@@ -5,30 +5,31 @@ on:
     - cron: "0 */3 * * *"
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   update:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
+      - name: Instalar dependencias
+        run: |
+          pip install requests beautifulsoup4
 
-      - run: pip install requests beautifulsoup4
+      - name: Obtener pronóstico INUMET
+        run: python fetch_inumet.py
 
-      - run: python fetch_inumet.py
-
-      - name: Guardar datos actualizados
+      - name: Guardar cambios
         run: |
           git config user.name "Tiempo Montevideo"
-          git config user.email "actions@users.noreply.github.com"
+          git config user.email "tiempo@montevideo.local"
           git add data.json
-          git diff --cached --quiet || git commit -m "Actualizar pronóstico INUMET"
-          git push --force
+          git commit -m "Actualizar pronóstico INUMET" || echo "Sin cambios"
+          git pull --rebase origin main
+          git push origin main
