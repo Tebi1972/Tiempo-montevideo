@@ -1,166 +1,33 @@
-import requests
-import re
-import json
-from bs4 import BeautifulSoup
-from datetime import datetime
-
-URL = "https://www.inumet.gub.uy/tiempo/pronostico"
-
-r = requests.get(
-    URL,
-    timeout=30,
-    headers={"User-Agent": "Mozilla/5.0"}
-)
-r.raise_for_status()
-
-soup = BeautifulSoup(r.text, "html.parser")
-
-# Convertimos toda la página en un único texto limpio
-texto = soup.get_text(" ", strip=True)
-texto = re.sub(r"\s+", " ", texto)
-
-# Buscamos directamente:
-# Día + número + Temp. min + máxima
-patron = re.compile(
-    r"(Lunes|Martes|Miércoles|Jueves|Viernes|Sábado|Domingo)"
-    r"\s+(\d{1,2})"
-    r"\s+Temp\.\s*min\s*(\d{1,2})\s*°C\s*"
-    r"máx\s*(\d{1,2})\s*°C",
-    re.IGNORECASE
-)
-
-matches = list(patron.finditer(texto))
-
-days = []
-vistos = set()
-
-for i, m in enumerate(matches):
-
-    dia = m.group(1)
-    numero = m.group(2)
-    temp_min = m.group(3)
-    temp_max = m.group(4)
-
-    fecha = f"{dia} {numero}"
-
-    if fecha in vistos:
-        continue
-
-    vistos.add(fecha)
-
-    # Texto correspondiente a este día
-    inicio = m.end()
-
-    if i + 1 < len(matches):
-        fin = matches[i + 1].start()
-    else:
-        fin = len(texto)
-
-    bloque = texto[inicio:fin]
-
-    # Mañana
-    mañana_match = re.search(
-        r"Mañana\s+(.*?)(?=\s+Viento:|\s+Tarde/Noche)",
-        bloque,
-        re.IGNORECASE
-    )
-
-    morning = (
-        mañana_match.group(1).strip()
-        if mañana_match
-        else "Sin detalle"
-    )
-
-    # Tarde / Noche
-    tarde_match = re.search(
-        r"Tarde/Noche\s+(.*?)(?=\s+Viento:|$)",
-        bloque,
-        re.IGNORECASE
-    )
-
-    evening = (
-        tarde_match.group(1).strip()
-        if tarde_match
-        else "Sin detalle"
-    )
-
-    # Vientos
-    vientos = re.findall(
-        r"Viento:\s*(.*?)(?=\s+(?:Tarde/Noche|Mañana|$))",
-        bloque,
-        re.IGNORECASE
-    )
-
-    if vientos:
-        wind = " ".join(vientos)
-    else:
-        wind = "—"
-
-    # Lluvia
-    lluvia = (
-        "Precipitaciones"
-        if re.search(
-            r"precipit|lluvia|chaparr",
-            bloque,
-            re.IGNORECASE
-        )
-        else "No indicada"
-    )
-
-    days.append({
-        "date": fecha,
-        "min": temp_min,
-        "max": temp_max,
-        "morning": morning,
-        "evening": evening,
-        "wind": wind,
-        "rain": lluvia
-    })
-
-    if len(days) >= 3:
-        break
-
-
-if not days:
-    raise SystemExit(
-        "No se pudo interpretar el pronóstico de INUMET"
-    )
-
-
-# Resumen
-t = days[0]
-parts = []
-
-parts.append(
-    f"Temperaturas de {t['min']}° a {t['max']}°"
-)
-
-if re.search(
-    r"precipit|lluvia|chaparr",
-    t["morning"] + " " + t["evening"],
-    re.IGNORECASE
-):
-    parts.append("con posibilidad de precipitaciones")
-
-if re.search(
-    r"viento|ráfaga",
-    t["wind"],
-    re.IGNORECASE
-):
-    parts.append("y viento a tener en cuenta")
-
-
-data = {
-    "updated": datetime.now().strftime("%d/%m/%Y %H:%M"),
-    "days": days,
-    "summary": "; ".join(parts) + "."
+{
+  "updated": "15/09/2026 15:06",
+  "days": [
+    {
+      "date": "Martes 15",
+      "min": "—",
+      "max": "—",
+      "morning": "Sin detalle",
+      "evening": "Algo nuboso y nuboso, períodos de cubierto. Baja probabilidad de precipitaciones.",
+      "wind": "SW al SE 20-40 km/h. Rachas de hasta 50 km/h.",
+      "rain": "Precipitaciones"
+    },
+    {
+      "date": "Miércoles 16",
+      "min": "—",
+      "max": "—",
+      "morning": "Claro y algo nuboso.",
+      "evening": "Claro y algo nuboso.",
+      "wind": "Sector E 10-30 km/h. Tarde/Noche Claro y algo nuboso. Viento: E al NE 10-30 km/h.",
+      "rain": "No indicada"
+    },
+    {
+      "date": "Jueves 17",
+      "min": "—",
+      "max": "—",
+      "morning": "Nuboso.",
+      "evening": "Algo nuboso, períodos de nuboso. Neblinas y bancos de niebla.",
+      "wind": "NE y N 10-30 km/h. Tarde/Noche Algo nuboso, períodos de nuboso. Neblinas y bancos de niebla. Viento: NE 10-30 km/h, períodos de variables 0-10 km/h. Pronóstico extendido: Última Actualización: 15/09/2026 11:30Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "rain": "Precipitaciones"
+    }
+  ],
+  "summary": "con posibilidad de precipitaciones."
 }
-
-
-with open("data.json", "w", encoding="utf-8") as f:
-    json.dump(
-        data,
-        f,
-        ensure_ascii=False,
-        indent=2
-    )
