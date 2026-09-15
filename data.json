@@ -1,33 +1,33 @@
 {
-  "updated": "15/09/2026 15:06",
+  "updated": "15/09/2026 16:18",
   "days": [
     {
       "date": "Martes 15",
-      "min": "—",
-      "max": "—",
+      "min": "5",
+      "max": "17",
       "morning": "Sin detalle",
       "evening": "Algo nuboso y nuboso, períodos de cubierto. Baja probabilidad de precipitaciones.",
-      "wind": "SW al SE 20-40 km/h. Rachas de hasta 50 km/h.",
+      "wind": "SW al SE 20-40 km/h. Rachas de hasta 50 km/h. ",
       "rain": "Precipitaciones"
     },
     {
       "date": "Miércoles 16",
-      "min": "—",
-      "max": "—",
+      "min": "5",
+      "max": "12",
       "morning": "Claro y algo nuboso.",
       "evening": "Claro y algo nuboso.",
-      "wind": "Sector E 10-30 km/h. Tarde/Noche Claro y algo nuboso. Viento: E al NE 10-30 km/h.",
+      "wind": "Sector E 10-30 km/h. E al NE 10-30 km/h. ",
       "rain": "No indicada"
     },
     {
       "date": "Jueves 17",
-      "min": "—",
-      "max": "—",
+      "min": "5",
+      "max": "19",
       "morning": "Nuboso.",
       "evening": "Algo nuboso, períodos de nuboso. Neblinas y bancos de niebla.",
-      "wind": "NE y N 10-30 km/h. Tarde/Noche Algo nuboso, períodos de nuboso. Neblinas y bancos de niebla. Viento: NE 10-30 km/h, períodos de variables 0-10 km/h. Pronóstico extendido: Última Actualización: 15/09/2026 11:30Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
-      "rain": "Precipitaciones"
+      "wind": "NE y N 10-30 km/h. NE 10-30 km/h, períodos de variables 0-10 km/h. Pronóstico extendido: Última Actualización: 15/09/2026 12:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "rain": "No indicada"
     }
   ],
-  "summary": "con posibilidad de precipitaciones."
+  "summary": "Temperaturas de 5° a 17°; con posibilidad de precipitaciones."
 }
