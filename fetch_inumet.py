@@ -8,87 +8,82 @@ URL = "https://www.inumet.gub.uy/tiempo/pronostico"
 
 r = requests.get(
     URL,
-    timeout=30,
-    headers={"User-Agent": "Mozilla/5.0"}
+    headers={"User-Agent": "Mozilla/5.0"},
+    timeout=30
 )
 r.raise_for_status()
 
 soup = BeautifulSoup(r.text, "html.parser")
 
-text = [
-    re.sub(r"\s+", " ", x.get_text(" ", strip=True)).strip()
-    for x in soup.find_all(["h1", "h2", "h3", "h4", "p", "div", "span"])
-]
+# Texto completo de INUMET
+texto = soup.get_text(" ", strip=True)
+texto = re.sub(r"\s+", " ", texto)
 
-text = [x for x in text if x]
-joined = "\n".join(dict.fromkeys(text))
+# Buscamos cada día junto con su temperatura
+patron = re.compile(
+    r"(Lunes|Martes|Miércoles|Jueves|Viernes|Sábado|Domingo)"
+    r"\s+(\d{1,2})"
+    r".{0,100}?"
+    r"Temp\.\s*min\s*(\d{1,2})\s*°C"
+    r"\s*máx\s*(\d{1,2})\s*°C",
+    re.IGNORECASE
+)
 
-# Buscar cada día del pronóstico
-matches = list(re.finditer(
-    r"(Lunes|Martes|Miércoles|Jueves|Viernes|Sábado|Domingo)\s+\d{1,2}",
-    joined
-))
+matches = list(patron.finditer(texto))
 
 days = []
 vistos = set()
 
 for i, m in enumerate(matches):
-    fecha = m.group(0)
 
-    # Evitar días duplicados
+    fecha = f"{m.group(1)} {m.group(2)}"
+
     if fecha in vistos:
         continue
 
     vistos.add(fecha)
 
-    siguiente = matches[i + 1].start() if i + 1 < len(matches) else len(joined)
-    bloque = joined[m.start():siguiente]
+    temp_min = m.group(3)
+    temp_max = m.group(4)
 
-    # Temperaturas: formato oficial de INUMET
-    temp = re.search(
-        r"Temp\.\s*min\s*(\d{1,2})°C\s*máx\s*(\d{1,2})°C",
+    inicio = m.end()
+
+    if i + 1 < len(matches):
+        fin = matches[i + 1].start()
+    else:
+        fin = len(texto)
+
+    bloque = texto[inicio:fin]
+
+    manana = re.search(
+        r"Mañana\s+(.*?)(?=\s+Viento:|\s+Tarde/Noche)",
         bloque,
         re.IGNORECASE
     )
 
-    temp_min = temp.group(1) if temp else "—"
-    temp_max = temp.group(2) if temp else "—"
-
-    # Mañana
-    mañana = re.search(
-        r"Mañana\s+(.*?)(?=Viento:|Tarde/Noche|$)",
-        bloque,
-        re.IGNORECASE | re.DOTALL
-    )
-
-    # Tarde/Noche
     tarde = re.search(
-        r"Tarde/Noche\s+(.*?)(?=Viento:|$)",
+        r"Tarde/Noche\s+(.*?)(?=\s+Viento:|$)",
         bloque,
-        re.IGNORECASE | re.DOTALL
+        re.IGNORECASE
     )
 
-    # Viento
     vientos = re.findall(
-        r"Viento:\s*(.*?)(?=\n|$)",
+        r"Viento:\s*(.*?)(?=\s+(?:Tarde/Noche|Mañana)|$)",
         bloque,
         re.IGNORECASE
     )
 
     morning = (
-        re.sub(r"\s+", " ", mañana.group(1)).strip()
-        if mañana else "Sin detalle"
+        manana.group(1).strip()
+        if manana else "Sin detalle"
     )
 
     evening = (
-        re.sub(r"\s+", " ", tarde.group(1)).strip()
+        tarde.group(1).strip()
         if tarde else "Sin detalle"
     )
 
-    wind = (
-        re.sub(r"\s+", " ", vientos[-1]).strip()
-        if vientos else "—"
-    )
+    wind = " ".join(vientos) if vientos else "—"
 
     lluvia = (
         "Precipitaciones"
@@ -106,6 +101,51 @@ for i, m in enumerate(matches):
         "max": temp_max,
         "morning": morning,
         "evening": evening,
+        "wind": wind,
+        "rain": lluvia
+    })
+
+    if len(days) == 3:
+        break
+
+if not days:
+    raise SystemExit(
+        "No se encontraron temperaturas en INUMET"
+    )
+
+t = days[0]
+
+parts = [
+    f"Temperaturas de {t['min']}° a {t['max']}°"
+]
+
+if re.search(
+    r"precipit|lluvia|chaparr",
+    t["morning"] + " " + t["evening"],
+    re.IGNORECASE
+):
+    parts.append("con posibilidad de precipitaciones")
+
+if re.search(
+    r"viento|ráfaga",
+    t["wind"],
+    re.IGNORECASE
+):
+    parts.append("y viento a tener en cuenta")
+
+data = {
+    "updated": datetime.now().strftime("%d/%m/%Y %H:%M"),
+    "days": days,
+    "summary": "; ".join(parts) + "."
+}
+
+with open("data.json", "w", encoding="utf-8") as f:
+    json.dump(
+        data,
+        f,
+        ensure_ascii=False,
+        indent=2
+    )        "evening": evening,
         "wind": wind,
         "rain": lluvia
     })
