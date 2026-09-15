@@ -1,51 +1,51 @@
 {
-  "updated": "14/09/2026 12:08",
+  "updated": "15/09/2026 12:21",
   "days": [
-    {
-      "date": "Lunes 14",
-      "min": "—",
-      "max": "—",
-      "morning": "Algo nuboso y nuboso. Heladas agrometeorológicas. Neblinas y bancos de niebla.",
-      "evening": "Nuboso, períodos de algo nuboso. Bajas temperaturas. Neblinas.",
-      "wind": "NE al NW 10-20 km/h. Períodos de variables 0-10 km/h. Tarde/Noche Nuboso, períodos de algo nuboso. Bajas temperaturas. Neblinas. Viento: Sector W 10-20 km/h periodos de variables 0-10 km/h.",
-      "rain": "No indicada"
-    },
     {
       "date": "Martes 15",
       "min": "—",
       "max": "—",
       "morning": "Algo nuboso y nuboso.",
-      "evening": "Algo nuboso y nuboso, períodos de cubierto. Bajas temperaturas.",
-      "wind": "NW al SW 10-30 km/h. Rachas de hasta 40 km/h. Tarde/Noche Algo nuboso y nuboso, períodos de cubierto. Bajas temperaturas. Viento: SW al SE 10-30 km/h. Rachas de hasta 40 km/h.",
-      "rain": "No indicada"
-    },
-    {
-      "date": "Miércoles 16",
-      "min": "26",
-      "max": "06",
-      "morning": "Claro y algo nuboso.",
-      "evening": "Claro y algo nuboso.",
-      "wind": "Sector E 10-30 km/h. Tarde/Noche Claro y algo nuboso. Viento: NE 10-30 km/h. Pronóstico extendido: Última Actualización: 14/09/2026 06:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "evening": "Algo nuboso y nuboso, períodos de cubierto. Baja probabilidad de precipitaciones.",
+      "wind": "NW al SW 10-30 km/h. Rachas de hasta 40 km/h. Tarde/Noche Algo nuboso y nuboso, períodos de cubierto. Baja probabilidad de precipitaciones. Viento: SW al SE 10-30 km/h. Rachas de hasta 40 km/h.",
       "rain": "Precipitaciones"
     },
     {
-      "date": "Lunes 14",
+      "date": "Miércoles 16",
       "min": "—",
       "max": "—",
-      "morning": "Algo nuboso y nuboso. Heladas agrometeorológicas. Neblinas y bancos de niebla.",
-      "evening": "Nuboso, períodos de algo nuboso. Bajas temperaturas. Neblinas.",
-      "wind": "NE al NW 10-20 km/h. Períodos de variables 0-10 km/h. Tarde/Noche Nuboso, períodos de algo nuboso. Bajas temperaturas. Neblinas. Viento: Sector W 10-20 km/h periodos de variables 0-10 km/h.",
+      "morning": "Claro y algo nuboso.",
+      "evening": "Claro y algo nuboso.",
+      "wind": "Sector E 10-30 km/h. Tarde/Noche Claro y algo nuboso. Viento: E al NE 10-30 km/h.",
       "rain": "No indicada"
+    },
+    {
+      "date": "Jueves 17",
+      "min": "26",
+      "max": "06",
+      "morning": "Nuboso.",
+      "evening": "Algo nuboso, períodos de nuboso. Neblinas y bancos de niebla.",
+      "wind": "NE y N 10-30 km/h. Tarde/Noche Algo nuboso, períodos de nuboso. Neblinas y bancos de niebla. Viento: NE 10-30 km/h, períodos de variables 0-10 km/h. Pronóstico extendido: Última Actualización: 15/09/2026 06:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "rain": "Precipitaciones"
     },
     {
       "date": "Martes 15",
       "min": "—",
       "max": "—",
       "morning": "Algo nuboso y nuboso.",
-      "evening": "Algo nuboso y nuboso, períodos de cubierto. Bajas temperaturas.",
-      "wind": "NW al SW 10-30 km/h. Rachas de hasta 40 km/h. Tarde/Noche Algo nuboso y nuboso, períodos de cubierto. Bajas temperaturas. Viento: SW al SE 10-30 km/h. Rachas de hasta 40 km/h.",
+      "evening": "Algo nuboso y nuboso, períodos de cubierto. Baja probabilidad de precipitaciones.",
+      "wind": "NW al SW 10-30 km/h. Rachas de hasta 40 km/h. Tarde/Noche Algo nuboso y nuboso, períodos de cubierto. Baja probabilidad de precipitaciones. Viento: SW al SE 10-30 km/h. Rachas de hasta 40 km/h.",
+      "rain": "Precipitaciones"
+    },
+    {
+      "date": "Miércoles 16",
+      "min": "—",
+      "max": "—",
+      "morning": "Claro y algo nuboso.",
+      "evening": "Claro y algo nuboso.",
+      "wind": "Sector E 10-30 km/h. Tarde/Noche Claro y algo nuboso. Viento: E al NE 10-30 km/h.",
       "rain": "No indicada"
     }
   ],
-  "summary": "y viento a tener en cuenta."
+  "summary": "con posibilidad de precipitaciones; y viento a tener en cuenta."
 }
