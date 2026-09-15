@@ -18,6 +18,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Sincronizar con GitHub
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+
       - name: Instalar dependencias
         run: |
           pip install requests beautifulsoup4
@@ -25,11 +30,10 @@ jobs:
       - name: Obtener pronóstico INUMET
         run: python fetch_inumet.py
 
-      - name: Guardar cambios
+      - name: Guardar pronóstico
         run: |
           git config user.name "Tiempo Montevideo"
           git config user.email "tiempo@montevideo.local"
           git add data.json
-          git commit -m "Actualizar pronóstico INUMET" || echo "Sin cambios"
-          git pull --rebase origin main
+          git diff --cached --quiet || git commit -m "Actualizar pronóstico INUMET"
           git push origin main
