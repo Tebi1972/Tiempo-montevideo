@@ -1,20 +1,20 @@
 {
-  "updated": "15/09/2026 18:06",
+  "updated": "15/09/2026 21:05",
   "days": [
     {
       "date": "Martes 15",
       "min": "5",
-      "max": "17",
+      "max": "19",
       "morning": "Sin detalle",
-      "evening": "Algo nuboso y nuboso, períodos de cubierto. Baja probabilidad de precipitaciones.",
-      "wind": "SW al SE 20-40 km/h. Rachas de hasta 50 km/h. ",
+      "evening": "Nuboso, períodos de cubierto. Baja probabilidad de precipitaciones. Descenso de temperatura.",
+      "wind": "SE 20-30 km/h. Rachas de hasta 50 km/h. ",
       "rain": "Precipitaciones"
     },
     {
       "date": "Miércoles 16",
-      "min": "5",
-      "max": "12",
-      "morning": "Claro y algo nuboso.",
+      "min": "4",
+      "max": "13",
+      "morning": "Disminución de nubosidad. Probables heladas agrometeorológicas. Bajas temperaturas.",
       "evening": "Claro y algo nuboso.",
       "wind": "Sector E 10-30 km/h. E al NE 10-30 km/h. ",
       "rain": "No indicada"
@@ -22,12 +22,12 @@
     {
       "date": "Jueves 17",
       "min": "5",
-      "max": "19",
-      "morning": "Nuboso.",
-      "evening": "Algo nuboso, períodos de nuboso. Neblinas y bancos de niebla.",
-      "wind": "NE y N 10-30 km/h. NE 10-30 km/h, períodos de variables 0-10 km/h. Pronóstico extendido: Última Actualización: 15/09/2026 14:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "max": "20",
+      "morning": "Claro y algo nuboso.",
+      "evening": "Claro, períodos de algo nuboso. Neblinas.",
+      "wind": "NE y N 10-30 km/h. NE 10-30 km/h, períodos de variables 0-10 km/h. Pronóstico extendido: Última Actualización: 15/09/2026 18:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
       "rain": "No indicada"
     }
   ],
-  "summary": "Temperaturas de 5° a 17°; con posibilidad de precipitaciones."
+  "summary": "Temperaturas de 5° a 19°; con posibilidad de precipitaciones."
 }
