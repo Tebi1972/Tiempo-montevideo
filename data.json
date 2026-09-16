@@ -1,15 +1,6 @@
 {
-  "updated": "16/09/2026 00:07",
+  "updated": "16/09/2026 03:05",
   "days": [
-    {
-      "date": "Martes 15",
-      "min": "5",
-      "max": "19",
-      "morning": "Sin detalle",
-      "evening": "Nuboso, períodos de cubierto. Baja probabilidad de precipitaciones. Descenso de temperatura.",
-      "wind": "SE 20-30 km/h. Rachas de hasta 50 km/h. ",
-      "rain": "Precipitaciones"
-    },
     {
       "date": "Miércoles 16",
       "min": "4",
@@ -25,9 +16,18 @@
       "max": "20",
       "morning": "Claro y algo nuboso.",
       "evening": "Claro, períodos de algo nuboso. Neblinas.",
-      "wind": "NE y N 10-30 km/h. NE 10-30 km/h, períodos de variables 0-10 km/h. Pronóstico extendido: Última Actualización: 15/09/2026 18:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "wind": "NE y N 10-30 km/h. NE 10-30 km/h, períodos de variables 0-10 km/h. ",
+      "rain": "No indicada"
+    },
+    {
+      "date": "Viernes 18",
+      "min": "8",
+      "max": "19",
+      "morning": "Claro y algo nuboso.",
+      "evening": "Claro y algo nuboso.",
+      "wind": "NE 10-30 km/h. NE 10-40 km/h. Pronóstico extendido: Última Actualización: 16/09/2026 00:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
       "rain": "No indicada"
     }
   ],
-  "summary": "Temperaturas de 5° a 19°; con posibilidad de precipitaciones."
+  "summary": "Temperaturas de 4° a 13°."
 }
