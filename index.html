@@ -1,40 +1,818 @@
 <!doctype html>
 <html lang="es">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>Tiempo Montevideo — INUMET</title>
+<title>Tiempo Montevideo — INUMET</title>
 
-  <style>
-    body {
-      margin: 0;
-      background: #eef3f8;
-      color: #172033;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#eef3f8;
+  color:#172033;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+.wrap{
+  max-width:760px;
+  margin:auto;
+  padding:18px;
+}
+
+.source{
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.5px;
+  color:#52647a;
+  margin-bottom:5px;
+}
+
+h1{
+  font-size:32px;
+  margin:5px 0;
+}
+
+h2{
+  margin:0 0 16px;
+  font-size:21px;
+}
+
+.muted{
+  color:#64748b;
+}
+
+.card{
+  background:white;
+  border-radius:22px;
+  padding:20px;
+  margin:14px 0;
+  box-shadow:0 5px 20px #17203312;
+}
+
+/* CABECERA DEL DÍA */
+
+.weatherTop{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:18px;
+}
+
+.weatherIcon{
+  font-size:64px;
+  line-height:1;
+}
+
+.weatherText{
+  font-size:18px;
+  font-weight:750;
+  line-height:1.35;
+}
+
+/* TEMPERATURAS */
+
+.temps{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.tempBox{
+  background:#f5f8fb;
+  border-radius:18px;
+  padding:17px;
+  text-align:center;
+}
+
+.tempLabel{
+  font-size:12px;
+  font-weight:800;
+  color:#64748b;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+}
+
+.temp{
+  font-size:46px;
+  line-height:1;
+  font-weight:850;
+  margin-top:8px;
+}
+
+/* RECOMENDACIONES */
+
+.recommendations{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.recommendation{
+  background:#f5f8fb;
+  border-radius:18px;
+  padding:17px;
+  text-align:center;
+}
+
+.recommendationIcon{
+  font-size:34px;
+}
+
+.recommendationTitle{
+  margin-top:6px;
+  font-size:12px;
+  font-weight:800;
+  color:#64748b;
+  text-transform:uppercase;
+}
+
+.recommendationValue{
+  margin-top:7px;
+  font-size:18px;
+  font-weight:800;
+}
+
+/* DETALLES */
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.item{
+  background:#f5f8fb;
+  border-radius:15px;
+  padding:14px;
+}
+
+.label{
+  font-size:12px;
+  color:#718096;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.value{
+  margin-top:6px;
+  font-weight:650;
+  line-height:1.45;
+}
+
+/* PRÓXIMOS DÍAS */
+
+.nextDay{
+  padding:16px 0;
+  border-bottom:1px solid #e5eaf0;
+}
+
+.nextDay:last-child{
+  border-bottom:0;
+}
+
+.nextHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.nextName{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-weight:800;
+  font-size:17px;
+}
+
+.nextIcon{
+  font-size:28px;
+}
+
+.nextTemp{
+  font-size:19px;
+  font-weight:850;
+}
+
+.nextDescription{
+  margin-top:9px;
+  color:#526071;
+  line-height:1.45;
+}
+
+/* BOTÓN */
+
+button{
+  border:0;
+  border-radius:14px;
+  padding:13px 19px;
+  background:#172033;
+  color:white;
+  font-size:15px;
+  font-weight:750;
+  cursor:pointer;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+.footer{
+  font-size:12px;
+  margin-top:16px;
+}
+
+a{
+  color:inherit;
+}
+
+/* CELULAR */
+
+@media(max-width:520px){
+
+  .wrap{
+    padding:14px;
+  }
+
+  h1{
+    font-size:28px;
+  }
+
+  .weatherIcon{
+    font-size:55px;
+  }
+
+  .weatherText{
+    font-size:16px;
+  }
+
+  .temp{
+    font-size:41px;
+  }
+
+  .recommendations{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="source">
+    INUMET · ÁREA METROPOLITANA
+  </div>
+
+  <h1>Tiempo en Montevideo</h1>
+
+  <div class="muted" id="updated">
+    Cargando…
+  </div>
+
+
+  <section class="card">
+
+    <div id="weatherTop">
+      Consultando pronóstico…
+    </div>
+
+    <div id="temperatures"></div>
+
+    <div id="details"></div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>¿Qué necesito hoy?</h2>
+
+    <div class="recommendations">
+
+      <div class="recommendation">
+
+        <div class="recommendationIcon">☔</div>
+
+        <div class="recommendationTitle">
+          ¿Llevo paraguas?
+        </div>
+
+        <div class="recommendationValue" id="umbrella">
+          Analizando…
+        </div>
+
+      </div>
+
+
+      <div class="recommendation">
+
+        <div class="recommendationIcon">🧥</div>
+
+        <div class="recommendationTitle">
+          ¿Necesito abrigo?
+        </div>
+
+        <div class="recommendationValue" id="coat">
+          Analizando…
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>En pocas palabras</h2>
+
+    <div id="summary">
+      —
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>Próximos días</h2>
+
+    <div id="days">
+      —
+    </div>
+
+  </section>
+
+
+  <button onclick="load()">
+    ↻ Actualizar
+  </button>
+
+
+  <p class="muted footer">
+    Fuente:
+    <a
+      href="https://www.inumet.gub.uy/tiempo/pronostico"
+      target="_blank">
+      Instituto Uruguayo de Meteorología (INUMET)
+    </a>
+  </p>
+
+</div>
+
+
+<script>
+
+function escapeHtml(value){
+
+  return String(value ?? '').replace(
+    /[&<>"]/g,
+    function(c){
+
+      return {
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;'
+      }[c];
+
+    }
+  );
+
+}
+
+
+/* ICONO SEGÚN EL PRONÓSTICO */
+
+function weatherIcon(day){
+
+  const text=(
+    (day.morning || '')+' '+
+    (day.evening || '')+' '+
+    (day.rain || '')
+  ).toLowerCase();
+
+
+  if(
+    text.includes('torment')
+  ){
+    return '⛈️';
+  }
+
+
+  if(
+    text.includes('lluvia') ||
+    text.includes('precipit') ||
+    text.includes('chaparr')
+  ){
+    return '🌧️';
+  }
+
+
+  if(
+    text.includes('cubierto')
+  ){
+    return '☁️';
+  }
+
+
+  if(
+    text.includes('nuboso')
+  ){
+    return '🌥️';
+  }
+
+
+  if(
+    text.includes('soleado') ||
+    text.includes('claro')
+  ){
+    return '☀️';
+  }
+
+
+  return '🌤️';
+}
+
+
+/* DESCRIPCIÓN CORTA */
+
+function weatherTitle(day){
+
+  const text=(
+    (day.morning || '')+' '+
+    (day.evening || '')
+  ).toLowerCase();
+
+
+  if(text.includes('torment')){
+    return 'Posibles tormentas';
+  }
+
+  if(
+    text.includes('lluvia') ||
+    text.includes('precipit') ||
+    text.includes('chaparr')
+  ){
+    return 'Posibles precipitaciones';
+  }
+
+  if(text.includes('cubierto')){
+    return 'Cielo cubierto';
+  }
+
+  if(text.includes('nuboso')){
+    return 'Nubosidad variable';
+  }
+
+  if(
+    text.includes('soleado') ||
+    text.includes('claro')
+  ){
+    return 'Tiempo mayormente despejado';
+  }
+
+  return 'Pronóstico para hoy';
+}
+
+
+/* PARAGUAS */
+
+function umbrellaAdvice(day){
+
+  const text=(
+    (day.morning || '')+' '+
+    (day.evening || '')+' '+
+    (day.rain || '')
+  ).toLowerCase();
+
+
+  /*
+    Importante:
+    "baja probabilidad de precipitaciones"
+    no se interpreta igual que lluvia segura.
+  */
+
+  if(
+    text.includes('baja probabilidad')
+  ){
+    return 'Por las dudas';
+  }
+
+
+  if(
+    text.includes('torment') ||
+    text.includes('lluvia') ||
+    text.includes('chaparr') ||
+    text.includes('precipit')
+  ){
+    return 'Sí, mejor llevar';
+  }
+
+
+  return 'No parece necesario';
+}
+
+
+/* ABRIGO */
+
+function coatAdvice(day){
+
+  const min=parseInt(day.min,10);
+  const max=parseInt(day.max,10);
+
+  const wind=(day.wind || '').toLowerCase();
+
+
+  if(
+    min<=7 ||
+    max<=13
+  ){
+    return 'Sí, abrigo';
+  }
+
+
+  if(
+    min<=11 ||
+    max<=17
+  ){
+    return 'Abrigo liviano';
+  }
+
+
+  if(
+    wind.includes('racha') &&
+    min<=15
+  ){
+    return 'Abrigo liviano';
+  }
+
+
+  return 'No parece necesario';
+}
+
+
+/* CARGA DE DATOS */
+
+async function load(){
+
+  try{
+
+    const response=await fetch(
+      'data.json?'+Date.now()
+    );
+
+
+    if(!response.ok){
+      throw new Error(
+        'Todavía no hay datos disponibles.'
+      );
     }
 
-    .wrap {
-      max-width: 760px;
-      margin: auto;
-      padding: 18px;
+
+    const data=await response.json();
+
+    if(!data.days || !data.days.length){
+      throw new Error(
+        'El pronóstico no contiene días.'
+      );
     }
 
-    h1 {
-      font-size: 32px;
-      margin: 8px 0;
-    }
 
-    h2 {
-      margin-top: 0;
-    }
+    const today=data.days[0];
 
-    .muted {
-      color: #64748b;
-    }
 
-    .card {
+    document.querySelector('#updated').textContent=
+      'Última actualización: '+data.updated;
+
+
+    /* CABECERA */
+
+    document.querySelector('#weatherTop').innerHTML=`
+
+      <div class="weatherTop">
+
+        <div class="weatherIcon">
+          ${weatherIcon(today)}
+        </div>
+
+        <div class="weatherText">
+
+          ${escapeHtml(today.date)}
+
+          <br>
+
+          ${escapeHtml(weatherTitle(today))}
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    /* TEMPERATURAS */
+
+    document.querySelector('#temperatures').innerHTML=`
+
+      <div class="temps">
+
+        <div class="tempBox">
+
+          <div class="tempLabel">
+            Mínima
+          </div>
+
+          <div class="temp">
+            ${escapeHtml(today.min)}°
+          </div>
+
+        </div>
+
+
+        <div class="tempBox">
+
+          <div class="tempLabel">
+            Máxima
+          </div>
+
+          <div class="temp">
+            ${escapeHtml(today.max)}°
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    /* DETALLES */
+
+    document.querySelector('#details').innerHTML=`
+
+      <div class="grid">
+
+        <div class="item">
+
+          <div class="label">
+            Mañana
+          </div>
+
+          <div class="value">
+            ${escapeHtml(today.morning)}
+          </div>
+
+        </div>
+
+
+        <div class="item">
+
+          <div class="label">
+            Tarde / Noche
+          </div>
+
+          <div class="value">
+            ${escapeHtml(today.evening)}
+          </div>
+
+        </div>
+
+
+        <div class="item">
+
+          <div class="label">
+            💨 Viento
+          </div>
+
+          <div class="value">
+            ${escapeHtml(today.wind)}
+          </div>
+
+        </div>
+
+
+        <div class="item">
+
+          <div class="label">
+            ☔ Lluvia
+          </div>
+
+          <div class="value">
+            ${escapeHtml(today.rain)}
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    /* RECOMENDACIONES */
+
+    document.querySelector('#umbrella').textContent=
+      umbrellaAdvice(today);
+
+    document.querySelector('#coat').textContent=
+      coatAdvice(today);
+
+
+    /* RESUMEN */
+
+    document.querySelector('#summary').textContent=
+      data.summary || 'Sin resumen disponible.';
+
+
+    /* PRÓXIMOS DÍAS */
+
+    document.querySelector('#days').innerHTML=
+      data.days
+      .slice(1)
+      .map(function(day){
+
+        return `
+
+          <div class="nextDay">
+
+            <div class="nextHeader">
+
+              <div class="nextName">
+
+                <span class="nextIcon">
+                  ${weatherIcon(day)}
+                </span>
+
+                ${escapeHtml(day.date)}
+
+              </div>
+
+
+              <div class="nextTemp">
+                ${escapeHtml(day.min)}°
+                /
+                ${escapeHtml(day.max)}°
+              </div>
+
+            </div>
+
+
+            <div class="nextDescription">
+
+              ${escapeHtml(day.morning)}
+
+              <br>
+
+              ${escapeHtml(day.evening)}
+
+            </div>
+
+          </div>
+
+        `;
+
+      })
+      .join('');
+
+
+  }catch(error){
+
+    document.querySelector('#updated').textContent=
+      'No se pudieron cargar los datos';
+
+    document.querySelector('#weatherTop').innerHTML=
+      '<b>Error al cargar el pronóstico.</b>';
+
+    document.querySelector('#umbrella').textContent=
+      'Sin datos';
+
+    document.querySelector('#coat').textContent=
+      'Sin datos';
+
+    console.error(error);
+
+  }
+
+}
+
+
+load();
+
+</script>
+
+</body>
+</html>    .card {
       background: #ffffff;
       border-radius: 22px;
       padding: 20px;
