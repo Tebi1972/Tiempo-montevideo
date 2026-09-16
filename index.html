@@ -1,1 +1,438 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tiempo Montevideo — INUMET</title><style>body{margin:0;background:#eef3f8;color:#172033;font-family:system-ui,sans-serif}.wrap{max-width:760px;margin:auto;padding:18px}.card{background:#fff;border-radius:22px;padding:20px;margin:14px 0;box-shadow:0 5px 20px #17203312}h1{font-size:32px}.temp{font-size:46px;font-weight:800}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.item{padding:13px;background:#f5f8fb;border-radius:14px}.label{font-size:12px;color:#718096;font-weight:700}.value{margin-top:5px;font-weight:650}.muted{color:#64748b}@media(max-width:520px){.grid{grid-template-columns:1fr}}</style></head><body><div class="wrap"><p><b>INUMET · ÁREA METROPOLITANA</b></p><h1>Tiempo en Montevideo</h1><div class="muted" id="updated">Cargando…</div><section class="card" id="today">Consultando pronóstico…</section><section class="card"><h2>En pocas palabras</h2><div id="summary">—</div></section><section class="card"><h2>Próximos días</h2><div id="days">—</div></section><button onclick="load()">↻ Actualizar</button><p class="muted" style="font-size:12px">Fuente: <a href="https://www.inumet.gub.uy/tiempo/pronostico">INUMET</a></p></div><script>const e=s=>String(s??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));async function load(){try{let r=await fetch('data.json?'+Date.now());if(!r.ok)throw Error('Todavía no hay datos.');let d=await r.json(),t=d.days[0];document.querySelector('#updated').textContent='Última actualización: '+d.updated;document.querySelector('#today').innerHTML='<div class="temp">'+e(t.min)+'° / '+e(t.max)+'°</div><p>'+e(t.morning)+'</p><div class="grid"><div class="item"><div class="label">MAÑANA</div><div class="value">'+e(t.morning)+'</div></div><div class="item"><div class="label">TARDE / NOCHE</div><div class="value">'+e(t.evening)+'</div></div><div class="item"><div class="label">VIENTO</div><div class="value">'+e(t.wind)+'</div></div><div class="item"><div class="label">LLUVIA</div><div class="value">'+e(t.rain)+'</div></div></div>';document.querySelector('#summary').textContent=d.summary;document.querySelector('#days').innerHTML=d.days.slice(1).map(x=>'<p><b>'+e(x.date)+'</b> · '+e(x.min)+'° / '+e(x.max)+'°<br>'+e(x.morning)+'<br>'+e(x.evening)+'</p>').join('')}catch(x){document.querySelector('#updated').textContent='Esperando actualización automática';document.querySelector('#today').innerHTML='<b>La conexión con INUMET todavía se está preparando.</b><p>'+e(x.message)+'</p>'}}load()</script></body></html>
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Tiempo Montevideo — INUMET</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #eef3f8;
+      color: #172033;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: auto;
+      padding: 18px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin: 8px 0;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .muted {
+      color: #64748b;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 20px;
+      margin: 14px 0;
+      box-shadow: 0 5px 20px #17203312;
+    }
+
+    /* TEMPERATURAS */
+
+    .temps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .tempBox {
+      background: #f5f8fb;
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .tempLabel {
+      font-size: 13px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .temp {
+      font-size: 48px;
+      line-height: 1;
+      font-weight: 800;
+      margin-top: 8px;
+    }
+
+    .description {
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 10px 0 18px;
+    }
+
+    /* DATOS DEL DÍA */
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .item {
+      padding: 14px;
+      background: #f5f8fb;
+      border-radius: 14px;
+    }
+
+    .label {
+      font-size: 12px;
+      color: #718096;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .value {
+      margin-top: 6px;
+      font-weight: 650;
+      line-height: 1.4;
+    }
+
+    /* BOTÓN */
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 18px;
+      background: #172033;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* CELULAR */
+
+    @media (max-width: 520px) {
+
+      .wrap {
+        padding: 14px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .temps {
+        gap: 10px;
+      }
+
+      .tempBox {
+        padding: 15px 10px;
+      }
+
+      .temp {
+        font-size: 42px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+
+    <p>
+      <b>INUMET · ÁREA METROPOLITANA</b>
+    </p>
+
+    <h1>Tiempo en Montevideo</h1>
+
+    <div class="muted" id="updated">
+      Cargando…
+    </div>
+
+    <!-- PRONÓSTICO DE HOY -->
+
+    <section class="card" id="today">
+      Consultando pronóstico…
+    </section>
+
+    <!-- RESUMEN -->
+
+    <section class="card">
+
+      <h2>En pocas palabras</h2>
+
+      <div id="summary">
+        —
+      </div>
+
+    </section>
+
+    <!-- PRÓXIMOS DÍAS -->
+
+    <section class="card">
+
+      <h2>Próximos días</h2>
+
+      <div id="days">
+        —
+      </div>
+
+    </section>
+
+    <button onclick="load()">
+      ↻ Actualizar
+    </button>
+
+    <p class="muted" style="font-size:12px">
+      Fuente:
+      <a href="https://www.inumet.gub.uy/tiempo/pronostico" target="_blank">
+        INUMET
+      </a>
+    </p>
+
+  </div>
+
+
+  <script>
+
+    /* Evita que texto proveniente de INUMET pueda romper el HTML */
+
+    function escapeHtml(value) {
+
+      return String(value ?? '').replace(
+        /[&<>\"]/g,
+        function (c) {
+
+          return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;'
+          }[c];
+
+        }
+      );
+
+    }
+
+
+    /* Carga los datos generados por fetch_inumet.py */
+
+    async function load() {
+
+      try {
+
+        const response = await fetch(
+          'data.json?' + Date.now()
+        );
+
+        if (!response.ok) {
+          throw new Error('Todavía no hay datos disponibles.');
+        }
+
+        const data = await response.json();
+
+        const today = data.days[0];
+
+
+        /* Última actualización */
+
+        document.querySelector('#updated').textContent =
+          'Última actualización: ' + data.updated;
+
+
+        /* Pronóstico de hoy */
+
+        document.querySelector('#today').innerHTML = `
+
+          <div class="temps">
+
+            <div class="tempBox">
+
+              <div class="tempLabel">
+                Mínima
+              </div>
+
+              <div class="temp">
+                ${escapeHtml(today.min)}°
+              </div>
+
+            </div>
+
+
+            <div class="tempBox">
+
+              <div class="tempLabel">
+                Máxima
+              </div>
+
+              <div class="temp">
+                ${escapeHtml(today.max)}°
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="description">
+            ${escapeHtml(today.morning)}
+          </div>
+
+
+          <div class="grid">
+
+            <div class="item">
+
+              <div class="label">
+                Mañana
+              </div>
+
+              <div class="value">
+                ${escapeHtml(today.morning)}
+              </div>
+
+            </div>
+
+
+            <div class="item">
+
+              <div class="label">
+                Tarde / Noche
+              </div>
+
+              <div class="value">
+                ${escapeHtml(today.evening)}
+              </div>
+
+            </div>
+
+
+            <div class="item">
+
+              <div class="label">
+                Viento
+              </div>
+
+              <div class="value">
+                ${escapeHtml(today.wind)}
+              </div>
+
+            </div>
+
+
+            <div class="item">
+
+              <div class="label">
+                Lluvia
+              </div>
+
+              <div class="value">
+                ${escapeHtml(today.rain)}
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+
+        /* Resumen */
+
+        document.querySelector('#summary').textContent =
+          data.summary;
+
+
+        /* Próximos días */
+
+        document.querySelector('#days').innerHTML =
+          data.days
+            .slice(1)
+            .map(function (day) {
+
+              return `
+
+                <p>
+
+                  <b>
+                    ${escapeHtml(day.date)}
+                  </b>
+
+                  ·
+
+                  ${escapeHtml(day.min)}°
+                  /
+                  ${escapeHtml(day.max)}°
+
+                  <br>
+
+                  ${escapeHtml(day.morning)}
+
+                  <br>
+
+                  ${escapeHtml(day.evening)}
+
+                </p>
+
+              `;
+
+            })
+            .join('');
+
+
+      } catch (error) {
+
+        document.querySelector('#updated').textContent =
+          'Esperando actualización automática';
+
+
+        document.querySelector('#today').innerHTML = `
+
+          <b>
+            La conexión con INUMET todavía se está preparando.
+          </b>
+
+          <p>
+            ${escapeHtml(error.message)}
+          </p>
+
+        `;
+
+      }
+
+    }
+
+
+    /* Cargar automáticamente al abrir la página */
+
+    load();
+
+  </script>
+
+</body>
+
+</html>
