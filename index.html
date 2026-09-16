@@ -79,6 +79,611 @@
       margin: 10px 0 18px;
     }
 
+    /* RECOMENDACIONES */
+
+    .recommendations {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .recommendation {
+      background: #f5f8fb;
+      border-radius: 18px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .recommendationIcon {
+      font-size: 34px;
+      margin-bottom: 6px;
+    }
+
+    .recommendationTitle {
+      font-size: 13px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    .recommendationValue {
+      font-size: 19px;
+      font-weight: 800;
+      margin-top: 6px;
+    }
+
+    /* DATOS DEL DÍA */
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .item {
+      padding: 14px;
+      background: #f5f8fb;
+      border-radius: 14px;
+    }
+
+    .label {
+      font-size: 12px;
+      color: #718096;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .value {
+      margin-top: 6px;
+      font-weight: 650;
+      line-height: 1.4;
+    }
+
+    /* BOTÓN */
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 18px;
+      background: #172033;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* CELULAR */
+
+    @media (max-width: 520px) {
+
+      .wrap {
+        padding: 14px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .temps {
+        gap: 10px;
+      }
+
+      .tempBox {
+        padding: 15px 10px;
+      }
+
+      .temp {
+        font-size: 42px;
+      }
+
+      .recommendations {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+
+    <p>
+      <b>INUMET · ÁREA METROPOLITANA</b>
+    </p>
+
+    <h1>Tiempo en Montevideo</h1>
+
+    <div class="muted" id="updated">
+      Cargando…
+    </div>
+
+    <!-- PRONÓSTICO DE HOY -->
+
+    <section class="card" id="today">
+      Consultando pronóstico…
+    </section>
+
+    <!-- RECOMENDACIONES -->
+
+    <section class="card">
+
+      <h2>¿Qué necesito hoy?</h2>
+
+      <div class="recommendations">
+
+        <div class="recommendation">
+
+          <div class="recommendationIcon">
+            ☔
+          </div>
+
+          <div class="recommendationTitle">
+            ¿Llevo paraguas?
+          </div>
+
+          <div class="recommendationValue" id="umbrella">
+            Analizando…
+          </div>
+
+        </div>
+
+
+        <div class="recommendation">
+
+          <div class="recommendationIcon">
+            🧥
+          </div>
+
+          <div class="recommendationTitle">
+            ¿Necesito abrigo?
+          </div>
+
+          <div class="recommendationValue" id="coat">
+            Analizando…
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RESUMEN -->
+
+    <section class="card">
+
+      <h2>En pocas palabras</h2>
+
+      <div id="summary">
+        —
+      </div>
+
+    </section>
+
+
+    <!-- PRÓXIMOS DÍAS -->
+
+    <section class="card">
+
+      <h2>Próximos días</h2>
+
+      <div id="days">
+        —
+      </div>
+
+    </section>
+
+
+    <button onclick="load()">
+      ↻ Actualizar
+    </button>
+
+
+    <p class="muted" style="font-size:12px">
+      Fuente:
+      <a
+        href="https://www.inumet.gub.uy/tiempo/pronostico"
+        target="_blank">
+        INUMET
+      </a>
+    </p>
+
+  </div>
+
+
+  <script>
+
+    /* Evita problemas si el texto de INUMET contiene caracteres especiales */
+
+    function escapeHtml(value) {
+
+      return String(value ?? '').replace(
+        /[&<>\"]/g,
+        function (c) {
+
+          return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;'
+          }[c];
+
+        }
+      );
+
+    }
+
+
+    /* RECOMENDACIÓN DE PARAGUAS */
+
+    function getUmbrellaAdvice(day) {
+
+      const text = (
+        (day.morning || '') + ' ' +
+        (day.evening || '') + ' ' +
+        (day.rain || '')
+      ).toLowerCase();
+
+
+      if (
+        text.includes('precipit') ||
+        text.includes('lluvia') ||
+        text.includes('chaparr') ||
+        text.includes('torment')
+      ) {
+
+        return 'Sí, mejor llevar';
+
+      }
+
+
+      if (
+        text.includes('nuboso') ||
+        text.includes('cubierto')
+      ) {
+
+        return 'Puede ser';
+
+      }
+
+
+      return 'No parece necesario';
+
+    }
+
+
+    /* RECOMENDACIÓN DE ABRIGO */
+
+    function getCoatAdvice(day) {
+
+      const min = parseInt(day.min, 10);
+      const max = parseInt(day.max, 10);
+
+      const wind = (day.wind || '').toLowerCase();
+
+
+      /* Días fríos */
+
+      if (
+        min <= 7 ||
+        max <= 13
+      ) {
+
+        return 'Sí, abrigo';
+
+      }
+
+
+      /* Días frescos */
+
+      if (
+        min <= 11 ||
+        max <= 17
+      ) {
+
+        return 'Abrigo liviano';
+
+      }
+
+
+      /* Si hay viento fuerte, puede hacer falta abrigo aunque la temperatura sea mayor */
+
+      if (
+        wind.includes('racha') ||
+        wind.includes('30') ||
+        wind.includes('40') ||
+        wind.includes('50')
+      ) {
+
+        return 'Abrigo liviano';
+
+      }
+
+
+      return 'No parece necesario';
+
+    }
+
+
+    /* CARGAR DATOS */
+
+    async function load() {
+
+      try {
+
+        const response = await fetch(
+          'data.json?' + Date.now()
+        );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            'Todavía no hay datos disponibles.'
+          );
+
+        }
+
+
+        const data = await response.json();
+
+        const today = data.days[0];
+
+
+        /* Última actualización */
+
+        document.querySelector('#updated').textContent =
+          'Última actualización: ' + data.updated;
+
+
+        /* Pronóstico de hoy */
+
+        document.querySelector('#today').innerHTML = `
+
+          <div class="temps">
+
+            <div class="tempBox">
+
+              <div class="tempLabel">
+                Mínima
+              </div>
+
+              <div class="temp">
+                ${escapeHtml(today.min)}°
+              </div>
+
+            </div>
+
+
+            <div class="tempBox">
+
+              <div class="tempLabel">
+                Máxima
+              </div>
+
+              <div class="temp">
+                ${escapeHtml(today.max)}°
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="description">
+            ${escapeHtml(today.morning)}
+          </div>
+
+
+          <div class="grid">
+
+            <div class="item">
+
+              <div class="label">
+                Mañana
+              </div>
+
+              <div class="value">
+                ${escapeHtml(today.morning)}
+              </div>
+
+            </div>
+
+
+            <div class="item">
+
+              <div class="label">
+                Tarde / Noche
+              </div>
+
+              <div class="value">
+                ${escapeHtml(today.evening)}
+              </div>
+
+            </div>
+
+
+            <div class="item">
+
+              <div class="label">
+                Viento
+              </div>
+
+              <div class="value">
+                ${escapeHtml(today.wind)}
+              </div>
+
+            </div>
+
+
+            <div class="item">
+
+              <div class="label">
+                Lluvia
+              </div>
+
+              <div class="value">
+                ${escapeHtml(today.rain)}
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+
+        /* RECOMENDACIONES */
+
+        document.querySelector('#umbrella').textContent =
+          getUmbrellaAdvice(today);
+
+
+        document.querySelector('#coat').textContent =
+          getCoatAdvice(today);
+
+
+        /* RESUMEN */
+
+        document.querySelector('#summary').textContent =
+          data.summary;
+
+
+        /* PRÓXIMOS DÍAS */
+
+        document.querySelector('#days').innerHTML =
+          data.days
+            .slice(1)
+            .map(function (day) {
+
+              return `
+
+                <p>
+
+                  <b>
+                    ${escapeHtml(day.date)}
+                  </b>
+
+                  ·
+
+                  ${escapeHtml(day.min)}°
+                  /
+                  ${escapeHtml(day.max)}°
+
+                  <br>
+
+                  ${escapeHtml(day.morning)}
+
+                  <br>
+
+                  ${escapeHtml(day.evening)}
+
+                </p>
+
+              `;
+
+            })
+            .join('');
+
+
+      } catch (error) {
+
+        document.querySelector('#updated').textContent =
+          'Esperando actualización automática';
+
+
+        document.querySelector('#today').innerHTML = `
+
+          <b>
+            La conexión con INUMET todavía se está preparando.
+          </b>
+
+          <p>
+            ${escapeHtml(error.message)}
+          </p>
+
+        `;
+
+
+        document.querySelector('#umbrella').textContent =
+          'Sin datos';
+
+
+        document.querySelector('#coat').textContent =
+          'Sin datos';
+
+      }
+
+    }
+
+
+    /* Cargar automáticamente */
+
+    load();
+
+  </script>
+
+</body>
+
+</html>    .card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 20px;
+      margin: 14px 0;
+      box-shadow: 0 5px 20px #17203312;
+    }
+
+    /* TEMPERATURAS */
+
+    .temps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .tempBox {
+      background: #f5f8fb;
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .tempLabel {
+      font-size: 13px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .temp {
+      font-size: 48px;
+      line-height: 1;
+      font-weight: 800;
+      margin-top: 8px;
+    }
+
+    .description {
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 10px 0 18px;
+    }
+
     /* DATOS DEL DÍA */
 
     .grid {
