@@ -3,263 +3,220 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>Tiempo Montevideo — INUMET</title>
 
 <style>
-*{box-sizing:border-box}
+* { box-sizing: border-box; }
 
-body{
-  margin:0;
-  background:#eef3f8;
-  color:#172033;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+body {
+  margin: 0;
+  background: #eef3f8;
+  color: #172033;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.wrap{
-  max-width:760px;
-  margin:auto;
-  padding:18px;
+.wrap {
+  max-width: 760px;
+  margin: auto;
+  padding: 18px;
 }
 
-.source{
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:.5px;
-  color:#52647a;
-  margin-bottom:5px;
+.source {
+  font-size: 13px;
+  font-weight: 800;
+  color: #52647a;
 }
 
-h1{
-  font-size:32px;
-  margin:5px 0;
+h1 {
+  font-size: 32px;
+  margin: 6px 0;
 }
 
-h2{
-  margin:0 0 16px;
-  font-size:21px;
+h2 {
+  margin-top: 0;
 }
 
-.muted{
-  color:#64748b;
+.muted {
+  color: #64748b;
 }
 
-.card{
-  background:white;
-  border-radius:22px;
-  padding:20px;
-  margin:14px 0;
-  box-shadow:0 5px 20px #17203312;
+.card {
+  background: white;
+  border-radius: 22px;
+  padding: 20px;
+  margin: 14px 0;
+  box-shadow: 0 5px 20px #17203312;
 }
 
-/* CABECERA DEL DÍA */
-
-.weatherTop{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  margin-bottom:18px;
+.weatherTop {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
-.weatherIcon{
-  font-size:64px;
-  line-height:1;
+.weatherIcon {
+  font-size: 58px;
 }
 
-.weatherText{
-  font-size:18px;
-  font-weight:750;
-  line-height:1.35;
+.weatherTitle {
+  font-size: 20px;
+  font-weight: 800;
 }
 
-/* TEMPERATURAS */
-
-.temps{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-bottom:18px;
+.weatherDate {
+  color: #64748b;
+  margin-top: 3px;
 }
 
-.tempBox{
-  background:#f5f8fb;
-  border-radius:18px;
-  padding:17px;
-  text-align:center;
+.temps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
-.tempLabel{
-  font-size:12px;
-  font-weight:800;
-  color:#64748b;
-  text-transform:uppercase;
-  letter-spacing:.6px;
+.tempBox {
+  background: #f5f8fb;
+  border-radius: 18px;
+  padding: 18px;
+  text-align: center;
 }
 
-.temp{
-  font-size:46px;
-  line-height:1;
-  font-weight:850;
-  margin-top:8px;
+.tempLabel {
+  font-size: 12px;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
 }
 
-/* RECOMENDACIONES */
-
-.recommendations{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+.temp {
+  font-size: 46px;
+  font-weight: 850;
+  margin-top: 5px;
 }
 
-.recommendation{
-  background:#f5f8fb;
-  border-radius:18px;
-  padding:17px;
-  text-align:center;
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
-.recommendationIcon{
-  font-size:34px;
+.item {
+  background: #f5f8fb;
+  border-radius: 15px;
+  padding: 14px;
 }
 
-.recommendationTitle{
-  margin-top:6px;
-  font-size:12px;
-  font-weight:800;
-  color:#64748b;
-  text-transform:uppercase;
+.label {
+  font-size: 12px;
+  color: #718096;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
-.recommendationValue{
-  margin-top:7px;
-  font-size:18px;
-  font-weight:800;
+.value {
+  margin-top: 6px;
+  line-height: 1.45;
+  font-weight: 600;
 }
 
-/* DETALLES */
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+.recommendations {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
-.item{
-  background:#f5f8fb;
-  border-radius:15px;
-  padding:14px;
+.recommendation {
+  background: #f5f8fb;
+  border-radius: 18px;
+  padding: 17px;
+  text-align: center;
 }
 
-.label{
-  font-size:12px;
-  color:#718096;
-  font-weight:800;
-  text-transform:uppercase;
+.recIcon {
+  font-size: 34px;
 }
 
-.value{
-  margin-top:6px;
-  font-weight:650;
-  line-height:1.45;
+.recQuestion {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 800;
+  margin-top: 5px;
+  text-transform: uppercase;
 }
 
-/* PRÓXIMOS DÍAS */
-
-.nextDay{
-  padding:16px 0;
-  border-bottom:1px solid #e5eaf0;
+.recAnswer {
+  font-size: 18px;
+  font-weight: 800;
+  margin-top: 7px;
 }
 
-.nextDay:last-child{
-  border-bottom:0;
+.nextDay {
+  padding: 15px 0;
+  border-bottom: 1px solid #e5eaf0;
 }
 
-.nextHeader{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
+.nextDay:last-child {
+  border-bottom: 0;
 }
 
-.nextName{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  font-weight:800;
-  font-size:17px;
+.nextHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.nextIcon{
-  font-size:28px;
+.nextName {
+  font-size: 17px;
+  font-weight: 800;
 }
 
-.nextTemp{
-  font-size:19px;
-  font-weight:850;
+.nextTemp {
+  font-size: 18px;
+  font-weight: 800;
 }
 
-.nextDescription{
-  margin-top:9px;
-  color:#526071;
-  line-height:1.45;
+.nextText {
+  margin-top: 8px;
+  color: #526071;
+  line-height: 1.45;
 }
 
-/* BOTÓN */
-
-button{
-  border:0;
-  border-radius:14px;
-  padding:13px 19px;
-  background:#172033;
-  color:white;
-  font-size:15px;
-  font-weight:750;
-  cursor:pointer;
+button {
+  border: 0;
+  border-radius: 14px;
+  padding: 13px 19px;
+  background: #172033;
+  color: white;
+  font-size: 15px;
+  font-weight: 750;
+  cursor: pointer;
 }
 
-button:active{
-  transform:scale(.98);
+.footer {
+  font-size: 12px;
 }
 
-.footer{
-  font-size:12px;
-  margin-top:16px;
+a {
+  color: inherit;
 }
 
-a{
-  color:inherit;
-}
-
-/* CELULAR */
-
-@media(max-width:520px){
-
-  .wrap{
-    padding:14px;
+@media (max-width: 520px) {
+  .wrap {
+    padding: 14px;
   }
 
-  h1{
-    font-size:28px;
+  h1 {
+    font-size: 28px;
   }
 
-  .weatherIcon{
-    font-size:55px;
+  .temp {
+    font-size: 41px;
   }
 
-  .weatherText{
-    font-size:16px;
-  }
-
-  .temp{
-    font-size:41px;
-  }
-
-  .recommendations{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
@@ -269,29 +226,15 @@ a{
 
 <div class="wrap">
 
-  <div class="source">
-    INUMET · ÁREA METROPOLITANA
-  </div>
+  <div class="source">INUMET · ÁREA METROPOLITANA</div>
 
   <h1>Tiempo en Montevideo</h1>
 
-  <div class="muted" id="updated">
-    Cargando…
-  </div>
-
+  <div class="muted" id="updated">Cargando…</div>
 
   <section class="card">
-
-    <div id="weatherTop">
-      Consultando pronóstico…
-    </div>
-
-    <div id="temperatures"></div>
-
-    <div id="details"></div>
-
+    <div id="today">Consultando pronóstico…</div>
   </section>
-
 
   <section class="card">
 
@@ -300,447 +243,233 @@ a{
     <div class="recommendations">
 
       <div class="recommendation">
-
-        <div class="recommendationIcon">☔</div>
-
-        <div class="recommendationTitle">
-          ¿Llevo paraguas?
-        </div>
-
-        <div class="recommendationValue" id="umbrella">
-          Analizando…
-        </div>
-
+        <div class="recIcon">☔</div>
+        <div class="recQuestion">¿Llevo paraguas?</div>
+        <div class="recAnswer" id="umbrella">Analizando…</div>
       </div>
-
 
       <div class="recommendation">
-
-        <div class="recommendationIcon">🧥</div>
-
-        <div class="recommendationTitle">
-          ¿Necesito abrigo?
-        </div>
-
-        <div class="recommendationValue" id="coat">
-          Analizando…
-        </div>
-
+        <div class="recIcon">🧥</div>
+        <div class="recQuestion">¿Necesito abrigo?</div>
+        <div class="recAnswer" id="coat">Analizando…</div>
       </div>
 
     </div>
 
   </section>
 
-
   <section class="card">
-
     <h2>En pocas palabras</h2>
-
-    <div id="summary">
-      —
-    </div>
-
+    <div id="summary">—</div>
   </section>
-
 
   <section class="card">
-
     <h2>Próximos días</h2>
-
-    <div id="days">
-      —
-    </div>
-
+    <div id="days">—</div>
   </section>
 
-
-  <button onclick="load()">
-    ↻ Actualizar
-  </button>
-
+  <button onclick="load()">↻ Actualizar</button>
 
   <p class="muted footer">
     Fuente:
-    <a
-      href="https://www.inumet.gub.uy/tiempo/pronostico"
-      target="_blank">
-      Instituto Uruguayo de Meteorología (INUMET)
+    <a href="https://www.inumet.gub.uy/tiempo/pronostico"
+       target="_blank"
+       rel="noopener">
+       INUMET
     </a>
   </p>
 
 </div>
 
-
 <script>
 
-function escapeHtml(value){
-
-  return String(value ?? '').replace(
-    /[&<>"]/g,
-    function(c){
-
-      return {
-        '&':'&amp;',
-        '<':'&lt;',
-        '>':'&gt;',
-        '"':'&quot;'
-      }[c];
-
-    }
-  );
-
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"]/g, function(c) {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;"
+    }[c];
+  });
 }
 
-
-/* ICONO SEGÚN EL PRONÓSTICO */
-
-function weatherIcon(day){
-
-  const text=(
-    (day.morning || '')+' '+
-    (day.evening || '')+' '+
-    (day.rain || '')
+function forecastText(day) {
+  return (
+    (day.morning || "") + " " +
+    (day.evening || "") + " " +
+    (day.rain || "")
   ).toLowerCase();
-
-
-  if(
-    text.includes('torment')
-  ){
-    return '⛈️';
-  }
-
-
-  if(
-    text.includes('lluvia') ||
-    text.includes('precipit') ||
-    text.includes('chaparr')
-  ){
-    return '🌧️';
-  }
-
-
-  if(
-    text.includes('cubierto')
-  ){
-    return '☁️';
-  }
-
-
-  if(
-    text.includes('nuboso')
-  ){
-    return '🌥️';
-  }
-
-
-  if(
-    text.includes('soleado') ||
-    text.includes('claro')
-  ){
-    return '☀️';
-  }
-
-
-  return '🌤️';
 }
 
+function icon(day) {
+  const text = forecastText(day);
 
-/* DESCRIPCIÓN CORTA */
+  if (text.includes("torment")) return "⛈️";
 
-function weatherTitle(day){
+  if (
+    text.includes("precipit") ||
+    text.includes("lluvia") ||
+    text.includes("chaparr")
+  ) return "🌧️";
 
-  const text=(
-    (day.morning || '')+' '+
-    (day.evening || '')
-  ).toLowerCase();
+  if (text.includes("cubierto")) return "☁️";
 
+  if (text.includes("nuboso")) return "🌥️";
 
-  if(text.includes('torment')){
-    return 'Posibles tormentas';
-  }
-
-  if(
-    text.includes('lluvia') ||
-    text.includes('precipit') ||
-    text.includes('chaparr')
-  ){
-    return 'Posibles precipitaciones';
-  }
-
-  if(text.includes('cubierto')){
-    return 'Cielo cubierto';
-  }
-
-  if(text.includes('nuboso')){
-    return 'Nubosidad variable';
-  }
-
-  if(
-    text.includes('soleado') ||
-    text.includes('claro')
-  ){
-    return 'Tiempo mayormente despejado';
-  }
-
-  return 'Pronóstico para hoy';
+  return "🌤️";
 }
 
+function shortDescription(day) {
+  const text = forecastText(day);
 
-/* PARAGUAS */
+  if (text.includes("torment"))
+    return "Posibles tormentas";
 
-function umbrellaAdvice(day){
+  if (
+    text.includes("precipit") ||
+    text.includes("lluvia") ||
+    text.includes("chaparr")
+  )
+    return "Posibles precipitaciones";
 
-  const text=(
-    (day.morning || '')+' '+
-    (day.evening || '')+' '+
-    (day.rain || '')
-  ).toLowerCase();
+  if (text.includes("cubierto"))
+    return "Cielo cubierto";
 
+  if (text.includes("nuboso"))
+    return "Nubosidad variable";
 
-  /*
-    Importante:
-    "baja probabilidad de precipitaciones"
-    no se interpreta igual que lluvia segura.
-  */
-
-  if(
-    text.includes('baja probabilidad')
-  ){
-    return 'Por las dudas';
-  }
-
-
-  if(
-    text.includes('torment') ||
-    text.includes('lluvia') ||
-    text.includes('chaparr') ||
-    text.includes('precipit')
-  ){
-    return 'Sí, mejor llevar';
-  }
-
-
-  return 'No parece necesario';
+  return "Pronóstico para hoy";
 }
 
+function umbrellaAdvice(day) {
+  const text = forecastText(day);
 
-/* ABRIGO */
+  if (
+    text.includes("baja probabilidad") &&
+    (
+      text.includes("precipit") ||
+      text.includes("lluvia")
+    )
+  )
+    return "Por las dudas";
 
-function coatAdvice(day){
+  if (
+    text.includes("torment") ||
+    text.includes("precipit") ||
+    text.includes("lluvia") ||
+    text.includes("chaparr")
+  )
+    return "Sí, mejor llevar";
 
-  const min=parseInt(day.min,10);
-  const max=parseInt(day.max,10);
-
-  const wind=(day.wind || '').toLowerCase();
-
-
-  if(
-    min<=7 ||
-    max<=13
-  ){
-    return 'Sí, abrigo';
-  }
-
-
-  if(
-    min<=11 ||
-    max<=17
-  ){
-    return 'Abrigo liviano';
-  }
-
-
-  if(
-    wind.includes('racha') &&
-    min<=15
-  ){
-    return 'Abrigo liviano';
-  }
-
-
-  return 'No parece necesario';
+  return "No parece necesario";
 }
 
+function coatAdvice(day) {
+  const min = Number(day.min);
+  const max = Number(day.max);
 
-/* CARGA DE DATOS */
+  if (min <= 7 || max <= 13)
+    return "Sí, abrigo";
 
-async function load(){
+  if (min <= 11 || max <= 17)
+    return "Abrigo liviano";
 
-  try{
+  return "No parece necesario";
+}
 
-    const response=await fetch(
-      'data.json?'+Date.now()
+async function load() {
+
+  try {
+
+    const response = await fetch(
+      "data.json?v=" + Date.now(),
+      { cache: "no-store" }
     );
 
+    if (!response.ok)
+      throw new Error("No se pudo leer data.json");
 
-    if(!response.ok){
-      throw new Error(
-        'Todavía no hay datos disponibles.'
-      );
-    }
+    const data = await response.json();
 
+    if (!data.days || data.days.length === 0)
+      throw new Error("No hay pronóstico disponible");
 
-    const data=await response.json();
+    const today = data.days[0];
 
-    if(!data.days || !data.days.length){
-      throw new Error(
-        'El pronóstico no contiene días.'
-      );
-    }
+    document.getElementById("updated").textContent =
+      "Última actualización: " + data.updated;
 
-
-    const today=data.days[0];
-
-
-    document.querySelector('#updated').textContent=
-      'Última actualización: '+data.updated;
-
-
-    /* CABECERA */
-
-    document.querySelector('#weatherTop').innerHTML=`
+    document.getElementById("today").innerHTML = `
 
       <div class="weatherTop">
 
         <div class="weatherIcon">
-          ${weatherIcon(today)}
+          ${icon(today)}
         </div>
 
-        <div class="weatherText">
+        <div>
+          <div class="weatherTitle">
+            ${esc(shortDescription(today))}
+          </div>
 
-          ${escapeHtml(today.date)}
-
-          <br>
-
-          ${escapeHtml(weatherTitle(today))}
-
+          <div class="weatherDate">
+            ${esc(today.date)}
+          </div>
         </div>
 
       </div>
-
-    `;
-
-
-    /* TEMPERATURAS */
-
-    document.querySelector('#temperatures').innerHTML=`
 
       <div class="temps">
 
         <div class="tempBox">
-
-          <div class="tempLabel">
-            Mínima
-          </div>
-
-          <div class="temp">
-            ${escapeHtml(today.min)}°
-          </div>
-
+          <div class="tempLabel">Mínima</div>
+          <div class="temp">${esc(today.min)}°</div>
         </div>
 
-
         <div class="tempBox">
-
-          <div class="tempLabel">
-            Máxima
-          </div>
-
-          <div class="temp">
-            ${escapeHtml(today.max)}°
-          </div>
-
+          <div class="tempLabel">Máxima</div>
+          <div class="temp">${esc(today.max)}°</div>
         </div>
 
       </div>
-
-    `;
-
-
-    /* DETALLES */
-
-    document.querySelector('#details').innerHTML=`
 
       <div class="grid">
 
         <div class="item">
-
-          <div class="label">
-            Mañana
-          </div>
-
-          <div class="value">
-            ${escapeHtml(today.morning)}
-          </div>
-
+          <div class="label">Mañana</div>
+          <div class="value">${esc(today.morning)}</div>
         </div>
 
-
         <div class="item">
-
-          <div class="label">
-            Tarde / Noche
-          </div>
-
-          <div class="value">
-            ${escapeHtml(today.evening)}
-          </div>
-
+          <div class="label">Tarde / Noche</div>
+          <div class="value">${esc(today.evening)}</div>
         </div>
 
-
         <div class="item">
-
-          <div class="label">
-            💨 Viento
-          </div>
-
-          <div class="value">
-            ${escapeHtml(today.wind)}
-          </div>
-
+          <div class="label">💨 Viento</div>
+          <div class="value">${esc(today.wind)}</div>
         </div>
 
-
         <div class="item">
-
-          <div class="label">
-            ☔ Lluvia
-          </div>
-
-          <div class="value">
-            ${escapeHtml(today.rain)}
-          </div>
-
+          <div class="label">☔ Precipitaciones</div>
+          <div class="value">${esc(today.rain)}</div>
         </div>
 
       </div>
-
     `;
 
-
-    /* RECOMENDACIONES */
-
-    document.querySelector('#umbrella').textContent=
+    document.getElementById("umbrella").textContent =
       umbrellaAdvice(today);
 
-    document.querySelector('#coat').textContent=
+    document.getElementById("coat").textContent =
       coatAdvice(today);
 
+    document.getElementById("summary").textContent =
+      data.summary || "Sin resumen disponible.";
 
-    /* RESUMEN */
-
-    document.querySelector('#summary').textContent=
-      data.summary || 'Sin resumen disponible.';
-
-
-    /* PRÓXIMOS DÍAS */
-
-    document.querySelector('#days').innerHTML=
-      data.days
-      .slice(1)
-      .map(function(day){
+    document.getElementById("days").innerHTML =
+      data.days.slice(1).map(function(day) {
 
         return `
 
@@ -749,1073 +478,49 @@ async function load(){
             <div class="nextHeader">
 
               <div class="nextName">
-
-                <span class="nextIcon">
-                  ${weatherIcon(day)}
-                </span>
-
-                ${escapeHtml(day.date)}
-
+                ${icon(day)} ${esc(day.date)}
               </div>
 
-
               <div class="nextTemp">
-                ${escapeHtml(day.min)}°
-                /
-                ${escapeHtml(day.max)}°
+                ${esc(day.min)}° / ${esc(day.max)}°
               </div>
 
             </div>
 
-
-            <div class="nextDescription">
-
-              ${escapeHtml(day.morning)}
-
+            <div class="nextText">
+              ${esc(day.morning)}
               <br>
-
-              ${escapeHtml(day.evening)}
-
+              ${esc(day.evening)}
             </div>
 
           </div>
-
         `;
 
-      })
-      .join('');
-
-
-  }catch(error){
-
-    document.querySelector('#updated').textContent=
-      'No se pudieron cargar los datos';
-
-    document.querySelector('#weatherTop').innerHTML=
-      '<b>Error al cargar el pronóstico.</b>';
-
-    document.querySelector('#umbrella').textContent=
-      'Sin datos';
-
-    document.querySelector('#coat').textContent=
-      'Sin datos';
-
-    console.error(error);
+      }).join("");
 
   }
 
-}
+  catch(error) {
 
+    document.getElementById("updated").textContent =
+      "Error al cargar el pronóstico";
+
+    document.getElementById("today").innerHTML =
+      "<b>No se pudieron cargar los datos de INUMET.</b>";
+
+    document.getElementById("umbrella").textContent =
+      "Sin datos";
+
+    document.getElementById("coat").textContent =
+      "Sin datos";
+
+    console.error(error);
+  }
+}
 
 load();
 
 </script>
 
 </body>
-</html>    .card {
-      background: #ffffff;
-      border-radius: 22px;
-      padding: 20px;
-      margin: 14px 0;
-      box-shadow: 0 5px 20px #17203312;
-    }
-
-    /* TEMPERATURAS */
-
-    .temps {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-
-    .tempBox {
-      background: #f5f8fb;
-      border-radius: 18px;
-      padding: 18px;
-      text-align: center;
-    }
-
-    .tempLabel {
-      font-size: 13px;
-      font-weight: 700;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .temp {
-      font-size: 48px;
-      line-height: 1;
-      font-weight: 800;
-      margin-top: 8px;
-    }
-
-    .description {
-      font-size: 16px;
-      line-height: 1.5;
-      margin: 10px 0 18px;
-    }
-
-    /* RECOMENDACIONES */
-
-    .recommendations {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin: 18px 0;
-    }
-
-    .recommendation {
-      background: #f5f8fb;
-      border-radius: 18px;
-      padding: 16px;
-      text-align: center;
-    }
-
-    .recommendationIcon {
-      font-size: 34px;
-      margin-bottom: 6px;
-    }
-
-    .recommendationTitle {
-      font-size: 13px;
-      font-weight: 700;
-      color: #64748b;
-      text-transform: uppercase;
-    }
-
-    .recommendationValue {
-      font-size: 19px;
-      font-weight: 800;
-      margin-top: 6px;
-    }
-
-    /* DATOS DEL DÍA */
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .item {
-      padding: 14px;
-      background: #f5f8fb;
-      border-radius: 14px;
-    }
-
-    .label {
-      font-size: 12px;
-      color: #718096;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .value {
-      margin-top: 6px;
-      font-weight: 650;
-      line-height: 1.4;
-    }
-
-    /* BOTÓN */
-
-    button {
-      border: 0;
-      border-radius: 14px;
-      padding: 12px 18px;
-      background: #172033;
-      color: white;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    button:active {
-      transform: scale(0.98);
-    }
-
-    a {
-      color: inherit;
-    }
-
-    /* CELULAR */
-
-    @media (max-width: 520px) {
-
-      .wrap {
-        padding: 14px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      .temps {
-        gap: 10px;
-      }
-
-      .tempBox {
-        padding: 15px 10px;
-      }
-
-      .temp {
-        font-size: 42px;
-      }
-
-      .recommendations {
-        grid-template-columns: 1fr;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="wrap">
-
-    <p>
-      <b>INUMET · ÁREA METROPOLITANA</b>
-    </p>
-
-    <h1>Tiempo en Montevideo</h1>
-
-    <div class="muted" id="updated">
-      Cargando…
-    </div>
-
-    <!-- PRONÓSTICO DE HOY -->
-
-    <section class="card" id="today">
-      Consultando pronóstico…
-    </section>
-
-    <!-- RECOMENDACIONES -->
-
-    <section class="card">
-
-      <h2>¿Qué necesito hoy?</h2>
-
-      <div class="recommendations">
-
-        <div class="recommendation">
-
-          <div class="recommendationIcon">
-            ☔
-          </div>
-
-          <div class="recommendationTitle">
-            ¿Llevo paraguas?
-          </div>
-
-          <div class="recommendationValue" id="umbrella">
-            Analizando…
-          </div>
-
-        </div>
-
-
-        <div class="recommendation">
-
-          <div class="recommendationIcon">
-            🧥
-          </div>
-
-          <div class="recommendationTitle">
-            ¿Necesito abrigo?
-          </div>
-
-          <div class="recommendationValue" id="coat">
-            Analizando…
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- RESUMEN -->
-
-    <section class="card">
-
-      <h2>En pocas palabras</h2>
-
-      <div id="summary">
-        —
-      </div>
-
-    </section>
-
-
-    <!-- PRÓXIMOS DÍAS -->
-
-    <section class="card">
-
-      <h2>Próximos días</h2>
-
-      <div id="days">
-        —
-      </div>
-
-    </section>
-
-
-    <button onclick="load()">
-      ↻ Actualizar
-    </button>
-
-
-    <p class="muted" style="font-size:12px">
-      Fuente:
-      <a
-        href="https://www.inumet.gub.uy/tiempo/pronostico"
-        target="_blank">
-        INUMET
-      </a>
-    </p>
-
-  </div>
-
-
-  <script>
-
-    /* Evita problemas si el texto de INUMET contiene caracteres especiales */
-
-    function escapeHtml(value) {
-
-      return String(value ?? '').replace(
-        /[&<>\"]/g,
-        function (c) {
-
-          return {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;'
-          }[c];
-
-        }
-      );
-
-    }
-
-
-    /* RECOMENDACIÓN DE PARAGUAS */
-
-    function getUmbrellaAdvice(day) {
-
-      const text = (
-        (day.morning || '') + ' ' +
-        (day.evening || '') + ' ' +
-        (day.rain || '')
-      ).toLowerCase();
-
-
-      if (
-        text.includes('precipit') ||
-        text.includes('lluvia') ||
-        text.includes('chaparr') ||
-        text.includes('torment')
-      ) {
-
-        return 'Sí, mejor llevar';
-
-      }
-
-
-      if (
-        text.includes('nuboso') ||
-        text.includes('cubierto')
-      ) {
-
-        return 'Puede ser';
-
-      }
-
-
-      return 'No parece necesario';
-
-    }
-
-
-    /* RECOMENDACIÓN DE ABRIGO */
-
-    function getCoatAdvice(day) {
-
-      const min = parseInt(day.min, 10);
-      const max = parseInt(day.max, 10);
-
-      const wind = (day.wind || '').toLowerCase();
-
-
-      /* Días fríos */
-
-      if (
-        min <= 7 ||
-        max <= 13
-      ) {
-
-        return 'Sí, abrigo';
-
-      }
-
-
-      /* Días frescos */
-
-      if (
-        min <= 11 ||
-        max <= 17
-      ) {
-
-        return 'Abrigo liviano';
-
-      }
-
-
-      /* Si hay viento fuerte, puede hacer falta abrigo aunque la temperatura sea mayor */
-
-      if (
-        wind.includes('racha') ||
-        wind.includes('30') ||
-        wind.includes('40') ||
-        wind.includes('50')
-      ) {
-
-        return 'Abrigo liviano';
-
-      }
-
-
-      return 'No parece necesario';
-
-    }
-
-
-    /* CARGAR DATOS */
-
-    async function load() {
-
-      try {
-
-        const response = await fetch(
-          'data.json?' + Date.now()
-        );
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            'Todavía no hay datos disponibles.'
-          );
-
-        }
-
-
-        const data = await response.json();
-
-        const today = data.days[0];
-
-
-        /* Última actualización */
-
-        document.querySelector('#updated').textContent =
-          'Última actualización: ' + data.updated;
-
-
-        /* Pronóstico de hoy */
-
-        document.querySelector('#today').innerHTML = `
-
-          <div class="temps">
-
-            <div class="tempBox">
-
-              <div class="tempLabel">
-                Mínima
-              </div>
-
-              <div class="temp">
-                ${escapeHtml(today.min)}°
-              </div>
-
-            </div>
-
-
-            <div class="tempBox">
-
-              <div class="tempLabel">
-                Máxima
-              </div>
-
-              <div class="temp">
-                ${escapeHtml(today.max)}°
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="description">
-            ${escapeHtml(today.morning)}
-          </div>
-
-
-          <div class="grid">
-
-            <div class="item">
-
-              <div class="label">
-                Mañana
-              </div>
-
-              <div class="value">
-                ${escapeHtml(today.morning)}
-              </div>
-
-            </div>
-
-
-            <div class="item">
-
-              <div class="label">
-                Tarde / Noche
-              </div>
-
-              <div class="value">
-                ${escapeHtml(today.evening)}
-              </div>
-
-            </div>
-
-
-            <div class="item">
-
-              <div class="label">
-                Viento
-              </div>
-
-              <div class="value">
-                ${escapeHtml(today.wind)}
-              </div>
-
-            </div>
-
-
-            <div class="item">
-
-              <div class="label">
-                Lluvia
-              </div>
-
-              <div class="value">
-                ${escapeHtml(today.rain)}
-              </div>
-
-            </div>
-
-          </div>
-
-        `;
-
-
-        /* RECOMENDACIONES */
-
-        document.querySelector('#umbrella').textContent =
-          getUmbrellaAdvice(today);
-
-
-        document.querySelector('#coat').textContent =
-          getCoatAdvice(today);
-
-
-        /* RESUMEN */
-
-        document.querySelector('#summary').textContent =
-          data.summary;
-
-
-        /* PRÓXIMOS DÍAS */
-
-        document.querySelector('#days').innerHTML =
-          data.days
-            .slice(1)
-            .map(function (day) {
-
-              return `
-
-                <p>
-
-                  <b>
-                    ${escapeHtml(day.date)}
-                  </b>
-
-                  ·
-
-                  ${escapeHtml(day.min)}°
-                  /
-                  ${escapeHtml(day.max)}°
-
-                  <br>
-
-                  ${escapeHtml(day.morning)}
-
-                  <br>
-
-                  ${escapeHtml(day.evening)}
-
-                </p>
-
-              `;
-
-            })
-            .join('');
-
-
-      } catch (error) {
-
-        document.querySelector('#updated').textContent =
-          'Esperando actualización automática';
-
-
-        document.querySelector('#today').innerHTML = `
-
-          <b>
-            La conexión con INUMET todavía se está preparando.
-          </b>
-
-          <p>
-            ${escapeHtml(error.message)}
-          </p>
-
-        `;
-
-
-        document.querySelector('#umbrella').textContent =
-          'Sin datos';
-
-
-        document.querySelector('#coat').textContent =
-          'Sin datos';
-
-      }
-
-    }
-
-
-    /* Cargar automáticamente */
-
-    load();
-
-  </script>
-
-</body>
-
-</html>    .card {
-      background: #ffffff;
-      border-radius: 22px;
-      padding: 20px;
-      margin: 14px 0;
-      box-shadow: 0 5px 20px #17203312;
-    }
-
-    /* TEMPERATURAS */
-
-    .temps {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-
-    .tempBox {
-      background: #f5f8fb;
-      border-radius: 18px;
-      padding: 18px;
-      text-align: center;
-    }
-
-    .tempLabel {
-      font-size: 13px;
-      font-weight: 700;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .temp {
-      font-size: 48px;
-      line-height: 1;
-      font-weight: 800;
-      margin-top: 8px;
-    }
-
-    .description {
-      font-size: 16px;
-      line-height: 1.5;
-      margin: 10px 0 18px;
-    }
-
-    /* DATOS DEL DÍA */
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .item {
-      padding: 14px;
-      background: #f5f8fb;
-      border-radius: 14px;
-    }
-
-    .label {
-      font-size: 12px;
-      color: #718096;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .value {
-      margin-top: 6px;
-      font-weight: 650;
-      line-height: 1.4;
-    }
-
-    /* BOTÓN */
-
-    button {
-      border: 0;
-      border-radius: 14px;
-      padding: 12px 18px;
-      background: #172033;
-      color: white;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    button:active {
-      transform: scale(0.98);
-    }
-
-    a {
-      color: inherit;
-    }
-
-    /* CELULAR */
-
-    @media (max-width: 520px) {
-
-      .wrap {
-        padding: 14px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      .temps {
-        gap: 10px;
-      }
-
-      .tempBox {
-        padding: 15px 10px;
-      }
-
-      .temp {
-        font-size: 42px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="wrap">
-
-    <p>
-      <b>INUMET · ÁREA METROPOLITANA</b>
-    </p>
-
-    <h1>Tiempo en Montevideo</h1>
-
-    <div class="muted" id="updated">
-      Cargando…
-    </div>
-
-    <!-- PRONÓSTICO DE HOY -->
-
-    <section class="card" id="today">
-      Consultando pronóstico…
-    </section>
-
-    <!-- RESUMEN -->
-
-    <section class="card">
-
-      <h2>En pocas palabras</h2>
-
-      <div id="summary">
-        —
-      </div>
-
-    </section>
-
-    <!-- PRÓXIMOS DÍAS -->
-
-    <section class="card">
-
-      <h2>Próximos días</h2>
-
-      <div id="days">
-        —
-      </div>
-
-    </section>
-
-    <button onclick="load()">
-      ↻ Actualizar
-    </button>
-
-    <p class="muted" style="font-size:12px">
-      Fuente:
-      <a href="https://www.inumet.gub.uy/tiempo/pronostico" target="_blank">
-        INUMET
-      </a>
-    </p>
-
-  </div>
-
-
-  <script>
-
-    /* Evita que texto proveniente de INUMET pueda romper el HTML */
-
-    function escapeHtml(value) {
-
-      return String(value ?? '').replace(
-        /[&<>\"]/g,
-        function (c) {
-
-          return {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;'
-          }[c];
-
-        }
-      );
-
-    }
-
-
-    /* Carga los datos generados por fetch_inumet.py */
-
-    async function load() {
-
-      try {
-
-        const response = await fetch(
-          'data.json?' + Date.now()
-        );
-
-        if (!response.ok) {
-          throw new Error('Todavía no hay datos disponibles.');
-        }
-
-        const data = await response.json();
-
-        const today = data.days[0];
-
-
-        /* Última actualización */
-
-        document.querySelector('#updated').textContent =
-          'Última actualización: ' + data.updated;
-
-
-        /* Pronóstico de hoy */
-
-        document.querySelector('#today').innerHTML = `
-
-          <div class="temps">
-
-            <div class="tempBox">
-
-              <div class="tempLabel">
-                Mínima
-              </div>
-
-              <div class="temp">
-                ${escapeHtml(today.min)}°
-              </div>
-
-            </div>
-
-
-            <div class="tempBox">
-
-              <div class="tempLabel">
-                Máxima
-              </div>
-
-              <div class="temp">
-                ${escapeHtml(today.max)}°
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="description">
-            ${escapeHtml(today.morning)}
-          </div>
-
-
-          <div class="grid">
-
-            <div class="item">
-
-              <div class="label">
-                Mañana
-              </div>
-
-              <div class="value">
-                ${escapeHtml(today.morning)}
-              </div>
-
-            </div>
-
-
-            <div class="item">
-
-              <div class="label">
-                Tarde / Noche
-              </div>
-
-              <div class="value">
-                ${escapeHtml(today.evening)}
-              </div>
-
-            </div>
-
-
-            <div class="item">
-
-              <div class="label">
-                Viento
-              </div>
-
-              <div class="value">
-                ${escapeHtml(today.wind)}
-              </div>
-
-            </div>
-
-
-            <div class="item">
-
-              <div class="label">
-                Lluvia
-              </div>
-
-              <div class="value">
-                ${escapeHtml(today.rain)}
-              </div>
-
-            </div>
-
-          </div>
-
-        `;
-
-
-        /* Resumen */
-
-        document.querySelector('#summary').textContent =
-          data.summary;
-
-
-        /* Próximos días */
-
-        document.querySelector('#days').innerHTML =
-          data.days
-            .slice(1)
-            .map(function (day) {
-
-              return `
-
-                <p>
-
-                  <b>
-                    ${escapeHtml(day.date)}
-                  </b>
-
-                  ·
-
-                  ${escapeHtml(day.min)}°
-                  /
-                  ${escapeHtml(day.max)}°
-
-                  <br>
-
-                  ${escapeHtml(day.morning)}
-
-                  <br>
-
-                  ${escapeHtml(day.evening)}
-
-                </p>
-
-              `;
-
-            })
-            .join('');
-
-
-      } catch (error) {
-
-        document.querySelector('#updated').textContent =
-          'Esperando actualización automática';
-
-
-        document.querySelector('#today').innerHTML = `
-
-          <b>
-            La conexión con INUMET todavía se está preparando.
-          </b>
-
-          <p>
-            ${escapeHtml(error.message)}
-          </p>
-
-        `;
-
-      }
-
-    }
-
-
-    /* Cargar automáticamente al abrir la página */
-
-    load();
-
-  </script>
-
-</body>
-
 </html>
