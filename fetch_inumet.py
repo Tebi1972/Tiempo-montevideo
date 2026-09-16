@@ -4,19 +4,19 @@ import json
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-# -------------------------------------------------
-# 1. PRONÓSTICO PARA ÁREA METROPOLITANA
-# -------------------------------------------------
-
-URL_PRONOSTICO = "https://www.inumet.gub.uy/tiempo/pronostico"
-
-headers = {
+HEADERS = {
     "User-Agent": "Mozilla/5.0"
 }
 
+# =================================================
+# 1. PRONÓSTICO PARA ÁREA METROPOLITANA
+# =================================================
+
+URL_PRONOSTICO = "https://www.inumet.gub.uy/tiempo/pronostico"
+
 r = requests.get(
     URL_PRONOSTICO,
-    headers=headers,
+    headers=HEADERS,
     timeout=30
 )
 
@@ -139,21 +139,24 @@ if not days:
     )
 
 
-# -------------------------------------------------
-# 2. TEMPERATURA ACTUAL - ESTACIÓN PRADO
-# -------------------------------------------------
+# =================================================
+# 2. TEMPERATURA ACTUAL - PRADO G3
+# =================================================
 
-URL_ACTUAL = "https://www.inumet.gub.uy/tiempo/estado-actual-test"
+URL_ACTUAL = (
+    "https://www.inumet.gub.uy/"
+    "tiempo/estaciones-meteorologicas-automaticas"
+)
 
 current_temp = None
-current_station = "Prado"
+current_station = "Prado G3"
 
 
 try:
 
     r_actual = requests.get(
         URL_ACTUAL,
-        headers=headers,
+        headers=HEADERS,
         timeout=30
     )
 
@@ -165,8 +168,6 @@ try:
     )
 
 
-    # Buscamos las filas de la tabla de observaciones.
-
     filas = soup_actual.find_all("tr")
 
 
@@ -175,27 +176,48 @@ try:
         columnas = fila.find_all(["td", "th"])
 
         valores = [
-            c.get_text(" ", strip=True)
-            for c in columnas
+            columna.get_text(
+                " ",
+                strip=True
+            )
+            for columna in columnas
         ]
 
 
-        if (
-            valores and
-            valores[0].strip().lower() == "prado"
-        ):
+        if not valores:
+            continue
 
-            # La temperatura del aire está
-            # en la quinta columna de la tabla.
 
-            if len(valores) >= 5:
+        nombre_estacion = valores[0].strip()
 
-                temperatura = valores[4]
+
+        if nombre_estacion.lower() == "prado g3":
+
+            print(
+                "Fila Prado encontrada:",
+                valores
+            )
+
+
+            # Tabla INUMET:
+            #
+            # 0 = Estación
+            # 1 = Viento
+            # 2 = Temperatura del aire
+            # 3 = Punto de rocío
+            # 4 = Humedad
+            # 5 = Precipitación
+            # 6 = Presión
+
+            if len(valores) >= 3:
+
+                temperatura = valores[2]
 
                 numero = re.search(
                     r"-?\d+(?:[.,]\d+)?",
                     temperatura
                 )
+
 
                 if numero:
 
@@ -215,9 +237,9 @@ except Exception as error:
     )
 
 
-# -------------------------------------------------
+# =================================================
 # 3. RESUMEN
-# -------------------------------------------------
+# =================================================
 
 t = days[0]
 
@@ -248,9 +270,9 @@ if re.search(
     )
 
 
-# -------------------------------------------------
+# =================================================
 # 4. CREAR DATA.JSON
-# -------------------------------------------------
+# =================================================
 
 data = {
 
@@ -284,7 +306,7 @@ with open(
 
 
 print(
-    "Temperatura actual Prado:",
+    "Temperatura actual Prado G3:",
     current_temp
 )
 
