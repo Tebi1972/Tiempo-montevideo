@@ -1,5 +1,5 @@
 {
-  "updated": "16/09/2026 13:52",
+  "updated": "16/09/2026 15:06",
   "current": {
     "temperature": null,
     "station": "Prado G3"
@@ -8,10 +8,10 @@
     {
       "date": "Miércoles 16",
       "min": "6",
-      "max": "13",
-      "morning": "Disminución de nubosidad. Bajas temperaturas.",
+      "max": "14",
+      "morning": "Sin detalle",
       "evening": "Claro y algo nuboso.",
-      "wind": "Sector E 10-30 km/h. E al NE 10-30 km/h. ",
+      "wind": "E al NE 10-30 km/h. ",
       "rain": "No indicada"
     },
     {
@@ -29,9 +29,9 @@
       "max": "19",
       "morning": "Claro y algo nuboso.",
       "evening": "Claro y algo nuboso.",
-      "wind": "NE 10-30 km/h. NE 10-40 km/h. Pronóstico extendido: Última Actualización: 16/09/2026 06:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "wind": "NE 10-30 km/h. NE 10-40 km/h. Pronóstico extendido: Última Actualización: 16/09/2026 12:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
       "rain": "No indicada"
     }
   ],
-  "summary": "Temperaturas de 6° a 13°."
+  "summary": "Temperaturas de 6° a 14°."
 }
