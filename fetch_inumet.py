@@ -2,14 +2,14 @@ import requests
 import re
 import json
 from bs4 import BeautifulSoup
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 HEADERS = {
-    "User-Agent": "Mozilla/5.0"
+    "User-Agent": "Tiempo-Montevideo/1.0"
 }
 
 # =================================================
-# 1. PRONÓSTICO PARA ÁREA METROPOLITANA
+# 1. PRONÓSTICO INUMET - ÁREA METROPOLITANA
 # =================================================
 
 URL_PRONOSTICO = "https://www.inumet.gub.uy/tiempo/pronostico"
@@ -140,105 +140,186 @@ if not days:
 
 
 # =================================================
-# 2. TEMPERATURA ACTUAL - PRADO G3
+# 2. TEMPERATURA ACTUAL - API OFICIAL INUMET
 # =================================================
 
-URL_ACTUAL = (
-    "https://www.inumet.gub.uy/"
-    "tiempo/estaciones-meteorologicas-automaticas"
+API_OBSERVACIONES = (
+    "https://w2b.inumet.gub.uy/oapi/collections/"
+    "urn:wmo:md:uy-inumet:surface-based-observations.synop/"
+    "items"
 )
 
+PRADO_WIGOS = "0-20000-0-86585"
+
 current_temp = None
-current_station = "Prado G3"
+current_time = None
+current_station = "Prado"
 
 
 try:
 
-    r_actual = requests.get(
-        URL_ACTUAL,
+    # Buscamos observaciones recientes.
+    # La ventana de 48 horas permite que la app siga
+    # funcionando aunque haya algún retraso en la estación.
+
+    ahora = datetime.now(timezone.utc)
+
+    desde = ahora - timedelta(hours=48)
+
+    rango_tiempo = (
+        desde.strftime("%Y-%m-%dT%H:%M:%SZ")
+        + "/"
+        + ahora.strftime("%Y-%m-%dT%H:%M:%SZ")
+    )
+
+
+    params = {
+        "f": "json",
+        "limit": 100,
+        "datetime": rango_tiempo,
+        "filter-lang": "cql-text",
+        "filter": (
+            "wigos_station_identifier='"
+            + PRADO_WIGOS +
+            "' AND name='air_temperature'"
+        ),
+        "sortby": "-phenomenonTime"
+    }
+
+
+    respuesta = requests.get(
+        API_OBSERVACIONES,
+        params=params,
         headers=HEADERS,
         timeout=30
     )
 
-    r_actual.raise_for_status()
 
-    soup_actual = BeautifulSoup(
-        r_actual.text,
-        "html.parser"
+    print(
+        "Consulta API INUMET:",
+        respuesta.url
     )
 
 
-    filas = soup_actual.find_all("tr")
+    print(
+        "Código respuesta API:",
+        respuesta.status_code
+    )
 
 
-    for fila in filas:
+    respuesta.raise_for_status()
 
-        columnas = fila.find_all(["td", "th"])
+    api_data = respuesta.json()
 
-        valores = [
-            columna.get_text(
-                " ",
-                strip=True
-            )
-            for columna in columnas
+    features = api_data.get(
+        "features",
+        []
+    )
+
+
+    print(
+        "Observaciones encontradas:",
+        len(features)
+    )
+
+
+    # Como protección adicional, comprobamos nosotros
+    # mismos estación y variable.
+
+    observaciones = []
+
+
+    for feature in features:
+
+        props = feature.get(
+            "properties",
+            {}
+        )
+
+
+        station = props.get(
+            "wigos_station_identifier"
+        )
+
+        name = props.get(
+            "name"
+        )
+
+        value = props.get(
+            "value"
+        )
+
+        phenomenon_time = props.get(
+            "phenomenonTime"
+        )
+
+
+        if (
+            station == PRADO_WIGOS
+            and name == "air_temperature"
+            and value is not None
+        ):
+
+            observaciones.append({
+                "temperature": value,
+                "time": phenomenon_time
+            })
+
+
+    # Ordenamos por hora para asegurarnos de utilizar
+    # siempre la observación más reciente.
+
+    observaciones.sort(
+        key=lambda x: x["time"] or "",
+        reverse=True
+    )
+
+
+    if observaciones:
+
+        current_temp = observaciones[0][
+            "temperature"
+        ]
+
+        current_time = observaciones[0][
+            "time"
         ]
 
 
-        if not valores:
-            continue
+        print(
+            "Temperatura actual Prado:",
+            current_temp
+        )
 
 
-        nombre_estacion = valores[0].strip()
+        print(
+            "Hora observación:",
+            current_time
+        )
 
 
-        if nombre_estacion.lower() == "prado g3":
+    else:
 
-            print(
-                "Fila Prado encontrada:",
-                valores
-            )
-
-
-            # Tabla INUMET:
-            #
-            # 0 = Estación
-            # 1 = Viento
-            # 2 = Temperatura del aire
-            # 3 = Punto de rocío
-            # 4 = Humedad
-            # 5 = Precipitación
-            # 6 = Presión
-
-            if len(valores) >= 3:
-
-                temperatura = valores[2]
-
-                numero = re.search(
-                    r"-?\d+(?:[.,]\d+)?",
-                    temperatura
-                )
-
-
-                if numero:
-
-                    current_temp = (
-                        numero.group(0)
-                        .replace(",", ".")
-                    )
-
-            break
+        print(
+            "No se encontró una temperatura "
+            "reciente de Prado."
+        )
 
 
 except Exception as error:
 
+    # Muy importante:
+    # si la API de observaciones falla,
+    # NO rompemos el pronóstico.
+
     print(
-        "No se pudo obtener la temperatura actual:",
+        "Error obteniendo temperatura actual:",
         error
     )
 
 
 # =================================================
-# 3. RESUMEN
+# 3. RESUMEN DEL DÍA
 # =================================================
 
 t = days[0]
@@ -271,7 +352,7 @@ if re.search(
 
 
 # =================================================
-# 4. CREAR DATA.JSON
+# 4. GENERAR DATA.JSON
 # =================================================
 
 data = {
@@ -281,8 +362,12 @@ data = {
     ),
 
     "current": {
+
         "temperature": current_temp,
-        "station": current_station
+
+        "station": current_station,
+
+        "observation_time": current_time
     },
 
     "days": days,
@@ -305,9 +390,16 @@ with open(
     )
 
 
+print("--------------------------------")
+
 print(
-    "Temperatura actual Prado G3:",
+    "Temperatura Prado:",
     current_temp
+)
+
+print(
+    "Hora observación:",
+    current_time
 )
 
 print(
