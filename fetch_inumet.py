@@ -2,7 +2,7 @@ import requests
 import re
 import json
 from bs4 import BeautifulSoup
-from datetime import datetime, timezone, timedelta
+from datetime import datetime
 
 HEADERS = {
     "User-Agent": "Tiempo-Montevideo/1.0"
@@ -27,7 +27,6 @@ soup = BeautifulSoup(r.text, "html.parser")
 texto = soup.get_text(" ", strip=True)
 texto = re.sub(r"\s+", " ", texto)
 
-
 patron = re.compile(
     r"(Lunes|Martes|Miércoles|Jueves|Viernes|Sábado|Domingo)"
     r"\s+(\d{1,2})"
@@ -41,7 +40,6 @@ matches = list(patron.finditer(texto))
 
 days = []
 vistos = set()
-
 
 for i, m in enumerate(matches):
 
@@ -64,13 +62,11 @@ for i, m in enumerate(matches):
 
     bloque = texto[inicio:fin]
 
-
     manana = re.search(
         r"Mañana\s+(.*?)(?=\s+Viento:|\s+Tarde/Noche)",
         bloque,
         re.IGNORECASE
     )
-
 
     tarde = re.search(
         r"Tarde/Noche\s+(.*?)(?=\s+Viento:|$)",
@@ -78,13 +74,11 @@ for i, m in enumerate(matches):
         re.IGNORECASE
     )
 
-
     vientos = re.findall(
         r"Viento:\s*(.*?)(?=\s+(?:Tarde/Noche|Mañana)|$)",
         bloque,
         re.IGNORECASE
     )
-
 
     morning = (
         manana.group(1).strip()
@@ -92,20 +86,17 @@ for i, m in enumerate(matches):
         else "Sin detalle"
     )
 
-
     evening = (
         tarde.group(1).strip()
         if tarde
         else "Sin detalle"
     )
 
-
     wind = (
         " ".join(vientos)
         if vientos
         else "—"
     )
-
 
     lluvia = (
         "Precipitaciones"
@@ -117,7 +108,6 @@ for i, m in enumerate(matches):
         else "No indicada"
     )
 
-
     days.append({
         "date": fecha,
         "min": temp_min,
@@ -127,7 +117,6 @@ for i, m in enumerate(matches):
         "wind": wind,
         "rain": lluvia
     })
-
 
     if len(days) == 3:
         break
@@ -140,7 +129,7 @@ if not days:
 
 
 # =================================================
-# 2. TEMPERATURA ACTUAL - API OFICIAL INUMET
+# 2. TEMPERATURA ACTUAL - API INUMET
 # =================================================
 
 API_OBSERVACIONES = (
@@ -155,57 +144,39 @@ current_temp = None
 current_time = None
 current_station = "Prado"
 
-
 try:
 
-    # Buscamos observaciones recientes.
-    # La ventana de 48 horas permite que la app siga
-    # funcionando aunque haya algún retraso en la estación.
-
-    ahora = datetime.now(timezone.utc)
-
-    desde = ahora - timedelta(hours=48)
-
-    rango_tiempo = (
-        desde.strftime("%Y-%m-%dT%H:%M:%SZ")
-        + "/"
-        + ahora.strftime("%Y-%m-%dT%H:%M:%SZ")
-    )
-
+    # Consulta deliberadamente sencilla.
+    #
+    # NO usamos:
+    # filter
+    # filter-lang
+    # sortby
+    # datetime
+    #
+    # Python hará el filtrado.
 
     params = {
         "f": "json",
-        "limit": 100,
-        "datetime": rango_tiempo,
-        "filter-lang": "cql-text",
-        "filter": (
-            "wigos_station_identifier='"
-            + PRADO_WIGOS +
-            "' AND name='air_temperature'"
-        ),
-        "sortby": "-phenomenonTime"
+        "limit": 1000
     }
-
 
     respuesta = requests.get(
         API_OBSERVACIONES,
         params=params,
         headers=HEADERS,
-        timeout=30
+        timeout=60
     )
-
 
     print(
         "Consulta API INUMET:",
         respuesta.url
     )
 
-
     print(
         "Código respuesta API:",
         respuesta.status_code
     )
-
 
     respuesta.raise_for_status()
 
@@ -216,18 +187,14 @@ try:
         []
     )
 
-
     print(
-        "Observaciones encontradas:",
+        "Registros recibidos:",
         len(features)
     )
 
+    observaciones_prado = []
 
-    # Como protección adicional, comprobamos nosotros
-    # mismos estación y variable.
-
-    observaciones = []
-
+    estaciones_encontradas = set()
 
     for feature in features:
 
@@ -235,7 +202,6 @@ try:
             "properties",
             {}
         )
-
 
         station = props.get(
             "wigos_station_identifier"
@@ -253,6 +219,10 @@ try:
             "phenomenonTime"
         )
 
+        if station:
+            estaciones_encontradas.add(
+                station
+            )
 
         if (
             station == PRADO_WIGOS
@@ -260,57 +230,64 @@ try:
             and value is not None
         ):
 
-            observaciones.append({
+            observaciones_prado.append({
                 "temperature": value,
                 "time": phenomenon_time
             })
 
 
-    # Ordenamos por hora para asegurarnos de utilizar
-    # siempre la observación más reciente.
+    print(
+        "Cantidad de estaciones recibidas:",
+        len(estaciones_encontradas)
+    )
 
-    observaciones.sort(
+    print(
+        "Temperaturas de Prado encontradas:",
+        len(observaciones_prado)
+    )
+
+
+    # Ordenamos nosotros por fecha/hora.
+
+    observaciones_prado.sort(
         key=lambda x: x["time"] or "",
         reverse=True
     )
 
 
-    if observaciones:
+    if observaciones_prado:
 
-        current_temp = observaciones[0][
+        ultima = observaciones_prado[0]
+
+        current_temp = ultima[
             "temperature"
         ]
 
-        current_time = observaciones[0][
+        current_time = ultima[
             "time"
         ]
 
-
         print(
-            "Temperatura actual Prado:",
+            "Temperatura Prado seleccionada:",
             current_temp
         )
 
-
         print(
-            "Hora observación:",
+            "Hora de la observación:",
             current_time
         )
-
 
     else:
 
         print(
-            "No se encontró una temperatura "
-            "reciente de Prado."
+            "No apareció una temperatura "
+            "de Prado entre los registros recibidos."
         )
-
 
 except Exception as error:
 
-    # Muy importante:
-    # si la API de observaciones falla,
-    # NO rompemos el pronóstico.
+    # Si falla la observación actual,
+    # el pronóstico sigue funcionando.
 
     print(
         "Error obteniendo temperatura actual:",
@@ -319,7 +296,7 @@ except Exception as error:
 
 
 # =================================================
-# 3. RESUMEN DEL DÍA
+# 3. RESUMEN
 # =================================================
 
 t = days[0]
@@ -327,7 +304,6 @@ t = days[0]
 parts = [
     f"Temperaturas de {t['min']}° a {t['max']}°"
 ]
-
 
 if re.search(
     r"precipit|lluvia|chaparr",
@@ -338,7 +314,6 @@ if re.search(
     parts.append(
         "con posibilidad de precipitaciones"
     )
-
 
 if re.search(
     r"viento|ráfaga",
@@ -352,7 +327,7 @@ if re.search(
 
 
 # =================================================
-# 4. GENERAR DATA.JSON
+# 4. CREAR DATA.JSON
 # =================================================
 
 data = {
@@ -362,11 +337,8 @@ data = {
     ),
 
     "current": {
-
         "temperature": current_temp,
-
         "station": current_station,
-
         "observation_time": current_time
     },
 
