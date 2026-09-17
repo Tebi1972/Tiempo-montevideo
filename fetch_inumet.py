@@ -2,7 +2,7 @@ import requests
 import re
 import json
 from bs4 import BeautifulSoup
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 HEADERS = {
     "User-Agent": "Tiempo-Montevideo/1.0"
@@ -129,7 +129,7 @@ if not days:
 
 
 # =================================================
-# 2. TEMPERATURA ACTUAL - API INUMET
+# 2. TEMPERATURA ACTUAL - API OFICIAL INUMET
 # =================================================
 
 API_OBSERVACIONES = (
@@ -146,19 +146,27 @@ current_station = "Prado"
 
 try:
 
-    # Consulta deliberadamente sencilla.
-    #
-    # NO usamos:
-    # filter
-    # filter-lang
-    # sortby
-    # datetime
-    #
-    # Python hará el filtrado.
+    # ---------------------------------------------
+    # Pedimos únicamente observaciones recientes.
+    # No usamos filter ni sortby porque esa
+    # combinación produjo error 500 en INUMET.
+    # ---------------------------------------------
+
+    ahora = datetime.now(timezone.utc)
+
+    # Buscamos las últimas 24 horas.
+    desde = ahora - timedelta(hours=24)
+
+    rango_tiempo = (
+        desde.strftime("%Y-%m-%dT%H:%M:%SZ")
+        + "/"
+        + ahora.strftime("%Y-%m-%dT%H:%M:%SZ")
+    )
 
     params = {
         "f": "json",
-        "limit": 1000
+        "limit": 1000,
+        "datetime": rango_tiempo
     }
 
     respuesta = requests.get(
@@ -188,7 +196,7 @@ try:
     )
 
     print(
-        "Registros recibidos:",
+        "Registros recientes recibidos:",
         len(features)
     )
 
@@ -228,6 +236,7 @@ try:
             station == PRADO_WIGOS
             and name == "air_temperature"
             and value is not None
+            and phenomenon_time
         ):
 
             observaciones_prado.append({
@@ -237,20 +246,23 @@ try:
 
 
     print(
-        "Cantidad de estaciones recibidas:",
+        "Cantidad de estaciones recientes:",
         len(estaciones_encontradas)
     )
 
     print(
-        "Temperaturas de Prado encontradas:",
+        "Temperaturas recientes de Prado:",
         len(observaciones_prado)
     )
 
 
-    # Ordenamos nosotros por fecha/hora.
+    # ---------------------------------------------
+    # Ordenamos las temperaturas de Prado
+    # de más reciente a más antigua.
+    # ---------------------------------------------
 
     observaciones_prado.sort(
-        key=lambda x: x["time"] or "",
+        key=lambda x: x["time"],
         reverse=True
     )
 
@@ -259,35 +271,84 @@ try:
 
         ultima = observaciones_prado[0]
 
-        current_temp = ultima[
+        temperatura_encontrada = ultima[
             "temperature"
         ]
 
-        current_time = ultima[
+        hora_encontrada = ultima[
             "time"
         ]
 
         print(
-            "Temperatura Prado seleccionada:",
-            current_temp
+            "Temperatura Prado encontrada:",
+            temperatura_encontrada
         )
 
         print(
-            "Hora de la observación:",
-            current_time
+            "Hora encontrada:",
+            hora_encontrada
         )
+
+
+        # -----------------------------------------
+        # PROTECCIÓN CONTRA DATOS VIEJOS
+        # -----------------------------------------
+
+        hora_observacion = datetime.fromisoformat(
+            hora_encontrada.replace(
+                "Z",
+                "+00:00"
+            )
+        )
+
+        antiguedad = (
+            ahora - hora_observacion
+        )
+
+        horas_antiguedad = (
+            antiguedad.total_seconds()
+            / 3600
+        )
+
+        print(
+            "Antigüedad de la observación:",
+            round(horas_antiguedad, 2),
+            "horas"
+        )
+
+
+        # Solo consideramos "actual"
+        # una observación de hasta 6 horas.
+
+        if horas_antiguedad <= 6:
+
+            current_temp = temperatura_encontrada
+            current_time = hora_encontrada
+
+            print(
+                "Temperatura aceptada como actual:",
+                current_temp
+            )
+
+        else:
+
+            print(
+                "Temperatura descartada: "
+                "la observación es demasiado antigua."
+            )
 
     else:
 
         print(
-            "No apareció una temperatura "
-            "de Prado entre los registros recibidos."
+            "No se encontraron temperaturas "
+            "recientes de Prado."
         )
+
 
 except Exception as error:
 
-    # Si falla la observación actual,
-    # el pronóstico sigue funcionando.
+    # La temperatura actual es complementaria.
+    # Si falla, el pronóstico continúa funcionando.
 
     print(
         "Error obteniendo temperatura actual:",
