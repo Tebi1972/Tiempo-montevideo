@@ -1,5 +1,5 @@
 {
-  "updated": "18/09/2026 03:05",
+  "updated": "18/09/2026 06:06",
   "current": {
     "temperature": null,
     "station": "Prado",
@@ -8,7 +8,7 @@
   "days": [
     {
       "date": "Viernes 18",
-      "min": "8",
+      "min": "10",
       "max": "22",
       "morning": "Algo nuboso, períodos de nuboso.",
       "evening": "Algo nuboso y nuboso, períodos de claro.",
@@ -34,5 +34,5 @@
       "rain": "Precipitaciones"
     }
   ],
-  "summary": "Temperaturas de 8° a 22°."
+  "summary": "Temperaturas de 10° a 22°."
 }
