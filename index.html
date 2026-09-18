@@ -19,7 +19,6 @@
 
   --glass:rgba(220,240,250,.18);
   --glass-small:rgba(230,244,250,.16);
-
   --border:rgba(255,255,255,.30);
 
   --cloud-speed-1:38s;
@@ -147,7 +146,6 @@ body.stormy {
    ========================================== */
 
 body.night {
-
   --bg1:#07182f;
   --bg2:#183c62;
 
@@ -167,7 +165,6 @@ body.night {
 
 body.night.cloudy,
 body.night.partly {
-
   --bg1:#102238;
   --bg2:#38536c;
 
@@ -178,7 +175,6 @@ body.night.partly {
 /* NOCHE LLUVIOSA */
 
 body.night.rainy {
-
   --bg1:#071523;
   --bg2:#29465e;
 }
@@ -187,7 +183,6 @@ body.night.rainy {
 /* NOCHE CON TORMENTA */
 
 body.night.stormy {
-
   --bg1:#050b14;
   --bg2:#25384b;
 }
@@ -202,7 +197,6 @@ body.night.stormy {
   inset:0;
 
   pointer-events:none;
-
   overflow:hidden;
 
   z-index:0;
@@ -214,7 +208,6 @@ body.night.stormy {
    ========================================== */
 
 .sunGlow {
-
   position:absolute;
 
   width:430px;
@@ -238,10 +231,8 @@ body.night.stormy {
   transition:opacity 1.5s ease;
 }
 
-
 body.sunny:not(.night) .sunGlow,
 body.partly:not(.night) .sunGlow {
-
   opacity:1;
 }
 
@@ -251,7 +242,6 @@ body.partly:not(.night) .sunGlow {
    ========================================== */
 
 .moonGlow {
-
   position:absolute;
 
   width:280px;
@@ -275,9 +265,7 @@ body.partly:not(.night) .sunGlow {
   transition:opacity 1.5s ease;
 }
 
-
 body.night .moonGlow {
-
   opacity:1;
 }
 
@@ -287,7 +275,6 @@ body.night .moonGlow {
    ========================================== */
 
 .stars {
-
   position:absolute;
 
   inset:0;
@@ -326,15 +313,12 @@ body.night .moonGlow {
       transparent 2px
     );
 
-  background-size:
-    230px 180px;
+  background-size:230px 180px;
 
   transition:opacity 1.5s ease;
 }
 
-
 body.night .stars {
-
   opacity:.65;
 }
 
@@ -344,7 +328,6 @@ body.night .stars {
    ========================================== */
 
 .cloud {
-
   position:absolute;
 
   width:220px;
@@ -354,18 +337,15 @@ body.night .stars {
 
   border-radius:100px;
 
-  background:
-    rgba(255,255,255,.18);
+  background:rgba(255,255,255,.18);
 
   filter:blur(2px);
 
   opacity:0;
 }
 
-
 .cloud::before,
 .cloud::after {
-
   content:"";
 
   position:absolute;
@@ -375,9 +355,7 @@ body.night .stars {
   border-radius:50%;
 }
 
-
 .cloud::before {
-
   width:90px;
   height:90px;
 
@@ -385,9 +363,7 @@ body.night .stars {
   top:-38px;
 }
 
-
 .cloud::after {
-
   width:120px;
   height:120px;
 
@@ -396,38 +372,29 @@ body.night .stars {
 }
 
 
-/* Nubosidad = nubes visibles */
+/* VISIBILIDAD SEGÚN EL TIEMPO */
 
 body.partly .cloud {
-
   opacity:.28;
 }
 
-
 body.cloudy .cloud {
-
   opacity:.38;
 }
 
-
 body.rainy .cloud,
 body.stormy .cloud {
-
   opacity:.42;
 }
 
-
 body.night .cloud {
-
-  background:
-    rgba(205,220,240,.11);
+  background:rgba(205,220,240,.11);
 }
 
 
-/* Nubes individuales */
+/* NUBES INDIVIDUALES */
 
 .cloud1 {
-
   top:18%;
 
   animation:
@@ -437,9 +404,7 @@ body.night .cloud {
     infinite;
 }
 
-
 .cloud2 {
-
   top:46%;
 
   transform:scale(.72);
@@ -453,9 +418,7 @@ body.night .cloud {
   animation-delay:-16s;
 }
 
-
 .cloud3 {
-
   top:72%;
 
   transform:scale(.52);
@@ -468,7 +431,6 @@ body.night .cloud {
 
   animation-delay:-30s;
 }
-
 
 @keyframes windCloud {
 
@@ -487,7 +449,6 @@ body.night .cloud {
    ========================================== */
 
 .rain {
-
   position:absolute;
 
   inset:0;
@@ -509,20 +470,16 @@ body.night .cloud {
       transparent 40px
     );
 
-  background-size:
-    80px 80px;
+  background-size:80px 80px;
 }
-
 
 body.rainy .rain,
 body.stormy .rain {
-
   opacity:.38;
 
   animation:
     rainMove .55s linear infinite;
 }
-
 
 @keyframes rainMove {
 
@@ -541,7 +498,6 @@ body.stormy .rain {
    ========================================== */
 
 .flash {
-
   position:absolute;
 
   inset:0;
@@ -551,13 +507,10 @@ body.stormy .rain {
   opacity:0;
 }
 
-
 body.stormy .flash {
-
   animation:
     lightning 9s infinite;
 }
-
 
 @keyframes lightning {
 
@@ -584,7 +537,6 @@ body.stormy .flash {
    ========================================== */
 
 .wrap {
-
   position:relative;
 
   z-index:2;
@@ -596,9 +548,7 @@ body.stormy .flash {
   padding:18px;
 }
 
-
 .source {
-
   font-size:13px;
 
   font-weight:800;
@@ -606,23 +556,17 @@ body.stormy .flash {
   color:var(--muted);
 }
 
-
 h1 {
-
   font-size:32px;
 
   margin:6px 0;
 }
 
-
 h2 {
-
   margin-top:0;
 }
 
-
 .muted {
-
   color:var(--muted);
 }
 
@@ -632,15 +576,12 @@ h2 {
    ========================================== */
 
 .card {
-
   background:var(--glass);
 
   backdrop-filter:blur(12px);
-
   -webkit-backdrop-filter:blur(12px);
 
-  border:
-    1px solid var(--border);
+  border:1px solid var(--border);
 
   border-radius:22px;
 
@@ -653,19 +594,15 @@ h2 {
     inset 0 1px 0 rgba(255,255,255,.16);
 }
 
-
 .tempBox,
 .item,
 .recommendation {
-
   background:var(--glass-small);
 
   backdrop-filter:blur(7px);
-
   -webkit-backdrop-filter:blur(7px);
 
-  border:
-    1px solid var(--border);
+  border:1px solid var(--border);
 }
 
 
@@ -674,7 +611,6 @@ h2 {
    ========================================== */
 
 .weatherTop {
-
   display:flex;
 
   align-items:center;
@@ -684,9 +620,7 @@ h2 {
   margin-bottom:20px;
 }
 
-
 .weatherIcon {
-
   font-size:58px;
 
   line-height:1;
@@ -697,15 +631,11 @@ h2 {
     );
 }
 
-
 .weatherInfo {
-
   flex:1;
 }
 
-
 .currentLine {
-
   display:flex;
 
   align-items:baseline;
@@ -715,9 +645,7 @@ h2 {
   gap:7px;
 }
 
-
 .currentTemp {
-
   font-size:42px;
 
   font-weight:850;
@@ -725,25 +653,19 @@ h2 {
   line-height:1;
 }
 
-
 .separator {
-
   font-size:25px;
 
   opacity:.55;
 }
 
-
 .weatherTitle {
-
   font-size:20px;
 
   font-weight:800;
 }
 
-
 .currentSource {
-
   color:var(--muted);
 
   font-size:13px;
@@ -753,9 +675,7 @@ h2 {
   font-weight:600;
 }
 
-
 .weatherDate {
-
   color:var(--muted);
 
   margin-top:4px;
@@ -767,20 +687,16 @@ h2 {
    ========================================== */
 
 .temps {
-
   display:grid;
 
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns:1fr 1fr;
 
   gap:12px;
 
   margin-bottom:18px;
 }
 
-
 .tempBox {
-
   border-radius:18px;
 
   padding:18px;
@@ -788,9 +704,7 @@ h2 {
   text-align:center;
 }
 
-
 .tempLabel {
-
   font-size:12px;
 
   font-weight:800;
@@ -800,9 +714,7 @@ h2 {
   text-transform:uppercase;
 }
 
-
 .temp {
-
   font-size:46px;
 
   font-weight:850;
@@ -816,26 +728,20 @@ h2 {
    ========================================== */
 
 .grid {
-
   display:grid;
 
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns:1fr 1fr;
 
   gap:12px;
 }
 
-
 .item {
-
   border-radius:15px;
 
   padding:14px;
 }
 
-
 .label {
-
   font-size:12px;
 
   color:var(--muted);
@@ -845,9 +751,7 @@ h2 {
   text-transform:uppercase;
 }
 
-
 .value {
-
   margin-top:6px;
 
   line-height:1.45;
@@ -861,18 +765,14 @@ h2 {
    ========================================== */
 
 .recommendations {
-
   display:grid;
 
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns:1fr 1fr;
 
   gap:12px;
 }
 
-
 .recommendation {
-
   border-radius:18px;
 
   padding:17px;
@@ -880,15 +780,11 @@ h2 {
   text-align:center;
 }
 
-
 .recIcon {
-
   font-size:34px;
 }
 
-
 .recQuestion {
-
   font-size:12px;
 
   color:var(--muted);
@@ -900,9 +796,7 @@ h2 {
   text-transform:uppercase;
 }
 
-
 .recAnswer {
-
   font-size:18px;
 
   font-weight:800;
@@ -916,49 +810,37 @@ h2 {
    ========================================== */
 
 .nextDay {
-
   padding:15px 0;
 
   border-bottom:
     1px solid var(--border);
 }
 
-
 .nextDay:last-child {
-
   border-bottom:0;
 }
 
-
 .nextHeader {
-
   display:flex;
 
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   align-items:center;
 }
 
-
 .nextName {
-
   font-size:17px;
 
   font-weight:800;
 }
 
-
 .nextTemp {
-
   font-size:18px;
 
   font-weight:800;
 }
 
-
 .nextText {
-
   margin-top:8px;
 
   color:var(--muted);
@@ -972,16 +854,13 @@ h2 {
    ========================================== */
 
 button {
-
-  border:
-    1px solid var(--border);
+  border:1px solid var(--border);
 
   border-radius:14px;
 
   padding:13px 19px;
 
-  background:
-    rgba(23,32,51,.88);
+  background:rgba(23,32,51,.88);
 
   color:white;
 
@@ -995,15 +874,11 @@ button {
     0 5px 14px rgba(23,32,51,.15);
 }
 
-
 .footer {
-
   font-size:12px;
 }
 
-
 a {
-
   color:inherit;
 }
 
@@ -1017,7 +892,6 @@ a {
   *,
   *::before,
   *::after {
-
     animation:none !important;
 
     transition:none !important;
@@ -1067,6 +941,8 @@ a {
 <body>
 
 
+<!-- EFECTOS ATMOSFÉRICOS -->
+
 <div class="atmosphere">
 
   <div class="sunGlow"></div>
@@ -1088,49 +964,45 @@ a {
 </div>
 
 
+<!-- CONTENIDO -->
+
 <div class="wrap">
 
 
   <div class="source">
-
     INUMET · ÁREA METROPOLITANA
-
   </div>
 
 
   <h1>
-
     Tiempo en Montevideo
-
   </h1>
 
 
   <div
     class="muted"
     id="updated">
-
     Cargando…
-
   </div>
 
+
+  <!-- HOY -->
 
   <section class="card">
 
     <div id="today">
-
       Consultando pronóstico…
-
     </div>
 
   </section>
 
 
+  <!-- RECOMENDACIONES -->
+
   <section class="card">
 
     <h2>
-
       ¿Qué necesito hoy?
-
     </h2>
 
 
@@ -1150,9 +1022,7 @@ a {
         <div
           class="recAnswer"
           id="umbrella">
-
           Analizando…
-
         </div>
 
       </div>
@@ -1171,9 +1041,7 @@ a {
         <div
           class="recAnswer"
           id="coat">
-
           Analizando…
-
         </div>
 
       </div>
@@ -1183,6 +1051,8 @@ a {
 
   </section>
 
+
+  <!-- RESUMEN -->
 
   <section class="card">
 
@@ -1196,6 +1066,8 @@ a {
 
   </section>
 
+
+  <!-- PRÓXIMOS DÍAS -->
 
   <section class="card">
 
@@ -1223,9 +1095,7 @@ a {
       href="https://www.inumet.gub.uy/tiempo/pronostico"
       target="_blank"
       rel="noopener">
-
       INUMET
-
     </a>
 
   </p>
@@ -1247,12 +1117,10 @@ function esc(value) {
     .replace(/[&<>"]/g, function(c) {
 
       return {
-
         "&":"&amp;",
         "<":"&lt;",
         ">":"&gt;",
         '"':"&quot;"
-
       }[c];
 
     });
@@ -1266,13 +1134,11 @@ function esc(value) {
 function forecastText(day) {
 
   return (
-
     (day.morning || "") +
     " " +
     (day.evening || "") +
     " " +
     (day.rain || "")
-
   ).toLowerCase();
 }
 
@@ -1346,7 +1212,7 @@ function shortDescription(day) {
 
 
 /* ==========================================
-   TEMPERATURA
+   TEMPERATURA ACTUAL
    ========================================== */
 
 function getCurrentTemp(data) {
@@ -1372,48 +1238,12 @@ function getCurrentTemp(data) {
 function formatTemperature(temp) {
 
   return temp.toLocaleString(
-
     "es-UY",
-
     {
       minimumFractionDigits:1,
       maximumFractionDigits:1
     }
   );
-}
-
-
-/* ==========================================
-   HORA DEL REGISTRO INUMET
-   Convierte UTC a hora de Uruguay
-   ========================================== */
-
-function formatObservationTime(value) {
-
-  if (!value)
-    return null;
-
-
-  const date =
-    new Date(value);
-
-
-  if (Number.isNaN(date.getTime()))
-    return null;
-
-
-  return new Intl.DateTimeFormat(
-
-    "es-UY",
-
-    {
-      timeZone:"America/Montevideo",
-      hour:"2-digit",
-      minute:"2-digit",
-      hour12:false
-    }
-
-  ).format(date);
 }
 
 
@@ -1425,15 +1255,12 @@ function uruguayHour() {
 
   const parts =
     new Intl.DateTimeFormat(
-
       "en-US",
-
       {
         timeZone:"America/Montevideo",
         hour:"2-digit",
         hour12:false
       }
-
     ).formatToParts(new Date());
 
 
@@ -1449,10 +1276,6 @@ function uruguayHour() {
 
 /* ==========================================
    DÍA / NOCHE
-
-   Primera versión:
-   día = 07:00 a 19:59
-   noche = 20:00 a 06:59
    ========================================== */
 
 function isNightInUruguay() {
@@ -1514,8 +1337,7 @@ function applyWeatherTheme(
     forecastText(day);
 
 
-  /* CONDICIÓN */
-
+  /* CONDICIÓN PRINCIPAL */
 
   if (text.includes("torment")) {
 
@@ -1526,11 +1348,9 @@ function applyWeatherTheme(
   }
 
   else if (
-
     text.includes("precipit") ||
     text.includes("lluvia") ||
     text.includes("chaparr")
-
   ) {
 
     body.classList.add(
@@ -1568,8 +1388,7 @@ function applyWeatherTheme(
   }
 
 
-  /* NOCHE */
-
+  /* DÍA / NOCHE */
 
   if (
     isNightInUruguay()
@@ -1585,7 +1404,6 @@ function applyWeatherTheme(
   /* ======================================
      VELOCIDAD DE LAS NUBES
      ====================================== */
-
 
   const maxWind =
     getMaximumWind(day);
@@ -1640,33 +1458,6 @@ function applyWeatherTheme(
       "--cloud-speed-3",
       speed3 + "s"
     );
-
-
-  /* TEMPERATURA */
-
-  if (
-    currentTemp !== null
-  ) {
-
-    if (
-      currentTemp <= 10
-    ) {
-
-      body.classList.add(
-        "cold"
-      );
-    }
-
-
-    if (
-      currentTemp >= 27
-    ) {
-
-      body.classList.add(
-        "hot"
-      );
-    }
-  }
 }
 
 
@@ -1681,27 +1472,20 @@ function umbrellaAdvice(day) {
 
 
   if (
-
-    text.includes(
-      "baja probabilidad"
-    ) &&
-
+    text.includes("baja probabilidad") &&
     (
       text.includes("precipit") ||
       text.includes("lluvia")
     )
-
   )
     return "Por las dudas";
 
 
   if (
-
     text.includes("torment") ||
     text.includes("precipit") ||
     text.includes("lluvia") ||
     text.includes("chaparr")
-
   )
     return "Sí, mejor llevar";
 
@@ -1742,7 +1526,7 @@ function coatAdvice(day) {
 
 
 /* ==========================================
-   CARGAR DATOS
+   CARGAR DATA.JSON
    ========================================== */
 
 async function load() {
@@ -1752,10 +1536,8 @@ async function load() {
 
     const response =
       await fetch(
-
         "data.json?v=" +
         Date.now(),
-
         {
           cache:"no-store"
         }
@@ -1789,18 +1571,9 @@ async function load() {
       getCurrentTemp(data);
 
 
-    const observationTime =
-      data.current
-        ? formatObservationTime(
-            data.current.observation_time
-          )
-        : null;
-
-
     /* ======================================
-       AMBIENTE
+       APLICAR AMBIENTE
        ====================================== */
-
 
     applyWeatherTheme(
       today,
@@ -1809,9 +1582,8 @@ async function load() {
 
 
     /* ======================================
-       ACTUALIZACIÓN
+       ÚLTIMA ACTUALIZACIÓN
        ====================================== */
-
 
     document.getElementById(
       "updated"
@@ -1825,7 +1597,6 @@ async function load() {
        CABECERA
        ====================================== */
 
-
     let currentHeader;
 
 
@@ -1834,36 +1605,14 @@ async function load() {
     ) {
 
 
-      let sourceLine =
-
-        "Temperatura actual · INUMET " +
-
-        esc(
-          data.current.station ||
-          "Prado"
-        );
-
-
-      if (
-        observationTime
-      ) {
-
-        sourceLine +=
-          " · registro " +
-          observationTime;
-      }
-
-
       currentHeader = `
 
         <div class="currentLine">
 
           <span class="currentTemp">
-
             ${formatTemperature(
               currentTemp
             )}°
-
           </span>
 
 
@@ -1885,7 +1634,11 @@ async function load() {
 
         <div class="currentSource">
 
-          ${sourceLine}
+          Temperatura actual · INUMET
+          ${esc(
+            data.current.station ||
+            "Prado"
+          )}
 
         </div>
 
@@ -1915,8 +1668,7 @@ async function load() {
 
         <div class="currentSource">
 
-          Temperatura actual
-          no disponible
+          Temperatura actual no disponible
 
         </div>
 
@@ -1931,9 +1683,8 @@ async function load() {
 
 
     /* ======================================
-       HOY
+       TARJETA DE HOY
        ====================================== */
-
 
     document.getElementById(
       "today"
@@ -1941,19 +1692,26 @@ async function load() {
 
       <div class="weatherTop">
 
+
         <div class="weatherIcon">
+
           ${icon(today)}
+
         </div>
 
 
         <div class="weatherInfo">
+
           ${currentHeader}
+
         </div>
+
 
       </div>
 
 
       <div class="temps">
+
 
         <div class="tempBox">
 
@@ -1980,10 +1738,12 @@ async function load() {
 
         </div>
 
+
       </div>
 
 
       <div class="grid">
+
 
         <div class="item">
 
@@ -2036,6 +1796,7 @@ async function load() {
 
         </div>
 
+
       </div>
     `;
 
@@ -2043,7 +1804,6 @@ async function load() {
     /* ======================================
        RECOMENDACIONES
        ====================================== */
-
 
     document.getElementById(
       "umbrella"
@@ -2063,7 +1823,6 @@ async function load() {
        RESUMEN
        ====================================== */
 
-
     document.getElementById(
       "summary"
     ).textContent =
@@ -2075,7 +1834,6 @@ async function load() {
     /* ======================================
        PRÓXIMOS DÍAS
        ====================================== */
-
 
     document.getElementById(
       "days"
@@ -2089,7 +1847,9 @@ async function load() {
 
             <div class="nextDay">
 
+
               <div class="nextHeader">
+
 
                 <div class="nextName">
 
@@ -2106,6 +1866,7 @@ async function load() {
 
                 </div>
 
+
               </div>
 
 
@@ -2118,6 +1879,7 @@ async function load() {
                 ${esc(day.evening)}
 
               </div>
+
 
             </div>
           `;
@@ -2135,14 +1897,12 @@ async function load() {
     document.getElementById(
       "updated"
     ).textContent =
-
       "Error al cargar el pronóstico";
 
 
     document.getElementById(
       "today"
     ).innerHTML =
-
       "<b>No se pudieron cargar los datos de INUMET.</b>";
 
 
@@ -2164,7 +1924,7 @@ async function load() {
 
 
 /* ==========================================
-   INICIO
+   INICIAR
    ========================================== */
 
 load();
