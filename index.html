@@ -3,16 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Tiempo Montevideo — INUMET</title>
 
 <style>
-* { box-sizing: border-box; }
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   background: #eef3f8;
   color: #172033;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 .wrap {
@@ -48,6 +52,8 @@ h2 {
   box-shadow: 0 5px 20px #17203312;
 }
 
+/* CABECERA DEL TIEMPO */
+
 .weatherTop {
   display: flex;
   align-items: center;
@@ -57,6 +63,29 @@ h2 {
 
 .weatherIcon {
   font-size: 58px;
+  line-height: 1;
+}
+
+.weatherInfo {
+  flex: 1;
+}
+
+.currentLine {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.currentTemp {
+  font-size: 42px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.separator {
+  font-size: 25px;
+  color: #94a3b8;
 }
 
 .weatherTitle {
@@ -64,10 +93,19 @@ h2 {
   font-weight: 800;
 }
 
+.currentSource {
+  color: #64748b;
+  font-size: 13px;
+  margin-top: 7px;
+  font-weight: 600;
+}
+
 .weatherDate {
   color: #64748b;
-  margin-top: 3px;
+  margin-top: 4px;
 }
+
+/* MÍNIMA Y MÁXIMA */
 
 .temps {
   display: grid;
@@ -96,6 +134,8 @@ h2 {
   margin-top: 5px;
 }
 
+/* DETALLES */
+
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -120,6 +160,8 @@ h2 {
   line-height: 1.45;
   font-weight: 600;
 }
+
+/* RECOMENDACIONES */
 
 .recommendations {
   display: grid;
@@ -152,6 +194,8 @@ h2 {
   margin-top: 7px;
 }
 
+/* PRÓXIMOS DÍAS */
+
 .nextDay {
   padding: 15px 0;
   border-bottom: 1px solid #e5eaf0;
@@ -183,6 +227,8 @@ h2 {
   line-height: 1.45;
 }
 
+/* BOTÓN */
+
 button {
   border: 0;
   border-radius: 14px;
@@ -202,13 +248,24 @@ a {
   color: inherit;
 }
 
-@media (max-width: 520px) {
+/* CELULAR */
+
+@media (max-width:520px) {
+
   .wrap {
     padding: 14px;
   }
 
   h1 {
     font-size: 28px;
+  }
+
+  .currentTemp {
+    font-size: 36px;
+  }
+
+  .weatherTitle {
+    font-size: 18px;
   }
 
   .temp {
@@ -218,7 +275,9 @@ a {
   .grid {
     grid-template-columns: 1fr;
   }
+
 }
+
 </style>
 </head>
 
@@ -226,101 +285,202 @@ a {
 
 <div class="wrap">
 
-  <div class="source">INUMET · ÁREA METROPOLITANA</div>
+  <div class="source">
+    INUMET · ÁREA METROPOLITANA
+  </div>
 
-  <h1>Tiempo en Montevideo</h1>
+  <h1>
+    Tiempo en Montevideo
+  </h1>
 
-  <div class="muted" id="updated">Cargando…</div>
+  <div
+    class="muted"
+    id="updated">
+    Cargando…
+  </div>
+
 
   <section class="card">
-    <div id="today">Consultando pronóstico…</div>
+
+    <div id="today">
+      Consultando pronóstico…
+    </div>
+
   </section>
 
+
   <section class="card">
 
-    <h2>¿Qué necesito hoy?</h2>
+    <h2>
+      ¿Qué necesito hoy?
+    </h2>
 
     <div class="recommendations">
 
       <div class="recommendation">
-        <div class="recIcon">☔</div>
-        <div class="recQuestion">¿Llevo paraguas?</div>
-        <div class="recAnswer" id="umbrella">Analizando…</div>
+
+        <div class="recIcon">
+          ☔
+        </div>
+
+        <div class="recQuestion">
+          ¿Llevo paraguas?
+        </div>
+
+        <div
+          class="recAnswer"
+          id="umbrella">
+          Analizando…
+        </div>
+
       </div>
 
+
       <div class="recommendation">
-        <div class="recIcon">🧥</div>
-        <div class="recQuestion">¿Necesito abrigo?</div>
-        <div class="recAnswer" id="coat">Analizando…</div>
+
+        <div class="recIcon">
+          🧥
+        </div>
+
+        <div class="recQuestion">
+          ¿Necesito abrigo?
+        </div>
+
+        <div
+          class="recAnswer"
+          id="coat">
+          Analizando…
+        </div>
+
       </div>
 
     </div>
 
   </section>
 
-  <section class="card">
-    <h2>En pocas palabras</h2>
-    <div id="summary">—</div>
-  </section>
 
   <section class="card">
-    <h2>Próximos días</h2>
-    <div id="days">—</div>
+
+    <h2>
+      En pocas palabras
+    </h2>
+
+    <div id="summary">
+      —
+    </div>
+
   </section>
 
-  <button onclick="load()">↻ Actualizar</button>
+
+  <section class="card">
+
+    <h2>
+      Próximos días
+    </h2>
+
+    <div id="days">
+      —
+    </div>
+
+  </section>
+
+
+  <button onclick="load()">
+    ↻ Actualizar
+  </button>
+
 
   <p class="muted footer">
+
     Fuente:
-    <a href="https://www.inumet.gub.uy/tiempo/pronostico"
-       target="_blank"
-       rel="noopener">
-       INUMET
+
+    <a
+      href="https://www.inumet.gub.uy/tiempo/pronostico"
+      target="_blank"
+      rel="noopener">
+      INUMET
     </a>
+
   </p>
 
 </div>
 
+
 <script>
 
+/* ===============================================
+   SEGURIDAD DE TEXTO
+   =============================================== */
+
 function esc(value) {
-  return String(value ?? "").replace(/[&<>"]/g, function(c) {
-    return {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;"
-    }[c];
-  });
+
+  return String(value ?? "")
+    .replace(/[&<>"]/g, function(c) {
+
+      return {
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;"
+      }[c];
+
+    });
+
 }
+
+
+/* ===============================================
+   TEXTO DEL PRONÓSTICO
+   =============================================== */
 
 function forecastText(day) {
+
   return (
-    (day.morning || "") + " " +
-    (day.evening || "") + " " +
+    (day.morning || "") +
+    " " +
+    (day.evening || "") +
+    " " +
     (day.rain || "")
   ).toLowerCase();
+
 }
 
+
+/* ===============================================
+   ICONO
+   =============================================== */
+
 function icon(day) {
+
   const text = forecastText(day);
 
-  if (text.includes("torment")) return "⛈️";
+  if (text.includes("torment"))
+    return "⛈️";
 
   if (
     text.includes("precipit") ||
     text.includes("lluvia") ||
     text.includes("chaparr")
-  ) return "🌧️";
+  )
+    return "🌧️";
 
-  if (text.includes("cubierto")) return "☁️";
+  if (text.includes("cubierto"))
+    return "☁️";
 
-  if (text.includes("nuboso")) return "🌥️";
+  if (text.includes("nuboso"))
+    return "🌥️";
 
   return "🌤️";
+
 }
 
+
+/* ===============================================
+   DESCRIPCIÓN CORTA
+   =============================================== */
+
 function shortDescription(day) {
+
   const text = forecastText(day);
 
   if (text.includes("torment"))
@@ -339,10 +499,51 @@ function shortDescription(day) {
   if (text.includes("nuboso"))
     return "Nubosidad variable";
 
-  return "Pronóstico para hoy";
+  return "Cielo mayormente despejado";
+
 }
 
+
+/* ===============================================
+   TEMPERATURA ACTUAL
+   =============================================== */
+
+function currentTemperature(data) {
+
+  if (
+    !data.current ||
+    data.current.temperature === null ||
+    data.current.temperature === undefined
+  ) {
+
+    return null;
+
+  }
+
+  const temp = Number(
+    data.current.temperature
+  );
+
+  if (!Number.isFinite(temp))
+    return null;
+
+  return temp.toLocaleString(
+    "es-UY",
+    {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1
+    }
+  );
+
+}
+
+
+/* ===============================================
+   PARAGUAS
+   =============================================== */
+
 function umbrellaAdvice(day) {
+
   const text = forecastText(day);
 
   if (
@@ -363,20 +564,39 @@ function umbrellaAdvice(day) {
     return "Sí, mejor llevar";
 
   return "No parece necesario";
+
 }
 
+
+/* ===============================================
+   ABRIGO
+   =============================================== */
+
 function coatAdvice(day) {
+
   const min = Number(day.min);
   const max = Number(day.max);
 
-  if (min <= 7 || max <= 13)
+  if (
+    min <= 7 ||
+    max <= 13
+  )
     return "Sí, abrigo";
 
-  if (min <= 11 || max <= 17)
+  if (
+    min <= 11 ||
+    max <= 17
+  )
     return "Abrigo liviano";
 
   return "No parece necesario";
+
 }
+
+
+/* ===============================================
+   CARGAR DATA.JSON
+   =============================================== */
 
 async function load() {
 
@@ -384,23 +604,104 @@ async function load() {
 
     const response = await fetch(
       "data.json?v=" + Date.now(),
-      { cache: "no-store" }
+      {
+        cache: "no-store"
+      }
     );
 
     if (!response.ok)
-      throw new Error("No se pudo leer data.json");
+      throw new Error(
+        "No se pudo leer data.json"
+      );
 
     const data = await response.json();
 
-    if (!data.days || data.days.length === 0)
-      throw new Error("No hay pronóstico disponible");
+    if (
+      !data.days ||
+      data.days.length === 0
+    )
+      throw new Error(
+        "No hay pronóstico disponible"
+      );
+
 
     const today = data.days[0];
 
-    document.getElementById("updated").textContent =
-      "Última actualización: " + data.updated;
+    const currentTemp =
+      currentTemperature(data);
 
-    document.getElementById("today").innerHTML = `
+
+    /* -------------------------------------------
+       ACTUALIZACIÓN
+       ------------------------------------------- */
+
+    document.getElementById(
+      "updated"
+    ).textContent =
+      "Última actualización: " +
+      data.updated;
+
+
+    /* -------------------------------------------
+       CABECERA
+       ------------------------------------------- */
+
+    let currentHeader;
+
+    if (currentTemp !== null) {
+
+      currentHeader = `
+
+        <div class="currentLine">
+
+          <span class="currentTemp">
+            ${currentTemp}°
+          </span>
+
+          <span class="separator">
+            ·
+          </span>
+
+          <span class="weatherTitle">
+            ${esc(shortDescription(today))}
+          </span>
+
+        </div>
+
+        <div class="currentSource">
+          Temperatura actual · INUMET ${esc(data.current.station || "Prado")}
+        </div>
+
+        <div class="weatherDate">
+          ${esc(today.date)}
+        </div>
+
+      `;
+
+    } else {
+
+      currentHeader = `
+
+        <div class="weatherTitle">
+          ${esc(shortDescription(today))}
+        </div>
+
+        <div class="currentSource">
+          Temperatura actual no disponible
+        </div>
+
+        <div class="weatherDate">
+          ${esc(today.date)}
+        </div>
+
+      `;
+
+    }
+
+
+    document.getElementById(
+      "today"
+    ).innerHTML = `
 
       <div class="weatherTop">
 
@@ -408,115 +709,204 @@ async function load() {
           ${icon(today)}
         </div>
 
-        <div>
-          <div class="weatherTitle">
-            ${esc(shortDescription(today))}
-          </div>
-
-          <div class="weatherDate">
-            ${esc(today.date)}
-          </div>
+        <div class="weatherInfo">
+          ${currentHeader}
         </div>
 
       </div>
+
 
       <div class="temps">
 
         <div class="tempBox">
-          <div class="tempLabel">Mínima</div>
-          <div class="temp">${esc(today.min)}°</div>
+
+          <div class="tempLabel">
+            Mínima
+          </div>
+
+          <div class="temp">
+            ${esc(today.min)}°
+          </div>
+
         </div>
 
+
         <div class="tempBox">
-          <div class="tempLabel">Máxima</div>
-          <div class="temp">${esc(today.max)}°</div>
+
+          <div class="tempLabel">
+            Máxima
+          </div>
+
+          <div class="temp">
+            ${esc(today.max)}°
+          </div>
+
         </div>
 
       </div>
+
 
       <div class="grid">
 
         <div class="item">
-          <div class="label">Mañana</div>
-          <div class="value">${esc(today.morning)}</div>
+
+          <div class="label">
+            Mañana
+          </div>
+
+          <div class="value">
+            ${esc(today.morning)}
+          </div>
+
         </div>
 
-        <div class="item">
-          <div class="label">Tarde / Noche</div>
-          <div class="value">${esc(today.evening)}</div>
-        </div>
 
         <div class="item">
-          <div class="label">💨 Viento</div>
-          <div class="value">${esc(today.wind)}</div>
+
+          <div class="label">
+            Tarde / Noche
+          </div>
+
+          <div class="value">
+            ${esc(today.evening)}
+          </div>
+
         </div>
 
+
         <div class="item">
-          <div class="label">☔ Precipitaciones</div>
-          <div class="value">${esc(today.rain)}</div>
+
+          <div class="label">
+            💨 Viento
+          </div>
+
+          <div class="value">
+            ${esc(today.wind)}
+          </div>
+
+        </div>
+
+
+        <div class="item">
+
+          <div class="label">
+            ☔ Precipitaciones
+          </div>
+
+          <div class="value">
+            ${esc(today.rain)}
+          </div>
+
         </div>
 
       </div>
+
     `;
 
-    document.getElementById("umbrella").textContent =
+
+    /* -------------------------------------------
+       RECOMENDACIONES
+       ------------------------------------------- */
+
+    document.getElementById(
+      "umbrella"
+    ).textContent =
       umbrellaAdvice(today);
 
-    document.getElementById("coat").textContent =
+
+    document.getElementById(
+      "coat"
+    ).textContent =
       coatAdvice(today);
 
-    document.getElementById("summary").textContent =
-      data.summary || "Sin resumen disponible.";
 
-    document.getElementById("days").innerHTML =
-      data.days.slice(1).map(function(day) {
+    /* -------------------------------------------
+       RESUMEN
+       ------------------------------------------- */
 
-        return `
+    document.getElementById(
+      "summary"
+    ).textContent =
+      data.summary ||
+      "Sin resumen disponible.";
 
-          <div class="nextDay">
 
-            <div class="nextHeader">
+    /* -------------------------------------------
+       PRÓXIMOS DÍAS
+       ------------------------------------------- */
 
-              <div class="nextName">
-                ${icon(day)} ${esc(day.date)}
+    document.getElementById(
+      "days"
+    ).innerHTML =
+
+      data.days
+        .slice(1)
+        .map(function(day) {
+
+          return `
+
+            <div class="nextDay">
+
+              <div class="nextHeader">
+
+                <div class="nextName">
+                  ${icon(day)}
+                  ${esc(day.date)}
+                </div>
+
+                <div class="nextTemp">
+                  ${esc(day.min)}° /
+                  ${esc(day.max)}°
+                </div>
+
               </div>
 
-              <div class="nextTemp">
-                ${esc(day.min)}° / ${esc(day.max)}°
+              <div class="nextText">
+                ${esc(day.morning)}
+                <br>
+                ${esc(day.evening)}
               </div>
 
             </div>
 
-            <div class="nextText">
-              ${esc(day.morning)}
-              <br>
-              ${esc(day.evening)}
-            </div>
+          `;
 
-          </div>
-        `;
+        })
+        .join("");
 
-      }).join("");
 
-  }
+  } catch(error) {
 
-  catch(error) {
-
-    document.getElementById("updated").textContent =
+    document.getElementById(
+      "updated"
+    ).textContent =
       "Error al cargar el pronóstico";
 
-    document.getElementById("today").innerHTML =
+
+    document.getElementById(
+      "today"
+    ).innerHTML =
       "<b>No se pudieron cargar los datos de INUMET.</b>";
 
-    document.getElementById("umbrella").textContent =
+
+    document.getElementById(
+      "umbrella"
+    ).textContent =
       "Sin datos";
 
-    document.getElementById("coat").textContent =
+
+    document.getElementById(
+      "coat"
+    ).textContent =
       "Sin datos";
+
 
     console.error(error);
+
   }
+
 }
+
 
 load();
 
