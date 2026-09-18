@@ -8,19 +8,23 @@
 
 <style>
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing:border-box; }
 
 :root {
-  --bg1: #dceeff;
-  --bg2: #f4f8fb;
-  --glow: rgba(255,255,255,.45);
-  --text: #172033;
-  --muted: #52647a;
-  --glass: rgba(255,255,255,.22);
-  --glass-small: rgba(255,255,255,.18);
-  --border: rgba(255,255,255,.32);
+  --bg1:#92d4ff;
+  --bg2:#fff0a0;
+  --glow:rgba(255,245,180,.75);
+  --text:#172033;
+  --muted:#52647a;
+
+  --glass:rgba(220,240,250,.18);
+  --glass-small:rgba(230,244,250,.16);
+
+  --border:rgba(255,255,255,.30);
+
+  --cloud-speed-1:38s;
+  --cloud-speed-2:48s;
+  --cloud-speed-3:58s;
 }
 
 
@@ -29,9 +33,10 @@
    ========================================== */
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  color: var(--text);
+  margin:0;
+  min-height:100vh;
+
+  color:var(--text);
 
   font-family:
     system-ui,
@@ -42,101 +47,149 @@ body {
 
   background:
     radial-gradient(
-      circle at 15% 5%,
+      circle at 92% 7%,
       var(--glow),
-      transparent 35%
+      transparent 28%
     ),
     linear-gradient(
-      160deg,
+      145deg,
       var(--bg1),
       var(--bg2)
     );
 
-  background-attachment: fixed;
+  background-attachment:fixed;
 
   transition:
-    background 1.2s ease,
-    color .8s ease;
+    background 1.5s ease,
+    color 1s ease;
 
-  overflow-x: hidden;
+  overflow-x:hidden;
 }
 
 
 /* ==========================================
-   AMBIENTES METEOROLÓGICOS
+   DÍA — SOLEADO
    ========================================== */
 
-/* SOL */
-
 body.sunny {
-  --bg1: #ffd84d;
-  --bg2: #fff4b0;
-  --glow: rgba(255,255,255,.90);
+  --bg1:#ffd447;
+  --bg2:#fff5ad;
 
-  --glass: rgba(255,235,120,.24);
-  --glass-small: rgba(255,244,170,.23);
+  --glow:rgba(255,255,220,.95);
+
+  --glass:rgba(255,238,130,.18);
+  --glass-small:rgba(255,244,175,.17);
 }
 
 
-/* SOL + NUBES */
+/* ==========================================
+   DÍA — SOL Y NUBES
+   ========================================== */
 
 body.partly {
-  --bg1: #92d4ff;
-  --bg2: #fff0a0;
-  --glow: rgba(255,245,180,.75);
+  --bg1:#91d6f2;
+  --bg2:#fff0a2;
 
-  --glass: rgba(220,240,250,.25);
-  --glass-small: rgba(230,244,250,.22);
+  --glow:rgba(255,250,185,.90);
+
+  --glass:rgba(215,239,235,.18);
+  --glass-small:rgba(225,241,239,.16);
 }
 
 
-/* NUBLADO */
+/* ==========================================
+   NUBLADO
+   ========================================== */
 
 body.cloudy {
-  --bg1: #a8b7c5;
-  --bg2: #e4eaef;
-  --glow: rgba(255,255,255,.35);
+  --bg1:#96a8b8;
+  --bg2:#dce5eb;
 
-  --glass: rgba(210,220,230,.30);
-  --glass-small: rgba(220,228,235,.25);
+  --glow:rgba(255,255,255,.30);
+
+  --glass:rgba(210,222,230,.20);
+  --glass-small:rgba(220,230,236,.17);
 }
 
 
-/* LLUVIA */
+/* ==========================================
+   LLUVIA
+   ========================================== */
 
 body.rainy {
-  --bg1: #708aa3;
-  --bg2: #c4d3df;
-  --glow: rgba(218,238,249,.25);
+  --bg1:#617b93;
+  --bg2:#b9cad6;
 
-  --glass: rgba(190,210,225,.27);
-  --glass-small: rgba(205,220,230,.22);
+  --glow:rgba(220,240,250,.20);
+
+  --glass:rgba(190,210,224,.20);
+  --glass-small:rgba(205,220,230,.17);
 }
 
 
-/* TORMENTA */
+/* ==========================================
+   TORMENTA
+   ========================================== */
 
 body.stormy {
-  --bg1: #475569;
-  --bg2: #98a8b8;
-  --glow: rgba(204,220,235,.20);
+  --bg1:#3e4b5d;
+  --bg2:#8495a6;
 
-  --glass: rgba(190,200,215,.28);
-  --glass-small: rgba(205,215,225,.20);
+  --glow:rgba(210,225,240,.14);
+
+  --glass:rgba(180,195,210,.20);
+  --glass-small:rgba(195,208,220,.16);
 }
 
 
-/* FRÍO */
+/* ==========================================
+   NOCHE
+   ========================================== */
 
-body.cold {
-  --bg1: #a8d8ee;
+body.night {
+
+  --bg1:#07182f;
+  --bg2:#183c62;
+
+  --glow:rgba(195,218,255,.17);
+
+  --text:#f4f8ff;
+  --muted:#c5d3e4;
+
+  --glass:rgba(75,105,140,.20);
+  --glass-small:rgba(90,120,150,.17);
+
+  --border:rgba(220,235,255,.16);
 }
 
 
-/* CALOR */
+/* NOCHE NUBLADA */
 
-body.hot {
-  --glow: rgba(255,220,100,.90);
+body.night.cloudy,
+body.night.partly {
+
+  --bg1:#102238;
+  --bg2:#38536c;
+
+  --glow:rgba(210,225,245,.12);
+}
+
+
+/* NOCHE LLUVIOSA */
+
+body.night.rainy {
+
+  --bg1:#071523;
+  --bg2:#29465e;
+}
+
+
+/* NOCHE CON TORMENTA */
+
+body.night.stormy {
+
+  --bg1:#050b14;
+  --bg2:#25384b;
 }
 
 
@@ -145,150 +198,286 @@ body.hot {
    ========================================== */
 
 .atmosphere {
-  position: fixed;
-  inset: 0;
+  position:fixed;
+  inset:0;
 
-  pointer-events: none;
-  overflow: hidden;
+  pointer-events:none;
 
-  z-index: 0;
+  overflow:hidden;
+
+  z-index:0;
 }
 
 
 /* ==========================================
-   RESPLANDOR DEL SOL
+   SOL
    ========================================== */
 
 .sunGlow {
-  position: absolute;
 
-  width: 380px;
-  height: 380px;
+  position:absolute;
 
-  border-radius: 50%;
+  width:430px;
+  height:430px;
 
-  right: -100px;
-  top: -130px;
+  border-radius:50%;
+
+  right:-120px;
+  top:-150px;
 
   background:
     radial-gradient(
       circle,
       rgba(255,255,225,.98) 0%,
-      rgba(255,225,80,.48) 35%,
+      rgba(255,224,80,.50) 32%,
       transparent 70%
     );
 
-  opacity: 0;
+  opacity:0;
 
-  transition: opacity 1s ease;
+  transition:opacity 1.5s ease;
 }
 
-body.sunny .sunGlow,
-body.partly .sunGlow {
-  opacity: 1;
+
+body.sunny:not(.night) .sunGlow,
+body.partly:not(.night) .sunGlow {
+
+  opacity:1;
 }
 
 
 /* ==========================================
-   NUBES ANIMADAS
+   LUNA
+   ========================================== */
+
+.moonGlow {
+
+  position:absolute;
+
+  width:280px;
+  height:280px;
+
+  right:-45px;
+  top:-65px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(245,249,255,.75) 0%,
+      rgba(190,215,255,.18) 35%,
+      transparent 70%
+    );
+
+  opacity:0;
+
+  transition:opacity 1.5s ease;
+}
+
+
+body.night .moonGlow {
+
+  opacity:1;
+}
+
+
+/* ==========================================
+   ESTRELLAS
+   ========================================== */
+
+.stars {
+
+  position:absolute;
+
+  inset:0;
+
+  opacity:0;
+
+  background-image:
+
+    radial-gradient(
+      circle at 15% 12%,
+      rgba(255,255,255,.8) 0 1px,
+      transparent 2px
+    ),
+
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(255,255,255,.6) 0 1px,
+      transparent 2px
+    ),
+
+    radial-gradient(
+      circle at 52% 8%,
+      rgba(255,255,255,.8) 0 1px,
+      transparent 2px
+    ),
+
+    radial-gradient(
+      circle at 70% 24%,
+      rgba(255,255,255,.7) 0 1px,
+      transparent 2px
+    ),
+
+    radial-gradient(
+      circle at 87% 15%,
+      rgba(255,255,255,.8) 0 1px,
+      transparent 2px
+    );
+
+  background-size:
+    230px 180px;
+
+  transition:opacity 1.5s ease;
+}
+
+
+body.night .stars {
+
+  opacity:.65;
+}
+
+
+/* ==========================================
+   NUBES
    ========================================== */
 
 .cloud {
-  position: absolute;
 
-  width: 220px;
-  height: 55px;
+  position:absolute;
 
-  border-radius: 100px;
+  width:220px;
+  height:55px;
+
+  left:-300px;
+
+  border-radius:100px;
 
   background:
-    rgba(255,255,255,.20);
+    rgba(255,255,255,.18);
 
-  filter: blur(2px);
+  filter:blur(2px);
 
-  opacity: 0;
+  opacity:0;
 }
+
 
 .cloud::before,
 .cloud::after {
 
-  content: "";
+  content:"";
 
-  position: absolute;
+  position:absolute;
 
-  background: inherit;
+  background:inherit;
 
-  border-radius: 50%;
+  border-radius:50%;
 }
+
 
 .cloud::before {
 
-  width: 90px;
-  height: 90px;
+  width:90px;
+  height:90px;
 
-  left: 35px;
-  top: -38px;
+  left:35px;
+  top:-38px;
 }
+
 
 .cloud::after {
 
-  width: 120px;
-  height: 120px;
+  width:120px;
+  height:120px;
 
-  right: 25px;
-  top: -55px;
+  right:25px;
+  top:-55px;
 }
 
 
-/* Se muestran cuando hay viento */
+/* Nubosidad = nubes visibles */
 
-body.windy .cloud {
-  opacity: .55;
+body.partly .cloud {
+
+  opacity:.28;
 }
+
+
+body.cloudy .cloud {
+
+  opacity:.38;
+}
+
+
+body.rainy .cloud,
+body.stormy .cloud {
+
+  opacity:.42;
+}
+
+
+body.night .cloud {
+
+  background:
+    rgba(205,220,240,.11);
+}
+
+
+/* Nubes individuales */
 
 .cloud1 {
 
-  top: 18%;
-  left: -260px;
+  top:18%;
 
   animation:
-    windCloud 16s linear infinite;
+    windCloud
+    var(--cloud-speed-1)
+    linear
+    infinite;
 }
+
 
 .cloud2 {
 
-  top: 48%;
-  left: -320px;
+  top:46%;
 
-  transform: scale(.7);
+  transform:scale(.72);
 
   animation:
-    windCloud 23s linear infinite;
+    windCloud
+    var(--cloud-speed-2)
+    linear
+    infinite;
 
-  animation-delay: -8s;
+  animation-delay:-16s;
 }
+
 
 .cloud3 {
 
-  top: 72%;
-  left: -280px;
+  top:72%;
 
-  transform: scale(.5);
+  transform:scale(.52);
 
   animation:
-    windCloud 19s linear infinite;
+    windCloud
+    var(--cloud-speed-3)
+    linear
+    infinite;
 
-  animation-delay: -13s;
+  animation-delay:-30s;
 }
+
 
 @keyframes windCloud {
 
   from {
-    left: -320px;
+    left:-330px;
   }
 
   to {
-    left: 110vw;
+    left:110vw;
   }
 }
 
@@ -299,13 +488,11 @@ body.windy .cloud {
 
 .rain {
 
-  position: absolute;
-  inset: 0;
+  position:absolute;
 
-  opacity: 0;
+  inset:0;
 
-  transition:
-    opacity .8s ease;
+  opacity:0;
 
   background-image:
 
@@ -315,8 +502,8 @@ body.windy .cloud {
       transparent 0px,
       transparent 18px,
 
-      rgba(255,255,255,.20) 19px,
-      rgba(255,255,255,.20) 21px,
+      rgba(255,255,255,.18) 19px,
+      rgba(255,255,255,.18) 21px,
 
       transparent 22px,
       transparent 40px
@@ -326,42 +513,44 @@ body.windy .cloud {
     80px 80px;
 }
 
+
 body.rainy .rain,
 body.stormy .rain {
 
-  opacity: .45;
+  opacity:.38;
 
   animation:
     rainMove .55s linear infinite;
 }
 
+
 @keyframes rainMove {
 
   from {
-    background-position:
-      0 -80px;
+    background-position:0 -80px;
   }
 
   to {
-    background-position:
-      -25px 80px;
+    background-position:-25px 80px;
   }
 }
 
 
 /* ==========================================
-   RELÁMPAGO
+   RELÁMPAGOS
    ========================================== */
 
 .flash {
 
-  position: absolute;
-  inset: 0;
+  position:absolute;
 
-  background: white;
+  inset:0;
 
-  opacity: 0;
+  background:white;
+
+  opacity:0;
 }
+
 
 body.stormy .flash {
 
@@ -369,25 +558,23 @@ body.stormy .flash {
     lightning 9s infinite;
 }
 
+
 @keyframes lightning {
 
-  0%,
-  91%,
-  94%,
-  100% {
-    opacity: 0;
+  0%,91%,94%,100% {
+    opacity:0;
   }
 
   92% {
-    opacity: .16;
+    opacity:.15;
   }
 
   93% {
-    opacity: 0;
+    opacity:0;
   }
 
   93.5% {
-    opacity: .09;
+    opacity:.08;
   }
 }
 
@@ -398,283 +585,274 @@ body.stormy .flash {
 
 .wrap {
 
-  position: relative;
+  position:relative;
 
-  z-index: 2;
+  z-index:2;
 
-  max-width: 760px;
+  max-width:760px;
 
-  margin: auto;
+  margin:auto;
 
-  padding: 18px;
+  padding:18px;
 }
+
 
 .source {
 
-  font-size: 13px;
+  font-size:13px;
 
-  font-weight: 800;
+  font-weight:800;
 
-  color: var(--muted);
+  color:var(--muted);
 }
+
 
 h1 {
 
-  font-size: 32px;
+  font-size:32px;
 
-  margin:
-    6px 0;
+  margin:6px 0;
 }
+
 
 h2 {
 
-  margin-top: 0;
+  margin-top:0;
 }
+
 
 .muted {
 
-  color: var(--muted);
+  color:var(--muted);
 }
 
 
 /* ==========================================
-   TARJETAS PRINCIPALES
+   TARJETAS
    ========================================== */
 
 .card {
 
-  background:
-    var(--glass);
+  background:var(--glass);
 
-  backdrop-filter:
-    blur(14px);
+  backdrop-filter:blur(12px);
 
-  -webkit-backdrop-filter:
-    blur(14px);
+  -webkit-backdrop-filter:blur(12px);
 
   border:
     1px solid var(--border);
 
-  border-radius:
-    22px;
+  border-radius:22px;
 
-  padding:
-    20px;
+  padding:20px;
 
-  margin:
-    14px 0;
+  margin:14px 0;
 
   box-shadow:
-    0 8px 28px rgba(23,32,51,.08),
-    inset 0 1px 0 rgba(255,255,255,.25);
+    0 8px 28px rgba(23,32,51,.07),
+    inset 0 1px 0 rgba(255,255,255,.16);
+}
 
-  transition:
-    background .8s ease,
-    border-color .8s ease;
+
+.tempBox,
+.item,
+.recommendation {
+
+  background:var(--glass-small);
+
+  backdrop-filter:blur(7px);
+
+  -webkit-backdrop-filter:blur(7px);
+
+  border:
+    1px solid var(--border);
 }
 
 
 /* ==========================================
-   CABECERA DEL TIEMPO
+   CABECERA
    ========================================== */
 
 .weatherTop {
 
-  display: flex;
+  display:flex;
 
-  align-items: center;
+  align-items:center;
 
-  gap: 16px;
+  gap:16px;
 
-  margin-bottom: 20px;
+  margin-bottom:20px;
 }
+
 
 .weatherIcon {
 
-  font-size: 58px;
+  font-size:58px;
 
-  line-height: 1;
+  line-height:1;
 
   filter:
     drop-shadow(
-      0 4px 6px rgba(0,0,0,.08)
+      0 4px 7px rgba(0,0,0,.10)
     );
 }
 
+
 .weatherInfo {
 
-  flex: 1;
+  flex:1;
 }
+
 
 .currentLine {
 
-  display: flex;
+  display:flex;
 
-  align-items: baseline;
+  align-items:baseline;
 
-  flex-wrap: wrap;
+  flex-wrap:wrap;
 
-  gap: 7px;
+  gap:7px;
 }
+
 
 .currentTemp {
 
-  font-size: 42px;
+  font-size:42px;
 
-  font-weight: 850;
+  font-weight:850;
 
-  line-height: 1;
+  line-height:1;
 }
+
 
 .separator {
 
-  font-size: 25px;
+  font-size:25px;
 
-  color: #718096;
+  opacity:.55;
 }
+
 
 .weatherTitle {
 
-  font-size: 20px;
+  font-size:20px;
 
-  font-weight: 800;
+  font-weight:800;
 }
+
 
 .currentSource {
 
-  color: #52647a;
+  color:var(--muted);
 
-  font-size: 13px;
+  font-size:13px;
 
-  margin-top: 7px;
+  margin-top:7px;
 
-  font-weight: 600;
+  font-weight:600;
 }
+
 
 .weatherDate {
 
-  color: #52647a;
+  color:var(--muted);
 
-  margin-top: 4px;
+  margin-top:4px;
 }
 
 
 /* ==========================================
-   MÍNIMA Y MÁXIMA
+   MÍNIMA / MÁXIMA
    ========================================== */
 
 .temps {
 
-  display: grid;
+  display:grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap: 12px;
+  gap:12px;
 
-  margin-bottom: 18px;
+  margin-bottom:18px;
 }
+
 
 .tempBox {
 
-  background:
-    var(--glass-small);
+  border-radius:18px;
 
-  backdrop-filter:
-    blur(8px);
+  padding:18px;
 
-  -webkit-backdrop-filter:
-    blur(8px);
-
-  border:
-    1px solid rgba(255,255,255,.25);
-
-  border-radius:
-    18px;
-
-  padding:
-    18px;
-
-  text-align:
-    center;
+  text-align:center;
 }
+
 
 .tempLabel {
 
-  font-size: 12px;
+  font-size:12px;
 
-  font-weight: 800;
+  font-weight:800;
 
-  color: #52647a;
+  color:var(--muted);
 
-  text-transform:
-    uppercase;
+  text-transform:uppercase;
 }
+
 
 .temp {
 
-  font-size: 46px;
+  font-size:46px;
 
-  font-weight: 850;
+  font-weight:850;
 
-  margin-top: 5px;
+  margin-top:5px;
 }
 
 
 /* ==========================================
-   INFORMACIÓN
+   DETALLES
    ========================================== */
 
 .grid {
 
-  display: grid;
+  display:grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap: 12px;
+  gap:12px;
 }
+
 
 .item {
 
-  background:
-    var(--glass-small);
+  border-radius:15px;
 
-  backdrop-filter:
-    blur(8px);
-
-  -webkit-backdrop-filter:
-    blur(8px);
-
-  border:
-    1px solid rgba(255,255,255,.24);
-
-  border-radius:
-    15px;
-
-  padding:
-    14px;
+  padding:14px;
 }
+
 
 .label {
 
-  font-size: 12px;
+  font-size:12px;
 
-  color: #52647a;
+  color:var(--muted);
 
-  font-weight: 800;
+  font-weight:800;
 
-  text-transform:
-    uppercase;
+  text-transform:uppercase;
 }
+
 
 .value {
 
-  margin-top: 6px;
+  margin-top:6px;
 
-  line-height: 1.45;
+  line-height:1.45;
 
-  font-weight: 600;
+  font-weight:600;
 }
 
 
@@ -684,72 +862,52 @@ h2 {
 
 .recommendations {
 
-  display: grid;
+  display:grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap: 12px;
+  gap:12px;
 }
+
 
 .recommendation {
 
-  background:
-    var(--glass-small);
+  border-radius:18px;
 
-  backdrop-filter:
-    blur(8px);
+  padding:17px;
 
-  -webkit-backdrop-filter:
-    blur(8px);
-
-  border:
-    1px solid rgba(255,255,255,.24);
-
-  border-radius:
-    18px;
-
-  padding:
-    17px;
-
-  text-align:
-    center;
+  text-align:center;
 }
+
 
 .recIcon {
 
-  font-size:
-    34px;
+  font-size:34px;
 }
+
 
 .recQuestion {
 
-  font-size:
-    12px;
+  font-size:12px;
 
-  color:
-    #52647a;
+  color:var(--muted);
 
-  font-weight:
-    800;
+  font-weight:800;
 
-  margin-top:
-    5px;
+  margin-top:5px;
 
-  text-transform:
-    uppercase;
+  text-transform:uppercase;
 }
+
 
 .recAnswer {
 
-  font-size:
-    18px;
+  font-size:18px;
 
-  font-weight:
-    800;
+  font-weight:800;
 
-  margin-top:
-    7px;
+  margin-top:7px;
 }
 
 
@@ -759,59 +917,53 @@ h2 {
 
 .nextDay {
 
-  padding:
-    15px 0;
+  padding:15px 0;
 
   border-bottom:
-    1px solid rgba(82,100,122,.20);
+    1px solid var(--border);
 }
+
 
 .nextDay:last-child {
 
-  border-bottom:
-    0;
+  border-bottom:0;
 }
+
 
 .nextHeader {
 
-  display:
-    flex;
+  display:flex;
 
   justify-content:
     space-between;
 
-  align-items:
-    center;
+  align-items:center;
 }
+
 
 .nextName {
 
-  font-size:
-    17px;
+  font-size:17px;
 
-  font-weight:
-    800;
+  font-weight:800;
 }
+
 
 .nextTemp {
 
-  font-size:
-    18px;
+  font-size:18px;
 
-  font-weight:
-    800;
+  font-weight:800;
 }
+
 
 .nextText {
 
-  margin-top:
-    8px;
+  margin-top:8px;
 
-  color:
-    #435267;
+  color:var(--muted);
 
-  line-height:
-    1.45;
+  line-height:1.45;
 }
 
 
@@ -822,55 +974,37 @@ h2 {
 button {
 
   border:
-    1px solid rgba(255,255,255,.30);
+    1px solid var(--border);
 
-  border-radius:
-    14px;
+  border-radius:14px;
 
-  padding:
-    13px 19px;
+  padding:13px 19px;
 
   background:
     rgba(23,32,51,.88);
 
-  backdrop-filter:
-    blur(8px);
+  color:white;
 
-  color:
-    white;
+  font-size:15px;
 
-  font-size:
-    15px;
+  font-weight:750;
 
-  font-weight:
-    750;
-
-  cursor:
-    pointer;
+  cursor:pointer;
 
   box-shadow:
     0 5px 14px rgba(23,32,51,.15);
-
-  transition:
-    transform .2s ease;
 }
 
-button:hover {
-
-  transform:
-    translateY(-1px);
-}
 
 .footer {
 
-  font-size:
-    12px;
+  font-size:12px;
 }
+
 
 a {
 
-  color:
-    inherit;
+  color:inherit;
 }
 
 
@@ -878,17 +1012,15 @@ a {
    ACCESIBILIDAD
    ========================================== */
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion:reduce) {
 
   *,
   *::before,
   *::after {
 
-    animation:
-      none !important;
+    animation:none !important;
 
-    transition:
-      none !important;
+    transition:none !important;
   }
 }
 
@@ -900,31 +1032,31 @@ a {
 @media (max-width:520px) {
 
   .wrap {
-    padding: 14px;
+    padding:14px;
   }
 
   h1 {
-    font-size: 28px;
+    font-size:28px;
   }
 
   .currentTemp {
-    font-size: 36px;
+    font-size:36px;
   }
 
   .weatherTitle {
-    font-size: 18px;
+    font-size:18px;
   }
 
   .temp {
-    font-size: 41px;
+    font-size:41px;
   }
 
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns:1fr;
   }
 
   .weatherIcon {
-    font-size: 52px;
+    font-size:52px;
   }
 }
 
@@ -935,13 +1067,13 @@ a {
 <body>
 
 
-<!-- ==========================================
-     EFECTOS ATMOSFÉRICOS
-     ========================================== -->
-
 <div class="atmosphere">
 
   <div class="sunGlow"></div>
+
+  <div class="moonGlow"></div>
+
+  <div class="stars"></div>
 
   <div class="cloud cloud1"></div>
 
@@ -955,10 +1087,6 @@ a {
 
 </div>
 
-
-<!-- ==========================================
-     CONTENIDO
-     ========================================== -->
 
 <div class="wrap">
 
@@ -986,8 +1114,6 @@ a {
   </div>
 
 
-  <!-- HOY -->
-
   <section class="card">
 
     <div id="today">
@@ -998,8 +1124,6 @@ a {
 
   </section>
 
-
-  <!-- RECOMENDACIONES -->
 
   <section class="card">
 
@@ -1016,15 +1140,11 @@ a {
       <div class="recommendation">
 
         <div class="recIcon">
-
           ☔
-
         </div>
 
         <div class="recQuestion">
-
           ¿Llevo paraguas?
-
         </div>
 
         <div
@@ -1041,15 +1161,11 @@ a {
       <div class="recommendation">
 
         <div class="recIcon">
-
           🧥
-
         </div>
 
         <div class="recQuestion">
-
           ¿Necesito abrigo?
-
         </div>
 
         <div
@@ -1068,48 +1184,34 @@ a {
   </section>
 
 
-  <!-- RESUMEN -->
-
   <section class="card">
 
     <h2>
-
       En pocas palabras
-
     </h2>
 
     <div id="summary">
-
       —
-
     </div>
 
   </section>
 
 
-  <!-- PRÓXIMOS DÍAS -->
-
   <section class="card">
 
     <h2>
-
       Próximos días
-
     </h2>
 
     <div id="days">
-
       —
-
     </div>
 
   </section>
 
 
   <button onclick="load()">
-
     ↻ Actualizar
-
   </button>
 
 
@@ -1136,7 +1238,7 @@ a {
 
 
 /* ==========================================
-   SEGURIDAD DE TEXTO
+   SEGURIDAD
    ========================================== */
 
 function esc(value) {
@@ -1146,23 +1248,19 @@ function esc(value) {
 
       return {
 
-        "&": "&amp;",
-
-        "<": "&lt;",
-
-        ">": "&gt;",
-
-        '"': "&quot;"
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;"
 
       }[c];
 
     });
-
 }
 
 
 /* ==========================================
-   TEXTO COMPLETO DEL PRONÓSTICO
+   TEXTO METEOROLÓGICO
    ========================================== */
 
 function forecastText(day) {
@@ -1170,17 +1268,12 @@ function forecastText(day) {
   return (
 
     (day.morning || "") +
-
     " " +
-
     (day.evening || "") +
-
     " " +
-
     (day.rain || "")
 
   ).toLowerCase();
-
 }
 
 
@@ -1194,55 +1287,32 @@ function icon(day) {
     forecastText(day);
 
 
-  if (
-    text.includes("torment")
-  ) {
-
+  if (text.includes("torment"))
     return "⛈️";
 
-  }
-
 
   if (
-
     text.includes("precipit") ||
-
     text.includes("lluvia") ||
-
     text.includes("chaparr")
-
-  ) {
-
+  )
     return "🌧️";
 
-  }
 
-
-  if (
-    text.includes("cubierto")
-  ) {
-
+  if (text.includes("cubierto"))
     return "☁️";
 
-  }
 
-
-  if (
-    text.includes("nuboso")
-  ) {
-
-    return "🌥️";
-
-  }
+  if (text.includes("nuboso"))
+    return "🌤️";
 
 
   return "☀️";
-
 }
 
 
 /* ==========================================
-   DESCRIPCIÓN CORTA
+   DESCRIPCIÓN
    ========================================== */
 
 function shortDescription(day) {
@@ -1251,91 +1321,51 @@ function shortDescription(day) {
     forecastText(day);
 
 
-  if (
-    text.includes("torment")
-  ) {
-
+  if (text.includes("torment"))
     return "Posibles tormentas";
 
-  }
-
 
   if (
-
     text.includes("precipit") ||
-
     text.includes("lluvia") ||
-
     text.includes("chaparr")
-
-  ) {
-
+  )
     return "Posibles precipitaciones";
 
-  }
 
-
-  if (
-    text.includes("cubierto")
-  ) {
-
+  if (text.includes("cubierto"))
     return "Cielo cubierto";
 
-  }
 
-
-  if (
-    text.includes("nuboso")
-  ) {
-
+  if (text.includes("nuboso"))
     return "Nubosidad variable";
-
-  }
 
 
   return "Cielo mayormente despejado";
-
 }
 
 
 /* ==========================================
-   TEMPERATURA ACTUAL
+   TEMPERATURA
    ========================================== */
 
 function getCurrentTemp(data) {
 
   if (
-
     !data.current ||
-
     data.current.temperature === null ||
-
     data.current.temperature === undefined
-
-  ) {
-
+  )
     return null;
-
-  }
 
 
   const temp =
-    Number(
-      data.current.temperature
-    );
+    Number(data.current.temperature);
 
 
-  if (
-    !Number.isFinite(temp)
-  ) {
-
-    return null;
-
-  }
-
-
-  return temp;
-
+  return Number.isFinite(temp)
+    ? temp
+    : null;
 }
 
 
@@ -1346,15 +1376,121 @@ function formatTemperature(temp) {
     "es-UY",
 
     {
+      minimumFractionDigits:1,
+      maximumFractionDigits:1
+    }
+  );
+}
 
-      minimumFractionDigits: 1,
 
-      maximumFractionDigits: 1
+/* ==========================================
+   HORA DEL REGISTRO INUMET
+   Convierte UTC a hora de Uruguay
+   ========================================== */
 
+function formatObservationTime(value) {
+
+  if (!value)
+    return null;
+
+
+  const date =
+    new Date(value);
+
+
+  if (Number.isNaN(date.getTime()))
+    return null;
+
+
+  return new Intl.DateTimeFormat(
+
+    "es-UY",
+
+    {
+      timeZone:"America/Montevideo",
+      hour:"2-digit",
+      minute:"2-digit",
+      hour12:false
     }
 
-  );
+  ).format(date);
+}
 
+
+/* ==========================================
+   HORA ACTUAL EN URUGUAY
+   ========================================== */
+
+function uruguayHour() {
+
+  const parts =
+    new Intl.DateTimeFormat(
+
+      "en-US",
+
+      {
+        timeZone:"America/Montevideo",
+        hour:"2-digit",
+        hour12:false
+      }
+
+    ).formatToParts(new Date());
+
+
+  const hour =
+    parts.find(
+      part => part.type === "hour"
+    );
+
+
+  return Number(hour.value);
+}
+
+
+/* ==========================================
+   DÍA / NOCHE
+
+   Primera versión:
+   día = 07:00 a 19:59
+   noche = 20:00 a 06:59
+   ========================================== */
+
+function isNightInUruguay() {
+
+  const hour =
+    uruguayHour();
+
+
+  return (
+    hour >= 20 ||
+    hour < 7
+  );
+}
+
+
+/* ==========================================
+   VIENTO
+   ========================================== */
+
+function getMaximumWind(day) {
+
+  const wind =
+    String(
+      day.wind || ""
+    ).toLowerCase();
+
+
+  const numbers =
+    wind.match(/\d+/g);
+
+
+  if (!numbers)
+    return 0;
+
+
+  return Math.max(
+    ...numbers.map(Number)
+  );
 }
 
 
@@ -1378,12 +1514,10 @@ function applyWeatherTheme(
     forecastText(day);
 
 
-  /* CONDICIÓN PRINCIPAL */
+  /* CONDICIÓN */
 
 
-  if (
-    text.includes("torment")
-  ) {
+  if (text.includes("torment")) {
 
     body.classList.add(
       "stormy"
@@ -1391,13 +1525,10 @@ function applyWeatherTheme(
 
   }
 
-
   else if (
 
     text.includes("precipit") ||
-
     text.includes("lluvia") ||
-
     text.includes("chaparr")
 
   ) {
@@ -1407,7 +1538,6 @@ function applyWeatherTheme(
     );
 
   }
-
 
   else if (
     text.includes("cubierto")
@@ -1419,7 +1549,6 @@ function applyWeatherTheme(
 
   }
 
-
   else if (
     text.includes("nuboso")
   ) {
@@ -1430,7 +1559,6 @@ function applyWeatherTheme(
 
   }
 
-
   else {
 
     body.classList.add(
@@ -1440,60 +1568,85 @@ function applyWeatherTheme(
   }
 
 
-  /* ======================================
-     VIENTO
-     ====================================== */
-
-
-  const wind =
-    String(
-      day.wind || ""
-    ).toLowerCase();
-
-
-  const numbers =
-    wind.match(/\d+/g);
-
-
-  let maxWind = 0;
-
-
-  if (numbers) {
-
-    maxWind =
-      Math.max(
-        ...numbers.map(Number)
-      );
-
-  }
+  /* NOCHE */
 
 
   if (
-
-    wind.includes("ráfaga") ||
-
-    wind.includes("rachas") ||
-
-    maxWind >= 40
-
+    isNightInUruguay()
   ) {
 
     body.classList.add(
-      "windy"
+      "night"
     );
 
   }
 
 
   /* ======================================
-     TEMPERATURA
+     VELOCIDAD DE LAS NUBES
      ====================================== */
 
+
+  const maxWind =
+    getMaximumWind(day);
+
+
+  let speed1 = 38;
+  let speed2 = 48;
+  let speed3 = 58;
+
+
+  if (maxWind >= 60) {
+
+    speed1 = 10;
+    speed2 = 14;
+    speed3 = 18;
+
+  }
+
+  else if (maxWind >= 40) {
+
+    speed1 = 15;
+    speed2 = 20;
+    speed3 = 26;
+
+  }
+
+  else if (maxWind >= 25) {
+
+    speed1 = 23;
+    speed2 = 30;
+    speed3 = 37;
+
+  }
+
+
+  document.documentElement.style
+    .setProperty(
+      "--cloud-speed-1",
+      speed1 + "s"
+    );
+
+
+  document.documentElement.style
+    .setProperty(
+      "--cloud-speed-2",
+      speed2 + "s"
+    );
+
+
+  document.documentElement.style
+    .setProperty(
+      "--cloud-speed-3",
+      speed3 + "s"
+    );
+
+
+  /* TEMPERATURA */
 
   if (
     currentTemp !== null
   ) {
-
 
     if (
       currentTemp <= 10
@@ -1502,7 +1655,6 @@ function applyWeatherTheme(
       body.classList.add(
         "cold"
       );
-
     }
 
 
@@ -1513,11 +1665,8 @@ function applyWeatherTheme(
       body.classList.add(
         "hot"
       );
-
     }
-
   }
-
 }
 
 
@@ -1538,39 +1687,26 @@ function umbrellaAdvice(day) {
     ) &&
 
     (
-
       text.includes("precipit") ||
-
       text.includes("lluvia")
-
     )
 
-  ) {
-
+  )
     return "Por las dudas";
-
-  }
 
 
   if (
 
     text.includes("torment") ||
-
     text.includes("precipit") ||
-
     text.includes("lluvia") ||
-
     text.includes("chaparr")
 
-  ) {
-
+  )
     return "Sí, mejor llevar";
-
-  }
 
 
   return "No parece necesario";
-
 }
 
 
@@ -1588,38 +1724,25 @@ function coatAdvice(day) {
 
 
   if (
-
     min <= 7 ||
-
     max <= 13
-
-  ) {
-
+  )
     return "Sí, abrigo";
-
-  }
 
 
   if (
-
     min <= 11 ||
-
     max <= 17
-
-  ) {
-
+  )
     return "Abrigo liviano";
-
-  }
 
 
   return "No parece necesario";
-
 }
 
 
 /* ==========================================
-   CARGAR DATA.JSON
+   CARGAR DATOS
    ========================================== */
 
 async function load() {
@@ -1634,24 +1757,15 @@ async function load() {
         Date.now(),
 
         {
-
-          cache:
-            "no-store"
-
+          cache:"no-store"
         }
-
       );
 
 
-    if (
-      !response.ok
-    ) {
-
+    if (!response.ok)
       throw new Error(
         "No se pudo leer data.json"
       );
-
-    }
 
 
     const data =
@@ -1659,18 +1773,12 @@ async function load() {
 
 
     if (
-
       !data.days ||
-
       data.days.length === 0
-
-    ) {
-
+    )
       throw new Error(
         "No hay pronóstico disponible"
       );
-
-    }
 
 
     const today =
@@ -1681,8 +1789,16 @@ async function load() {
       getCurrentTemp(data);
 
 
+    const observationTime =
+      data.current
+        ? formatObservationTime(
+            data.current.observation_time
+          )
+        : null;
+
+
     /* ======================================
-       APLICAR EL AMBIENTE
+       AMBIENTE
        ====================================== */
 
 
@@ -1706,7 +1822,7 @@ async function load() {
 
 
     /* ======================================
-       TEMPERATURA ACTUAL
+       CABECERA
        ====================================== */
 
 
@@ -1718,21 +1834,41 @@ async function load() {
     ) {
 
 
+      let sourceLine =
+
+        "Temperatura actual · INUMET " +
+
+        esc(
+          data.current.station ||
+          "Prado"
+        );
+
+
+      if (
+        observationTime
+      ) {
+
+        sourceLine +=
+          " · registro " +
+          observationTime;
+      }
+
+
       currentHeader = `
 
         <div class="currentLine">
 
           <span class="currentTemp">
 
-            ${formatTemperature(currentTemp)}°
+            ${formatTemperature(
+              currentTemp
+            )}°
 
           </span>
 
 
           <span class="separator">
-
             ·
-
           </span>
 
 
@@ -1749,12 +1885,7 @@ async function load() {
 
         <div class="currentSource">
 
-          Temperatura actual ·
-          INUMET
-          ${esc(
-            data.current.station ||
-            "Prado"
-          )}
+          ${sourceLine}
 
         </div>
 
@@ -1764,11 +1895,11 @@ async function load() {
           ${esc(today.date)}
 
         </div>
-
       `;
 
+    }
 
-    } else {
+    else {
 
 
       currentHeader = `
@@ -1795,14 +1926,12 @@ async function load() {
           ${esc(today.date)}
 
         </div>
-
       `;
-
     }
 
 
     /* ======================================
-       TARJETA PRINCIPAL
+       HOY
        ====================================== */
 
 
@@ -1810,158 +1939,104 @@ async function load() {
       "today"
     ).innerHTML = `
 
-
       <div class="weatherTop">
 
-
         <div class="weatherIcon">
-
           ${icon(today)}
-
         </div>
 
 
         <div class="weatherInfo">
-
           ${currentHeader}
-
         </div>
-
 
       </div>
 
 
       <div class="temps">
 
-
         <div class="tempBox">
 
-
           <div class="tempLabel">
-
             Mínima
-
           </div>
-
 
           <div class="temp">
-
             ${esc(today.min)}°
-
           </div>
-
 
         </div>
 
 
         <div class="tempBox">
 
-
           <div class="tempLabel">
-
             Máxima
-
           </div>
-
 
           <div class="temp">
-
             ${esc(today.max)}°
-
           </div>
 
-
         </div>
-
 
       </div>
 
 
       <div class="grid">
 
-
         <div class="item">
 
-
           <div class="label">
-
             Mañana
-
           </div>
 
-
           <div class="value">
-
             ${esc(today.morning)}
-
           </div>
-
 
         </div>
 
 
         <div class="item">
 
-
           <div class="label">
-
             Tarde / Noche
-
           </div>
 
-
           <div class="value">
-
             ${esc(today.evening)}
-
           </div>
-
 
         </div>
 
 
         <div class="item">
 
-
           <div class="label">
-
             💨 Viento
-
           </div>
-
 
           <div class="value">
-
             ${esc(today.wind)}
-
           </div>
-
 
         </div>
 
 
         <div class="item">
 
-
           <div class="label">
-
             ☔ Precipitaciones
-
           </div>
-
 
           <div class="value">
-
             ${esc(today.rain)}
-
           </div>
 
-
         </div>
-
 
       </div>
-
     `;
 
 
@@ -1994,7 +2069,6 @@ async function load() {
     ).textContent =
 
       data.summary ||
-
       "Sin resumen disponible.";
 
 
@@ -2007,27 +2081,19 @@ async function load() {
       "days"
     ).innerHTML =
 
-
       data.days
-
         .slice(1)
-
         .map(function(day) {
-
 
           return `
 
-
             <div class="nextDay">
 
-
               <div class="nextHeader">
-
 
                 <div class="nextName">
 
                   ${icon(day)}
-
                   ${esc(day.date)}
 
                 </div>
@@ -2035,12 +2101,10 @@ async function load() {
 
                 <div class="nextTemp">
 
-                  ${esc(day.min)}°
-                  /
+                  ${esc(day.min)}° /
                   ${esc(day.max)}°
 
                 </div>
-
 
               </div>
 
@@ -2055,11 +2119,8 @@ async function load() {
 
               </div>
 
-
             </div>
-
           `;
-
 
         })
 
@@ -2067,7 +2128,6 @@ async function load() {
 
 
   }
-
 
   catch(error) {
 
@@ -2089,26 +2149,22 @@ async function load() {
     document.getElementById(
       "umbrella"
     ).textContent =
-
       "Sin datos";
 
 
     document.getElementById(
       "coat"
     ).textContent =
-
       "Sin datos";
 
 
     console.error(error);
-
   }
-
 }
 
 
 /* ==========================================
-   INICIAR
+   INICIO
    ========================================== */
 
 load();
