@@ -1,5 +1,5 @@
 {
-  "updated": "18/09/2026 09:05",
+  "updated": "18/09/2026 12:06",
   "current": {
     "temperature": null,
     "station": "Prado",
@@ -10,19 +10,19 @@
       "date": "Viernes 18",
       "min": "10",
       "max": "22",
-      "morning": "Algo nuboso, períodos de nuboso.",
+      "morning": "Nuboso, períodos de algo nuboso.",
       "evening": "Algo nuboso y nuboso, períodos de claro.",
       "wind": "NE 10-30 km/h. NE 10-40 km/h. ",
       "rain": "No indicada"
     },
     {
       "date": "Sábado 19",
-      "min": "10",
+      "min": "12",
       "max": "21",
       "morning": "Nuboso.",
-      "evening": "Nuboso. Probables precipitaciones.",
+      "evening": "Nuboso.",
       "wind": "NE 10-30 km/h. Sector E 10-30 km/h. ",
-      "rain": "Precipitaciones"
+      "rain": "No indicada"
     },
     {
       "date": "Domingo 20",
@@ -30,7 +30,7 @@
       "max": "21",
       "morning": "Nuboso y cubierto. Probables precipitaciones. Neblinas y bancos de niebla.",
       "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
-      "wind": "Sector N 10-30 km/h. Sector W 10-40 km/h, rachas de hasta 50 km/h. Rachas fuertes asociadas a tormentas. Pronóstico extendido: Última Actualización: 18/09/2026 06:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "wind": "Sector N 10-30 km/h. Sector W 10-40 km/h, rachas de hasta 50 km/h. Rachas fuertes asociadas a tormentas. Pronóstico extendido: Última Actualización: 18/09/2026 07:30Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
       "rain": "Precipitaciones"
     }
   ],
