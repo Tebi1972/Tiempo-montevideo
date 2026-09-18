@@ -1,5 +1,5 @@
 {
-  "updated": "18/09/2026 00:06",
+  "updated": "18/09/2026 03:05",
   "current": {
     "temperature": null,
     "station": "Prado",
@@ -7,19 +7,10 @@
   },
   "days": [
     {
-      "date": "Jueves 17",
-      "min": "6",
-      "max": "25",
-      "morning": "Sin detalle",
-      "evening": "Claro, períodos de algo nuboso. Neblinas.",
-      "wind": "NE 10-30 km/h, períodos de variables 0-10 km/h. ",
-      "rain": "No indicada"
-    },
-    {
       "date": "Viernes 18",
       "min": "8",
       "max": "22",
-      "morning": "Claro y algo nuboso.",
+      "morning": "Algo nuboso, períodos de nuboso.",
       "evening": "Algo nuboso y nuboso, períodos de claro.",
       "wind": "NE 10-30 km/h. NE 10-40 km/h. ",
       "rain": "No indicada"
@@ -29,10 +20,19 @@
       "min": "10",
       "max": "21",
       "morning": "Nuboso.",
-      "evening": "Nuboso.",
-      "wind": "NE 10-30 km/h. Sector E 10-30 km/h. Pronóstico extendido: Última Actualización: 17/09/2026 18:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
-      "rain": "No indicada"
+      "evening": "Nuboso. Probables precipitaciones.",
+      "wind": "NE 10-30 km/h. Sector E 10-30 km/h. ",
+      "rain": "Precipitaciones"
+    },
+    {
+      "date": "Domingo 20",
+      "min": "14",
+      "max": "21",
+      "morning": "Nuboso y cubierto. Probables precipitaciones. Neblinas y bancos de niebla.",
+      "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
+      "wind": "Sector N 10-30 km/h. Sector W 10-40 km/h, rachas de hasta 50 km/h. Rachas fuertes asociadas a tormentas. Pronóstico extendido: Última Actualización: 18/09/2026 00:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "rain": "Precipitaciones"
     }
   ],
-  "summary": "Temperaturas de 6° a 25°."
+  "summary": "Temperaturas de 8° a 22°."
 }
