@@ -146,15 +146,7 @@ current_station = "Prado"
 
 try:
 
-    # ---------------------------------------------
-    # Pedimos únicamente observaciones recientes.
-    # No usamos filter ni sortby porque esa
-    # combinación produjo error 500 en INUMET.
-    # ---------------------------------------------
-
     ahora = datetime.now(timezone.utc)
-
-    # Buscamos las últimas 24 horas.
     desde = ahora - timedelta(hours=24)
 
     rango_tiempo = (
@@ -163,109 +155,141 @@ try:
         + ahora.strftime("%Y-%m-%dT%H:%M:%SZ")
     )
 
+    # Primera consulta
+    url_actual = API_OBSERVACIONES
+
     params = {
         "f": "json",
         "limit": 1000,
         "datetime": rango_tiempo
     }
 
-    respuesta = requests.get(
-        API_OBSERVACIONES,
-        params=params,
-        headers=HEADERS,
-        timeout=60
-    )
-
-    print(
-        "Consulta API INUMET:",
-        respuesta.url
-    )
-
-    print(
-        "Código respuesta API:",
-        respuesta.status_code
-    )
-
-    respuesta.raise_for_status()
-
-    api_data = respuesta.json()
-
-    features = api_data.get(
-        "features",
-        []
-    )
-
-    print(
-        "Registros recientes recibidos:",
-        len(features)
-    )
-
     observaciones_prado = []
+    pagina = 1
+    max_paginas = 20
 
-    estaciones_encontradas = set()
+    while url_actual and pagina <= max_paginas:
 
-    for feature in features:
-
-        props = feature.get(
-            "properties",
-            {}
+        print(
+            "Consultando página:",
+            pagina
         )
 
-        station = props.get(
-            "wigos_station_identifier"
+        respuesta = requests.get(
+            url_actual,
+            params=params,
+            headers=HEADERS,
+            timeout=60
         )
 
-        name = props.get(
-            "name"
+        print(
+            "Código respuesta API:",
+            respuesta.status_code
         )
 
-        value = props.get(
-            "value"
+        respuesta.raise_for_status()
+
+        api_data = respuesta.json()
+
+        features = api_data.get(
+            "features",
+            []
         )
 
-        phenomenon_time = props.get(
-            "phenomenonTime"
+        print(
+            "Registros recibidos en página:",
+            len(features)
         )
 
-        if station:
-            estaciones_encontradas.add(
-                station
+        for feature in features:
+
+            props = feature.get(
+                "properties",
+                {}
             )
 
-        if (
-            station == PRADO_WIGOS
-            and name == "air_temperature"
-            and value is not None
-            and phenomenon_time
-        ):
+            station = props.get(
+                "wigos_station_identifier"
+            )
 
-            observaciones_prado.append({
-                "temperature": value,
-                "time": phenomenon_time
-            })
+            name = props.get(
+                "name"
+            )
+
+            value = props.get(
+                "value"
+            )
+
+            phenomenon_time = props.get(
+                "phenomenonTime"
+            )
+
+            if (
+                station == PRADO_WIGOS
+                and name == "air_temperature"
+                and value is not None
+                and phenomenon_time
+            ):
+
+                observaciones_prado.append({
+                    "temperature": value,
+                    "time": phenomenon_time
+                })
+
+        # -----------------------------------------
+        # Buscar enlace a la página siguiente
+        # -----------------------------------------
+
+        siguiente = None
+
+        for link in api_data.get("links", []):
+
+            if link.get("rel") == "next":
+                siguiente = link.get("href")
+                break
+
+        if siguiente:
+
+            print(
+                "Hay una página siguiente."
+            )
+
+            url_actual = siguiente
+
+            # El enlace "next" ya contiene
+            # sus propios parámetros.
+            params = None
+
+            pagina += 1
+
+        else:
+
+            print(
+                "No hay más páginas."
+            )
+
+            url_actual = None
 
 
     print(
-        "Cantidad de estaciones recientes:",
-        len(estaciones_encontradas)
+        "Páginas consultadas:",
+        pagina
     )
 
     print(
-        "Temperaturas recientes de Prado:",
+        "Temperaturas de Prado encontradas:",
         len(observaciones_prado)
     )
 
 
     # ---------------------------------------------
-    # Ordenamos las temperaturas de Prado
-    # de más reciente a más antigua.
+    # Elegir la observación más reciente
     # ---------------------------------------------
 
     observaciones_prado.sort(
         key=lambda x: x["time"],
         reverse=True
     )
-
 
     if observaciones_prado:
 
@@ -291,7 +315,7 @@ try:
 
 
         # -----------------------------------------
-        # PROTECCIÓN CONTRA DATOS VIEJOS
+        # Comprobar antigüedad
         # -----------------------------------------
 
         hora_observacion = datetime.fromisoformat(
@@ -317,10 +341,10 @@ try:
         )
 
 
-        # Solo consideramos "actual"
-        # una observación de hasta 6 horas.
+        # No mostrar como "actual"
+        # una observación de más de 6 horas.
 
-        if horas_antiguedad <= 6:
+        if 0 <= horas_antiguedad <= 6:
 
             current_temp = temperatura_encontrada
             current_time = hora_encontrada
@@ -341,20 +365,16 @@ try:
 
         print(
             "No se encontraron temperaturas "
-            "recientes de Prado."
+            "de Prado en las últimas 24 horas."
         )
 
 
 except Exception as error:
 
-    # La temperatura actual es complementaria.
-    # Si falla, el pronóstico continúa funcionando.
-
     print(
         "Error obteniendo temperatura actual:",
         error
     )
-
 
 # =================================================
 # 3. RESUMEN
