@@ -3,10 +3,20 @@ import re
 import json
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
+
 
 HEADERS = {
     "User-Agent": "Tiempo-Montevideo/1.0"
 }
+
+
+# =================================================
+# ZONA HORARIA DE URUGUAY
+# =================================================
+
+URUGUAY_TZ = ZoneInfo("America/Montevideo")
+
 
 # =================================================
 # 1. PRONÓSTICO INUMET - ÁREA METROPOLITANA
@@ -155,7 +165,6 @@ try:
         + ahora.strftime("%Y-%m-%dT%H:%M:%SZ")
     )
 
-    # Primera consulta
     url_actual = API_OBSERVACIONES
 
     params = {
@@ -376,6 +385,7 @@ except Exception as error:
         error
     )
 
+
 # =================================================
 # 3. RESUMEN
 # =================================================
@@ -411,9 +421,11 @@ if re.search(
 # 4. CREAR DATA.JSON
 # =================================================
 
+ahora_uruguay = datetime.now(URUGUAY_TZ)
+
 data = {
 
-    "updated": datetime.now().strftime(
+    "updated": ahora_uruguay.strftime(
         "%d/%m/%Y %H:%M"
     ),
 
@@ -451,8 +463,15 @@ print(
 )
 
 print(
-    "Hora observación:",
+    "Hora observación UTC:",
     current_time
+)
+
+print(
+    "Hora actualización Uruguay:",
+    ahora_uruguay.strftime(
+        "%d/%m/%Y %H:%M"
+    )
 )
 
 print(
