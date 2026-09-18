@@ -1,16 +1,16 @@
 {
-  "updated": "18/09/2026 12:06",
+  "updated": "18/09/2026 13:41",
   "current": {
-    "temperature": null,
+    "temperature": 16.3,
     "station": "Prado",
-    "observation_time": null
+    "observation_time": "2026-09-18T12:00:00Z"
   },
   "days": [
     {
       "date": "Viernes 18",
       "min": "10",
       "max": "22",
-      "morning": "Nuboso, períodos de algo nuboso.",
+      "morning": "Algo nuboso, períodos de nuboso.",
       "evening": "Algo nuboso y nuboso, períodos de claro.",
       "wind": "NE 10-30 km/h. NE 10-40 km/h. ",
       "rain": "No indicada"
