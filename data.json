@@ -1,20 +1,11 @@
 {
-  "updated": "18/09/2026 21:07",
+  "updated": "19/09/2026 00:05",
   "current": {
-    "temperature": 18.9,
+    "temperature": 16.6,
     "station": "Prado",
-    "observation_time": "2026-09-18T23:00:00Z"
+    "observation_time": "2026-09-19T02:00:00Z"
   },
   "days": [
-    {
-      "date": "Viernes 18",
-      "min": "10",
-      "max": "24",
-      "morning": "Sin detalle",
-      "evening": "Nuboso y cubierto.",
-      "wind": "NE 10-40 km/h. ",
-      "rain": "No indicada"
-    },
     {
       "date": "Sábado 19",
       "min": "12",
@@ -30,9 +21,18 @@
       "max": "22",
       "morning": "Nuboso y cubierto. Probables precipitaciones. Neblinas y bancos de niebla.",
       "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
-      "wind": "NE al NW 10-30 km/h. NW al SW 10-40 km/h, rachas de hasta 50 km/h. Rachas fuertes asociadas a tormentas. Pronóstico extendido: Última Actualización: 18/09/2026 18:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "wind": "NE al NW 10-30 km/h. NW al SW 10-40 km/h, rachas de hasta 50 km/h. Rachas fuertes asociadas a tormentas. ",
+      "rain": "Precipitaciones"
+    },
+    {
+      "date": "Lunes 21",
+      "min": "11",
+      "max": "18",
+      "morning": "Algo nuboso y nuboso, períodos de cubierto. Precipitaciones y probables tormentas. Ventoso.",
+      "evening": "Nuboso y cubierto, períodos de algo nuboso. Temperatura en descenso. Ventoso.",
+      "wind": "SW y W 30-40 km/h, rachas de 50-60 km/h. Probables rachas fuertes asociadas a tormentas. W al SW 30-40 km/h, rachas de hasta 70 km/h. Pronóstico extendido: Última Actualización: 19/09/2026 00:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
       "rain": "Precipitaciones"
     }
   ],
-  "summary": "Temperaturas de 10° a 24°."
+  "summary": "Temperaturas de 12° a 23°."
 }
