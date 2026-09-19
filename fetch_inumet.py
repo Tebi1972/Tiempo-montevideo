@@ -245,10 +245,6 @@ try:
                     "time": phenomenon_time
                 })
 
-        # -----------------------------------------
-        # Buscar enlace a la página siguiente
-        # -----------------------------------------
-
         siguiente = None
 
         for link in api_data.get("links", []):
@@ -264,11 +260,7 @@ try:
             )
 
             url_actual = siguiente
-
-            # El enlace "next" ya contiene
-            # sus propios parámetros.
             params = None
-
             pagina += 1
 
         else:
@@ -350,10 +342,10 @@ try:
         )
 
 
-        # No mostrar como "actual"
-        # una observación de más de 6 horas.
+        # Solo considerar "actual" una temperatura
+        # con un máximo de 2 horas de antigüedad.
 
-        if 0 <= horas_antiguedad <= 6:
+        if 0 <= horas_antiguedad <= 2:
 
             current_temp = temperatura_encontrada
             current_time = hora_encontrada
@@ -367,7 +359,7 @@ try:
 
             print(
                 "Temperatura descartada: "
-                "la observación es demasiado antigua."
+                "la observación tiene más de 2 horas."
             )
 
     else:
