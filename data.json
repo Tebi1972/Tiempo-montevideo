@@ -1,9 +1,9 @@
 {
-  "updated": "20/09/2026 08:05",
+  "updated": "20/09/2026 09:07",
   "current": {
-    "temperature": 16.8,
+    "temperature": 17.0,
     "station": "Prado",
-    "observation_time": "2026-09-20T10:00:00Z"
+    "observation_time": "2026-09-20T11:00:00Z"
   },
   "days": [
     {
