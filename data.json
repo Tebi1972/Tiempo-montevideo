@@ -1,9 +1,9 @@
 {
-  "updated": "20/09/2026 12:05",
+  "updated": "20/09/2026 13:06",
   "current": {
-    "temperature": 22.1,
+    "temperature": 23.1,
     "station": "Prado",
-    "observation_time": "2026-09-20T14:00:00Z"
+    "observation_time": "2026-09-20T15:00:00Z"
   },
   "days": [
     {
@@ -11,7 +11,7 @@
       "min": "16",
       "max": "25",
       "morning": "Sin detalle",
-      "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
+      "evening": "Nuboso y cubierto. Desmejorando con precipitaciones y tormentas",
       "wind": "NW 10-30 km/h al SW 10-40 km/h, rachas de 50-60 km/h. Rachas fuertes asociadas a tormentas. ",
       "rain": "Precipitaciones"
     },
