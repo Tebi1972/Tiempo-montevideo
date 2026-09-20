@@ -1144,6 +1144,22 @@ function forecastText(day) {
 
 
 /* ==========================================
+   PERÍODOS DISPONIBLES DEL PRONÓSTICO
+   ========================================== */
+
+function hasForecastDetail(value) {
+
+  const text = String(value ?? "").trim();
+
+  return (
+    text !== "" &&
+    text.toLowerCase() !== "sin detalle" &&
+    text !== "—"
+  );
+}
+
+
+/* ==========================================
    ICONO
    ========================================== */
 
@@ -1858,6 +1874,7 @@ async function load() {
       <div class="grid">
 
 
+        ${hasForecastDetail(today.morning) ? `
         <div class="item">
 
           <div class="label">
@@ -1869,6 +1886,7 @@ async function load() {
           </div>
 
         </div>
+        ` : ""}
 
 
         <div class="item">
@@ -1985,9 +2003,7 @@ async function load() {
 
               <div class="nextText">
 
-                ${esc(day.morning)}
-
-                <br>
+                ${hasForecastDetail(day.morning) ? `${esc(day.morning)}<br>` : ""}
 
                 ${esc(day.evening)}
 
