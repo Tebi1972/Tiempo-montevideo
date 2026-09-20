@@ -1,25 +1,16 @@
 {
-  "updated": "19/09/2026 23:06",
+  "updated": "20/09/2026 00:06",
   "current": {
-    "temperature": 18.0,
+    "temperature": 17.6,
     "station": "Prado",
-    "observation_time": "2026-09-20T01:00:00Z"
+    "observation_time": "2026-09-20T02:00:00Z"
   },
   "days": [
     {
-      "date": "Sábado 19",
-      "min": "12",
-      "max": "25",
-      "morning": "Sin detalle",
-      "evening": "Nuboso y cubierto.",
-      "wind": "Sector E 10-30 km/h. ",
-      "rain": "No indicada"
-    },
-    {
       "date": "Domingo 20",
       "min": "15",
-      "max": "23",
-      "morning": "Nuboso y cubierto. Baja probabilidad de precipitaciones escasas. Neblinas y bancos de niebla.",
+      "max": "24",
+      "morning": "Nuboso y cubierto. Neblinas y bancos de niebla.",
       "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
       "wind": "NE al NW 10-30 km/h. NW 10-30 km/h al SW 10-40 km/h, rachas de 50-60 km/h. Rachas fuertes asociadas a tormentas. ",
       "rain": "Precipitaciones"
@@ -29,10 +20,19 @@
       "min": "12",
       "max": "18",
       "morning": "Algo nuboso y nuboso, períodos de cubierto. Precipitaciones y probables tormentas. Ventoso.",
-      "evening": "Nuboso y cubierto, períodos de algo nuboso. Probables precipitaciones aisladas. Temperatura en descenso. Ventoso.",
-      "wind": "SW y W 30-40 km/h, rachas de 50-60 km/h. W al SW 30-40 km/h, rachas de 50-70 km/h y ocasionalmente superiores. Pronóstico extendido: Última Actualización: 19/09/2026 22:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "evening": "Nuboso, períodos de algo nuboso. Probables precipitaciones aisladas. Temperatura en descenso. Ventoso.",
+      "wind": "SW y W 30-40 km/h, rachas de 50-60 km/h y ocasionalmente superiores. W al SW 30-40 km/h, rachas de 50-70 km/h y ocasionalmente superiores. ",
+      "rain": "Precipitaciones"
+    },
+    {
+      "date": "Martes 22",
+      "min": "7",
+      "max": "11",
+      "morning": "Nuboso y cubierto. Probables precipitaciones aisladas.",
+      "evening": "Nuboso y cubierto.",
+      "wind": "SW 10-30 km/h. SW 10-30 km/h a variables 05-15 km/h. Pronóstico extendido: Última Actualización: 20/09/2026 00:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
       "rain": "Precipitaciones"
     }
   ],
-  "summary": "Temperaturas de 12° a 25°."
+  "summary": "Temperaturas de 15° a 24°; con posibilidad de precipitaciones."
 }
