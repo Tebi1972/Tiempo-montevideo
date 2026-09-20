@@ -116,13 +116,17 @@ body.cloudy {
    ========================================== */
 
 body.rainy {
-  --bg1:#617b93;
-  --bg2:#b9cad6;
+  --bg1:#526d86;
+  --bg2:#879dad;
 
-  --glow:rgba(220,240,250,.20);
+  --glow:rgba(220,240,250,.18);
 
-  --glass:rgba(190,210,224,.20);
-  --glass-small:rgba(205,220,230,.17);
+  --text:#f7fbff;
+  --muted:#d7e5f2;
+
+  --glass:rgba(45,68,90,.30);
+  --glass-small:rgba(55,78,100,.27);
+  --border:rgba(235,247,255,.38);
 }
 
 
@@ -131,15 +135,53 @@ body.rainy {
    ========================================== */
 
 body.stormy {
-  --bg1:#3e4b5d;
-  --bg2:#8495a6;
+  --bg1:#344255;
+  --bg2:#667b8e;
 
-  --glow:rgba(210,225,240,.14);
+  --glow:rgba(210,225,240,.12);
 
-  --glass:rgba(180,195,210,.20);
-  --glass-small:rgba(195,208,220,.16);
+  --text:#f8fbff;
+  --muted:#d5e2ef;
+
+  --glass:rgba(35,51,70,.34);
+  --glass-small:rgba(45,62,82,.30);
+  --border:rgba(235,247,255,.40);
 }
 
+
+
+
+/* ==========================================
+   AMANECER / ATARDECER — CONTRASTE ADAPTATIVO
+   ========================================== */
+
+body.dawn {
+  --bg1:#8fc9df;
+  --bg2:#ffd6a1;
+  --glow:rgba(255,224,170,.65);
+  --text:#172033;
+  --muted:#46596e;
+}
+
+body.dusk {
+  --bg1:#7d93b6;
+  --bg2:#f0b17f;
+  --glow:rgba(255,190,135,.52);
+  --text:#172033;
+  --muted:#46566a;
+}
+
+/* Si además llueve o hay tormenta, manda el contraste claro */
+body.dawn.rainy,
+body.dawn.stormy,
+body.dusk.rainy,
+body.dusk.stormy {
+  --text:#f8fbff;
+  --muted:#d7e5f2;
+  --glass:rgba(40,58,78,.31);
+  --glass-small:rgba(48,68,88,.28);
+  --border:rgba(235,247,255,.38);
+}
 
 /* ==========================================
    NOCHE
@@ -1517,16 +1559,18 @@ function applyWeatherTheme(
   }
 
 
-  /* DÍA / NOCHE */
+  /* FASE SOLAR / CONTRASTE */
 
-  if (
-    isNightInUruguay()
-  ) {
+  const solarPhase = solarPhaseMontevideo();
 
-    body.classList.add(
-      "night"
-    );
-
+  if (solarPhase === "night") {
+    body.classList.add("night");
+  }
+  else if (solarPhase === "dawn") {
+    body.classList.add("dawn");
+  }
+  else if (solarPhase === "dusk") {
+    body.classList.add("dusk");
   }
 
 
