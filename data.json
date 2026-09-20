@@ -1,9 +1,9 @@
 {
-  "updated": "20/09/2026 10:05",
+  "updated": "20/09/2026 11:05",
   "current": {
-    "temperature": 19.4,
+    "temperature": 20.8,
     "station": "Prado",
-    "observation_time": "2026-09-20T12:00:00Z"
+    "observation_time": "2026-09-20T13:00:00Z"
   },
   "days": [
     {
@@ -30,7 +30,7 @@
       "max": "11",
       "morning": "Nuboso y cubierto. Probables precipitaciones aisladas.",
       "evening": "Nuboso y cubierto.",
-      "wind": "SW 10-30 km/h. SW 10-30 km/h a variables 05-15 km/h. Pronóstico extendido: Última Actualización: 20/09/2026 08:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "wind": "SW 10-30 km/h. SW 10-30 km/h a variables 05-15 km/h. Pronóstico extendido: Última Actualización: 20/09/2026 10:30Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
       "rain": "Precipitaciones"
     }
   ],
