@@ -1,16 +1,16 @@
 {
-  "updated": "21/09/2026 06:06",
+  "updated": "21/09/2026 07:06",
   "current": {
-    "temperature": 13.6,
+    "temperature": 13.5,
     "station": "Prado",
-    "observation_time": "2026-09-21T08:00:00Z"
+    "observation_time": "2026-09-21T09:00:00Z"
   },
   "days": [
     {
       "date": "Lunes 21",
-      "min": "12",
-      "max": "18",
-      "morning": "Algo nuboso y nuboso, períodos de cubierto. Ventoso.",
+      "min": "11",
+      "max": "17",
+      "morning": "Algo nuboso y nuboso, períodos de claro. Ventoso.",
       "evening": "Nuboso, períodos de algo nuboso. Probables precipitaciones aisladas. Temperatura en descenso. Ventoso.",
       "wind": "SW y W 30-40 km/h, rachas de 50-60 km/h. SW 30-40 km/h, rachas de 50-70 km/h. ",
       "rain": "Precipitaciones"
@@ -30,9 +30,9 @@
       "max": "17",
       "morning": "Algo nuboso a nuboso. Probables heladas agrometeorológicas.",
       "evening": "Nuboso, períodos de cubierto.",
-      "wind": "Variables 0-20 km/h al N y NW 10-30 km/h. N y NW 10-30 km/h, rachas de 40 km/h. Pronóstico extendido: Última Actualización: 21/09/2026 01:35Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "wind": "Variables 0-20 km/h al N y NW 10-30 km/h. N y NW 10-30 km/h, rachas de 40 km/h. Pronóstico extendido: Última Actualización: 21/09/2026 06:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
       "rain": "No indicada"
     }
   ],
-  "summary": "Temperaturas de 12° a 18°; con posibilidad de precipitaciones."
+  "summary": "Temperaturas de 11° a 17°; con posibilidad de precipitaciones."
 }
