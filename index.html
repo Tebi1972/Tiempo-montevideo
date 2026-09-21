@@ -976,6 +976,7 @@ a {
   }
 }
 
+\n\n/* Botón a observaciones actuales de INUMET */\n.inumetCurrentButton {\n  display: inline-block;\n  margin-top: 8px;\n  padding: 10px 14px;\n  border-radius: 14px;\n  border: 1px solid currentColor;\n  background: rgba(255,255,255,.14);\n  color: inherit;\n  text-decoration: none;\n  font-weight: 700;\n  backdrop-filter: blur(8px);\n  -webkit-backdrop-filter: blur(8px);\n}\n.inumetCurrentButton:active { transform: scale(.98); }\n
 </style>
 </head>
 
@@ -1488,153 +1489,11 @@ function getMaximumWind(day) {
 }
 
 
-/* ==========================================
+/* ==========================================\n   OBSERVACIÓN REAL INUMET\n   ========================================== */\n\nfunction observedCondition(data) {\n  return String(data?.current?.condition || "neutral").toLowerCase();\n}\n\nfunction observedIcon(data) {\n  const c = observedCondition(data);\n  if (c === "stormy") return "⛈️";\n  if (c === "rainy") return "🌧️";\n  if (c === "cloudy") return "☁️";\n  if (c === "partly") return "🌤️";\n  if (c === "sunny") return "☀️";\n  return "🌡️";\n}\n\nfunction montevideoHour() {\n  const parts = new Intl.DateTimeFormat("en-GB", {\n    timeZone: "America/Montevideo",\n    hour: "2-digit",\n    hourCycle: "h23"\n  }).formatToParts(new Date());\n  return Number(parts.find(p => p.type === "hour")?.value ?? 0);\n}\n\nfunction showObservedTemperature() {\n  return montevideoHour() < 18;\n}\n\n/* ==========================================
    AMBIENTE VISUAL
    ========================================== */
 
-function applyWeatherTheme(
-  day,
-  currentTemp
-) {
-
-  const body =
-    document.body;
-
-
-  body.className = "";
-
-
-  const text =
-    forecastText(day);
-
-
-  /* CONDICIÓN PRINCIPAL */
-
-  if (text.includes("torment")) {
-
-    body.classList.add(
-      "stormy"
-    );
-
-  }
-
-  else if (
-    text.includes("precipit") ||
-    text.includes("lluvia") ||
-    text.includes("chaparr")
-  ) {
-
-    body.classList.add(
-      "rainy"
-    );
-
-  }
-
-  else if (
-    text.includes("cubierto")
-  ) {
-
-    body.classList.add(
-      "cloudy"
-    );
-
-  }
-
-  else if (
-    text.includes("nuboso")
-  ) {
-
-    body.classList.add(
-      "partly"
-    );
-
-  }
-
-  else {
-
-    body.classList.add(
-      "sunny"
-    );
-
-  }
-
-
-  /* FASE SOLAR / CONTRASTE */
-
-  const solarPhase = solarPhaseMontevideo();
-
-  if (solarPhase === "night") {
-    body.classList.add("night");
-  }
-  else if (solarPhase === "dawn") {
-    body.classList.add("dawn");
-  }
-  else if (solarPhase === "dusk") {
-    body.classList.add("dusk");
-  }
-
-
-  /* ======================================
-     VELOCIDAD DE LAS NUBES
-     ====================================== */
-
-  const maxWind =
-    getMaximumWind(day);
-
-
-  let speed1 = 38;
-  let speed2 = 48;
-  let speed3 = 58;
-
-
-  if (maxWind >= 60) {
-
-    speed1 = 10;
-    speed2 = 14;
-    speed3 = 18;
-
-  }
-
-  else if (maxWind >= 40) {
-
-    speed1 = 15;
-    speed2 = 20;
-    speed3 = 26;
-
-  }
-
-  else if (maxWind >= 25) {
-
-    speed1 = 23;
-    speed2 = 30;
-    speed3 = 37;
-
-  }
-
-
-  document.documentElement.style
-    .setProperty(
-      "--cloud-speed-1",
-      speed1 + "s"
-    );
-
-
-  document.documentElement.style
-    .setProperty(
-      "--cloud-speed-2",
-      speed2 + "s"
-    );
-
-
-  document.documentElement.style
-    .setProperty(
-      "--cloud-speed-3",
-      speed3 + "s"
-    );
-}
-
-
-/* ==========================================
+function applyWeatherTheme(data) {\n\n  const body = document.body;\n  body.className = "";\n\n  /* El entorno visual depende SOLO de la observación real. */\n  const condition = observedCondition(data);\n  const valid = ["sunny", "partly", "cloudy", "rainy", "stormy"];\n  body.classList.add(valid.includes(condition) ? condition : "cloudy");\n\n  /* FASE SOLAR */\n  const solarPhase = solarPhaseMontevideo();\n  if (solarPhase === "night") body.classList.add("night");\n  else if (solarPhase === "dawn") body.classList.add("dawn");\n  else if (solarPhase === "dusk") body.classList.add("dusk");\n\n  /* VELOCIDAD DE NUBES: viento OBSERVADO, no pronosticado. */\n  const windKmh = Number(data?.current?.wind_speed_kmh);\n  const maxWind = Number.isFinite(windKmh) ? windKmh : 0;\n\n  let speed1 = 38, speed2 = 48, speed3 = 58;\n  if (maxWind >= 60) { speed1 = 10; speed2 = 14; speed3 = 18; }\n  else if (maxWind >= 40) { speed1 = 15; speed2 = 20; speed3 = 26; }\n  else if (maxWind >= 25) { speed1 = 23; speed2 = 30; speed3 = 37; }\n\n  document.documentElement.style.setProperty("--cloud-speed-1", speed1 + "s");\n  document.documentElement.style.setProperty("--cloud-speed-2", speed2 + "s");\n  document.documentElement.style.setProperty("--cloud-speed-3", speed3 + "s");\n}\n\n\n/* ==========================================
    PARAGUAS
    ========================================== */
 
@@ -1748,10 +1607,7 @@ async function load() {
        APLICAR AMBIENTE
        ====================================== */
 
-    applyWeatherTheme(
-      today,
-      currentTemp
-    );
+    applyWeatherTheme(data);
 
 
     /* ======================================
@@ -1774,7 +1630,8 @@ async function load() {
 
 
     if (
-      currentTemp !== null
+      currentTemp !== null &&
+      showObservedTemperature()
     ) {
 
 
@@ -1841,7 +1698,9 @@ async function load() {
 
         <div class="currentSource">
 
-          Temperatura actual no disponible
+          ${montevideoHour() >= 18
+            ? `<a href="https://www.inumet.gub.uy/tiempo/estado-actual" target="_blank" rel="noopener noreferrer" class="inumetCurrentButton">🌡️ Ver temperaturas actuales en INUMET</a>`
+            : `Temperatura actual no disponible`}
 
         </div>
 
@@ -1868,7 +1727,7 @@ async function load() {
 
         <div class="weatherIcon">
 
-          ${icon(today)}
+          ${observedIcon(data)}
 
         </div>
 
