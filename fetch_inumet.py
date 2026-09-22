@@ -195,7 +195,54 @@ except Exception as error:
     print("Error obteniendo observación actual:", error)
 
 # =================================================
-# 3. RESUMEN DEL PRONÓSTICO
+# 3. ADVERTENCIA METEOROLÓGICA OFICIAL INUMET
+# =================================================
+# Primera etapa segura:
+# - comprobamos únicamente si INUMET declara que NO hay advertencia vigente;
+# - todavía no interpretamos nivel, fenómeno ni localidades.
+# Esto evita falsos positivos porque la página puede contener textos de
+# plantillas ocultas aunque no exista una advertencia activa.
+
+URL_ALERTA = "https://www.inumet.gub.uy/alerta"
+alert = {"active": False}
+
+try:
+    respuesta_alerta = requests.get(URL_ALERTA, headers=HEADERS, timeout=30)
+    print("Código respuesta advertencias:", respuesta_alerta.status_code)
+    respuesta_alerta.raise_for_status()
+
+    soup_alerta = BeautifulSoup(respuesta_alerta.text, "html.parser")
+    texto_alerta = re.sub(r"\s+", " ", soup_alerta.get_text(" ", strip=True))
+
+    sin_advertencia = re.search(
+        r"No\s+hay\s+advertencia\s+meteorol[oó]gica\s+vigente",
+        texto_alerta,
+        re.IGNORECASE,
+    )
+
+    if sin_advertencia:
+        alert = {"active": False}
+        print("Advertencia INUMET: no hay advertencia meteorológica vigente.")
+    else:
+        # Hay indicios de una advertencia activa, pero en esta primera etapa
+        # no publicamos datos que todavía no hayan sido validados.
+        alert = {
+            "active": True,
+            "status": "pending_validation"
+        }
+        print("Advertencia INUMET: posible advertencia vigente detectada.")
+        print("Se requiere validar nivel, fenómeno y área antes de mostrarla.")
+
+except Exception as error:
+    # Si INUMET no responde, no inventamos una advertencia.
+    alert = {
+        "active": False,
+        "check_error": True
+    }
+    print("Error consultando advertencias INUMET:", error)
+
+# =================================================
+# 4. RESUMEN DEL PRONÓSTICO
 # =================================================
 t = days[0]
 parts = [f"Temperaturas de {t['min']}° a {t['max']}°"]
@@ -206,7 +253,7 @@ if re.search(r"viento|ráfaga", t["wind"], re.IGNORECASE):
     parts.append("y viento a tener en cuenta")
 
 # =================================================
-# 4. CREAR DATA.JSON
+# 5. CREAR DATA.JSON
 # =================================================
 ahora_uruguay = datetime.now(URUGUAY_TZ)
 data = {
@@ -222,6 +269,7 @@ data = {
         "cloud_types": cloud_types,
         "wind_speed_kmh": wind_speed_kmh,
     },
+    "alert": alert,
     "days": days,
     "summary": "; ".join(parts) + ".",
 }
@@ -233,5 +281,6 @@ print("--------------------------------")
 print("Temperatura Prado:", current_temp)
 print("Condición visual observada:", condition)
 print("Hora condición UTC:", condition_time)
+print("Advertencia:", alert)
 print("Hora actualización Uruguay:", ahora_uruguay.strftime("%d/%m/%Y %H:%M"))
-print("Pronóstico y observación actualizados correctamente.")
+print("Pronóstico, observación y advertencia actualizados correctamente.")
