@@ -1002,6 +1002,28 @@ a {
 }
 .inumetCurrentButton:active { transform: scale(.98); }
 
+
+/* ==========================================
+   ADVERTENCIAS INUMET
+   ========================================== */
+.alertCard {
+  display:none;
+  border-radius:18px;
+  padding:16px 18px;
+  margin:14px 0;
+  border:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  box-shadow:0 8px 28px rgba(23,32,51,.08);
+}
+.alertCard.visible { display:block; }
+.alertCard.yellow { background:rgba(255,214,64,.78); color:#332900; }
+.alertCard.orange { background:rgba(255,145,45,.82); color:#2b1600; }
+.alertCard.red { background:rgba(190,35,45,.88); color:#fff; }
+.alertTitle { font-size:17px; font-weight:850; }
+.alertText { margin-top:6px; line-height:1.4; font-weight:600; }
+.alertLink { display:inline-block; margin-top:9px; font-weight:800; color:inherit; }
+
 </style>
 </head>
 
@@ -1052,6 +1074,9 @@ a {
     id="updated">
     Cargando…
   </div>
+
+  <!-- ADVERTENCIA INUMET: solo se muestra cuando haya una alerta validada -->
+  <section id="weatherAlert" class="alertCard" aria-live="polite"></section>
 
 
   <!-- HOY -->
@@ -1645,6 +1670,54 @@ function coatAdvice(day) {
 
 
 /* ==========================================
+   ADVERTENCIA INUMET
+   ========================================== */
+
+function renderAlert(data) {
+  const box = document.getElementById("weatherAlert");
+  if (!box) return;
+
+  const alert = data?.alert;
+
+  /* pending_validation nunca se muestra al usuario. */
+  if (!alert || alert.active !== true || alert.status === "pending_validation") {
+    box.className = "alertCard";
+    box.innerHTML = "";
+    return;
+  }
+
+  const level = String(alert.level || "").toLowerCase();
+  if (!["yellow", "orange", "red"].includes(level)) {
+    box.className = "alertCard";
+    box.innerHTML = "";
+    return;
+  }
+
+  const labels = {
+    yellow: "🟡 ADVERTENCIA AMARILLA",
+    orange: "🟠 ADVERTENCIA NARANJA",
+    red: "🔴 ADVERTENCIA ROJA"
+  };
+
+  const title = alert.title ? `<div class="alertText">${esc(alert.title)}</div>` : "";
+  const area = alert.area ? `<div class="alertText">${esc(alert.area)}</div>` : "";
+  const expires = alert.expires ? `<div class="alertText">Vigente hasta: ${esc(alert.expires)}</div>` : "";
+
+  box.className = `alertCard visible ${level}`;
+  box.innerHTML = `
+    <div class="alertTitle">${labels[level]}</div>
+    ${title}
+    ${area}
+    ${expires}
+    <a class="alertLink"
+       href="https://www.inumet.gub.uy/alerta"
+       target="_blank"
+       rel="noopener noreferrer">Ver detalle oficial en INUMET</a>
+  `;
+}
+
+
+/* ==========================================
    CARGAR DATA.JSON
    ========================================== */
 
@@ -1707,6 +1780,10 @@ async function load() {
 
       "Última actualización: " +
       data.updated;
+
+
+    /* ADVERTENCIA OFICIAL */
+    renderAlert(data);
 
 
     /* ======================================
