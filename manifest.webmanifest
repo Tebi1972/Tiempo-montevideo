@@ -1,0 +1,16 @@
+{
+  "name": "Tiempo Montevideo",
+  "short_name": "Tiempo MVD",
+  "description": "Pronóstico y observaciones meteorológicas de Montevideo con datos de INUMET.",
+  "lang": "es-UY",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#9fd8ee",
+  "theme_color": "#17304a",
+  "icons": [
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
