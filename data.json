@@ -1,15 +1,17 @@
 {
-  "updated": "22/09/2026 00:06",
+  "updated": "22/09/2026 01:06",
   "current": {
-    "temperature": 10.4,
+    "temperature": 10.2,
     "station": "Prado",
-    "observation_time": "2026-09-22T02:00:00Z",
+    "observation_time": "2026-09-22T03:00:00Z",
     "condition": "cloudy",
-    "condition_time": "2026-09-22T02:00:00Z",
+    "condition_time": "2026-09-22T03:00:00Z",
     "present_weather": null,
-    "cloud_amount": "8 OKTAS",
+    "cloud_amount": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
     "cloud_types": [
-      "CUMULUS (CU)"
+      "CUMULUS (CU)",
+      "CIRRUS (CI)",
+      "CIRRUS (CI)"
     ],
     "wind_speed_kmh": null
   },
