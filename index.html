@@ -1695,7 +1695,7 @@ function renderAlert(data) {
 
   const labels = {
     yellow: "🟡 ADVERTENCIA AMARILLA",
-    orange: "🟠 ADVERTENCIA NARANJA",
+    orange: "🟠 SIMULACIÓN — ADVERTENCIA NARANJA",
     red: "🔴 ADVERTENCIA ROJA"
   };
 
@@ -1782,8 +1782,18 @@ async function load() {
       data.updated;
 
 
-    /* ADVERTENCIA OFICIAL */
-    renderAlert(data);
+    /* PRUEBA VISUAL TEMPORAL: NO PROVIENE DE INUMET */
+    const testData = {
+      ...data,
+      alert: {
+        active: true,
+        level: "orange",
+        title: "SIMULACIÓN — Tormentas fuertes",
+        area: "Montevideo",
+        expires: "18:00"
+      }
+    };
+    renderAlert(testData);
 
 
     /* ======================================
