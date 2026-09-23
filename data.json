@@ -1,16 +1,16 @@
 {
-  "updated": "23/09/2026 08:05",
+  "updated": "23/09/2026 09:07",
   "current": {
-    "temperature": 4.9,
+    "temperature": 6.0,
     "station": "Prado",
-    "observation_time": "2026-09-23T10:00:00Z",
+    "observation_time": "2026-09-23T11:00:00Z",
     "condition": "cloudy",
-    "condition_time": "2026-09-23T10:00:00Z",
+    "condition_time": "2026-09-23T11:00:00Z",
     "present_weather": null,
     "cloud_amount": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
     "cloud_types": [
       "CIRRUS (CI)",
-      "CIRRUS (CI)",
+      "CIRROSTRATUS (CS)",
       "STRATOCUMULUS (SC)"
     ],
     "wind_speed_kmh": null
@@ -23,7 +23,7 @@
       "date": "Miércoles 23",
       "min": "2",
       "max": "17",
-      "morning": "Algo nuboso a nuboso. Heladas agrometeorológicas. Neblinas.",
+      "morning": "Nuboso, períodos de cubierto. Heladas agrometeorológicas. Neblinas.",
       "evening": "Nuboso, períodos de cubierto.",
       "wind": "Variables 0-10 km/h al N y NW 10-30 km/h. Sector N 10-30 km/h, rachas de hasta 40 km/h. ",
       "rain": "No indicada"
@@ -43,7 +43,7 @@
       "max": "23",
       "morning": "Nuboso, períodos de algo nuboso. Baja probabilidad de precipitaciones.",
       "evening": "Nuboso, períodos de algo nuboso. Baja probabilidad de precipitaciones. Neblinas y bancos de niebla.",
-      "wind": "NW al W 20-40 km/h. Sector W 10-40 km/h a variables 0-10 km/h. Pronóstico extendido: Última Actualización: 23/09/2026 06:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "wind": "NW al W 20-40 km/h. Sector W 10-40 km/h a variables 0-10 km/h. Pronóstico extendido: Última Actualización: 23/09/2026 08:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
       "rain": "Precipitaciones"
     }
   ],
