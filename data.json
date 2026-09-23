@@ -1,11 +1,11 @@
 {
-  "updated": "23/09/2026 01:06",
+  "updated": "23/09/2026 02:05",
   "current": {
-    "temperature": 5.8,
+    "temperature": 5.1,
     "station": "Prado",
-    "observation_time": "2026-09-23T03:00:00Z",
+    "observation_time": "2026-09-23T04:00:00Z",
     "condition": "neutral",
-    "condition_time": "2026-09-23T03:00:00Z",
+    "condition_time": "2026-09-23T04:00:00Z",
     "present_weather": null,
     "cloud_amount": "0",
     "cloud_types": [],
