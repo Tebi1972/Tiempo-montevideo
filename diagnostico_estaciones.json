@@ -1,0 +1,1036 @@
+{
+  "generated_utc": "2026-09-23T13:34:09.752323+00:00",
+  "window_hours": 6,
+  "stations_found": 27,
+  "stations": [
+    {
+      "wigos": "0-20000-0-86580",
+      "name": "Carrasco",
+      "department": null,
+      "coordinates": [
+        -56.012876,
+        -34.832923,
+        32.88
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 9.0,
+          "description": null,
+          "units": "Celsius"
+        },
+        "cloud_cover_total": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 8.0,
+          "description": null,
+          "units": "%"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        },
+        "present_weather": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CLOUDS GENERALLY FORMING OR DEVELOPING",
+          "units": "CODE TABLE"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 6.7,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "4 OKTAS",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": true,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 4
+    },
+    {
+      "wigos": "0-20000-0-86330",
+      "name": "Artigas",
+      "department": null,
+      "coordinates": [
+        -56.51267,
+        -30.39911,
+        120.88
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 10.3,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 2.7,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "6 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-20000-0-86560",
+      "name": "Colonia",
+      "department": null,
+      "coordinates": [
+        -57.76804181,
+        -34.45182199,
+        24.73
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 9.6,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 6.0,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "8 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-20000-0-86530",
+      "name": "Durazno",
+      "department": null,
+      "coordinates": [
+        -56.4972385,
+        -33.350522,
+        92.8
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 7.8,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 4.6000000000000005,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "8 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-20000-0-86545",
+      "name": "Florida",
+      "department": null,
+      "coordinates": [
+        -56.18795,
+        -34.086325,
+        63.35
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 8.4,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 5.9,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "8 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-20000-0-86586",
+      "name": "Laguna del Sauce",
+      "department": null,
+      "coordinates": [
+        -55.1071,
+        -34.8604,
+        28.33
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 10.2,
+          "description": null,
+          "units": "Celsius"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 6.0,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-20000-0-86575",
+      "name": "Melilla",
+      "department": null,
+      "coordinates": [
+        -56.2663,
+        -34.781,
+        48.33
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 8.4,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 4.6000000000000005,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "8 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-20000-0-86440",
+      "name": "Melo",
+      "department": null,
+      "coordinates": [
+        -54.19257,
+        -32.36675,
+        100.36
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 9.9,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 3.4000000000000004,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "8 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-20000-0-86490",
+      "name": "Mercedes",
+      "department": null,
+      "coordinates": [
+        -58.0692,
+        -33.2506,
+        19.0
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 9.5,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 4.6000000000000005,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-20000-0-86430",
+      "name": "Paysandu",
+      "department": null,
+      "coordinates": [
+        -58.0312,
+        -32.381,
+        61.12
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 10.2,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 4.4,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "6 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-20000-0-86585",
+      "name": "Prado",
+      "department": null,
+      "coordinates": [
+        -56.207389,
+        -34.860639,
+        16.27
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 8.9,
+          "description": null,
+          "units": "Celsius"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "8 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 2.9000000000000004,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-858-0-86595",
+      "name": "Punta del Este",
+      "department": null,
+      "coordinates": [
+        -54.9512,
+        -34.9689,
+        16.4
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 10.15,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 2.8000000000000003,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-20000-0-86565",
+      "name": "Rocha",
+      "department": null,
+      "coordinates": [
+        -54.3125,
+        -34.4936,
+        18.16
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 10.3,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 3.9000000000000004,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-20000-0-86360",
+      "name": "Salto",
+      "department": null,
+      "coordinates": [
+        -57.981,
+        -31.4388,
+        39.59
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 11.1,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 3.4000000000000004,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-858-0-86550",
+      "name": "San Jose",
+      "department": null,
+      "coordinates": [
+        -56.7497,
+        -34.3519,
+        72.0
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 8.37,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 5.9,
+          "description": null,
+          "units": "m/s"
+        },
+        "cloud_amount": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "8 OKTAS",
+          "units": "CODE TABLE"
+        },
+        "cloud_type": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": null,
+          "description": "CIRRUS (CI)",
+          "units": "CODE TABLE"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": true,
+      "has_wind": true,
+      "score": 3
+    },
+    {
+      "wigos": "0-20000-0-89054",
+      "name": "Antartida BCAA",
+      "department": null,
+      "coordinates": [
+        -58.9054694,
+        -62.183828,
+        16
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": -5.2,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 1.6,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": false,
+      "has_wind": true,
+      "score": 2
+    },
+    {
+      "wigos": "0-858-0-A000000000000003",
+      "name": "Atlantida",
+      "department": null,
+      "coordinates": [
+        -55.7528,
+        -34.7797,
+        8.75
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 8.7,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 3.3000000000000003,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": false,
+      "has_wind": true,
+      "score": 2
+    },
+    {
+      "wigos": "0-858-0-A000000000000009",
+      "name": "Bella Union",
+      "department": null,
+      "coordinates": [
+        -57.602608,
+        -30.253235,
+        48.3
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 12.09,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 2.7,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": false,
+      "has_wind": true,
+      "score": 2
+    },
+    {
+      "wigos": "0-858-0-A000000000000001",
+      "name": "Lavalleja",
+      "department": null,
+      "coordinates": [
+        -55.0841,
+        -34.336,
+        155.27
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 8.0,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 3.1,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": false,
+      "has_wind": true,
+      "score": 2
+    },
+    {
+      "wigos": "0-20000-0-86460",
+      "name": "Paso de los Toros",
+      "department": null,
+      "coordinates": [
+        -56.5147,
+        -32.7967,
+        80.97
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 9.6,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 5.1000000000000005,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": false,
+      "has_wind": true,
+      "score": 2
+    },
+    {
+      "wigos": "0-858-0-A000000000000004",
+      "name": "Rivera Aeropuerto",
+      "department": null,
+      "coordinates": [
+        -55.4735,
+        -30.9703,
+        200.82
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 8.3,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 3.9000000000000004,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": false,
+      "has_wind": true,
+      "score": 2
+    },
+    {
+      "wigos": "0-858-0-A000000000000002",
+      "name": "San Jacinto",
+      "department": null,
+      "coordinates": [
+        -55.8464,
+        -34.5145,
+        74.42
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 8.5,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 5.1000000000000005,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": false,
+      "has_wind": true,
+      "score": 2
+    },
+    {
+      "wigos": "0-20000-0-86370",
+      "name": "Tacuarembo",
+      "department": null,
+      "coordinates": [
+        -55.9288138511,
+        -31.7499634024,
+        134.0
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 9.2,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 2.6,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": false,
+      "has_wind": true,
+      "score": 2
+    },
+    {
+      "wigos": "0-858-0-A000000000000005",
+      "name": "Treinta y Tres Aeropuerto",
+      "department": null,
+      "coordinates": [
+        -54.3481,
+        -33.1968,
+        59.0
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 10.0,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 3.6,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": false,
+      "has_wind": true,
+      "score": 2
+    },
+    {
+      "wigos": "0-858-0-A000000000000007",
+      "name": "Trinidad",
+      "department": null,
+      "coordinates": [
+        -56.890246,
+        -33.486257,
+        129.82
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 7.45,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 4.9,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": false,
+      "has_wind": true,
+      "score": 2
+    },
+    {
+      "wigos": "0-858-0-A000000000000008",
+      "name": "Vichadero",
+      "department": null,
+      "coordinates": [
+        -54.58984,
+        -31.74309,
+        143.67
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 9.42,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 5.4,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": false,
+      "has_wind": true,
+      "score": 2
+    },
+    {
+      "wigos": "0-858-0-A000000000000006",
+      "name": "Young",
+      "department": null,
+      "coordinates": [
+        -57.58991,
+        -32.66447,
+        87.0
+      ],
+      "latest_observation": "2026-09-23T13:00:00Z",
+      "variables": {
+        "air_temperature": {
+          "time": "2026-09-23T13:00:00Z",
+          "value": 9.1,
+          "description": null,
+          "units": "Celsius"
+        },
+        "wind_speed": {
+          "time": "2026-09-23T12:50:00Z",
+          "value": 3.2,
+          "description": null,
+          "units": "m/s"
+        }
+      },
+      "age_hours": 0.57,
+      "has_temperature": true,
+      "has_present_weather": false,
+      "has_cloud": false,
+      "has_wind": true,
+      "score": 2
+    }
+  ]
+}
