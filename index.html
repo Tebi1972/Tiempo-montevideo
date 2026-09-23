@@ -1547,11 +1547,39 @@ function observedCondition(data) {
   return String(data?.current?.condition || "neutral").toLowerCase();
 }
 
+/* ==========================================
+   FASE LUNAR
+   ========================================== */
+
+function moonPhaseIcon(date = new Date()) {
+  const referenceNewMoon = Date.UTC(2000, 0, 6, 18, 14);
+  const synodicMonth = 29.530588853;
+  const daysSince = (date.getTime() - referenceNewMoon) / 86400000;
+  const age = ((daysSince % synodicMonth) + synodicMonth) % synodicMonth;
+  const phase = age / synodicMonth;
+
+  if (phase < 0.0625 || phase >= 0.9375) return "🌑";
+  if (phase < 0.1875) return "🌒";
+  if (phase < 0.3125) return "🌓";
+  if (phase < 0.4375) return "🌔";
+  if (phase < 0.5625) return "🌕";
+  if (phase < 0.6875) return "🌖";
+  if (phase < 0.8125) return "🌗";
+  return "🌘";
+}
+
 function observedIcon(data) {
   const c = observedCondition(data);
+  const phase = solarPhaseMontevideo();
+
   if (c === "stormy") return "⛈️";
   if (c === "rainy") return "🌧️";
   if (c === "cloudy") return "☁️";
+
+  if (phase === "night" && (c === "partly" || c === "sunny" || c === "neutral")) {
+    return moonPhaseIcon();
+  }
+
   if (c === "partly") return "🌤️";
   if (c === "sunny") return "☀️";
   return "🌡️";
