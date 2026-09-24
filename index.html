@@ -1024,6 +1024,39 @@ a {
 .alertText { margin-top:6px; line-height:1.4; font-weight:600; }
 .alertLink { display:inline-block; margin-top:9px; font-weight:800; color:inherit; }
 
+
+/* ==========================================
+   SELECTOR DE LOCALIDAD
+   ========================================== */
+.locationBar {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:12px 0 4px;
+}
+.locationSelect {
+  width:100%;
+  max-width:360px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:11px 13px;
+  background:var(--glass);
+  color:var(--text);
+  font:inherit;
+  font-weight:750;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.locationSelect option {
+  color:#172033;
+  background:#fff;
+}
+.locationNote {
+  font-size:12px;
+  color:var(--muted);
+  margin-top:6px;
+}
+
 </style>
 </head>
 
@@ -1059,14 +1092,22 @@ a {
 <div class="wrap">
 
 
-  <div class="source">
+  <div class="source" id="sourceLabel">
     INUMET · ÁREA METROPOLITANA
   </div>
 
-
-  <h1>
+  <h1 id="pageTitle">
     Tiempo en Montevideo
   </h1>
+
+  <div class="locationBar">
+    <select id="locationSelect" class="locationSelect" aria-label="Seleccionar localidad">
+      <option value="montevideo_prado">📍 Montevideo · Prado</option>
+    </select>
+  </div>
+  <div class="locationNote" id="locationNote">
+    Condiciones actuales según estación INUMET. El pronóstico de tres días sigue correspondiendo al Área Metropolitana.
+  </div>
 
 
   <div
@@ -1362,6 +1403,8 @@ function formatTemperature(temp) {
 
 const MONTEVIDEO_LAT = -34.9011;
 const MONTEVIDEO_LON = -56.1645;
+let ACTIVE_LAT = MONTEVIDEO_LAT;
+let ACTIVE_LON = MONTEVIDEO_LON;
 
 function rad(value) {
   return value * Math.PI / 180;
@@ -1408,7 +1451,7 @@ function dayOfYear(year, month, day) {
 
 function solarEventUtcHours(year, month, day, sunrise) {
   const N = dayOfYear(year, month, day);
-  const lngHour = MONTEVIDEO_LON / 15;
+  const lngHour = ACTIVE_LON / 15;
   const t = N + (((sunrise ? 6 : 18) - lngHour) / 24);
 
   const M = (0.9856 * t) - 3.289;
@@ -1433,8 +1476,8 @@ function solarEventUtcHours(year, month, day, sunrise) {
 
   const cosH =
     (Math.cos(rad(90.833))
-      - (sinDec * Math.sin(rad(MONTEVIDEO_LAT))))
-    / (cosDec * Math.cos(rad(MONTEVIDEO_LAT)));
+      - (sinDec * Math.sin(rad(ACTIVE_LAT))))
+    / (cosDec * Math.cos(rad(ACTIVE_LAT)));
 
   if (cosH > 1 || cosH < -1) return null;
 
@@ -1773,6 +1816,18 @@ async function load() {
     const data =
       await response.json();
 
+    lastWeatherData = data;
+    populateLocationSelector(data);
+
+    const selectedObservation = data?.locations?.[selectedLocationKey];
+    ACTIVE_LAT = Number.isFinite(Number(selectedObservation?.latitude))
+      ? Number(selectedObservation.latitude) : MONTEVIDEO_LAT;
+    ACTIVE_LON = Number.isFinite(Number(selectedObservation?.longitude))
+      ? Number(selectedObservation.longitude) : MONTEVIDEO_LON;
+
+    const viewData = dataForSelectedLocation(data);
+    updateLocationHeading(data);
+
 
     if (
       !data.days ||
@@ -1788,14 +1843,14 @@ async function load() {
 
 
     const currentTemp =
-      getCurrentTemp(data);
+      getCurrentTemp(viewData);
 
 
     /* ======================================
        APLICAR AMBIENTE
        ====================================== */
 
-    applyWeatherTheme(data);
+    applyWeatherTheme(viewData);
 
 
     /* ======================================
@@ -1858,7 +1913,7 @@ async function load() {
 
           Temperatura actual · INUMET
           ${esc(
-            data.current.station ||
+            viewData.current?.station ||
             "Prado"
           )}
 
@@ -1919,7 +1974,7 @@ async function load() {
 
         <div class="weatherIcon">
 
-          ${observedIcon(data)}
+          ${observedIcon(viewData)}
 
         </div>
 
