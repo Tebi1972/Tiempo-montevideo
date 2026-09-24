@@ -1362,6 +1362,85 @@ function shortDescription(day) {
 
 
 /* ==========================================
+   LOCALIDAD SELECCIONADA
+   ========================================== */
+const DEFAULT_LOCATION = "montevideo_prado";
+let selectedLocationKey =
+  localStorage.getItem("tiempoUY_location") || DEFAULT_LOCATION;
+let lastWeatherData = null;
+
+function locationDisplayName(key, current) {
+  if (key === "montevideo_prado") return "Montevideo · Prado";
+  if (key === "montevideo_carrasco") return "Montevideo · Carrasco";
+  return current?.station || key.replaceAll("_", " ");
+}
+
+function selectedCurrent(data) {
+  const locations = data?.locations || {};
+  if (!locations[selectedLocationKey]) {
+    selectedLocationKey = DEFAULT_LOCATION;
+    localStorage.setItem("tiempoUY_location", selectedLocationKey);
+  }
+  return locations[selectedLocationKey] || data?.current || null;
+}
+
+function dataForSelectedLocation(data) {
+  return {...data, current:selectedCurrent(data)};
+}
+
+function populateLocationSelector(data) {
+  const select = document.getElementById("locationSelect");
+  if (!select) return;
+
+  const locations = data?.locations || {};
+  if (!locations[selectedLocationKey]) selectedLocationKey = DEFAULT_LOCATION;
+
+  const entries = Object.entries(locations).sort((a,b) =>
+    locationDisplayName(a[0], a[1]).localeCompare(
+      locationDisplayName(b[0], b[1]), "es"
+    )
+  );
+
+  select.innerHTML = entries.map(([key,current]) =>
+    `<option value="${esc(key)}">${esc(locationDisplayName(key,current))}</option>`
+  ).join("");
+
+  select.value = selectedLocationKey;
+
+  if (!select.dataset.ready) {
+    select.addEventListener("change", function() {
+      selectedLocationKey = select.value;
+      localStorage.setItem("tiempoUY_location", selectedLocationKey);
+      load();
+    });
+    select.dataset.ready = "1";
+  }
+}
+
+function updateLocationHeading(data) {
+  const current = selectedCurrent(data);
+  const name = locationDisplayName(selectedLocationKey, current);
+  const isMontevideo = selectedLocationKey.startsWith("montevideo_");
+
+  const title = document.getElementById("pageTitle");
+  const source = document.getElementById("sourceLabel");
+  const notice = document.getElementById("locationNotice");
+
+  if (title) {
+    title.textContent =
+      isMontevideo ? "Tiempo en Montevideo" : `Tiempo en ${current?.station || name}`;
+  }
+  if (source) {
+    source.textContent = `INUMET · ${current?.station || name}`;
+  }
+  if (notice) {
+    notice.textContent = isMontevideo
+      ? "Condiciones actuales según estación INUMET. El pronóstico de tres días sigue correspondiendo al Área Metropolitana."
+      : "Condiciones actuales según estación INUMET. Por ahora, el pronóstico de tres días sigue correspondiendo al Área Metropolitana.";
+  }
+}
+
+/* ==========================================
    TEMPERATURA ACTUAL
    ========================================== */
 
