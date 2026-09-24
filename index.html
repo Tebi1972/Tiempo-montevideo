@@ -2255,7 +2255,7 @@ async function load() {
     document.getElementById(
       "updated"
     ).textContent =
-      "Error al cargar el pronóstico";
+      "Error: " + (error && error.message ? error.message : String(error));
 
 
     document.getElementById(
