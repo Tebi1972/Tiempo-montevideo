@@ -75,12 +75,25 @@ ZONE_NAMES = {
     "PE": "Punta del Este",
 }
 
-def extraer_objeto_balanceado(html, nombre):
-    m = re.search(r"(?:var|let|const)\s+" + re.escape(nombre) + r"\s*=\s*\{", html, re.I)
+def extraer_array_js_asignado(html, codigo):
+    # INUMET publica literalmente:
+    # pronosticos["NW"] = [{...},{...},...];
+    patron = re.compile(
+        r'pronosticos\s*\[\s*["\']' + re.escape(codigo) + r'["\']\s*\]\s*=\s*',
+        re.I
+    )
+    m = patron.search(html)
     if not m:
         return None
-    inicio = html.find("{", m.start())
-    nivel, comilla, escape = 0, None, False
+
+    inicio = html.find("[", m.end())
+    if inicio < 0:
+        return None
+
+    nivel = 0
+    comilla = None
+    escape = False
+
     for i in range(inicio, len(html)):
         ch = html[i]
         if comilla:
@@ -91,98 +104,124 @@ def extraer_objeto_balanceado(html, nombre):
             elif ch == comilla:
                 comilla = None
             continue
-        if ch in ("'", '"', "`"):
+
+        if ch in ('"', "'"):
             comilla = ch
-        elif ch == "{":
+        elif ch == "[":
             nivel += 1
-        elif ch == "}":
+        elif ch == "]":
             nivel -= 1
             if nivel == 0:
-                return html[inicio:i+1]
+                return html[inicio:i + 1]
     return None
 
-def limpiar_texto_html(v):
-    if v is None:
+def texto_subgrupo(sg):
+    partes = [
+        str(sg.get("descripcion") or "").strip(),
+        str(sg.get("evolucion") or "").strip(),
+        str(sg.get("descripcionExtra") or "").strip(),
+    ]
+    return " ".join(x for x in partes if x).strip() or None
+
+def convertir_periodo(periodo):
+    datos = (periodo or {}).get("datos") or {}
+    subs = datos.get("subgrupos") or []
+
+    manana = next(
+        (x for x in subs if str(x.get("subgrupo", "")).lower().startswith("mañ")),
+        None
+    )
+    tarde = next(
+        (x for x in subs if "tarde" in str(x.get("subgrupo", "")).lower()),
+        None
+    )
+
+    morning = texto_subgrupo(manana) if manana else None
+    evening = texto_subgrupo(tarde) if tarde else None
+
+    vientos = []
+    for sg in subs:
+        v = str(sg.get("vientos") or "").strip()
+        if v:
+            vientos.append(v)
+    wind = " ".join(vientos) if vientos else "—"
+
+    texto_lluvia = " ".join(
+        str(x or "") for x in [
+            morning,
+            evening,
+            datos.get("descripcion"),
+            datos.get("evolucion"),
+        ]
+    )
+    rain = "Precipitaciones" if re.search(
+        r"precipit|lluvia|chaparr|torment", texto_lluvia, re.I
+    ) else "No indicada"
+
+    fecha = datos.get("grupo") or datos.get("grupoCorto")
+    minimo = datos.get("tempMin")
+    maximo = datos.get("tempMax")
+
+    if fecha is None or minimo is None or maximo is None:
         return None
-    return re.sub(r"\s+", " ", BeautifulSoup(str(v), "html.parser").get_text(" ", strip=True)).strip() or None
 
-def parsear_pronosticos_objetos(js):
-    """
-    Extrae cada zona y sus días sin ejecutar JavaScript.
-    Aprovecha los nombres de campos observados en pronosticosObjetos.
-    """
-    forecasts = {}
-    if not js:
-        return forecasts
+    return {
+        "date": str(fecha),
+        "min": str(minimo),
+        "max": str(maximo),
+        "morning": morning,
+        "evening": evening,
+        "wind": wind,
+        "rain": rain,
+    }
 
-    # Separamos cada zona por sus claves conocidas, balanceando su objeto/array.
-    posiciones = []
-    for cod in ZONE_NAMES:
-        m = re.search(r'(?:"|\')?' + re.escape(cod) + r'(?:"|\')?\s*:', js)
-        if m:
-            posiciones.append((m.start(), cod))
-    posiciones.sort()
+forecasts = {}
 
-    for idx, (pos, cod) in enumerate(posiciones):
-        fin = posiciones[idx+1][0] if idx+1 < len(posiciones) else len(js)
-        ztxt = js[pos:fin]
+for codigo, nombre in ZONE_NAMES.items():
+    bruto = extraer_array_js_asignado(r.text, codigo)
+    if not bruto:
+        print("Zona no encontrada en HTML:", codigo)
+        continue
 
-        # Los días de INUMET contienen fecha y temperaturas con IDs/campos
-        # pron_min_X / pron_max_X. Extraemos por bloques de día.
-        fechas = list(re.finditer(
-            r'(Lunes|Martes|Miércoles|Jueves|Viernes|Sábado|Domingo)\s+(\d{1,2})',
-            ztxt, re.I
-        ))
-        dias = []
-        for j, fm in enumerate(fechas[:3]):
-            db = ztxt[fm.start(): fechas[j+1].start() if j+1 < len(fechas) else len(ztxt)]
+    try:
+        periodos = json.loads(bruto)
+    except Exception as e:
+        print("Error JSON zona", codigo, ":", e)
+        continue
 
-            mn = re.search(r'(?:pron_min_\d+|temp(?:eratura)?[_ ]?min(?:ima)?)\D{0,80}?(-?\d{1,2})', db, re.I)
-            mx = re.search(r'(?:pron_max_\d+|temp(?:eratura)?[_ ]?max(?:ima)?)\D{0,80}?(-?\d{1,2})', db, re.I)
+    dias_zona = []
+    for periodo in periodos:
+        dia = convertir_periodo(periodo)
+        if dia:
+            dias_zona.append(dia)
+        if len(dias_zona) == 3:
+            break
 
-            # Textos de mañana/tarde y viento, conservando la terminología INUMET.
-            plain = limpiar_texto_html(db) or ""
-            ma = re.search(r'Mañana\s+(.*?)(?=\s+Viento:|\s+Tarde/Noche)', plain, re.I)
-            ta = re.search(r'Tarde/Noche\s+(.*?)(?=\s+Viento:|$)', plain, re.I)
-            vi = re.findall(r'Viento:\s*(.*?)(?=\s+(?:Tarde/Noche|Mañana)|$)', plain, re.I)
+    if dias_zona:
+        forecasts[codigo] = {
+            "name": nombre,
+            "days": dias_zona,
+        }
 
-            morning = ma.group(1).strip() if ma else None
-            evening = ta.group(1).strip() if ta else None
-            wind = " ".join(x.strip() for x in vi if x.strip()) or "—"
-            texto_dia = " ".join(x for x in (morning, evening) if x)
-            rain = "Precipitaciones" if re.search(
-                r"precipit|lluvia|chaparr|torment", texto_dia, re.I
-            ) else "No indicada"
-
-            if mn and mx:
-                dias.append({
-                    "date": f"{fm.group(1)} {fm.group(2)}",
-                    "min": mn.group(1),
-                    "max": mx.group(1),
-                    "morning": morning,
-                    "evening": evening,
-                    "wind": wind,
-                    "rain": rain,
-                })
-
-        if dias:
-            forecasts[cod] = {"name": ZONE_NAMES[cod], "days": dias}
-
-    return forecasts
-
-obj_js = extraer_objeto_balanceado(r.text, "pronosticosObjetos")
-print("pronosticosObjetos detectado:", bool(obj_js))
-
-forecasts = parsear_pronosticos_objetos(obj_js)
-
-# Compatibilidad y red de seguridad: el pronóstico metropolitano histórico
-# continúa disponible en 'days' y completa M si hiciera falta.
-if "M" not in forecasts or not forecasts["M"].get("days"):
-    forecasts["M"] = {"name": ZONE_NAMES["M"], "days": days}
+# Red de seguridad: nunca dejamos a Montevideo sin el pronóstico histórico.
+if "M" not in forecasts:
+    forecasts["M"] = {
+        "name": ZONE_NAMES["M"],
+        "days": days,
+    }
 
 print("Zonas regionales extraídas:", ", ".join(forecasts.keys()))
-for _cod, _fc in forecasts.items():
-    print("Pronóstico", _cod, "-", _fc["name"], "- días:", len(_fc["days"]))
+for codigo in ZONE_NAMES:
+    if codigo in forecasts:
+        muestra = forecasts[codigo]["days"][0]
+        print(
+            codigo, "->", len(forecasts[codigo]["days"]), "días |",
+            muestra["date"], "|",
+            muestra["min"], "/", muestra["max"], "|",
+            muestra["morning"]
+        )
+    else:
+        print(codigo, "-> NO EXTRAÍDA")
 
 # =================================================
 # 2. OBSERVACIONES REALES - RED NACIONAL SYNOP
