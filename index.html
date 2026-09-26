@@ -1424,7 +1424,7 @@ function updateLocationHeading(data) {
 
   const title = document.getElementById("pageTitle");
   const source = document.getElementById("sourceLabel");
-  const notice = document.getElementById("locationNotice");
+  const notice = document.getElementById("locationNote");
 
   if (title) {
     title.textContent =
@@ -1667,6 +1667,44 @@ function getMaximumWind(day) {
 
 function observedCondition(data) {
   return String(data?.current?.condition || "neutral").toLowerCase();
+}
+
+function observedDescription(data) {
+  const c = observedCondition(data);
+
+  if (c === "stormy") return "Tormentas";
+  if (c === "rainy") return "Lluvias";
+  if (c === "cloudy") return "Cielo cubierto";
+  if (c === "partly") return "Parcialmente nublado";
+  if (c === "sunny") return "Cielo despejado";
+
+  const cloudText = String(data?.current?.cloud_amount || "").toUpperCase();
+  const matches = [...cloudText.matchAll(/(\\d+)\\s*OKTAS?/g)];
+  const oktas = matches.map(m => Number(m[1]));
+
+  if (oktas.length) {
+    const max = Math.max(...oktas);
+    if (max >= 7) return "Cielo cubierto";
+    if (max >= 3) return "Parcialmente nublado";
+    return "Cielo despejado";
+  }
+
+  return "Condición actual";
+}
+
+function observedWindText(data) {
+  const wind = Number(data?.current?.wind_speed_kmh);
+
+  if (!Number.isFinite(wind))
+    return "Sin dato observado";
+
+  return wind.toLocaleString(
+    "es-UY",
+    {
+      minimumFractionDigits:0,
+      maximumFractionDigits:1
+    }
+  ) + " km/h";
 }
 
 /* ==========================================
@@ -1980,7 +2018,7 @@ async function load() {
           <span class="weatherTitle">
 
             ${esc(
-              shortDescription(today)
+              observedDescription(viewData)
             )}
 
           </span>
@@ -2016,7 +2054,7 @@ async function load() {
         <div class="weatherTitle">
 
           ${esc(
-            shortDescription(today)
+            observedDescription(viewData)
           )}
 
         </div>
@@ -2134,11 +2172,11 @@ async function load() {
         <div class="item">
 
           <div class="label">
-            💨 Viento
+            💨 Viento actual
           </div>
 
           <div class="value">
-            ${esc(today.wind)}
+            ${esc(observedWindText(viewData))}
           </div>
 
         </div>
