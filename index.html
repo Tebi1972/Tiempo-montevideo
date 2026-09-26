@@ -1106,7 +1106,7 @@ a {
     </select>
   </div>
   <div class="locationNote" id="locationNote">
-    Condiciones actuales según estación INUMET. El pronóstico de tres días sigue correspondiendo al Área Metropolitana.
+    Condiciones actuales y pronóstico de tres días según la localidad seleccionada.
   </div>
 
 
@@ -1385,7 +1385,20 @@ function selectedCurrent(data) {
 }
 
 function dataForSelectedLocation(data) {
-  return {...data, current:selectedCurrent(data)};
+  const current = selectedCurrent(data);
+  const zone = current?.forecast_zone || "M";
+  const regional = data?.forecasts?.[zone];
+  const days = Array.isArray(regional?.days) && regional.days.length
+    ? regional.days
+    : (data?.days || []);
+
+  return {
+    ...data,
+    current,
+    days,
+    selectedForecastZone: zone,
+    selectedForecastName: regional?.name || "Área Metropolitana"
+  };
 }
 
 function populateLocationSelector(data) {
@@ -1418,7 +1431,8 @@ function populateLocationSelector(data) {
 }
 
 function updateLocationHeading(data) {
-  const current = selectedCurrent(data);
+  const viewData = dataForSelectedLocation(data);
+  const current = viewData.current;
   const name = locationDisplayName(selectedLocationKey, current);
   const isMontevideo = selectedLocationKey.startsWith("montevideo_");
 
@@ -1431,12 +1445,12 @@ function updateLocationHeading(data) {
       isMontevideo ? "Tiempo en Montevideo" : `Tiempo en ${current?.station || name}`;
   }
   if (source) {
-    source.textContent = `INUMET · ${current?.station || name}`;
+    source.textContent =
+      `INUMET · ${current?.station || name} · Pronóstico ${viewData.selectedForecastName}`;
   }
   if (notice) {
-    notice.textContent = isMontevideo
-      ? "Condiciones actuales según estación INUMET. El pronóstico de tres días sigue correspondiendo al Área Metropolitana."
-      : "Condiciones actuales según estación INUMET. Por ahora, el pronóstico de tres días sigue correspondiendo al Área Metropolitana.";
+    notice.textContent =
+      `Condiciones actuales según estación INUMET. Pronóstico de tres días: ${viewData.selectedForecastName}.`;
   }
 }
 
@@ -1947,8 +1961,8 @@ async function load() {
 
 
     if (
-      !data.days ||
-      data.days.length === 0
+      !viewData.days ||
+      viewData.days.length === 0
     )
       throw new Error(
         "No hay pronóstico disponible"
@@ -1956,7 +1970,7 @@ async function load() {
 
 
     const today =
-      data.days[0];
+      viewData.days[0];
 
 
     const currentTemp =
@@ -2225,8 +2239,22 @@ async function load() {
       "summary"
     ).textContent =
 
-      data.summary ||
-      "Sin resumen disponible.";
+      (() => {
+        const parts = [`Temperaturas de ${today.min}° a ${today.max}°`];
+        const text = forecastText(today);
+        if (
+          text.includes("precipit") ||
+          text.includes("lluvia") ||
+          text.includes("chaparr") ||
+          text.includes("torment")
+        ) {
+          parts.push("con posibilidad de precipitaciones");
+        }
+        if (getMaximumWind(today) > 0) {
+          parts.push("y viento a tener en cuenta");
+        }
+        return parts.join("; ") + ".";
+      })();
 
 
     /* ======================================
@@ -2237,7 +2265,7 @@ async function load() {
       "days"
     ).innerHTML =
 
-      data.days
+      viewData.days
         .slice(1)
         .map(function(day) {
 
