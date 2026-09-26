@@ -61,6 +61,41 @@ for i, m in enumerate(matches):
 if not days:
     raise SystemExit("No se encontraron temperaturas del pronóstico.")
 
+
+# =================================================
+# 1B. PRONÓSTICOS REGIONALES - ESTRUCTURA INUMET
+# =================================================
+# El sitio oficial identifica estas siete zonas:
+ZONE_NAMES = {
+    "M": "Área Metropolitana",
+    "NW": "Noroeste",
+    "NE": "Noreste",
+    "SO": "Suroeste",
+    "C": "Centro-Sur",
+    "E": "Este",
+    "PE": "Punta del Este",
+}
+
+# Conservamos 'days' como Área Metropolitana para compatibilidad.
+# En esta versión también guardamos la zona metropolitana dentro de forecasts.
+# Las demás zonas se incorporarán desde la estructura JS de INUMET una vez
+# validada en el log de Actions, sin arriesgar el funcionamiento actual.
+forecasts = {
+    "M": {
+        "name": ZONE_NAMES["M"],
+        "days": days,
+    }
+}
+
+# Dejamos trazas útiles para validar qué estructura regional publica INUMET.
+m_obj = re.search(
+    r"(?:var|let|const)\s+pronosticosObjetos\s*=",
+    r.text,
+    re.IGNORECASE,
+)
+print("pronosticosObjetos detectado:", bool(m_obj))
+print("Zonas previstas:", ", ".join(ZONE_NAMES.keys()))
+
 # =================================================
 # 2. OBSERVACIONES REALES - RED NACIONAL SYNOP
 # =================================================
@@ -100,6 +135,36 @@ ESTACIONES = {
     "young": ("0-858-0-A000000000000006", "Young", -32.66447, -57.58991),
 }
 WIGOS_A_KEY = {v[0]: k for k, v in ESTACIONES.items()}
+
+# Zona oficial de pronóstico asociada a cada estación de la aplicación.
+FORECAST_ZONE_BY_LOCATION = {
+    "montevideo_prado": "M",
+    "montevideo_carrasco": "M",
+    "melilla": "M",
+    "atlantida": "M",
+    "san_jacinto": "M",
+    "artigas": "NW",
+    "bella_union": "NW",
+    "salto": "NW",
+    "paysandu": "NW",
+    "young": "NW",
+    "rivera_aeropuerto": "NE",
+    "tacuarembo": "NE",
+    "vichadero": "NE",
+    "melo": "NE",
+    "colonia": "SO",
+    "mercedes": "SO",
+    "san_jose": "SO",
+    "durazno": "C",
+    "florida": "C",
+    "paso_de_los_toros": "C",
+    "trinidad": "C",
+    "lavalleja": "E",
+    "rocha": "E",
+    "treinta_y_tres": "E",
+    "laguna_del_sauce": "E",
+    "punta_del_este": "PE",
+}
 
 def instante(props):
     return str(props.get("phenomenonTime", "")).split("/")[0]
@@ -207,6 +272,8 @@ def construir_observacion(meta, registros, ahora):
     return out
 
 locations = {k: observacion_vacia(v) for k, v in ESTACIONES.items()}
+for _key in locations:
+    locations[_key]["forecast_zone"] = FORECAST_ZONE_BY_LOCATION.get(_key, "M")
 
 try:
     ahora = datetime.now(timezone.utc)
@@ -242,6 +309,7 @@ try:
 
     for key, meta in ESTACIONES.items():
         locations[key] = construir_observacion(meta, registros[key], ahora)
+        locations[key]["forecast_zone"] = FORECAST_ZONE_BY_LOCATION.get(key, "M")
         o = locations[key]
         print(key, o["temperature"], o["condition"], o["wind_speed_kmh"])
 
@@ -337,6 +405,7 @@ data = {
     },
     "alert": alert,
     "locations": locations,
+    "forecasts": forecasts,
     "days": days,
     "summary": "; ".join(parts) + ".",
 }
