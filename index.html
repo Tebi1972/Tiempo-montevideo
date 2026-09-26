@@ -1897,31 +1897,43 @@ function localityIsInWarning(warning, current) {
     "laguna del sauce": ["laguna del sauce"],
   };
 
-  const names = [station, ...(aliases[station] || [])];
+  const names = [station, ...(aliases[station] || [])]
+    .map(normalizeAlertText)
+    .filter(Boolean);
+
   const zonesRaw = String(warning?.zones || "");
 
   /*
-    INUMET publica bloques del tipo:
-    "Artigas : Baltasar Brum, Bella Unión... Salto : Arapey..."
-    Para no pintar todo un departamento por error, buscamos la localidad
-    únicamente dentro de las listas que siguen a ":".
+    INUMET devuelve bloques como:
+    "Artigas : Baltasar Brum, Bella Unión, Colonia Palma... Salto : Arapey..."
+
+    IMPORTANTE:
+    no usamos coincidencias parciales. "Colonia" NO debe coincidir con
+    "Colonia Palma" ni "Colonia 18 de Julio".
   */
-  const lists = zonesRaw
-    .split(/(?=[A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]+\s*:)/)
-    .map(part => {
-      const colon = part.indexOf(":");
-      return colon >= 0 ? part.slice(colon + 1) : part;
+  const departmentBlock = /(?:^|\s)([A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]*?)\s*:\s*/g;
+  const matches = [...zonesRaw.matchAll(departmentBlock)];
+  const localities = [];
+
+  if (matches.length) {
+    for (let i = 0; i < matches.length; i++) {
+      const listStart = matches[i].index + matches[i][0].length;
+      const listEnd = i + 1 < matches.length ? matches[i + 1].index : zonesRaw.length;
+      const listText = zonesRaw.slice(listStart, listEnd);
+
+      listText.split(",").forEach(item => {
+        const clean = normalizeAlertText(item.replace(/[.;]+$/g, ""));
+        if (clean) localities.push(clean);
+      });
+    }
+  } else {
+    zonesRaw.split(",").forEach(item => {
+      const clean = normalizeAlertText(item.replace(/[.;]+$/g, ""));
+      if (clean) localities.push(clean);
     });
+  }
 
-  const normalizedLists = normalizeAlertText(lists.join(" | "));
-
-  return names.some(name => {
-    const n = normalizeAlertText(name);
-    if (!n) return false;
-    const escaped = n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`, "i")
-      .test(normalizedLists);
-  });
+  return names.some(name => localities.includes(name));
 }
 
 function renderAlert(data) {
