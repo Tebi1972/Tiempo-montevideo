@@ -2,6 +2,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+from pathlib import Path
 
 BASE = "https://www.inumet.gub.uy"
 URL = BASE + "/tiempo/pronostico"
