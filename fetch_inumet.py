@@ -456,50 +456,161 @@ cloud_types = prado["cloud_types"]
 wind_speed_kmh = prado["wind_speed_kmh"]
 
 # =================================================
-# 3. ADVERTENCIA METEOROLÓGICA OFICIAL INUMET
+# 3. ADVERTENCIAS METEOROLÓGICAS OFICIALES INUMET
 # =================================================
-# Primera etapa segura:
-# - comprobamos únicamente si INUMET declara que NO hay advertencia vigente;
-# - todavía no interpretamos nivel, fenómeno ni localidades.
-# Esto evita falsos positivos porque la página puede contener textos de
-# plantillas ocultas aunque no exista una advertencia activa.
+# INUMET inserta en el HTML un objeto JavaScript llamado "alerta".
+# Leemos ese objeto directamente: contiene nivel, fenómeno, vigencia,
+# descripción y zonas afectadas.
 
 URL_ALERTA = "https://www.inumet.gub.uy/alerta"
 alert = {"active": False}
+
+def extraer_objeto_js_variable(html, nombre):
+    patrones = [
+        r'(?:var|let|const)\s+' + re.escape(nombre) + r'\s*=\s*',
+        r'\b' + re.escape(nombre) + r'\s*=\s*',
+    ]
+    m = None
+    for patron in patrones:
+        m = re.search(patron, html, re.I)
+        if m:
+            break
+    if not m:
+        return None
+
+    inicio = html.find("{", m.end())
+    if inicio < 0:
+        return None
+
+    nivel = 0
+    comilla = None
+    escape = False
+    for i in range(inicio, len(html)):
+        ch = html[i]
+        if comilla:
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == comilla:
+                comilla = None
+            continue
+        if ch in ('"', "'"):
+            comilla = ch
+        elif ch == "{":
+            nivel += 1
+        elif ch == "}":
+            nivel -= 1
+            if nivel == 0:
+                return html[inicio:i + 1]
+    return None
+
+def nivel_advertencia(riesgos):
+    valores = []
+    for valor in (riesgos or {}).values():
+        try:
+            valores.append(int(valor))
+        except (TypeError, ValueError):
+            pass
+    maximo = max(valores) if valores else 1
+    return {2: "amarilla", 3: "naranja", 4: "roja"}.get(maximo)
+
+def texto_zonas(zonas):
+    if zonas is None:
+        return ""
+    return re.sub(
+        r"\s+", " ",
+        BeautifulSoup(str(zonas), "html.parser").get_text(" ", strip=True)
+    ).strip()
+
+def fecha_uruguay(fecha):
+    # Formato observado en INUMET: YYYY-MM-DD HH:MM:SS
+    try:
+        return datetime.strptime(
+            str(fecha).strip(), "%Y-%m-%d %H:%M:%S"
+        ).replace(tzinfo=URUGUAY_TZ)
+    except Exception:
+        return None
 
 try:
     respuesta_alerta = requests.get(URL_ALERTA, headers=HEADERS, timeout=30)
     print("Código respuesta advertencias:", respuesta_alerta.status_code)
     respuesta_alerta.raise_for_status()
 
-    soup_alerta = BeautifulSoup(respuesta_alerta.text, "html.parser")
-    texto_alerta = re.sub(r"\s+", " ", soup_alerta.get_text(" ", strip=True))
+    bruto_alerta = extraer_objeto_js_variable(respuesta_alerta.text, "alerta")
+    print("Objeto alerta detectado:", bool(bruto_alerta))
 
-    sin_advertencia = re.search(
-        r"No\s+hay\s+advertencia\s+meteorol[oó]gica\s+vigente",
-        texto_alerta,
-        re.IGNORECASE,
-    )
-
-    if sin_advertencia:
-        alert = {"active": False}
-        print("Advertencia INUMET: no hay advertencia meteorológica vigente.")
+    if not bruto_alerta:
+        alert = {"active": False, "source_error": "alerta_object_not_found"}
+        print("Advertencia INUMET: no se encontró el objeto de datos.")
     else:
-        # Hay indicios de una advertencia activa, pero en esta primera etapa
-        # no publicamos datos que todavía no hayan sido validados.
-        alert = {
-            "active": True,
-            "status": "pending_validation"
-        }
-        print("Advertencia INUMET: posible advertencia vigente detectada.")
-        print("Se requiere validar nivel, fenómeno y área antes de mostrarla.")
+        try:
+            datos_alerta = json.loads(bruto_alerta)
+        except Exception as error_json:
+            datos_alerta = None
+            print("Error interpretando JSON de alerta:", error_json)
+
+        vigentes = []
+        ahora_local = datetime.now(URUGUAY_TZ)
+
+        if isinstance(datos_alerta, dict):
+            for adv in datos_alerta.get("advertencias") or []:
+                fin_dt = fecha_uruguay(adv.get("finalizacion"))
+                if fin_dt is not None and fin_dt < ahora_local:
+                    continue
+
+                nivel = nivel_advertencia(adv.get("riesgoFenomeno"))
+                if not nivel:
+                    continue
+
+                zonas = texto_zonas(adv.get("zonas"))
+                vigentes.append({
+                    "level": nivel,
+                    "phenomenon": adv.get("fenomeno"),
+                    "probability": adv.get("probabilidad"),
+                    "start": adv.get("comienzo"),
+                    "end": adv.get("finalizacion"),
+                    "description": adv.get("descripcion"),
+                    "zones": zonas,
+                    "risk": adv.get("riesgoFenomeno") or {},
+                })
+
+        if vigentes:
+            prioridad = {"amarilla": 2, "naranja": 3, "roja": 4}
+            vigentes.sort(
+                key=lambda x: prioridad.get(x.get("level"), 0),
+                reverse=True
+            )
+            principal = vigentes[0]
+            alert = {
+                "active": True,
+                "level": principal["level"],
+                "phenomenon": principal["phenomenon"],
+                "probability": principal["probability"],
+                "start": principal["start"],
+                "end": principal["end"],
+                "description": principal["description"],
+                "zones": principal["zones"],
+                "warnings": vigentes,
+                "updated": datos_alerta.get("fechaActualizacion")
+                    if isinstance(datos_alerta, dict) else None,
+                "pdf": datos_alerta.get("pdf")
+                    if isinstance(datos_alerta, dict) else None,
+            }
+            print("Advertencias INUMET vigentes:", len(vigentes))
+            for adv in vigentes:
+                print(
+                    "ALERTA", adv["level"].upper(), "|",
+                    adv.get("phenomenon"), "|",
+                    adv.get("start"), "->", adv.get("end")
+                )
+                print("ZONAS:", adv.get("zones"))
+        else:
+            alert = {"active": False}
+            print("Advertencia INUMET: no hay advertencias vigentes en el objeto oficial.")
 
 except Exception as error:
-    # Si INUMET no responde, no inventamos una advertencia.
-    alert = {
-        "active": False,
-        "check_error": True
-    }
+    alert = {"active": False, "check_error": True}
     print("Error consultando advertencias INUMET:", error)
 
 # =================================================
