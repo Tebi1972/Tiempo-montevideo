@@ -1,5 +1,5 @@
 {
-  "updated": "26/09/2026 12:16",
+  "updated": "26/09/2026 12:24",
   "current": {
     "temperature": 19.8,
     "station": "Prado",
@@ -474,9 +474,9 @@
           "date": "Sábado 26",
           "min": "12",
           "max": "21",
-          "morning": null,
+          "morning": "Algo nuboso y nuboso.",
           "evening": "Algo nuboso y nuboso.",
-          "wind": "SE al E 20-40 km/h, rachas de 50 km/h. ",
+          "wind": "sector E 10-30 km/h. SE al E 20-40 km/h, rachas de 50 km/h.",
           "rain": "No indicada"
         },
         {
@@ -485,7 +485,7 @@
           "max": "22",
           "morning": "Nuboso.",
           "evening": "Nuboso y cubierto. Probables precipitaciones y tormentas hacia la noche.",
-          "wind": "E y NE 20-40 km/h, rachas de 50 km/h. E y NE 20-40 km/h. ",
+          "wind": "E y NE 20-40 km/h, rachas de 50 km/h. E y NE 20-40 km/h.",
           "rain": "Precipitaciones"
         },
         {
@@ -494,7 +494,199 @@
           "max": "21",
           "morning": "Nuboso y cubierto. Chaparrones.",
           "evening": "Nuboso y cubierto. Chaparrones.",
-          "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h. Pronóstico extendido: Última Actualización: 26/09/2026 12:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+          "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h.",
+          "rain": "Precipitaciones"
+        }
+      ]
+    },
+    "NW": {
+      "name": "Noroeste",
+      "days": [
+        {
+          "date": "Sábado 26",
+          "min": "16",
+          "max": "33",
+          "morning": "Nuboso, períodos de cubierto. Probable formación de tormentas aisladas.",
+          "evening": "Aumento de nubosidad. Desmejorando con precipitaciones y tormentas",
+          "wind": "Sector E 10-30 km/h. Sector E 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas.",
+          "rain": "Precipitaciones"
+        },
+        {
+          "date": "Domingo 27",
+          "min": "15",
+          "max": "26",
+          "morning": "Nuboso y cubierto. Precipitaciones y tormentas. Neblinas y bancos de niebla.",
+          "evening": "Nuboso y cubierto. Precipitaciones y tormentas. Mejoras temporarias. Neblinas.",
+          "wind": "Sector E 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas. E y NE 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas.",
+          "rain": "Precipitaciones"
+        },
+        {
+          "date": "Lunes 28",
+          "min": "16",
+          "max": "27",
+          "morning": "Cubierto. Precipitaciones y tormentas. Neblinas.",
+          "evening": "Cubierto. Precipitaciones y tormentas.",
+          "wind": "Sector E 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas. Sector E 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas.",
+          "rain": "Precipitaciones"
+        }
+      ]
+    },
+    "NE": {
+      "name": "Noreste",
+      "days": [
+        {
+          "date": "Sábado 26",
+          "min": "14",
+          "max": "27",
+          "morning": "Nuboso, períodos de cubierto. Probable formación de tormentas aisladas. Neblinas y bancos de niebla.",
+          "evening": "Aumento de nubosidad. Desmejorando con precipitaciones y tormentas",
+          "wind": "SE y E 10-30 km/h. Períodos de variables 0-10 km/h. Sector E 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas.",
+          "rain": "Precipitaciones"
+        },
+        {
+          "date": "Domingo 27",
+          "min": "12",
+          "max": "21",
+          "morning": "Nuboso y cubierto. Precipitaciones y tormentas. Neblinas y bancos de niebla.",
+          "evening": "Nuboso y cubierto. Precipitaciones y tormentas. Mejoras temporarias. Neblinas.",
+          "wind": "Sector E 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas. Sector E 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas.",
+          "rain": "Precipitaciones"
+        },
+        {
+          "date": "Lunes 28",
+          "min": "14",
+          "max": "25",
+          "morning": "Cubierto. Precipitaciones y tormentas. Neblinas.",
+          "evening": "Cubierto. Precipitaciones y tormentas. Neblinas.",
+          "wind": "Sector E 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas. Sector E 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas.",
+          "rain": "Precipitaciones"
+        }
+      ]
+    },
+    "SO": {
+      "name": "Suroeste",
+      "days": [
+        {
+          "date": "Sábado 26",
+          "min": "12",
+          "max": "27",
+          "morning": "Algo nuboso y nuboso.",
+          "evening": "Algo nuboso y nuboso. Precipitaciones y probables tormentas. Ventoso en zonas costeras.",
+          "wind": "SE y E 20-30 km/h. Sector E 20-40 km/h, rachas de 50-60 km/h en zonas costeras.",
+          "rain": "Precipitaciones"
+        },
+        {
+          "date": "Domingo 27",
+          "min": "11",
+          "max": "23",
+          "morning": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Neblinas.",
+          "evening": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Mejoras temporarias. Neblinas.",
+          "wind": "E y NE 20-40 km/h, rachas de 50 km/h. E y NE 20-40 km/h. Probables rachas fuertes asociadas a tormentas.",
+          "rain": "Precipitaciones"
+        },
+        {
+          "date": "Lunes 28",
+          "min": "15",
+          "max": "24",
+          "morning": "Nuboso y cubierto. Precipitaciones y probables tormentas. Mejoras temporarias.",
+          "evening": "Nuboso y cubierto. Precipitaciones y probables tormentas. Mejoras temporarias.",
+          "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h.",
+          "rain": "Precipitaciones"
+        }
+      ]
+    },
+    "C": {
+      "name": "Centro-Sur",
+      "days": [
+        {
+          "date": "Sábado 26",
+          "min": "10",
+          "max": "25",
+          "morning": "Algo nuboso y nuboso.",
+          "evening": "Algo nuboso y nuboso. Baja probabilidad de precipitaciones.",
+          "wind": "SE y E 10-30 km/h, rachas de hasta 40-50 km/h. Sector E 20-40 km/h, rachas de 50 km/h.",
+          "rain": "Precipitaciones"
+        },
+        {
+          "date": "Domingo 27",
+          "min": "9",
+          "max": "22",
+          "morning": "Nuboso y cubierto. Probables precipitaciones y tormentas.",
+          "evening": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Mejoras temporarias. Neblinas.",
+          "wind": "E y NE 20-40 km/h, rachas de 50 km/h. E y NE 20-40 km/h, rachas de  50 km/h. Probables rachas fuertes asociadas a tormentas.",
+          "rain": "Precipitaciones"
+        },
+        {
+          "date": "Lunes 28",
+          "min": "12",
+          "max": "23",
+          "morning": "Nuboso y cubierto. Chaparrones. Mejoras temporarias.",
+          "evening": "Nuboso y cubierto. Precipitaciones y probables tormentas. Mejoras temporarias.",
+          "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h.",
+          "rain": "Precipitaciones"
+        }
+      ]
+    },
+    "E": {
+      "name": "Este",
+      "days": [
+        {
+          "date": "Sábado 26",
+          "min": "9",
+          "max": "24",
+          "morning": "Algo nuboso y nuboso. Probable formación de tormentas aisladas. Neblinas y bancos de niebla.",
+          "evening": "Algo nuboso y nuboso. Neblinas.",
+          "wind": "Sector E 10-20 km/h. Períodos de variables 0-10 km/h. Sector E 10-30 km/h, rachas de 40 km/h en zonas costeras.",
+          "rain": "Precipitaciones"
+        },
+        {
+          "date": "Domingo 27",
+          "min": "7",
+          "max": "19",
+          "morning": "Nuboso. Neblinas y bancos de niebla.",
+          "evening": "Nuboso y cubierto. Precipitaciones y probables tormentas. Mejoras temporarias. Neblinas.",
+          "wind": "E al NE 20-40 km/h, rachas de 50 km/h. NE y E 20-40 km/h, rachas de 50 km/h.",
+          "rain": "Precipitaciones"
+        },
+        {
+          "date": "Lunes 28",
+          "min": "12",
+          "max": "21",
+          "morning": "Nuboso y cubierto. Chaparrones. Mejoras temporarias. Neblinas.",
+          "evening": "Nuboso y cubierto. Chaparrones. Mejoras temporarias. Neblinas.",
+          "wind": "Sector E 20-40 km/h, rachas de 50 km/h. Sector E 20-40 km/h, rachas de 50 km/h.",
+          "rain": "Precipitaciones"
+        }
+      ]
+    },
+    "PE": {
+      "name": "Punta del Este",
+      "days": [
+        {
+          "date": "Sábado 26",
+          "min": "12",
+          "max": "17",
+          "morning": "Algo nuboso y nuboso. Neblinas.",
+          "evening": "Algo nuboso y nuboso.",
+          "wind": "SE y E 10-20 km/h. Sector E 20-30 km/h, rachas de hasta 40 km/h.",
+          "rain": "No indicada"
+        },
+        {
+          "date": "Domingo 27",
+          "min": "11",
+          "max": "14",
+          "morning": "Nuboso.",
+          "evening": "Nuboso y cubierto. Probables precipitaciones y tormentas hacia la noche.",
+          "wind": "E y NE 20-40 km/h, rachas de 50 km/h. E y NE 20-40 km/h, rachas de 50 km/h.",
+          "rain": "Precipitaciones"
+        },
+        {
+          "date": "Lunes 28",
+          "min": "13",
+          "max": "16",
+          "morning": "Nuboso y cubierto. Chaparrones.",
+          "evening": "Nuboso y cubierto. Chaparrones.",
+          "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h.",
           "rain": "Precipitaciones"
         }
       ]
