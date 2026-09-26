@@ -1,5 +1,5 @@
 {
-  "updated": "26/09/2026 12:05",
+  "updated": "26/09/2026 12:10",
   "current": {
     "temperature": 18.9,
     "station": "Prado",
@@ -35,7 +35,8 @@
         "CIRRUS (CI)",
         "CIRRUS (CI)"
       ],
-      "wind_speed_kmh": 12.2
+      "wind_speed_kmh": 12.2,
+      "forecast_zone": "M"
     },
     "montevideo_carrasco": {
       "temperature": 17.2,
@@ -53,7 +54,8 @@
         "NIMBOSTRATUS (NS)",
         "STRATOCUMULUS (SC)"
       ],
-      "wind_speed_kmh": 27.7
+      "wind_speed_kmh": 27.7,
+      "forecast_zone": "M"
     },
     "artigas": {
       "temperature": 28.4,
@@ -71,7 +73,8 @@
         "CIRRUS (CI)",
         "NIMBOSTRATUS (NS)"
       ],
-      "wind_speed_kmh": 17.3
+      "wind_speed_kmh": 17.3,
+      "forecast_zone": "NW"
     },
     "bella_union": {
       "temperature": 29.83,
@@ -85,7 +88,8 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 14.0
+      "wind_speed_kmh": 14.0,
+      "forecast_zone": "NW"
     },
     "colonia": {
       "temperature": 18.4,
@@ -103,7 +107,8 @@
         "ALTOSTRATUS (AS)",
         "STRATOCUMULUS (SC)"
       ],
-      "wind_speed_kmh": 22.0
+      "wind_speed_kmh": 22.0,
+      "forecast_zone": "SO"
     },
     "durazno": {
       "temperature": 19.3,
@@ -121,7 +126,8 @@
         "NIMBOSTRATUS (NS)",
         "NIMBOSTRATUS (NS)"
       ],
-      "wind_speed_kmh": 28.1
+      "wind_speed_kmh": 28.1,
+      "forecast_zone": "C"
     },
     "florida": {
       "temperature": 20.5,
@@ -139,7 +145,8 @@
         "STRATUS (ST)",
         "NIMBOSTRATUS (NS)"
       ],
-      "wind_speed_kmh": 27.7
+      "wind_speed_kmh": 27.7,
+      "forecast_zone": "C"
     },
     "laguna_del_sauce": {
       "temperature": 19.4,
@@ -157,7 +164,8 @@
         "NIMBOSTRATUS (NS)",
         "CIRROCUMULUS (CC)"
       ],
-      "wind_speed_kmh": 14.0
+      "wind_speed_kmh": 14.0,
+      "forecast_zone": "E"
     },
     "lavalleja": {
       "temperature": 20.6,
@@ -171,7 +179,8 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 16.6
+      "wind_speed_kmh": 16.6,
+      "forecast_zone": "E"
     },
     "melilla": {
       "temperature": 19.3,
@@ -189,7 +198,8 @@
         "CIRRUS (CI)",
         "CIRROCUMULUS (CC)"
       ],
-      "wind_speed_kmh": 27.7
+      "wind_speed_kmh": 27.7,
+      "forecast_zone": "M"
     },
     "melo": {
       "temperature": 18.9,
@@ -207,7 +217,8 @@
         "STRATUS (ST)",
         "STRATOCUMULUS (SC)"
       ],
-      "wind_speed_kmh": 24.1
+      "wind_speed_kmh": 24.1,
+      "forecast_zone": "NE"
     },
     "mercedes": {
       "temperature": 22.2,
@@ -225,7 +236,8 @@
         "CUMULUS (CU)",
         "CIRRUS (CI)"
       ],
-      "wind_speed_kmh": 26.3
+      "wind_speed_kmh": 26.3,
+      "forecast_zone": "SO"
     },
     "paysandu": {
       "temperature": 24.5,
@@ -239,7 +251,8 @@
       "present_weather": null,
       "cloud_amount": "0",
       "cloud_types": [],
-      "wind_speed_kmh": 26.3
+      "wind_speed_kmh": 26.3,
+      "forecast_zone": "NW"
     },
     "punta_del_este": {
       "temperature": 15.23,
@@ -257,7 +270,8 @@
         "CUMULUS (CU)",
         "ALTOSTRATUS (AS)"
       ],
-      "wind_speed_kmh": 12.2
+      "wind_speed_kmh": 12.2,
+      "forecast_zone": "PE"
     },
     "rocha": {
       "temperature": 18.5,
@@ -275,7 +289,8 @@
         "CIRRUS (CI)",
         "NIMBOSTRATUS (NS)"
       ],
-      "wind_speed_kmh": 11.9
+      "wind_speed_kmh": 11.9,
+      "forecast_zone": "E"
     },
     "salto": {
       "temperature": 27.4,
@@ -293,7 +308,8 @@
         "CIRRUS (CI)",
         "NIMBOSTRATUS (NS)"
       ],
-      "wind_speed_kmh": 18.0
+      "wind_speed_kmh": 18.0,
+      "forecast_zone": "NW"
     },
     "san_jose": {
       "temperature": 19.79,
@@ -311,7 +327,8 @@
         "ALTOCUMULUS (AC)",
         "CUMULUS (CU)"
       ],
-      "wind_speed_kmh": 20.2
+      "wind_speed_kmh": 20.2,
+      "forecast_zone": "SO"
     },
     "atlantida": {
       "temperature": 17.3,
@@ -325,7 +342,8 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 10.8
+      "wind_speed_kmh": 10.8,
+      "forecast_zone": "M"
     },
     "paso_de_los_toros": {
       "temperature": 19.7,
@@ -339,7 +357,8 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 33.8
+      "wind_speed_kmh": 33.8,
+      "forecast_zone": "C"
     },
     "rivera_aeropuerto": {
       "temperature": 23.3,
@@ -353,7 +372,8 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 18.4
+      "wind_speed_kmh": 18.4,
+      "forecast_zone": "NE"
     },
     "san_jacinto": {
       "temperature": 20.2,
@@ -367,7 +387,8 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 21.6
+      "wind_speed_kmh": 21.6,
+      "forecast_zone": "M"
     },
     "tacuarembo": {
       "temperature": 21.8,
@@ -381,7 +402,8 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 25.9
+      "wind_speed_kmh": 25.9,
+      "forecast_zone": "NE"
     },
     "treinta_y_tres": {
       "temperature": 20.2,
@@ -395,7 +417,8 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 22.0
+      "wind_speed_kmh": 22.0,
+      "forecast_zone": "E"
     },
     "trinidad": {
       "temperature": 19.21,
@@ -409,7 +432,8 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 25.6
+      "wind_speed_kmh": 25.6,
+      "forecast_zone": "C"
     },
     "vichadero": {
       "temperature": 20.46,
@@ -423,7 +447,8 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 29.5
+      "wind_speed_kmh": 29.5,
+      "forecast_zone": "NE"
     },
     "young": {
       "temperature": 22.7,
@@ -437,7 +462,42 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 33.1
+      "wind_speed_kmh": 33.1,
+      "forecast_zone": "NW"
+    }
+  },
+  "forecasts": {
+    "M": {
+      "name": "Área Metropolitana",
+      "days": [
+        {
+          "date": "Sábado 26",
+          "min": "12",
+          "max": "21",
+          "morning": null,
+          "evening": "Algo nuboso y nuboso.",
+          "wind": "SE al E 20-40 km/h, rachas de 50 km/h. ",
+          "rain": "No indicada"
+        },
+        {
+          "date": "Domingo 27",
+          "min": "10",
+          "max": "22",
+          "morning": "Nuboso.",
+          "evening": "Nuboso y cubierto. Probables precipitaciones y tormentas hacia la noche.",
+          "wind": "E y NE 20-40 km/h, rachas de 50 km/h. E y NE 20-40 km/h. ",
+          "rain": "Precipitaciones"
+        },
+        {
+          "date": "Lunes 28",
+          "min": "15",
+          "max": "21",
+          "morning": "Nuboso y cubierto. Chaparrones.",
+          "evening": "Nuboso y cubierto. Chaparrones.",
+          "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h. Pronóstico extendido: Última Actualización: 26/09/2026 12:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+          "rain": "Precipitaciones"
+        }
+      ]
     }
   },
   "days": [
