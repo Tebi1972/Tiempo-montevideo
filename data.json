@@ -1,5 +1,5 @@
 {
-  "updated": "26/09/2026 19:58",
+  "updated": "26/09/2026 20:05",
   "current": {
     "temperature": 15.6,
     "station": "Prado",
@@ -162,15 +162,11 @@
       "latitude": -33.350522,
       "longitude": -56.4972385,
       "observation_time": "2026-09-26T22:00:00Z",
-      "condition": "partly",
+      "condition": "neutral",
       "condition_time": "2026-09-26T21:50:00Z",
       "present_weather": null,
-      "cloud_amount": "6 OKTAS",
-      "cloud_types": [
-        "CIRRUS (CI)",
-        "NIMBOSTRATUS (NS)",
-        "CIRRUS (CI)"
-      ],
+      "cloud_amount": null,
+      "cloud_types": [],
       "wind_speed_kmh": 21.6,
       "forecast_zone": "C"
     },
@@ -181,15 +177,11 @@
       "latitude": -34.086325,
       "longitude": -56.18795,
       "observation_time": "2026-09-26T22:00:00Z",
-      "condition": "partly",
+      "condition": "neutral",
       "condition_time": "2026-09-26T21:50:00Z",
       "present_weather": null,
-      "cloud_amount": "6 OKTAS",
-      "cloud_types": [
-        "ALTOSTRATUS (AS)",
-        "STRATUS (ST)",
-        "NIMBOSTRATUS (NS)"
-      ],
+      "cloud_amount": null,
+      "cloud_types": [],
       "wind_speed_kmh": 16.9,
       "forecast_zone": "C"
     },
