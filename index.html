@@ -1875,21 +1875,98 @@ function coatAdvice(day) {
    ADVERTENCIA INUMET
    ========================================== */
 
+function normalizeAlertText(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function localityIsInWarning(warning, current) {
+  const station = normalizeAlertText(current?.station);
+  if (!station) return false;
+
+  const aliases = {
+    "prado": ["montevideo"],
+    "carrasco": ["montevideo"],
+    "melilla": ["montevideo"],
+    "rivera aeropuerto": ["rivera"],
+    "treinta y tres aeropuerto": ["treinta y tres"],
+    "laguna del sauce": ["laguna del sauce"],
+  };
+
+  const names = [station, ...(aliases[station] || [])];
+  const zonesRaw = String(warning?.zones || "");
+
+  /*
+    INUMET publica bloques del tipo:
+    "Artigas : Baltasar Brum, Bella Unión... Salto : Arapey..."
+    Para no pintar todo un departamento por error, buscamos la localidad
+    únicamente dentro de las listas que siguen a ":".
+  */
+  const lists = zonesRaw
+    .split(/(?=[A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]+\s*:)/)
+    .map(part => {
+      const colon = part.indexOf(":");
+      return colon >= 0 ? part.slice(colon + 1) : part;
+    });
+
+  const normalizedLists = normalizeAlertText(lists.join(" | "));
+
+  return names.some(name => {
+    const n = normalizeAlertText(name);
+    if (!n) return false;
+    const escaped = n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`, "i")
+      .test(normalizedLists);
+  });
+}
+
 function renderAlert(data) {
   const box = document.getElementById("weatherAlert");
   if (!box) return;
 
-  const alert = data?.alert;
+  const current = selectedCurrent(data);
+  const rootAlert = data?.alert;
 
-  /* pending_validation nunca se muestra al usuario. */
-  if (!alert || alert.active !== true || alert.status === "pending_validation") {
+  if (!rootAlert || rootAlert.active !== true) {
     box.className = "alertCard";
     box.innerHTML = "";
     return;
   }
 
-  const level = String(alert.level || "").toLowerCase();
-  if (!["yellow", "orange", "red"].includes(level)) {
+  const warnings = Array.isArray(rootAlert.warnings) && rootAlert.warnings.length
+    ? rootAlert.warnings
+    : [rootAlert];
+
+  const applicable = warnings.filter(w => localityIsInWarning(w, current));
+
+  if (!applicable.length) {
+    box.className = "alertCard";
+    box.innerHTML = "";
+    return;
+  }
+
+  const priority = { amarilla: 2, naranja: 3, roja: 4, yellow: 2, orange: 3, red: 4 };
+  applicable.sort((a, b) =>
+    (priority[normalizeAlertText(b.level)] || 0) -
+    (priority[normalizeAlertText(a.level)] || 0)
+  );
+
+  const warning = applicable[0];
+  const rawLevel = normalizeAlertText(warning.level);
+  const cssLevel = {
+    amarilla: "yellow",
+    naranja: "orange",
+    roja: "red",
+    yellow: "yellow",
+    orange: "orange",
+    red: "red"
+  }[rawLevel];
+
+  if (!cssLevel) {
     box.className = "alertCard";
     box.innerHTML = "";
     return;
@@ -1901,16 +1978,25 @@ function renderAlert(data) {
     red: "🔴 ADVERTENCIA ROJA"
   };
 
-  const title = alert.title ? `<div class="alertText">${esc(alert.title)}</div>` : "";
-  const area = alert.area ? `<div class="alertText">${esc(alert.area)}</div>` : "";
-  const expires = alert.expires ? `<div class="alertText">Vigente hasta: ${esc(alert.expires)}</div>` : "";
+  const phenomenon = warning.phenomenon
+    ? `<div class="alertText">${esc(warning.phenomenon)}</div>` : "";
 
-  box.className = `alertCard visible ${level}`;
+  const description = warning.description
+    ? `<div class="alertText">${esc(warning.description)}</div>` : "";
+
+  const end = warning.end
+    ? `<div class="alertText">Vigente hasta: ${esc(warning.end)}</div>` : "";
+
+  const station = current?.station
+    ? `<div class="alertText">${esc(current.station)}</div>` : "";
+
+  box.className = `alertCard visible ${cssLevel}`;
   box.innerHTML = `
-    <div class="alertTitle">${labels[level]}</div>
-    ${title}
-    ${area}
-    ${expires}
+    <div class="alertTitle">${labels[cssLevel]}</div>
+    ${phenomenon}
+    ${station}
+    ${end}
+    ${description}
     <a class="alertLink"
        href="https://www.inumet.gub.uy/alerta"
        target="_blank"
