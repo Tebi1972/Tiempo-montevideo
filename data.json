@@ -1,5 +1,5 @@
 {
-  "updated": "27/09/2026 21:38",
+  "updated": "27/09/2026 22:07",
   "current": {
     "temperature": 15.9,
     "station": "Prado",
@@ -102,21 +102,18 @@
       "forecast_zone": "M"
     },
     "montevideo_carrasco": {
-      "temperature": 15.7,
+      "temperature": null,
       "station": "Carrasco",
       "wigos": "0-20000-0-86580",
       "latitude": -34.832923,
       "longitude": -56.012876,
-      "observation_time": "2026-09-27T23:00:00Z",
-      "condition": "rainy",
-      "condition_time": "2026-09-27T23:00:00Z",
-      "present_weather": "RAIN, NOT FREEZING, INTERMITTENT",
-      "cloud_amount": "1 OKTA OR LESS, BUT NOT ZERO",
-      "cloud_types": [
-        "NIMBOSTRATUS (NS)",
-        "STRATUS (ST)"
-      ],
-      "wind_speed_kmh": 22.3,
+      "observation_time": null,
+      "condition": "neutral",
+      "condition_time": null,
+      "present_weather": null,
+      "cloud_amount": null,
+      "cloud_types": [],
+      "wind_speed_kmh": null,
       "forecast_zone": "M"
     },
     "artigas": {
@@ -397,18 +394,18 @@
       "forecast_zone": "NE"
     },
     "san_jacinto": {
-      "temperature": 14.9,
+      "temperature": 15.2,
       "station": "San Jacinto",
       "wigos": "0-858-0-A000000000000002",
       "latitude": -34.5145,
       "longitude": -55.8464,
-      "observation_time": "2026-09-27T23:00:00Z",
+      "observation_time": "2026-09-28T00:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-27T22:50:00Z",
+      "condition_time": "2026-09-27T23:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 42.8,
+      "wind_speed_kmh": 22.7,
       "forecast_zone": "M"
     },
     "tacuarembo": {
