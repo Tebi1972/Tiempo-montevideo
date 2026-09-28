@@ -474,10 +474,12 @@ def observacion_vacia(meta):
         "temperature": None, "station": nombre, "wigos": wigos,
         "latitude": lat, "longitude": lon, "observation_time": None,
         "condition": "neutral", "condition_time": None,
+        "condition_source": None,
         "present_weather": None, "cloud_amount": None,
         "cloud_types": [], "wind_speed_kmh": None,
         "humidity": None, "pressure_hpa": None,
         "dewpoint_c": None, "feels_like_c": None,
+        "precipitation_recent_mm": None,
     }
 
 def construir_observacion(meta, registros, ahora):
@@ -501,7 +503,10 @@ def construir_observacion(meta, registros, ahora):
     }
     recientes = []
     for p in registros:
-        if p.get("name") not in nombres:
+        nombre_variable = str(p.get("name") or "")
+        # Algunas estaciones automáticas no reportan estado del cielo, pero sí
+        # precipitación reciente. La conservamos para reconocer lluvia observada.
+        if p.get("name") not in nombres and "precipitation" not in nombre_variable.lower():
             continue
         hora = instante(p)
         edad = edad_horas(hora, ahora)
@@ -531,6 +536,13 @@ def construir_observacion(meta, registros, ahora):
     pressure_msl = ultimo("pressure_reduced_to_mean_sea_level")
     pressure_station = ultimo("non_coordinate_pressure")
     dewpoint = ultimo("dewpoint_temperature")
+    precip_recent = [
+        p for p in recientes
+        if "precipitation" in str(p.get("name") or "").lower()
+        and "past24" not in str(p.get("name") or "").lower()
+        and p.get("value") is not None
+    ]
+    precip_recent.sort(key=instante, reverse=True)
 
     wd = [str(p.get("description") or "") for p in weather]
     cd = [str(p.get("description") or "") for p in clouds]
@@ -563,6 +575,14 @@ def construir_observacion(meta, registros, ahora):
         except (TypeError, ValueError):
             pass
 
+    if precip_recent:
+        try:
+            # Usamos el registro de precipitación reciente más nuevo. No usamos
+            # el acumulado de 24 h para decidir el estado meteorológico actual.
+            out["precipitation_recent_mm"] = round(float(precip_recent[0]["value"]), 1)
+        except (TypeError, ValueError):
+            pass
+
     # Sensación térmica / temperatura aparente (Steadman, sin radiación solar).
     # AT = T + 0.33*e - 0.70*ws - 4.00
     # e = RH/100 * 6.105 * exp(17.27*T/(237.7+T))
@@ -584,11 +604,19 @@ def construir_observacion(meta, registros, ahora):
 
     if any(x in weather_text for x in ("THUNDER", "LIGHTNING")):
         out["condition"] = "stormy"
+        out["condition_source"] = "observed"
     elif any(x in weather_text for x in
              ("RAIN", "DRIZZLE", "SHOWER", "PRECIPIT", "HAIL", "SNOW")):
         out["condition"] = "rainy"
+        out["condition_source"] = "observed"
     elif any(x in weather_text for x in ("FOG", "MIST")):
         out["condition"] = "cloudy"
+        out["condition_source"] = "observed"
+    elif out.get("precipitation_recent_mm") is not None and out["precipitation_recent_mm"] > 0:
+        # Respaldo especialmente útil en estaciones automáticas sin sensor/código
+        # de nubosidad: si está midiendo precipitación reciente, sí podemos afirmar lluvia.
+        out["condition"] = "rainy"
+        out["condition_source"] = "observed_precipitation"
     else:
         oktas = [int(x) for x in re.findall(r"(\d+)\s*OKTAS?", cloud_text)]
         cobertura = max(oktas) if oktas else None
@@ -608,6 +636,7 @@ def construir_observacion(meta, registros, ahora):
                 "partly" if cobertura >= 3 else
                 "sunny"
             )
+            out["condition_source"] = "observed"
     return out
 
 locations = {k: observacion_vacia(v) for k, v in ESTACIONES.items()}
@@ -650,7 +679,7 @@ try:
         locations[key] = construir_observacion(meta, registros[key], ahora)
         locations[key]["forecast_zone"] = FORECAST_ZONE_BY_LOCATION.get(key, "M")
         o = locations[key]
-        print(key, o["temperature"], o["condition"], o["wind_speed_kmh"])
+        print(key, o["temperature"], o["condition"], o.get("condition_source"), o["wind_speed_kmh"], "precip", o.get("precipitation_recent_mm"))
 
 except Exception as error:
     print("Error obteniendo observaciones nacionales:", error)
