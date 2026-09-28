@@ -1080,6 +1080,94 @@ a {
   margin-top:6px;
 }
 
+
+/* ===== Cabecera compacta / jerarquía visual V1 ===== */
+.topControls {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-top:10px;
+}
+.headerMeta {
+  margin-top:7px;
+  font-size:.84rem;
+  line-height:1.35;
+  color:var(--muted);
+}
+.currentHero {
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:16px;
+  align-items:center;
+}
+.currentHeroText {
+  min-width:0;
+}
+.currentHero .conditionTitle {
+  margin:0 0 3px;
+}
+.currentHero .currentSecondary {
+  margin-top:5px;
+  color:var(--muted);
+}
+
+@media (max-width:640px) {
+  .wrap {
+    padding-top:12px;
+  }
+  .eyebrow {
+    margin-bottom:3px;
+    font-size:.78rem;
+  }
+  h1 {
+    font-size:2rem;
+    line-height:1.05;
+    margin:0 0 10px;
+  }
+  .locationBar {
+    gap:8px;
+    margin-bottom:5px;
+  }
+  .locationSelect {
+    padding:10px 12px;
+    border-radius:13px;
+  }
+  .locationGeoButton {
+    padding:10px 11px;
+    border-radius:13px;
+  }
+  #locationNote {
+    margin-top:4px !important;
+    font-size:.76rem !important;
+    line-height:1.3;
+  }
+  .alertCard.visible {
+    margin-top:12px;
+    margin-bottom:12px;
+  }
+  .card {
+    border-radius:24px;
+  }
+  .mainCard {
+    padding:18px !important;
+  }
+  .currentHero {
+    gap:12px;
+  }
+  .currentHero .weatherIcon {
+    transform:scale(.9);
+    transform-origin:center;
+  }
+  .conditionTitle {
+    font-size:1.35rem !important;
+    line-height:1.12;
+  }
+  .currentTemp {
+    font-size:2.55rem !important;
+    line-height:1;
+  }
+}
+
 </style>
 </head>
 
@@ -1573,7 +1661,7 @@ function updateLocationHeading(data) {
   }
   if (notice) {
     notice.textContent =
-      `Condiciones actuales según estación INUMET. Pronóstico de tres días: ${viewData.selectedForecastName}.`;
+      `Datos de estación INUMET · Pronóstico: ${viewData.selectedForecastName}.`;
   }
 }
 
