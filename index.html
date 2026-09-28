@@ -2400,10 +2400,10 @@ function localityIsInWarning(warning, current) {
       const listStart = matches[i].index + matches[i][0].length;
       const listEnd = i + 1 < matches.length ? matches[i + 1].index : zonesRaw.length;
       const listText = zonesRaw.slice(listStart, listEnd);
-      listText.split(",").forEach(item => addItem(item, department));
+      listText.split(/,|\s+y\s+/i).forEach(item => addItem(item, department));
     }
   } else {
-    zonesRaw.split(",").forEach(item => addItem(item));
+    zonesRaw.split(/,|\s+y\s+/i).forEach(item => addItem(item));
   }
 
   // Algunos "Departamento(Todo el departamento)" pueden quedar pegados al
