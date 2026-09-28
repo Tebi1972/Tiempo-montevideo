@@ -1476,6 +1476,93 @@ button[onclick="load()"]{width:100%;margin-top:2px;background:var(--glass);color
  .wrap{padding:14px 12px 26px}.appPanel{border-radius:23px;padding:16px}.currentPanel{grid-template-columns:1fr;gap:14px}.currentPrimary{grid-template-columns:92px 1fr}.currentBigIcon{font-size:72px}.currentBigTemp{font-size:3.75rem}.currentCondition{font-size:1.2rem}.currentStats{border-left:0;border-top:1px solid var(--border);padding:14px 0 0;grid-template-columns:1fr 1fr}.statRow{grid-template-columns:28px 1fr;gap:7px}.statValue{grid-column:2;text-align:left;margin-top:-5px}.panelTitle{font-size:1.2rem}.tempTiles,.periodTiles{gap:9px}.tempTile{border-radius:17px}.tempTile strong{font-size:2rem}.periodTile{border-radius:17px;padding:11px}.periodBody{grid-template-columns:48px 1fr}.periodIcon{font-size:36px}.periodText{font-size:.9rem}.detailStrip{grid-template-columns:1fr;padding:4px 16px}.detailCell{border-right:0;border-bottom:1px solid var(--border);padding:13px 0}.detailCell:last-child{border-bottom:0}.nextCards{grid-template-columns:repeat(3,1fr)}.nextCard{padding:12px 7px}.nextCardIcon{font-size:34px}.nextCardTemp{font-size:1rem}.nextCardText{font-size:.76rem}.adviceRow{grid-template-columns:1fr}.adviceCard{padding:15px}.locationBar{max-width:none}}
 @media(max-width:430px){.currentStats{grid-template-columns:1fr 1fr}.nextCards{grid-template-columns:1fr}.nextCard{display:grid;grid-template-columns:1fr 54px 1fr;align-items:center;text-align:left;border-right:0;border-bottom:1px solid rgba(21,52,91,.16)}.nextCard:last-child{border-bottom:0}.nextCardIcon{margin:0;text-align:center}.nextCardText{grid-column:3}.periodTiles{grid-template-columns:1fr}}
 
+
+
+/* ==========================================
+   V4.2 — COMPACTACIÓN MÓVIL
+   Mantiene intacta la lógica meteorológica.
+   ========================================== */
+@media (max-width:700px){
+  .wrap{padding:10px 10px 22px!important}
+  h1{font-size:1.72rem!important;line-height:1!important;margin:0 0 9px!important}
+  .locationBar{grid-template-columns:minmax(0,1fr) 44px!important;gap:7px!important;margin-bottom:5px!important}
+  .locationSelect,.locationPinButton{height:44px!important;border-radius:15px!important}
+  .locationPinButton{width:44px!important;min-width:44px!important}
+  #updated{margin:4px 2px 9px!important;font-size:.78rem!important}
+  .appPanel{border-radius:21px!important;margin:8px 0!important;padding:13px!important}
+
+  /* Actual: vuelve a dos zonas, como la maqueta objetivo */
+  .currentPanel{grid-template-columns:minmax(0,1.42fr) minmax(112px,.72fr)!important;gap:10px!important;align-items:center!important}
+  .currentPrimary{grid-template-columns:68px minmax(0,1fr)!important;gap:8px!important}
+  .currentBigIcon{font-size:54px!important}
+  .currentEyebrow{font-size:.64rem!important;line-height:1.15!important;white-space:nowrap}
+  .currentBigTemp{font-size:3.1rem!important;margin-top:5px!important;line-height:.9!important}
+  .currentCondition{font-size:.92rem!important;margin-top:7px!important;line-height:1.12!important}
+  .currentStats{border-top:0!important;border-left:1px solid var(--border)!important;padding:2px 0 2px 10px!important;display:grid!important;grid-template-columns:1fr!important;gap:7px!important}
+  .statRow{grid-template-columns:21px minmax(0,1fr)!important;gap:5px!important;align-items:center!important}
+  .statIcon{font-size:1rem!important}
+  .statLabel{font-size:.66rem!important;line-height:1.05!important}
+  .statValue{grid-column:2!important;text-align:left!important;margin-top:-3px!important;font-size:.78rem!important;line-height:1.05!important}
+
+  /* Pronóstico: menos altura */
+  .forecastPanel{padding:13px!important}
+  .panelTitleRow{margin-bottom:9px!important;align-items:center!important}
+  .panelTitle{font-size:1.04rem!important;line-height:1.05!important}
+  .panelDate{font-size:.78rem!important}
+  .tempTiles{gap:8px!important}
+  .tempTile{padding:8px 8px!important;border-radius:15px!important}
+  .tempTile span{font-size:.78rem!important}
+  .tempTile strong{font-size:1.7rem!important;margin-top:2px!important}
+  .periodTiles{grid-template-columns:1fr 1fr!important;gap:8px!important;margin-top:8px!important}
+  .periodTile{padding:8px!important;border-radius:15px!important}
+  .periodLabel{font-size:.76rem!important;margin-bottom:4px!important}
+  .periodBody{grid-template-columns:37px 1fr!important;gap:5px!important}
+  .periodIcon{font-size:29px!important}
+  .periodText{font-size:.72rem!important;line-height:1.22!important;font-weight:650!important}
+
+  /* Viento / lluvia / sol: una sola franja horizontal */
+  .detailStrip{grid-template-columns:1.15fr .9fr .9fr!important;padding:9px 5px!important;gap:0!important}
+  .detailCell{grid-template-columns:26px minmax(0,1fr)!important;gap:5px!important;padding:2px 8px!important;border-bottom:0!important;border-right:1px solid var(--border)!important;align-items:center!important;min-width:0}
+  .detailCell:last-child{border-right:0!important}
+  .detailIcon{font-size:1.35rem!important}
+  .detailLabel{font-size:.62rem!important;line-height:1.05!important}
+  .detailValue{font-size:.7rem!important;line-height:1.13!important;margin-top:2px!important;overflow-wrap:anywhere}
+  .detailSub{font-size:.62rem!important;line-height:1.1!important;margin-top:2px!important}
+
+  /* Próximos días: tres columnas siempre */
+  .nextPanel{padding:13px!important}
+  .nextPanel .panelTitleRow{margin-bottom:8px!important}
+  .nextCards{grid-template-columns:repeat(3,minmax(0,1fr))!important;border-radius:16px!important}
+  .nextCard{display:block!important;padding:8px 4px!important;text-align:center!important;border-right:1px solid rgba(21,52,91,.16)!important;border-bottom:0!important;min-width:0}
+  .nextCard:last-child{border-right:0!important}
+  .nextCardName{font-size:.7rem!important;white-space:nowrap}
+  .nextCardIcon{font-size:28px!important;margin:4px 0 1px!important;text-align:center!important}
+  .nextCardTemp{font-size:.76rem!important;white-space:nowrap}
+  .nextCardText{grid-column:auto!important;font-size:.61rem!important;line-height:1.1!important;margin-top:2px!important}
+
+  /* Consejos: dos tarjetas en una fila */
+  .adviceRow{grid-template-columns:1fr 1fr!important;gap:8px!important;margin:8px 0!important}
+  .adviceCard{grid-template-columns:38px minmax(0,1fr) 12px!important;gap:6px!important;padding:10px 9px!important;margin:0!important}
+  .adviceIcon{font-size:2rem!important}
+  .adviceQuestion{font-size:.72rem!important;line-height:1.05!important}
+  .adviceAnswer{font-size:.68rem!important;line-height:1.12!important;margin-top:3px!important}
+  .adviceArrow{font-size:1.25rem!important}
+  .footerActions{margin-top:8px!important;gap:8px!important}
+  .footerActions button{padding:7px 10px!important;font-size:.72rem!important}
+  .footer{font-size:.68rem!important}
+}
+
+@media (max-width:380px){
+  .currentPanel{grid-template-columns:minmax(0,1.5fr) minmax(102px,.7fr)!important}
+  .currentPrimary{grid-template-columns:58px minmax(0,1fr)!important}
+  .currentBigIcon{font-size:47px!important}
+  .currentBigTemp{font-size:2.72rem!important}
+  .currentEyebrow{font-size:.58rem!important}
+  .currentCondition{font-size:.82rem!important}
+  .detailCell{padding-left:5px!important;padding-right:5px!important}
+  .detailIcon{font-size:1.15rem!important}
+}
+
 </style>
 </head>
 
