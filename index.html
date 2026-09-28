@@ -2940,7 +2940,9 @@ function compactRainText(value) {
    CARGAR DATA.JSON
    ========================================== */
 
-async function load() {
+async function load(options = {}) {
+
+  const silent = Boolean(options && options.silent);
 
   try {
 
@@ -3177,6 +3179,14 @@ async function load() {
   catch(error) {
 
 
+    // Las actualizaciones automáticas son silenciosas: si hay un corte
+    // momentáneo de red conservamos en pantalla los últimos datos válidos.
+    if (silent && lastWeatherData) {
+      console.warn("No se pudo actualizar en segundo plano:", error);
+      return;
+    }
+
+
     document.getElementById(
       "updated"
     ).textContent =
@@ -3205,6 +3215,32 @@ async function load() {
   }
 }
 
+
+/* ==========================================
+   SINCRONIZACIÓN AUTOMÁTICA
+   ========================================== */
+
+// data.json es un archivo estático muy pequeño. Lo consultamos cada 5 minutos
+// para que una advertencia nueva pueda aparecer aunque la app quede abierta.
+// Esto NO consulta INUMET directamente ni ejecuta GitHub Actions.
+const AUTO_REFRESH_MS = 5 * 60 * 1000;
+let lastAutoRefreshAt = Date.now();
+
+setInterval(() => {
+  lastAutoRefreshAt = Date.now();
+  load({ silent: true });
+}, AUTO_REFRESH_MS);
+
+// En celulares el navegador puede pausar los temporizadores en segundo plano.
+// Al volver a la app, actualizamos si pasaron al menos 5 minutos.
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState !== "visible") return;
+  const now = Date.now();
+  if (now - lastAutoRefreshAt >= AUTO_REFRESH_MS) {
+    lastAutoRefreshAt = now;
+    load({ silent: true });
+  }
+});
 
 /* ==========================================
    INICIAR
