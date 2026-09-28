@@ -1051,6 +1051,29 @@ a {
   color:#172033;
   background:#fff;
 }
+
+.locationGeoButton {
+  flex:0 0 auto;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:11px 13px;
+  background:var(--glass);
+  color:var(--text);
+  font:inherit;
+  font-weight:800;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.locationGeoButton:disabled {
+  opacity:.65;
+  cursor:wait;
+}
+@media (max-width:640px) {
+  .locationBar { align-items:stretch; }
+  .locationSelect { max-width:none; min-width:0; }
+  .locationGeoButton { white-space:nowrap; }
+}
 .locationNote {
   font-size:12px;
   color:var(--muted);
@@ -1104,6 +1127,10 @@ a {
     <select id="locationSelect" class="locationSelect" aria-label="Seleccionar localidad">
       <option value="montevideo_prado">📍 Montevideo · Prado</option>
     </select>
+    <button id="useMyLocation" class="locationGeoButton" type="button"
+            title="Seleccionar la estación INUMET más cercana">
+      📍 Mi ubicación
+    </button>
   </div>
   <div class="locationNote" id="locationNote">
     Condiciones actuales y pronóstico de tres días según la localidad seleccionada.
@@ -1399,6 +1426,102 @@ function dataForSelectedLocation(data) {
     selectedForecastZone: zone,
     selectedForecastName: regional?.name || "Área Metropolitana"
   };
+}
+
+
+function distanceKm(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const toRad = deg => deg * Math.PI / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+    Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+
+function nearestLocation(data, latitude, longitude) {
+  const locations = data?.locations || {};
+  let best = null;
+
+  for (const [key, current] of Object.entries(locations)) {
+    const lat = Number(current?.latitude);
+    const lon = Number(current?.longitude);
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+
+    const km = distanceKm(latitude, longitude, lat, lon);
+    if (!best || km < best.km) {
+      best = { key, current, km };
+    }
+  }
+  return best;
+}
+
+function setupGeolocationButton(data) {
+  const button = document.getElementById("useMyLocation");
+  const note = document.getElementById("locationNote");
+  if (!button || button.dataset.ready) return;
+
+  button.addEventListener("click", () => {
+    if (!navigator.geolocation) {
+      if (note) note.textContent =
+        "Este navegador no permite obtener la ubicación.";
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = "📍 Buscando…";
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const best = nearestLocation(
+          lastWeatherData || data,
+          position.coords.latitude,
+          position.coords.longitude
+        );
+
+        button.disabled = false;
+        button.textContent = "📍 Mi ubicación";
+
+        if (!best) {
+          if (note) note.textContent =
+            "No pude encontrar una estación INUMET cercana.";
+          return;
+        }
+
+        selectedLocationKey = best.key;
+        localStorage.setItem("tiempoUY_location", selectedLocationKey);
+
+        if (note) {
+          note.textContent =
+            `Estación INUMET más cercana: ${locationDisplayName(best.key, best.current)} · ` +
+            `aprox. ${Math.round(best.km)} km.`;
+        }
+
+        load();
+      },
+      error => {
+        button.disabled = false;
+        button.textContent = "📍 Mi ubicación";
+
+        const messages = {
+          1: "Para usar esta función, permití el acceso a tu ubicación.",
+          2: "No se pudo determinar tu ubicación en este momento.",
+          3: "La búsqueda de ubicación demoró demasiado. Probá nuevamente."
+        };
+        if (note) note.textContent =
+          messages[error.code] || "No se pudo obtener tu ubicación.";
+      },
+      {
+        enableHighAccuracy: false,
+        timeout: 12000,
+        maximumAge: 10 * 60 * 1000
+      }
+    );
+  });
+
+  button.dataset.ready = "1";
 }
 
 function populateLocationSelector(data) {
@@ -2101,6 +2224,7 @@ async function load() {
 
     lastWeatherData = data;
     populateLocationSelector(data);
+    setupGeolocationButton(data);
 
     const selectedObservation = data?.locations?.[selectedLocationKey];
     ACTIVE_LAT = Number.isFinite(Number(selectedObservation?.latitude))
