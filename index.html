@@ -2540,10 +2540,15 @@ function applyWeatherTheme(data) {
   const body = document.body;
   body.className = "";
 
-  /* El entorno visual depende SOLO de la observación real. */
-  const condition = observedCondition(data);
+  /*
+     El entorno visual depende SOLO de la observación real.
+     Si la estación no informa el estado del cielo, NO usamos el pronóstico
+     para oscurecer, hacer llover o generar tormenta en el fondo. En ese caso
+     queda el ambiente neutro correspondiente a la fase solar.
+  */
+  const condition = rawObservedCondition(data);
   const valid = ["sunny", "partly", "cloudy", "rainy", "stormy"];
-  body.classList.add(valid.includes(condition) ? condition : "cloudy");
+  if (valid.includes(condition)) body.classList.add(condition);
 
   /* FASE SOLAR */
   const solarPhase = solarPhaseMontevideo();
