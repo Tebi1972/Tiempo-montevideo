@@ -1,5 +1,5 @@
 {
-  "updated": "28/09/2026 12:06",
+  "updated": "28/09/2026 12:09",
   "current": {
     "temperature": 17.5,
     "station": "Prado",
@@ -79,7 +79,7 @@
     "pdf": "adv1790607585470.pdf",
     "source": "inumet_alerta_object_v4",
     "source_timestamp": "2026-09-28T12:00:00-03:00",
-    "source_age_hours": 0.11,
+    "source_age_hours": 0.15,
     "homepage_says_active": true,
     "data_unavailable": false
   },
