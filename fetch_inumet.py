@@ -456,11 +456,12 @@ cloud_types = prado["cloud_types"]
 wind_speed_kmh = prado["wind_speed_kmh"]
 
 # =================================================
-# 3. ADVERTENCIAS METEOROLÓGICAS OFICIALES INUMET
+# 3. ADVERTENCIAS METEOROLÓGICAS OFICIALES INUMET - V3
 # =================================================
-# INUMET inserta en el HTML un objeto JavaScript llamado "alerta".
-# Leemos ese objeto directamente: contiene nivel, fenómeno, vigencia,
-# descripción y zonas afectadas.
+# La página /alerta puede quedar servida desde caché. Para evitar resultados
+# intermitentes hacemos varias consultas con cache-buster y elegimos el objeto
+# "alerta" más reciente. Solo marcamos active=False cuando la fuente obtenida
+# es coherente; los errores de lectura quedan diferenciados.
 
 URL_ALERTA = "https://www.inumet.gub.uy/alerta"
 alert = {"active": False}
@@ -524,137 +525,81 @@ def texto_zonas(zonas):
     ).strip()
 
 def fecha_uruguay(fecha):
-    # Formato observado en INUMET: YYYY-MM-DD HH:MM:SS
+    if not fecha:
+        return None
+    texto = str(fecha).strip()
+    formatos = (
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d %H:%M",
+        "%d/%m/%Y %H:%M:%S",
+        "%d/%m/%Y %H:%M",
+    )
+    for formato in formatos:
+        try:
+            return datetime.strptime(texto, formato).replace(tzinfo=URUGUAY_TZ)
+        except ValueError:
+            pass
     try:
-        return datetime.strptime(
-            str(fecha).strip(), "%Y-%m-%d %H:%M:%S"
-        ).replace(tzinfo=URUGUAY_TZ)
+        dt = datetime.fromisoformat(texto.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=URUGUAY_TZ)
+        return dt.astimezone(URUGUAY_TZ)
     except Exception:
         return None
 
-try:
-    respuesta_alerta = requests.get(URL_ALERTA, headers=HEADERS, timeout=30)
-    print("Código respuesta advertencias:", respuesta_alerta.status_code)
-    respuesta_alerta.raise_for_status()
+def fecha_objeto_alerta(datos):
+    candidatos = [
+        datos.get("fechaActualizacion"),
+        datos.get("actualizacion"),
+        datos.get("updated"),
+    ]
+    fechas = [fecha_uruguay(x) for x in candidatos]
+    fechas = [x for x in fechas if x is not None]
 
-    bruto_alerta = extraer_objeto_js_variable(respuesta_alerta.text, "alerta")
-    print("Objeto alerta detectado:", bool(bruto_alerta))
+    for adv in datos.get("advertencias") or []:
+        for campo in ("actualizacion", "comienzo", "finalizacion"):
+            dt = fecha_uruguay(adv.get(campo))
+            if dt is not None:
+                fechas.append(dt)
 
-    if not bruto_alerta:
-        alert = {"active": False, "source_error": "alerta_object_not_found"}
-        print("Advertencia INUMET: no se encontró el objeto de datos.")
-    else:
+    return max(fechas) if fechas else datetime(1970, 1, 1, tzinfo=URUGUAY_TZ)
+
+def descargar_objeto_alerta():
+    candidatos = []
+    errores = []
+
+    headers_alerta = dict(HEADERS)
+    headers_alerta.update({
+        "Cache-Control": "no-cache, no-store, max-age=0",
+        "Pragma": "no-cache",
+        "Expires": "0",
+    })
+
+    # Tres lecturas independientes para reducir respuestas viejas de caché/CDN.
+    for intento in range(1, 4):
         try:
-            datos_alerta = json.loads(bruto_alerta)
-        except Exception as error_json:
-            datos_alerta = None
-            print("Error interpretando JSON de alerta:", error_json)
-
-        vigentes = []
-        ahora_local = datetime.now(URUGUAY_TZ)
-
-        if isinstance(datos_alerta, dict):
-            for adv in datos_alerta.get("advertencias") or []:
-                fin_dt = fecha_uruguay(adv.get("finalizacion"))
-                if fin_dt is not None and fin_dt < ahora_local:
-                    continue
-
-                nivel = nivel_advertencia(adv.get("riesgoFenomeno"))
-                if not nivel:
-                    continue
-
-                zonas = texto_zonas(adv.get("zonas"))
-                vigentes.append({
-                    "level": nivel,
-                    "phenomenon": adv.get("fenomeno"),
-                    "probability": adv.get("probabilidad"),
-                    "start": adv.get("comienzo"),
-                    "end": adv.get("finalizacion"),
-                    "description": adv.get("descripcion"),
-                    "zones": zonas,
-                    "risk": adv.get("riesgoFenomeno") or {},
-                })
-
-        if vigentes:
-            prioridad = {"amarilla": 2, "naranja": 3, "roja": 4}
-            vigentes.sort(
-                key=lambda x: prioridad.get(x.get("level"), 0),
-                reverse=True
+            cache_buster = int(datetime.now(timezone.utc).timestamp() * 1000) + intento
+            respuesta = requests.get(
+                URL_ALERTA,
+                params={"_": cache_buster},
+                headers=headers_alerta,
+                timeout=30,
             )
-            principal = vigentes[0]
-            alert = {
-                "active": True,
-                "level": principal["level"],
-                "phenomenon": principal["phenomenon"],
-                "probability": principal["probability"],
-                "start": principal["start"],
-                "end": principal["end"],
-                "description": principal["description"],
-                "zones": principal["zones"],
-                "warnings": vigentes,
-                "updated": datos_alerta.get("fechaActualizacion")
-                    if isinstance(datos_alerta, dict) else None,
-                "pdf": datos_alerta.get("pdf")
-                    if isinstance(datos_alerta, dict) else None,
-            }
-            print("Advertencias INUMET vigentes:", len(vigentes))
-            for adv in vigentes:
-                print(
-                    "ALERTA", adv["level"].upper(), "|",
-                    adv.get("phenomenon"), "|",
-                    adv.get("start"), "->", adv.get("end")
-                )
-                print("ZONAS:", adv.get("zones"))
-        else:
-            alert = {"active": False}
-            print("Advertencia INUMET: no hay advertencias vigentes en el objeto oficial.")
+            print(
+                f"Advertencias intento {intento}:",
+                respuesta.status_code,
+                "| bytes:", len(respuesta.text)
+            )
+            respuesta.raise_for_status()
 
-except Exception as error:
-    alert = {"active": False, "check_error": True}
-    print("Error consultando advertencias INUMET:", error)
+            bruto = extraer_objeto_js_variable(respuesta.text, "alerta")
+            print(f"Objeto alerta intento {intento}:", bool(bruto))
+            if not bruto:
+                errores.append(f"intento {intento}: objeto no encontrado")
+                continue
 
-# =================================================
-# 4. RESUMEN DEL PRONÓSTICO
-# =================================================
-t = days[0]
-parts = [f"Temperaturas de {t['min']}° a {t['max']}°"]
-texto_hoy = f"{t.get('morning') or ''} {t.get('evening') or ''}"
-if re.search(r"precipit|lluvia|chaparr", texto_hoy, re.IGNORECASE):
-    parts.append("con posibilidad de precipitaciones")
-if re.search(r"viento|ráfaga", t["wind"], re.IGNORECASE):
-    parts.append("y viento a tener en cuenta")
-
-# =================================================
-# 5. CREAR DATA.JSON
-# =================================================
-ahora_uruguay = datetime.now(URUGUAY_TZ)
-data = {
-    "updated": ahora_uruguay.strftime("%d/%m/%Y %H:%M"),
-    "current": {
-        "temperature": current_temp,
-        "station": current_station,
-        "observation_time": current_time,
-        "condition": condition,
-        "condition_time": condition_time,
-        "present_weather": present_weather,
-        "cloud_amount": cloud_amount,
-        "cloud_types": cloud_types,
-        "wind_speed_kmh": wind_speed_kmh,
-    },
-    "alert": alert,
-    "locations": locations,
-    "forecasts": forecasts,
-    "days": days,
-    "summary": "; ".join(parts) + ".",
-}
-
-with open("data.json", "w", encoding="utf-8") as f:
-    json.dump(data, f, ensure_ascii=False, indent=2)
-
-print("--------------------------------")
-print("Temperatura Prado:", current_temp)
-print("Condición visual observada:", condition)
-print("Hora condición UTC:", condition_time)
-print("Advertencia:", alert)
-print("Hora actualización Uruguay:", ahora_uruguay.strftime("%d/%m/%Y %H:%M"))
-print("Pronóstico, observación y advertencia actualizados correctamente.")
+            try:
+                datos = json.loads(bruto)
+            except Exception as e:
+                errores.append(f"intento {intento}: JSON inválido: {e}")
+  
