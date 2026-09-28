@@ -2371,7 +2371,7 @@ function localityIsInWarning(warning, current) {
     Se exige coincidencia exacta para localidades, evitando falsos positivos
     como "Colonia" con "Colonia Palma".
   */
-  const departmentBlock = /(?:^|\s)([A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]*?)\s*:\s*/g;
+  const departmentBlock = /(?:^|[.;]\s*)([A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]*?)\s*:\s*/g;
   const matches = [...zonesRaw.matchAll(departmentBlock)];
   const localities = [];
   const wholeDepartments = [];
