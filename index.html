@@ -1008,21 +1008,55 @@ a {
    ========================================== */
 .alertCard {
   display:none;
-  border-radius:18px;
-  padding:16px 18px;
-  margin:14px 0;
-  border:1px solid var(--border);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  box-shadow:0 8px 28px rgba(23,32,51,.08);
+  border-radius:22px;
+  padding:13px 16px;
+  margin:12px 0;
+  border:1px solid rgba(255,255,255,.42);
+  backdrop-filter:blur(16px) saturate(1.12);
+  -webkit-backdrop-filter:blur(16px) saturate(1.12);
+  box-shadow:0 8px 26px rgba(23,32,51,.08);
 }
 .alertCard.visible { display:block; }
-.alertCard.yellow { background:rgba(255,214,64,.78); color:#332900; }
-.alertCard.orange { background:rgba(255,145,45,.82); color:#2b1600; }
-.alertCard.red { background:rgba(190,35,45,.88); color:#fff; }
-.alertTitle { font-size:17px; font-weight:850; }
-.alertText { margin-top:6px; line-height:1.4; font-weight:600; }
-.alertLink { display:inline-block; margin-top:9px; font-weight:800; color:inherit; }
+/* El nivel sigue siendo inequívoco, pero con el mismo efecto translúcido del resto de la app. */
+.alertCard.yellow {
+  background:linear-gradient(135deg,rgba(255,214,64,.46),rgba(255,255,255,.18));
+  border-color:rgba(230,181,0,.50);
+  color:#332900;
+}
+.alertCard.orange {
+  background:linear-gradient(135deg,rgba(255,145,45,.48),rgba(255,255,255,.16));
+  border-color:rgba(222,105,0,.52);
+  color:#2b1600;
+}
+.alertCard.red {
+  background:linear-gradient(135deg,rgba(190,35,45,.50),rgba(255,255,255,.14));
+  border-color:rgba(155,20,31,.58);
+  color:#2b0d11;
+}
+.alertCompactRow {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.alertTitle { font-size:16px; font-weight:850; line-height:1.15; }
+.alertValidity {
+  margin-top:5px;
+  font-size:.94rem;
+  line-height:1.25;
+  font-weight:750;
+}
+.alertLink {
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  flex:0 0 auto;
+  font-size:.90rem;
+  font-weight:800;
+  color:inherit;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
 
 
 /* ==========================================
@@ -1145,6 +1179,10 @@ a {
     margin-top:12px;
     margin-bottom:12px;
   }
+  .alertCompactRow { gap:8px; }
+  .alertTitle { font-size:.95rem; }
+  .alertValidity { font-size:.84rem; }
+  .alertLink { font-size:.80rem; text-align:right; }
   .card {
     border-radius:24px;
   }
@@ -2727,30 +2765,39 @@ function renderAlert(data) {
     red: "🔴 ADVERTENCIA ROJA"
   };
 
-  const phenomenon = warning.phenomenon
-    ? `<div class="alertText">${esc(warning.phenomenon)}</div>` : "";
-
-  const description = warning.description
-    ? `<div class="alertText">${esc(warning.description)}</div>` : "";
-
   const end = warning.end
-    ? `<div class="alertText">Vigente hasta: ${esc(warning.end)}</div>` : "";
-
-  const station = current?.station
-    ? `<div class="alertText">${esc(current.station)}</div>` : "";
+    ? `<div class="alertValidity">Vigente hasta: ${esc(formatWarningEnd(warning.end))}</div>` : "";
 
   box.className = `alertCard visible ${cssLevel}`;
   box.innerHTML = `
-    <div class="alertTitle">${labels[cssLevel]}</div>
-    ${phenomenon}
-    ${station}
-    ${end}
-    ${description}
-    <a class="alertLink"
-       href="https://www.inumet.gub.uy/alerta"
-       target="_blank"
-       rel="noopener noreferrer">Ver detalle oficial en INUMET</a>
+    <div class="alertCompactRow">
+      <div>
+        <div class="alertTitle">${labels[cssLevel]}</div>
+        ${end}
+      </div>
+      <a class="alertLink"
+         href="https://www.inumet.gub.uy/alerta"
+         target="_blank"
+         rel="noopener noreferrer">Detalle en INUMET ↗</a>
+    </div>
   `;
+}
+
+function formatWarningEnd(raw) {
+  const value = String(raw || "").trim();
+  const match = value.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
+  if (!match) return value;
+
+  const [, year, month, day, hour, minute] = match;
+  const ymd = `${year}-${month}-${day}`;
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone:"America/Montevideo", year:"numeric", month:"2-digit", day:"2-digit"
+  }).formatToParts(new Date());
+  const nowUY = Object.fromEntries(parts.map(p => [p.type, p.value]));
+  const todayUY = `${nowUY.year}-${nowUY.month}-${nowUY.day}`;
+
+  if (ymd === todayUY) return `${hour}:${minute}`;
+  return `${day}/${month} ${hour}:${minute}`;
 }
 
 
