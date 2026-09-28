@@ -2403,12 +2403,46 @@ function getMaximumWind(day) {
    OBSERVACIÓN REAL INUMET
    ========================================== */
 
-function observedCondition(data) {
+function rawObservedCondition(data) {
   return String(data?.current?.condition || "neutral").toLowerCase();
+}
+
+function forecastFallbackCondition(data) {
+  const today = data?.days?.[0] || {};
+  const text = `${today.morning || ""} ${today.evening || ""}`.toLowerCase();
+
+  if (/torment|actividad eléctrica|electrica/.test(text)) return "stormy";
+  if (/lluv|precipit|chaparr|lloviz|granizo/.test(text)) return "rainy";
+  if (/cubiert|muy nuboso/.test(text)) return "cloudy";
+  if (/algo nub|parcial|nubosidad variable|nuboso/.test(text)) return "partly";
+  if (/despej|soleado|escasa nubosidad/.test(text)) return "sunny";
+  return "neutral";
+}
+
+function conditionUsesForecast(data) {
+  return rawObservedCondition(data) === "neutral" && forecastFallbackCondition(data) !== "neutral";
+}
+
+function observedCondition(data) {
+  const observed = rawObservedCondition(data);
+  return observed !== "neutral" ? observed : forecastFallbackCondition(data);
 }
 
 function observedDescription(data) {
   const c = observedCondition(data);
+  const forecast = conditionUsesForecast(data);
+
+  // Algunas estaciones automáticas de INUMET (por ejemplo Bella Unión)
+  // publican temperatura, humedad, presión, viento y precipitación, pero no
+  // observación de nubosidad/tiempo presente. En ese caso usamos únicamente
+  // el pronóstico oficial de la zona como respaldo visual y lo indicamos.
+  if (forecast) {
+    if (c === "stormy") return "Tormentas previstas";
+    if (c === "rainy") return "Lluvias previstas";
+    if (c === "cloudy") return "Cubierto previsto";
+    if (c === "partly") return "Nubosidad prevista";
+    if (c === "sunny") return "Despejado previsto";
+  }
 
   if (c === "stormy") return "Tormentas";
   if (c === "rainy") return "Lluvias";
@@ -2417,7 +2451,7 @@ function observedDescription(data) {
   if (c === "sunny") return "Cielo despejado";
 
   const cloudText = String(data?.current?.cloud_amount || "").toUpperCase();
-  const matches = [...cloudText.matchAll(/(\\d+)\\s*OKTAS?/g)];
+  const matches = [...cloudText.matchAll(/(\d+)\s*OKTAS?/g)];
   const oktas = matches.map(m => Number(m[1]));
 
   if (oktas.length) {
@@ -2427,8 +2461,9 @@ function observedDescription(data) {
     return "Cielo despejado";
   }
 
-  return "Condición actual";
+  return "Sin dato de cielo";
 }
+
 
 function observedWindText(data) {
   const wind = Number(data?.current?.wind_speed_kmh);
