@@ -49,7 +49,7 @@
     "pdf": "adv1790627322642.pdf",
     "source": "inumet_alerta_object_v4",
     "source_timestamp": "2026-09-28T17:30:00-03:00",
-    "source_age_hours": 0.93,
+    "source_age_hours": 1.38,
     "homepage_says_active": true,
     "data_unavailable": false
   },
@@ -1207,6 +1207,6 @@
   "summary": "Temperaturas de 13° a 22°; con posibilidad de precipitaciones.",
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-09-28T18:26-03:00"
+    "checked_at": "2026-09-28T18:52-03:00"
   }
 }
