@@ -602,4 +602,174 @@ def descargar_objeto_alerta():
                 datos = json.loads(bruto)
             except Exception as e:
                 errores.append(f"intento {intento}: JSON inválido: {e}")
-  
+                continue
+
+            if not isinstance(datos, dict):
+                errores.append(f"intento {intento}: objeto no es diccionario")
+                continue
+
+            marca = fecha_objeto_alerta(datos)
+            candidatos.append((marca, datos))
+            print(
+                f"Marca temporal intento {intento}:",
+                marca.strftime("%d/%m/%Y %H:%M:%S")
+            )
+
+        except Exception as e:
+            errores.append(f"intento {intento}: {e}")
+
+    if errores:
+        for e in errores:
+            print("Diagnóstico advertencias:", e)
+
+    if not candidatos:
+        return None
+
+    candidatos.sort(key=lambda x: x[0], reverse=True)
+    mejor_fecha, mejor = candidatos[0]
+    print(
+        "Objeto de advertencias seleccionado:",
+        mejor_fecha.strftime("%d/%m/%Y %H:%M:%S")
+    )
+    return mejor
+
+try:
+    datos_alerta = descargar_objeto_alerta()
+
+    if not datos_alerta:
+        alert = {
+            "active": False,
+            "source_error": "alerta_object_not_found",
+            "check_error": True,
+        }
+        print("Advertencias INUMET: no fue posible obtener un objeto válido.")
+    else:
+        vigentes = []
+        ahora_local = datetime.now(URUGUAY_TZ)
+
+        for adv in datos_alerta.get("advertencias") or []:
+            inicio_dt = fecha_uruguay(adv.get("comienzo"))
+            fin_dt = fecha_uruguay(adv.get("finalizacion"))
+
+            # Una advertencia solo se descarta si sabemos con certeza que terminó.
+            if fin_dt is not None and fin_dt < ahora_local:
+                continue
+
+            # Si INUMET incluye bloques futuros dentro de la misma publicación,
+            # todavía no deben mostrarse como vigentes.
+            if inicio_dt is not None and inicio_dt > ahora_local:
+                continue
+
+            nivel = nivel_advertencia(adv.get("riesgoFenomeno"))
+            if not nivel:
+                continue
+
+            zonas = texto_zonas(adv.get("zonas"))
+            vigentes.append({
+                "level": nivel,
+                "phenomenon": adv.get("fenomeno"),
+                "probability": adv.get("probabilidad"),
+                "start": adv.get("comienzo"),
+                "end": adv.get("finalizacion"),
+                "description": adv.get("descripcion"),
+                "zones": zonas,
+                "risk": adv.get("riesgoFenomeno") or {},
+            })
+
+        if vigentes:
+            prioridad = {"amarilla": 2, "naranja": 3, "roja": 4}
+            vigentes.sort(
+                key=lambda x: prioridad.get(x.get("level"), 0),
+                reverse=True
+            )
+            principal = vigentes[0]
+
+            alert = {
+                "active": True,
+                "level": principal["level"],
+                "phenomenon": principal["phenomenon"],
+                "probability": principal["probability"],
+                "start": principal["start"],
+                "end": principal["end"],
+                "description": principal["description"],
+                "zones": principal["zones"],
+                "warnings": vigentes,
+                "updated": datos_alerta.get("fechaActualizacion")
+                    or datos_alerta.get("actualizacion"),
+                "pdf": datos_alerta.get("pdf"),
+                "source": "inumet_alerta_object_v3",
+            }
+
+            print("Advertencias INUMET vigentes:", len(vigentes))
+            for adv in vigentes:
+                print(
+                    "ALERTA", adv["level"].upper(), "|",
+                    adv.get("phenomenon"), "|",
+                    adv.get("start"), "->", adv.get("end")
+                )
+                print("ZONAS:", adv.get("zones"))
+        else:
+            alert = {
+                "active": False,
+                "source": "inumet_alerta_object_v3",
+                "updated": datos_alerta.get("fechaActualizacion")
+                    or datos_alerta.get("actualizacion"),
+            }
+            print(
+                "Advertencia INUMET: el objeto más reciente no contiene "
+                "bloques vigentes para la hora actual."
+            )
+
+except Exception as error:
+    alert = {
+        "active": False,
+        "check_error": True,
+        "source_error": str(error),
+    }
+    print("Error procesando advertencias INUMET:", error)
+
+# =================================================
+# 4. RESUMEN DEL PRONÓSTICO
+# =================================================
+t = days[0]
+parts = [f"Temperaturas de {t['min']}° a {t['max']}°"]
+texto_hoy = f"{t.get('morning') or ''} {t.get('evening') or ''}"
+if re.search(r"precipit|lluvia|chaparr", texto_hoy, re.IGNORECASE):
+    parts.append("con posibilidad de precipitaciones")
+if re.search(r"viento|ráfaga", t["wind"], re.IGNORECASE):
+    parts.append("y viento a tener en cuenta")
+
+# =================================================
+# 5. CREAR DATA.JSON
+# =================================================
+ahora_uruguay = datetime.now(URUGUAY_TZ)
+data = {
+    "updated": ahora_uruguay.strftime("%d/%m/%Y %H:%M"),
+    "current": {
+        "temperature": current_temp,
+        "station": current_station,
+        "observation_time": current_time,
+        "condition": condition,
+        "condition_time": condition_time,
+        "present_weather": present_weather,
+        "cloud_amount": cloud_amount,
+        "cloud_types": cloud_types,
+        "wind_speed_kmh": wind_speed_kmh,
+    },
+    "alert": alert,
+    "locations": locations,
+    "forecasts": forecasts,
+    "days": days,
+    "summary": "; ".join(parts) + ".",
+}
+
+with open("data.json", "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
+
+print("--------------------------------")
+print("Temperatura Prado:", current_temp)
+print("Condición visual observada:", condition)
+print("Hora condición UTC:", condition_time)
+print("Advertencia:", alert)
+print("Hora actualización Uruguay:", ahora_uruguay.strftime("%d/%m/%Y %H:%M"))
+print("Pronóstico, observación y advertencia actualizados correctamente.")
