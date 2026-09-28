@@ -1300,6 +1300,92 @@ a {
   .compactNow>div{padding:9px 10px;font-size:.92rem}
 }
 
+
+/* ===== Cabecera ultralimpia V3 ===== */
+.eyebrow{
+  display:none !important;
+}
+
+/* La información técnica sigue en el DOM pero deja de competir con el tiempo. */
+#locationNote,
+#updated,
+.updated,
+.updateText,
+.lastUpdate{
+  display:none !important;
+}
+
+.locationBar{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) 48px;
+  gap:9px !important;
+  align-items:stretch !important;
+  max-width:620px;
+  margin-top:4px !important;
+  margin-bottom:10px !important;
+}
+
+.locationSelect{
+  width:100% !important;
+  max-width:none !important;
+  min-width:0 !important;
+}
+
+.locationPinButton{
+  width:48px !important;
+  min-width:48px !important;
+  height:48px !important;
+  padding:0 !important;
+  display:grid !important;
+  place-items:center !important;
+  border-radius:14px !important;
+}
+
+.locationPinIcon{
+  width:23px;
+  height:23px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+@media (max-width:640px){
+  .wrap{
+    padding-top:14px !important;
+  }
+
+  h1{
+    margin:0 0 14px !important;
+    font-size:2.15rem !important;
+    line-height:1.03 !important;
+  }
+
+  .locationBar{
+    grid-template-columns:minmax(0,1fr) 48px !important;
+    margin-bottom:10px !important;
+  }
+
+  .locationSelect,
+  .locationPinButton{
+    height:48px !important;
+  }
+
+  #today.card{
+    margin-top:8px !important;
+  }
+}
+
+
+.locationPinButton.isLocating .locationPinIcon{
+  animation:pinPulse .85s ease-in-out infinite alternate;
+}
+@keyframes pinPulse{
+  from{opacity:.45; transform:translateY(1px)}
+  to{opacity:1; transform:translateY(-1px)}
+}
+
 </style>
 </head>
 
@@ -1347,9 +1433,12 @@ a {
     <select id="locationSelect" class="locationSelect" aria-label="Seleccionar localidad">
       <option value="montevideo_prado">📍 Montevideo · Prado</option>
     </select>
-    <button id="useMyLocation" class="locationGeoButton" type="button"
-            title="Seleccionar la estación INUMET más cercana">
-      📍 Mi ubicación
+    <button id="useMyLocation" class="locationGeoButton locationPinButton" type="button"
+            title="Usar mi ubicación" aria-label="Usar mi ubicación">
+      <svg class="locationPinIcon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 21s7-6.1 7-13a7 7 0 1 0-14 0c0 6.9 7 13 7 13Z"></path>
+        <circle cx="12" cy="8" r="2.5"></circle>
+      </svg>
     </button>
   </div>
   <div class="locationNote" id="locationNote">
@@ -1691,7 +1780,7 @@ function setupGeolocationButton(data) {
     }
 
     button.disabled = true;
-    button.textContent = "📍 Buscando…";
+    button.classList.add("isLocating"); button.setAttribute("aria-label", "Buscando ubicación");
 
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -1702,7 +1791,7 @@ function setupGeolocationButton(data) {
         );
 
         button.disabled = false;
-        button.textContent = "📍 Mi ubicación";
+        button.classList.remove("isLocating"); button.setAttribute("aria-label", "Usar mi ubicación");
 
         if (!best) {
           if (note) note.textContent =
@@ -1723,7 +1812,7 @@ function setupGeolocationButton(data) {
       },
       error => {
         button.disabled = false;
-        button.textContent = "📍 Mi ubicación";
+        button.classList.remove("isLocating"); button.setAttribute("aria-label", "Usar mi ubicación");
 
         const messages = {
           1: "Para usar esta función, permití el acceso a tu ubicación.",
