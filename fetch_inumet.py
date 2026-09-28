@@ -1,6 +1,7 @@
 import requests
 import re
 import json
+import math
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
 from zoneinfo import ZoneInfo
@@ -475,6 +476,8 @@ def observacion_vacia(meta):
         "condition": "neutral", "condition_time": None,
         "present_weather": None, "cloud_amount": None,
         "cloud_types": [], "wind_speed_kmh": None,
+        "humidity": None, "pressure_hpa": None,
+        "dewpoint_c": None, "feels_like_c": None,
     }
 
 def construir_observacion(meta, registros, ahora):
@@ -490,8 +493,12 @@ def construir_observacion(meta, registros, ahora):
             out["temperature"] = temps[0].get("value")
             out["observation_time"] = hora
 
-    nombres = {"present_weather", "cloud_amount", "cloud_cover_total",
-               "cloud_type", "wind_speed"}
+    nombres = {
+        "present_weather", "cloud_amount", "cloud_cover_total",
+        "cloud_type", "wind_speed", "relative_humidity",
+        "pressure_reduced_to_mean_sea_level", "non_coordinate_pressure",
+        "dewpoint_temperature"
+    }
     recientes = []
     for p in registros:
         if p.get("name") not in nombres:
@@ -520,6 +527,10 @@ def construir_observacion(meta, registros, ahora):
     totals = ultimo("cloud_cover_total")
     types = ultimo("cloud_type")
     winds = ultimo("wind_speed")
+    humidity = ultimo("relative_humidity")
+    pressure_msl = ultimo("pressure_reduced_to_mean_sea_level")
+    pressure_station = ultimo("non_coordinate_pressure")
+    dewpoint = ultimo("dewpoint_temperature")
 
     wd = [str(p.get("description") or "") for p in weather]
     cd = [str(p.get("description") or "") for p in clouds]
@@ -530,6 +541,43 @@ def construir_observacion(meta, registros, ahora):
 
     if winds and winds[0].get("value") is not None:
         out["wind_speed_kmh"] = round(float(winds[0]["value"]) * 3.6, 1)
+
+    if humidity and humidity[0].get("value") is not None:
+        try:
+            out["humidity"] = round(float(humidity[0]["value"]), 0)
+        except (TypeError, ValueError):
+            pass
+
+    # Para una app meteorológica mostramos presión reducida al nivel medio del mar,
+    # que es la presión comparable entre estaciones. Si no existe, usamos la de estación.
+    pressure_source = pressure_msl or pressure_station
+    if pressure_source and pressure_source[0].get("value") is not None:
+        try:
+            out["pressure_hpa"] = round(float(pressure_source[0]["value"]), 1)
+        except (TypeError, ValueError):
+            pass
+
+    if dewpoint and dewpoint[0].get("value") is not None:
+        try:
+            out["dewpoint_c"] = round(float(dewpoint[0]["value"]), 1)
+        except (TypeError, ValueError):
+            pass
+
+    # Sensación térmica / temperatura aparente (Steadman, sin radiación solar).
+    # AT = T + 0.33*e - 0.70*ws - 4.00
+    # e = RH/100 * 6.105 * exp(17.27*T/(237.7+T))
+    # T en °C, RH en %, ws en m/s.
+    if (out.get("temperature") is not None and
+            out.get("humidity") is not None and
+            out.get("wind_speed_kmh") is not None):
+        try:
+            t = float(out["temperature"])
+            rh = float(out["humidity"])
+            ws = float(out["wind_speed_kmh"]) / 3.6
+            e = (rh / 100.0) * 6.105 * math.exp((17.27 * t) / (237.7 + t))
+            out["feels_like_c"] = round(t + 0.33 * e - 0.70 * ws - 4.00, 1)
+        except (TypeError, ValueError, OverflowError):
+            pass
 
     weather_text = " ".join(wd).upper()
     cloud_text = " ".join(cd).upper()
@@ -618,6 +666,10 @@ present_weather = prado["present_weather"]
 cloud_amount = prado["cloud_amount"]
 cloud_types = prado["cloud_types"]
 wind_speed_kmh = prado["wind_speed_kmh"]
+humidity = prado.get("humidity")
+pressure_hpa = prado.get("pressure_hpa")
+dewpoint_c = prado.get("dewpoint_c")
+feels_like_c = prado.get("feels_like_c")
 
 # =================================================
 # 3. ADVERTENCIAS METEOROLÓGICAS OFICIALES INUMET - V4
@@ -1045,6 +1097,10 @@ data = {
         "cloud_amount": cloud_amount,
         "cloud_types": cloud_types,
         "wind_speed_kmh": wind_speed_kmh,
+        "humidity": humidity,
+        "pressure_hpa": pressure_hpa,
+        "dewpoint_c": dewpoint_c,
+        "feels_like_c": feels_like_c,
     },
     "alert": alert,
     "locations": locations,
@@ -1058,6 +1114,9 @@ with open("data.json", "w", encoding="utf-8") as f:
 
 print("--------------------------------")
 print("Temperatura Prado:", current_temp)
+print("Humedad Prado:", humidity)
+print("Presión Prado:", pressure_hpa)
+print("Sensación térmica Prado:", feels_like_c)
 print("Condición visual observada:", condition)
 print("Hora condición UTC:", condition_time)
 print("Advertencia:", alert)
