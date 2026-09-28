@@ -1,5 +1,5 @@
 {
-  "updated": "28/09/2026 16:48",
+  "updated": "28/09/2026 17:05",
   "current": {
     "temperature": 20.0,
     "station": "Prado",
@@ -66,7 +66,7 @@
     "pdf": "adv1790616641463.pdf",
     "source": "inumet_alerta_object_v4",
     "source_timestamp": "2026-09-28T14:30:00-03:00",
-    "source_age_hours": 2.31,
+    "source_age_hours": 2.59,
     "homepage_says_active": true,
     "data_unavailable": false
   },
@@ -339,13 +339,11 @@
       "latitude": -32.381,
       "longitude": -58.0312,
       "observation_time": "2026-09-28T19:00:00Z",
-      "condition": "cloudy",
+      "condition": "neutral",
       "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
-      "cloud_amount": "8 OKTAS",
-      "cloud_types": [
-        "NIMBOSTRATUS (NS)"
-      ],
+      "cloud_amount": null,
+      "cloud_types": [],
       "wind_speed_kmh": 18.4,
       "humidity": 86.0,
       "pressure_hpa": 1007.4,
@@ -360,13 +358,11 @@
       "latitude": -34.9689,
       "longitude": -54.9512,
       "observation_time": "2026-09-28T19:00:00Z",
-      "condition": "cloudy",
+      "condition": "neutral",
       "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
-      "cloud_amount": "8 OKTAS",
-      "cloud_types": [
-        "STRATUS (ST)"
-      ],
+      "cloud_amount": null,
+      "cloud_types": [],
       "wind_speed_kmh": 19.8,
       "humidity": 96.0,
       "pressure_hpa": 1013.1,
