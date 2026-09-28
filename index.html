@@ -1897,40 +1897,94 @@ function localityIsInWarning(warning, current) {
     "laguna del sauce": ["laguna del sauce"],
   };
 
+  // Departamento al que pertenece cada estación de la app.
+  // Se usa SOLO cuando INUMET indica explícitamente "Todo el departamento".
+  const departmentByStation = {
+    "prado": "montevideo",
+    "carrasco": "montevideo",
+    "melilla": "montevideo",
+    "atlantida": "canelones",
+    "san jacinto": "canelones",
+    "artigas": "artigas",
+    "bella union": "artigas",
+    "salto": "salto",
+    "paysandu": "paysandu",
+    "young": "rio negro",
+    "rivera aeropuerto": "rivera",
+    "vichadero": "rivera",
+    "tacuarembo": "tacuarembo",
+    "melo": "cerro largo",
+    "colonia": "colonia",
+    "mercedes": "soriano",
+    "san jose": "san jose",
+    "durazno": "durazno",
+    "florida": "florida",
+    "paso de los toros": "tacuarembo",
+    "trinidad": "flores",
+    "lavalleja": "lavalleja",
+    "rocha": "rocha",
+    "treinta y tres aeropuerto": "treinta y tres",
+    "laguna del sauce": "maldonado",
+    "punta del este": "maldonado"
+  };
+
   const names = [station, ...(aliases[station] || [])]
     .map(normalizeAlertText)
     .filter(Boolean);
-
+  const stationDepartment = departmentByStation[station] || null;
   const zonesRaw = String(warning?.zones || "");
 
   /*
     INUMET devuelve bloques como:
-    "Artigas : Baltasar Brum, Bella Unión, Colonia Palma... Salto : Arapey..."
-
-    IMPORTANTE:
-    no usamos coincidencias parciales. "Colonia" NO debe coincidir con
-    "Colonia Palma" ni "Colonia 18 de Julio".
+    "Artigas : Baltasar Brum, Bella Unión... Rivera(Todo el departamento), Tacuarembó(Todo el departamento)".
+    Se exige coincidencia exacta para localidades, evitando falsos positivos
+    como "Colonia" con "Colonia Palma".
   */
   const departmentBlock = /(?:^|\s)([A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]*?)\s*:\s*/g;
   const matches = [...zonesRaw.matchAll(departmentBlock)];
   const localities = [];
+  const wholeDepartments = [];
+
+  function addItem(item, departmentFromBlock = null) {
+    const clean = normalizeAlertText(String(item).replace(/[.;]+$/g, ""));
+    if (!clean) return;
+
+    // Formatos observados: "Rivera(Todo el departamento)" o
+    // dentro de un bloque "Rivera : Todo el departamento".
+    const whole = clean.match(/^(.+?)\s*\(\s*todo el departamento\s*\)$/);
+    if (whole) {
+      wholeDepartments.push(normalizeAlertText(whole[1]));
+      return;
+    }
+    if (clean === "todo el departamento" && departmentFromBlock) {
+      wholeDepartments.push(normalizeAlertText(departmentFromBlock));
+      return;
+    }
+    localities.push(clean);
+  }
 
   if (matches.length) {
     for (let i = 0; i < matches.length; i++) {
+      const department = normalizeAlertText(matches[i][1]);
       const listStart = matches[i].index + matches[i][0].length;
       const listEnd = i + 1 < matches.length ? matches[i + 1].index : zonesRaw.length;
       const listText = zonesRaw.slice(listStart, listEnd);
-
-      listText.split(",").forEach(item => {
-        const clean = normalizeAlertText(item.replace(/[.;]+$/g, ""));
-        if (clean) localities.push(clean);
-      });
+      listText.split(",").forEach(item => addItem(item, department));
     }
   } else {
-    zonesRaw.split(",").forEach(item => {
-      const clean = normalizeAlertText(item.replace(/[.;]+$/g, ""));
-      if (clean) localities.push(clean);
-    });
+    zonesRaw.split(",").forEach(item => addItem(item));
+  }
+
+  // Algunos "Departamento(Todo el departamento)" pueden quedar pegados al
+  // final de otro bloque; los detectamos además directamente sobre el texto.
+  const wholeDepartmentRegex = /([A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]+?)\s*\(\s*Todo el departamento\s*\)/gi;
+  for (const match of zonesRaw.matchAll(wholeDepartmentRegex)) {
+    const dep = normalizeAlertText(match[1].split(/[,:;.]/).pop());
+    if (dep) wholeDepartments.push(dep);
+  }
+
+  if (stationDepartment && wholeDepartments.includes(stationDepartment)) {
+    return true;
   }
 
   return names.some(name => localities.includes(name));
