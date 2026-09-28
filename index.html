@@ -1445,6 +1445,37 @@ button[onclick="load()"]{width:100%;margin-top:2px;background:var(--glass);color
 }
 @media(max-width:390px){#days{grid-template-columns:1fr}.compactNow{grid-template-columns:1fr}}
 
+
+
+/* ==========================================
+   V4.1 — MAQUETA OBJETIVO
+   ========================================== */
+#updated{display:block!important;margin:6px 2px 14px;font-size:.9rem;color:var(--muted)}
+#sourceLabel{display:none}
+.wrap{max-width:980px}
+.locationBar{max-width:560px}
+.appPanel{background:var(--glass);border:1px solid var(--border);border-radius:28px;box-shadow:var(--v4-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);margin:12px 0;padding:22px}
+.currentPanel{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(250px,.85fr);gap:22px;align-items:center}
+.currentPrimary{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center;min-width:0}
+.currentBigIcon{font-size:104px;line-height:1;text-align:center;filter:drop-shadow(0 8px 12px rgba(0,0,0,.12))}
+.currentEyebrow{font-size:.84rem;font-weight:850;text-transform:uppercase;color:var(--muted);letter-spacing:.02em}
+.currentBigTemp{font-size:5rem;line-height:.92;font-weight:900;letter-spacing:-.065em;margin-top:8px}
+.currentCondition{font-size:1.45rem;font-weight:800;margin-top:10px}
+.currentStats{border-left:1px solid var(--border);padding-left:22px;display:grid;gap:14px}
+.statRow{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center}
+.statIcon{font-size:1.45rem;text-align:center}.statLabel{color:var(--muted);font-weight:650}.statValue{font-size:1.08rem;font-weight:850;text-align:right}
+.forecastPanel{padding:20px 22px}.panelTitleRow{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:16px}.panelTitle{font-size:1.45rem;font-weight:900;letter-spacing:-.025em}.panelDate{color:var(--muted);font-weight:700;white-space:nowrap}
+.tempTiles{display:grid;grid-template-columns:1fr 1fr;gap:14px}.tempTile{background:rgba(245,250,255,.52);border:1px solid var(--border);border-radius:20px;padding:13px;text-align:center;color:#15345b}.tempTile span{display:block;font-weight:850}.tempTile strong{display:block;font-size:2.45rem;line-height:1.05;margin-top:5px}.tempTile.min strong{color:#1256b8}.tempTile.max strong{color:#d92c2c}
+.periodTiles{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.periodTile{background:rgba(245,250,255,.52);border:1px solid var(--border);border-radius:20px;padding:14px;color:#15345b}.periodLabel{font-weight:900;margin-bottom:8px}.periodBody{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:center}.periodIcon{font-size:46px;text-align:center}.periodText{font-weight:650;line-height:1.35}
+.detailStrip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;padding:17px 8px}.detailCell{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:center;padding:0 18px;border-right:1px solid var(--border)}.detailCell:last-child{border-right:0}.detailIcon{font-size:2rem;text-align:center}.detailLabel{color:var(--muted);font-size:.82rem;font-weight:750}.detailValue{font-weight:900;margin-top:3px;line-height:1.25}.detailSub{color:var(--muted);font-size:.88rem;margin-top:2px}
+.nextPanel .panelTitleRow{margin-bottom:12px}.nextCards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:rgba(245,250,255,.48);border:1px solid var(--border);border-radius:22px;overflow:hidden}.nextCard{padding:15px;text-align:center;color:#15345b;border-right:1px solid rgba(21,52,91,.16)}.nextCard:last-child{border-right:0}.nextCardName{font-weight:900}.nextCardIcon{font-size:42px;margin:8px 0 4px}.nextCardTemp{font-size:1.25rem;font-weight:900}.nextCardTemp .lo{color:#1256b8}.nextCardTemp .hi{color:#d92c2c}.nextCardText{font-size:.86rem;line-height:1.25;margin-top:4px}
+.adviceRow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}.adviceCard{display:grid;grid-template-columns:72px 1fr 22px;gap:12px;align-items:center;padding:18px 20px}.adviceIcon{font-size:3.3rem;text-align:center}.adviceQuestion{font-size:1.08rem;font-weight:900}.adviceAnswer{font-size:1rem;margin-top:4px}.adviceArrow{font-size:2rem;opacity:.65}
+.footerActions{display:flex;justify-content:center;gap:14px;align-items:center;margin-top:14px}.footerActions button{width:auto!important;margin:0!important;padding:9px 13px!important;background:var(--glass)!important;color:var(--text)!important}.footer{margin:0!important}
+#summaryCard{display:none!important}
+@media(max-width:700px){
+ .wrap{padding:14px 12px 26px}.appPanel{border-radius:23px;padding:16px}.currentPanel{grid-template-columns:1fr;gap:14px}.currentPrimary{grid-template-columns:92px 1fr}.currentBigIcon{font-size:72px}.currentBigTemp{font-size:3.75rem}.currentCondition{font-size:1.2rem}.currentStats{border-left:0;border-top:1px solid var(--border);padding:14px 0 0;grid-template-columns:1fr 1fr}.statRow{grid-template-columns:28px 1fr;gap:7px}.statValue{grid-column:2;text-align:left;margin-top:-5px}.panelTitle{font-size:1.2rem}.tempTiles,.periodTiles{gap:9px}.tempTile{border-radius:17px}.tempTile strong{font-size:2rem}.periodTile{border-radius:17px;padding:11px}.periodBody{grid-template-columns:48px 1fr}.periodIcon{font-size:36px}.periodText{font-size:.9rem}.detailStrip{grid-template-columns:1fr;padding:4px 16px}.detailCell{border-right:0;border-bottom:1px solid var(--border);padding:13px 0}.detailCell:last-child{border-bottom:0}.nextCards{grid-template-columns:repeat(3,1fr)}.nextCard{padding:12px 7px}.nextCardIcon{font-size:34px}.nextCardTemp{font-size:1rem}.nextCardText{font-size:.76rem}.adviceRow{grid-template-columns:1fr}.adviceCard{padding:15px}.locationBar{max-width:none}}
+@media(max-width:430px){.currentStats{grid-template-columns:1fr 1fr}.nextCards{grid-template-columns:1fr}.nextCard{display:grid;grid-template-columns:1fr 54px 1fr;align-items:center;text-align:left;border-right:0;border-bottom:1px solid rgba(21,52,91,.16)}.nextCard:last-child{border-bottom:0}.nextCardIcon{margin:0;text-align:center}.nextCardText{grid-column:3}.periodTiles{grid-template-columns:1fr}}
+
 </style>
 </head>
 
@@ -1514,121 +1545,37 @@ button[onclick="load()"]{width:100%;margin-top:2px;background:var(--glass);color
   <!-- ADVERTENCIA INUMET: solo se muestra cuando haya una alerta validada -->
   <section id="weatherAlert" class="alertCard" aria-live="polite"></section>
 
-
-  <!-- HOY -->
-
-  <section class="card">
-
-    <div id="today">
-      Consultando pronóstico…
-    </div>
-
-  </section>
-
-
-  <!-- RECOMENDACIONES -->
-
-  <section class="card">
-
-    <h2>
-      ¿Qué necesito hoy?
-    </h2>
-
-
-    <div class="recommendations">
-
-
-      <div class="recommendation">
-
-        <div class="recIcon">
-          ☔
-        </div>
-
-        <div class="recQuestion">
-          ¿Llevo paraguas?
-        </div>
-
-        <div
-          class="recAnswer"
-          id="umbrella">
-          Analizando…
-        </div>
-
-      </div>
-
-
-      <div class="recommendation">
-
-        <div class="recIcon">
-          🧥
-        </div>
-
-        <div class="recQuestion">
-          ¿Necesito abrigo?
-        </div>
-
-        <div
-          class="recAnswer"
-          id="coat">
-          Analizando…
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-  <!-- RESUMEN -->
-
-  <section class="card">
-
-    <h2>
-      En pocas palabras
-    </h2>
-
-    <div id="summary">
-      —
-    </div>
-
-  </section>
-
+  <!-- CONDICIONES ACTUALES + PRONÓSTICO -->
+  <div id="today">Consultando pronóstico…</div>
 
   <!-- PRÓXIMOS DÍAS -->
-
-  <section class="card">
-
-    <h2>
-      Próximos días
-    </h2>
-
-    <div id="days">
-      —
+  <section class="appPanel nextPanel">
+    <div class="panelTitleRow">
+      <div class="panelTitle" id="nextTitle">Próximos días</div>
     </div>
-
+    <div id="days" class="nextCards">—</div>
   </section>
 
+  <!-- RECOMENDACIONES -->
+  <div class="adviceRow">
+    <section class="appPanel adviceCard">
+      <div class="adviceIcon">☔</div>
+      <div><div class="adviceQuestion">¿Llevo paraguas?</div><div class="adviceAnswer" id="umbrella">Analizando…</div></div>
+      <div class="adviceArrow">›</div>
+    </section>
+    <section class="appPanel adviceCard">
+      <div class="adviceIcon">🧥</div>
+      <div><div class="adviceQuestion">¿Necesito abrigo?</div><div class="adviceAnswer" id="coat">Analizando…</div></div>
+      <div class="adviceArrow">›</div>
+    </section>
+  </div>
 
-  <button onclick="load()">
-    ↻ Actualizar
-  </button>
+  <section id="summaryCard"><div id="summary">—</div></section>
 
-
-  <p class="muted footer">
-
-    Fuente:
-
-    <a
-      href="https://www.inumet.gub.uy/tiempo/pronostico"
-      target="_blank"
-      rel="noopener">
-      INUMET
-    </a>
-
-  </p>
-
+  <div class="footerActions">
+    <button onclick="load()" aria-label="Actualizar">↻ Actualizar</button>
+    <p class="muted footer">Datos: <a href="https://www.inumet.gub.uy/tiempo/pronostico" target="_blank" rel="noopener">INUMET</a></p>
+  </div>
 
 </div>
 
@@ -2561,6 +2508,19 @@ function renderAlert(data) {
 }
 
 
+function formatSolarTime(date) {
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "—";
+  return new Intl.DateTimeFormat("es-UY", {
+    timeZone:"America/Montevideo", hour:"2-digit", minute:"2-digit", hourCycle:"h23"
+  }).format(date);
+}
+
+function optionalObservedStat(label, icon, value, suffix="") {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return "";
+  return `<div class="statRow"><div class="statIcon">${icon}</div><div class="statLabel">${label}</div><div class="statValue">${esc(n.toLocaleString("es-UY", {maximumFractionDigits:1}))}${suffix}</div></div>`;
+}
+
 /* ==========================================
    CARGAR DATA.JSON
    ========================================== */
@@ -2635,8 +2595,7 @@ async function load() {
       "updated"
     ).textContent =
 
-      "Última actualización: " +
-      data.updated;
+      "Actualizado: " + data.updated;
 
 
     /* ADVERTENCIA OFICIAL */
@@ -2677,51 +2636,50 @@ async function load() {
        TARJETA DE HOY
        ====================================== */
 
-    document.getElementById(
-      "today"
-    ).innerHTML = `
+    const solar = solarTimesMontevideo();
+    const stationName = viewData.current?.station || "INUMET";
+    const currentTempDisplay = currentTemp !== null && showObservedTemperature()
+      ? `${formatTemperature(currentTemp)}°` : "—";
+    const humidityStat = optionalObservedStat("Humedad", "💧", viewData.current?.humidity, "%");
+    const pressureStat = optionalObservedStat("Presión", "◴", viewData.current?.pressure_hpa ?? viewData.current?.pressure, " hPa");
+    const feelsStat = optionalObservedStat("Sensación térmica", "🌡️", viewData.current?.feels_like ?? viewData.current?.feels_like_c, "°");
 
-      <div class="compactHero">
-        <div class="compactHeroIcon">${observedIcon(viewData)}</div>
-        <div class="compactHeroInfo">${currentHeader}</div>
-      </div>
+    document.getElementById("today").innerHTML = `
+      <section class="appPanel currentPanel">
+        <div class="currentPrimary">
+          <div class="currentBigIcon">${observedIcon(viewData)}</div>
+          <div>
+            <div class="currentEyebrow">Actual · INUMET ${esc(stationName)}</div>
+            <div class="currentBigTemp">${currentTempDisplay}</div>
+            <div class="currentCondition">${esc(observedDescription(viewData))}</div>
+          </div>
+        </div>
+        <div class="currentStats">
+          ${feelsStat}
+          <div class="statRow"><div class="statIcon">💨</div><div class="statLabel">Viento</div><div class="statValue">${esc(observedWindText(viewData))}</div></div>
+          ${humidityStat}
+          ${pressureStat}
+        </div>
+      </section>
 
-      <div class="compactTemps">
-        <div class="compactTemp">
-          <span class="compactTempLabel">Mín.</span>
-          <strong>${esc(today.min)}°</strong>
+      <section class="appPanel forecastPanel">
+        <div class="panelTitleRow"><div class="panelTitle">Pronóstico (${esc(viewData.selectedForecastName)})</div><div class="panelDate">${esc(today.date)}</div></div>
+        <div class="tempTiles">
+          <div class="tempTile min"><span>Mínima</span><strong>${esc(today.min)}°</strong></div>
+          <div class="tempTile max"><span>Máxima</span><strong>${esc(today.max)}°</strong></div>
         </div>
-        <div class="compactTempDivider"></div>
-        <div class="compactTemp">
-          <span class="compactTempLabel">Máx.</span>
-          <strong>${esc(today.max)}°</strong>
+        <div class="periodTiles">
+          ${hasForecastDetail(today.morning) ? `<div class="periodTile"><div class="periodLabel">Mañana</div><div class="periodBody"><div class="periodIcon">${icon({...today, evening:""})}</div><div class="periodText">${esc(today.morning)}</div></div></div>` : ""}
+          <div class="periodTile"><div class="periodLabel">Tarde / Noche</div><div class="periodBody"><div class="periodIcon">${icon({...today, morning:""})}</div><div class="periodText">${esc(today.evening)}</div></div></div>
         </div>
-      </div>
+      </section>
 
-      <div class="compactForecast">
-        ${hasForecastDetail(today.morning) ? `
-        <div class="compactPeriod">
-          <div class="label">Mañana</div>
-          <div class="value">${esc(today.morning)}</div>
-        </div>` : ""}
-        <div class="compactPeriod">
-          <div class="label">Tarde / Noche</div>
-          <div class="value">${esc(today.evening)}</div>
-        </div>
-      </div>
-
-      <div class="compactNow">
-        <div>
-          <span>💨</span>
-          <span><b>Viento</b><br>${esc(observedWindText(viewData))}</span>
-        </div>
-        <div>
-          <span>☔</span>
-          <span><b>Precipitaciones</b><br>${esc(today.rain)}</span>
-        </div>
-      </div>
+      <section class="appPanel detailStrip">
+        <div class="detailCell"><div class="detailIcon">💨</div><div><div class="detailLabel">Viento (pronóstico)</div><div class="detailValue">${esc(today.wind || "No indicado")}</div></div></div>
+        <div class="detailCell"><div class="detailIcon">☔</div><div><div class="detailLabel">Precipitaciones</div><div class="detailValue">${esc(today.rain || "No indicada")}</div></div></div>
+        <div class="detailCell"><div class="detailIcon">🌅</div><div><div class="detailLabel">Amanecer</div><div class="detailValue">${formatSolarTime(solar?.sunrise)}</div><div class="detailSub">Atardecer · ${formatSolarTime(solar?.sunset)}</div></div></div>
+      </section>
     `;
-
 
     /* ======================================
        RECOMENDACIONES
@@ -2771,56 +2729,18 @@ async function load() {
        PRÓXIMOS DÍAS
        ====================================== */
 
-    document.getElementById(
-      "days"
-    ).innerHTML =
+    const nextTitle = document.getElementById("nextTitle");
+    if (nextTitle) nextTitle.textContent = `Próximos días (${viewData.selectedForecastName})`;
 
-      viewData.days
-        .slice(1)
-        .map(function(day) {
-
-          return `
-
-            <div class="nextDay">
-
-
-              <div class="nextHeader">
-
-
-                <div class="nextName">
-
-                  ${icon(day)}
-                  ${esc(day.date)}
-
-                </div>
-
-
-                <div class="nextTemp">
-
-                  ${esc(day.min)}° /
-                  ${esc(day.max)}°
-
-                </div>
-
-
-              </div>
-
-
-              <div class="nextText">
-
-                ${hasForecastDetail(day.morning) ? `${esc(day.morning)}<br>` : ""}
-
-                ${esc(day.evening)}
-
-              </div>
-
-
-            </div>
-          `;
-
-        })
-
-        .join("");
+    document.getElementById("days").innerHTML =
+      viewData.days.slice(1, 4).map(function(day) {
+        return `<div class="nextCard">
+          <div class="nextCardName">${esc(day.date)}</div>
+          <div class="nextCardIcon">${icon(day)}</div>
+          <div><div class="nextCardTemp"><span class="lo">${esc(day.min)}°</span> / <span class="hi">${esc(day.max)}°</span></div>
+          <div class="nextCardText">${esc(shortDescription(day))}</div></div>
+        </div>`;
+      }).join("");
 
 
   }
