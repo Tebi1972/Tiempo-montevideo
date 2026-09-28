@@ -105,6 +105,21 @@ body.partly {
 
 
 /* ==========================================
+   OBSERVACIÓN SIN ESTADO DEL CIELO
+   Fondo neutro: no interpreta el pronóstico como tiempo actual.
+   Mantiene una paleta más sobria que el fondo soleado.
+   ========================================== */
+
+body.observation-neutral {
+  --bg1:#9bb9c9;
+  --bg2:#d9e1dc;
+  --glow:rgba(235,242,235,.42);
+  --glass:rgba(205,220,226,.20);
+  --glass-small:rgba(218,230,232,.18);
+}
+
+
+/* ==========================================
    NUBLADO
    ========================================== */
 
@@ -2549,6 +2564,7 @@ function applyWeatherTheme(data) {
   const condition = rawObservedCondition(data);
   const valid = ["sunny", "partly", "cloudy", "rainy", "stormy"];
   if (valid.includes(condition)) body.classList.add(condition);
+  else body.classList.add("observation-neutral");
 
   /* FASE SOLAR */
   const solarPhase = solarPhaseMontevideo();
@@ -2751,9 +2767,52 @@ function localityIsInWarning(warning, current) {
   return names.some(name => localities.includes(name));
 }
 
+let alertExpiryTimer = null;
+
+function warningEndDate(raw) {
+  const value = String(raw || "").trim();
+  const match = value.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?/);
+  if (!match) return null;
+
+  const [, year, month, day, hour, minute, second = "00"] = match;
+  // INUMET publica la vigencia en hora local de Uruguay.
+  // Uruguay usa UTC-03 en la fecha de estas advertencias.
+  const iso = `${year}-${month}-${day}T${hour}:${minute}:${second}-03:00`;
+  const date = new Date(iso);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function warningIsStillActive(warning) {
+  const endDate = warningEndDate(warning?.end);
+  return !endDate || endDate.getTime() > Date.now();
+}
+
+function scheduleAlertExpiry(data, warning) {
+  if (alertExpiryTimer) {
+    clearTimeout(alertExpiryTimer);
+    alertExpiryTimer = null;
+  }
+
+  const endDate = warningEndDate(warning?.end);
+  if (!endDate) return;
+
+  const delay = endDate.getTime() - Date.now();
+  if (delay <= 0) return;
+
+  // setTimeout admite hasta ~24,8 días. Las advertencias de INUMET
+  // tienen vigencias mucho menores, pero limitamos igualmente el valor.
+  const safeDelay = Math.min(delay + 750, 2147483000);
+  alertExpiryTimer = setTimeout(() => renderAlert(data), safeDelay);
+}
+
 function renderAlert(data) {
   const box = document.getElementById("weatherAlert");
   if (!box) return;
+
+  if (alertExpiryTimer) {
+    clearTimeout(alertExpiryTimer);
+    alertExpiryTimer = null;
+  }
 
   const current = selectedCurrent(data);
   const rootAlert = data?.alert;
@@ -2768,7 +2827,9 @@ function renderAlert(data) {
     ? rootAlert.warnings
     : [rootAlert];
 
-  const applicable = warnings.filter(w => localityIsInWarning(w, current));
+  const applicable = warnings.filter(w =>
+    warningIsStillActive(w) && localityIsInWarning(w, current)
+  );
 
   if (!applicable.length) {
     box.className = "alertCard";
@@ -2821,6 +2882,9 @@ function renderAlert(data) {
          rel="noopener noreferrer">Detalle en INUMET ↗</a>
     </div>
   `;
+
+  // La tarjeta desaparece al vencer aunque data.json todavía no se haya actualizado.
+  scheduleAlertExpiry(data, warning);
 }
 
 function formatWarningEnd(raw) {
