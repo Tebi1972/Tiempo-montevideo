@@ -456,14 +456,19 @@ cloud_types = prado["cloud_types"]
 wind_speed_kmh = prado["wind_speed_kmh"]
 
 # =================================================
-# 3. ADVERTENCIAS METEOROLÓGICAS OFICIALES INUMET - V3
+# 3. ADVERTENCIAS METEOROLÓGICAS OFICIALES INUMET - V4
 # =================================================
-# La página /alerta puede quedar servida desde caché. Para evitar resultados
-# intermitentes hacemos varias consultas con cache-buster y elegimos el objeto
-# "alerta" más reciente. Solo marcamos active=False cuando la fuente obtenida
-# es coherente; los errores de lectura quedan diferenciados.
+# V4 mantiene las zonas oficiales del objeto "alerta", pero añade:
+# - tres lecturas sin caché;
+# - comprobación independiente de la portada de INUMET;
+# - diagnóstico de frescura;
+# - estado "data_unavailable" cuando INUMET dice que hay advertencia
+#   pero la fuente estructurada todavía no entrega zonas vigentes.
+#
+# Importante: nunca inventa localidades ni prolonga una advertencia vencida.
 
 URL_ALERTA = "https://www.inumet.gub.uy/alerta"
+URL_INICIO = "https://www.inumet.gub.uy/"
 alert = {"active": False}
 
 def extraer_objeto_js_variable(html, nombre):
@@ -527,7 +532,8 @@ def texto_zonas(zonas):
 def fecha_uruguay(fecha):
     if not fecha:
         return None
-    texto = str(fecha).strip()
+
+    texto_fecha = str(fecha).strip()
     formatos = (
         "%Y-%m-%d %H:%M:%S",
         "%Y-%m-%d %H:%M",
@@ -536,38 +542,74 @@ def fecha_uruguay(fecha):
     )
     for formato in formatos:
         try:
-            return datetime.strptime(texto, formato).replace(tzinfo=URUGUAY_TZ)
+            return datetime.strptime(texto_fecha, formato).replace(tzinfo=URUGUAY_TZ)
         except ValueError:
             pass
+
     try:
-        dt = datetime.fromisoformat(texto.replace("Z", "+00:00"))
+        dt = datetime.fromisoformat(texto_fecha.replace("Z", "+00:00"))
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=URUGUAY_TZ)
         return dt.astimezone(URUGUAY_TZ)
     except Exception:
         return None
 
-def fecha_objeto_alerta(datos):
-    candidatos = [
-        datos.get("fechaActualizacion"),
-        datos.get("actualizacion"),
-        datos.get("updated"),
-    ]
-    fechas = [fecha_uruguay(x) for x in candidatos]
-    fechas = [x for x in fechas if x is not None]
+def marca_frescura_alerta(datos):
+    # NO usamos "finalizacion" para decidir qué respuesta es más nueva:
+    # una hora futura de vencimiento no es una marca de actualización.
+    fechas = []
+
+    for campo in ("fechaActualizacion", "actualizacion", "updated"):
+        dt = fecha_uruguay(datos.get(campo))
+        if dt:
+            fechas.append(dt)
 
     for adv in datos.get("advertencias") or []:
-        for campo in ("actualizacion", "comienzo", "finalizacion"):
+        for campo in ("actualizacion", "emision", "emitido", "comienzo"):
             dt = fecha_uruguay(adv.get(campo))
-            if dt is not None:
+            if dt:
                 fechas.append(dt)
 
-    return max(fechas) if fechas else datetime(1970, 1, 1, tzinfo=URUGUAY_TZ)
+    return max(fechas) if fechas else None
 
-def descargar_objeto_alerta():
+def portada_indica_vigente():
+    try:
+        headers = dict(HEADERS)
+        headers.update({
+            "Cache-Control": "no-cache, no-store, max-age=0",
+            "Pragma": "no-cache",
+            "Expires": "0",
+        })
+        cache_buster = int(datetime.now(timezone.utc).timestamp() * 1000)
+        respuesta = requests.get(
+            URL_INICIO,
+            params={"_": cache_buster},
+            headers=headers,
+            timeout=30,
+        )
+        respuesta.raise_for_status()
+
+        texto_portada = re.sub(
+            r"\s+", " ",
+            BeautifulSoup(
+                respuesta.text, "html.parser"
+            ).get_text(" ", strip=True)
+        )
+
+        vigente = bool(re.search(
+            r"Advertencia\s+Meteorol[oó]gica.{0,300}\bVigente\b",
+            texto_portada,
+            re.I,
+        ))
+        print("Portada INUMET indica advertencia vigente:", vigente)
+        return vigente
+
+    except Exception as error:
+        print("No se pudo verificar portada INUMET:", error)
+        return None
+
+def descargar_objetos_alerta():
     candidatos = []
-    errores = []
-
     headers_alerta = dict(HEADERS)
     headers_alerta.update({
         "Cache-Control": "no-cache, no-store, max-age=0",
@@ -575,96 +617,111 @@ def descargar_objeto_alerta():
         "Expires": "0",
     })
 
-    # Tres lecturas independientes para reducir respuestas viejas de caché/CDN.
     for intento in range(1, 4):
         try:
-            cache_buster = int(datetime.now(timezone.utc).timestamp() * 1000) + intento
+            cache_buster = int(
+                datetime.now(timezone.utc).timestamp() * 1000
+            ) + intento
+
             respuesta = requests.get(
                 URL_ALERTA,
                 params={"_": cache_buster},
                 headers=headers_alerta,
                 timeout=30,
             )
+
             print(
                 f"Advertencias intento {intento}:",
                 respuesta.status_code,
-                "| bytes:", len(respuesta.text)
+                "| bytes:",
+                len(respuesta.text),
             )
             respuesta.raise_for_status()
 
-            bruto = extraer_objeto_js_variable(respuesta.text, "alerta")
-            print(f"Objeto alerta intento {intento}:", bool(bruto))
-            if not bruto:
-                errores.append(f"intento {intento}: objeto no encontrado")
-                continue
-
-            try:
-                datos = json.loads(bruto)
-            except Exception as e:
-                errores.append(f"intento {intento}: JSON inválido: {e}")
-                continue
-
-            if not isinstance(datos, dict):
-                errores.append(f"intento {intento}: objeto no es diccionario")
-                continue
-
-            marca = fecha_objeto_alerta(datos)
-            candidatos.append((marca, datos))
+            bruto = extraer_objeto_js_variable(
+                respuesta.text, "alerta"
+            )
             print(
-                f"Marca temporal intento {intento}:",
+                f"Objeto alerta intento {intento}:",
+                bool(bruto),
+            )
+            if not bruto:
+                continue
+
+            datos = json.loads(bruto)
+            if not isinstance(datos, dict):
+                continue
+
+            marca = marca_frescura_alerta(datos)
+            print(
+                f"Marca de frescura intento {intento}:",
                 marca.strftime("%d/%m/%Y %H:%M:%S")
+                if marca else "SIN FECHA",
+            )
+            print(
+                f"Bloques recibidos intento {intento}:",
+                len(datos.get("advertencias") or []),
             )
 
-        except Exception as e:
-            errores.append(f"intento {intento}: {e}")
+            candidatos.append((marca, datos))
 
-    if errores:
-        for e in errores:
-            print("Diagnóstico advertencias:", e)
+        except Exception as error:
+            print(
+                f"Error leyendo advertencias intento {intento}:",
+                error,
+            )
 
-    if not candidatos:
-        return None
-
-    candidatos.sort(key=lambda x: x[0], reverse=True)
-    mejor_fecha, mejor = candidatos[0]
-    print(
-        "Objeto de advertencias seleccionado:",
-        mejor_fecha.strftime("%d/%m/%Y %H:%M:%S")
-    )
-    return mejor
+    return candidatos
 
 try:
-    datos_alerta = descargar_objeto_alerta()
+    portada_vigente = portada_indica_vigente()
+    candidatos = descargar_objetos_alerta()
+    ahora_local = datetime.now(URUGUAY_TZ)
 
-    if not datos_alerta:
-        alert = {
-            "active": False,
-            "source_error": "alerta_object_not_found",
-            "check_error": True,
-        }
-        print("Advertencias INUMET: no fue posible obtener un objeto válido.")
-    else:
-        vigentes = []
-        ahora_local = datetime.now(URUGUAY_TZ)
+    candidatos.sort(
+        key=lambda item: item[0]
+        or datetime(1970, 1, 1, tzinfo=URUGUAY_TZ),
+        reverse=True,
+    )
 
+    datos_alerta = candidatos[0][1] if candidatos else None
+    marca_fuente = candidatos[0][0] if candidatos else None
+
+    edad_fuente_h = None
+    if marca_fuente:
+        edad_fuente_h = (
+            ahora_local - marca_fuente
+        ).total_seconds() / 3600
+
+    print(
+        "Objeto de advertencias seleccionado:",
+        marca_fuente.strftime("%d/%m/%Y %H:%M:%S")
+        if marca_fuente else "SIN FECHA",
+    )
+    print(
+        "Edad de la fuente (h):",
+        round(edad_fuente_h, 2)
+        if edad_fuente_h is not None else "?",
+    )
+
+    vigentes = []
+
+    if isinstance(datos_alerta, dict):
         for adv in datos_alerta.get("advertencias") or []:
             inicio_dt = fecha_uruguay(adv.get("comienzo"))
             fin_dt = fecha_uruguay(adv.get("finalizacion"))
 
-            # Una advertencia solo se descarta si sabemos con certeza que terminó.
             if fin_dt is not None and fin_dt < ahora_local:
                 continue
-
-            # Si INUMET incluye bloques futuros dentro de la misma publicación,
-            # todavía no deben mostrarse como vigentes.
             if inicio_dt is not None and inicio_dt > ahora_local:
                 continue
 
-            nivel = nivel_advertencia(adv.get("riesgoFenomeno"))
+            nivel = nivel_advertencia(
+                adv.get("riesgoFenomeno")
+            )
             if not nivel:
                 continue
 
-            zonas = texto_zonas(adv.get("zonas"))
             vigentes.append({
                 "level": nivel,
                 "phenomenon": adv.get("fenomeno"),
@@ -672,61 +729,130 @@ try:
                 "start": adv.get("comienzo"),
                 "end": adv.get("finalizacion"),
                 "description": adv.get("descripcion"),
-                "zones": zonas,
+                "zones": texto_zonas(adv.get("zonas")),
                 "risk": adv.get("riesgoFenomeno") or {},
             })
 
-        if vigentes:
-            prioridad = {"amarilla": 2, "naranja": 3, "roja": 4}
-            vigentes.sort(
-                key=lambda x: prioridad.get(x.get("level"), 0),
-                reverse=True
-            )
-            principal = vigentes[0]
+    if vigentes:
+        prioridad = {
+            "amarilla": 2,
+            "naranja": 3,
+            "roja": 4,
+        }
+        vigentes.sort(
+            key=lambda x: prioridad.get(
+                x.get("level"), 0
+            ),
+            reverse=True,
+        )
 
-            alert = {
-                "active": True,
-                "level": principal["level"],
-                "phenomenon": principal["phenomenon"],
-                "probability": principal["probability"],
-                "start": principal["start"],
-                "end": principal["end"],
-                "description": principal["description"],
-                "zones": principal["zones"],
-                "warnings": vigentes,
-                "updated": datos_alerta.get("fechaActualizacion")
-                    or datos_alerta.get("actualizacion"),
-                "pdf": datos_alerta.get("pdf"),
-                "source": "inumet_alerta_object_v3",
-            }
+        principal = vigentes[0]
 
-            print("Advertencias INUMET vigentes:", len(vigentes))
-            for adv in vigentes:
-                print(
-                    "ALERTA", adv["level"].upper(), "|",
-                    adv.get("phenomenon"), "|",
-                    adv.get("start"), "->", adv.get("end")
-                )
-                print("ZONAS:", adv.get("zones"))
-        else:
-            alert = {
-                "active": False,
-                "source": "inumet_alerta_object_v3",
-                "updated": datos_alerta.get("fechaActualizacion")
-                    or datos_alerta.get("actualizacion"),
-            }
+        alert = {
+            "active": True,
+            "level": principal["level"],
+            "phenomenon": principal["phenomenon"],
+            "probability": principal["probability"],
+            "start": principal["start"],
+            "end": principal["end"],
+            "description": principal["description"],
+            "zones": principal["zones"],
+            "warnings": vigentes,
+            "updated": (
+                datos_alerta.get("fechaActualizacion")
+                or datos_alerta.get("actualizacion")
+            ),
+            "pdf": datos_alerta.get("pdf"),
+            "source": "inumet_alerta_object_v4",
+            "source_timestamp": (
+                marca_fuente.isoformat()
+                if marca_fuente else None
+            ),
+            "source_age_hours": (
+                round(edad_fuente_h, 2)
+                if edad_fuente_h is not None else None
+            ),
+            "homepage_says_active": portada_vigente,
+            "data_unavailable": False,
+        }
+
+        print(
+            "Advertencias INUMET vigentes:",
+            len(vigentes),
+        )
+        for adv in vigentes:
             print(
-                "Advertencia INUMET: el objeto más reciente no contiene "
-                "bloques vigentes para la hora actual."
+                "ALERTA",
+                adv["level"].upper(),
+                "|",
+                adv.get("phenomenon"),
+                "|",
+                adv.get("start"),
+                "->",
+                adv.get("end"),
             )
+            print("ZONAS:", adv.get("zones"))
+
+    elif portada_vigente is True:
+        # La portada dice que hay advertencia, pero la fuente estructurada
+        # todavía no ofrece zonas vigentes. No inventamos ni reutilizamos
+        # zonas vencidas.
+        alert = {
+            "active": False,
+            "data_unavailable": True,
+            "homepage_says_active": True,
+            "source": "inumet_sources_out_of_sync",
+            "source_timestamp": (
+                marca_fuente.isoformat()
+                if marca_fuente else None
+            ),
+            "source_age_hours": (
+                round(edad_fuente_h, 2)
+                if edad_fuente_h is not None else None
+            ),
+            "message": (
+                "INUMET informa una advertencia vigente, "
+                "pero la fuente estructurada de zonas aún "
+                "no entrega datos vigentes."
+            ),
+        }
+
+        print(
+            "ATENCIÓN: portada INUMET = VIGENTE, "
+            "pero no hay zonas estructuradas vigentes."
+        )
+
+    else:
+        alert = {
+            "active": False,
+            "data_unavailable": False,
+            "homepage_says_active": portada_vigente,
+            "source": "inumet_alerta_object_v4",
+            "source_timestamp": (
+                marca_fuente.isoformat()
+                if marca_fuente else None
+            ),
+            "source_age_hours": (
+                round(edad_fuente_h, 2)
+                if edad_fuente_h is not None else None
+            ),
+        }
+        print(
+            "INUMET no entrega advertencias vigentes."
+        )
 
 except Exception as error:
     alert = {
         "active": False,
+        "data_unavailable": True,
         "check_error": True,
         "source_error": str(error),
+        "source": "inumet_alert_v4_error",
     }
-    print("Error procesando advertencias INUMET:", error)
+    print(
+        "Error procesando advertencias INUMET:",
+        error,
+    )
 
 # =================================================
 # 4. RESUMEN DEL PRONÓSTICO
