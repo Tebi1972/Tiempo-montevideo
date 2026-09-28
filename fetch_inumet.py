@@ -223,6 +223,170 @@ for codigo in ZONE_NAMES:
     else:
         print(codigo, "-> NO EXTRAÍDA")
 
+
+# =================================================
+# 1C. PRONÓSTICO EXTENDIDO INUMET
+#     Completa los 3 días FUTUROS que muestra la app.
+# =================================================
+# El pronóstico corto de INUMET contiene el día actual + dos días más.
+# INUMET publica aparte un JSON extendido. Tomamos desde diaMasN >= 3 y
+# lo anexamos por zona, sin sustituir ni inventar el pronóstico corto.
+URL_PRONOSTICO_EXTENDIDO = (
+    "https://www.inumet.gub.uy/reportes/pronosticos/pronosticoV4.json"
+)
+
+def _valor_extendido(item, nombres):
+    """Busca un campo directo tolerando pequeñas variaciones de nombre."""
+    for nombre in nombres:
+        if nombre in item and item.get(nombre) not in (None, ""):
+            return item.get(nombre)
+
+    normalizados = {
+        re.sub(r"[^a-z0-9]", "", str(k).lower()): v
+        for k, v in item.items()
+    }
+    for nombre in nombres:
+        clave = re.sub(r"[^a-z0-9]", "", nombre.lower())
+        if clave in normalizados and normalizados[clave] not in (None, ""):
+            return normalizados[clave]
+    return None
+
+def _texto_precipitacion_extendida(item):
+    # El JSON ha cambiado de forma en distintas versiones del sitio.
+    # Primero probamos nombres esperables y luego cualquier clave relacionada
+    # con probabilidad/precipitación.
+    candidatos = [
+        "probabilidadPrecipitaciones",
+        "probabilidadPrecipitacion",
+        "probPrecipitaciones",
+        "probPrecipitacion",
+        "precipitaciones",
+        "precipitacion",
+        "probLluvia",
+    ]
+    valor = _valor_extendido(item, candidatos)
+
+    if valor in (None, ""):
+        for clave, posible in item.items():
+            nombre = str(clave).lower()
+            if ("precip" in nombre or "lluv" in nombre) and posible not in (None, ""):
+                valor = posible
+                break
+
+    if valor in (None, ""):
+        return "Pronóstico extendido"
+
+    texto_valor = str(valor).strip()
+    bajo = texto_valor.lower()
+    if bajo in {"nula", "ninguna", "0", "0%"}:
+        return "Sin precipitaciones previstas"
+    if bajo in {"baja", "bajo"}:
+        return "Baja probabilidad de precipitaciones"
+    if bajo in {"media", "moderada", "moderado"}:
+        return "Probabilidad media de precipitaciones"
+    if bajo in {"alta", "alto"}:
+        return "Alta probabilidad de precipitaciones"
+
+    if "precip" in bajo or "lluv" in bajo:
+        return texto_valor
+    return f"Probabilidad de precipitaciones: {texto_valor}"
+
+def _convertir_extendido(item):
+    fecha = _valor_extendido(item, ["grupo", "grupoCorto", "fecha"])
+    minimo = _valor_extendido(
+        item, ["tempMin", "temperaturaMinima", "temperatura_minima", "min"]
+    )
+    maximo = _valor_extendido(
+        item, ["tempMax", "temperaturaMaxima", "temperatura_maxima", "max"]
+    )
+
+    if fecha in (None, "") or minimo in (None, "") or maximo in (None, ""):
+        return None
+
+    detalle = _texto_precipitacion_extendida(item)
+    return {
+        "date": str(fecha),
+        "min": str(minimo),
+        "max": str(maximo),
+        "morning": None,
+        "evening": detalle,
+        "wind": "—",
+        "rain": detalle,
+        "extended": True,
+        "weather_code": item.get("estadoTiempo"),
+    }
+
+def _anexar_sin_duplicados(base, nuevos, limite=7):
+    salida = list(base or [])
+    fechas = {str(x.get("date", "")).strip().lower() for x in salida}
+    for dia in nuevos:
+        fecha = str(dia.get("date", "")).strip().lower()
+        if not fecha or fecha in fechas:
+            continue
+        salida.append(dia)
+        fechas.add(fecha)
+        if len(salida) >= limite:
+            break
+    return salida
+
+try:
+    respuesta_ext = requests.get(
+        URL_PRONOSTICO_EXTENDIDO, headers=HEADERS, timeout=30
+    )
+    print("Código respuesta pronóstico extendido:", respuesta_ext.status_code)
+    respuesta_ext.raise_for_status()
+    datos_ext = respuesta_ext.json()
+    items_ext = datos_ext.get("items", []) if isinstance(datos_ext, dict) else []
+
+    print("Ítems de pronóstico extendido recibidos:", len(items_ext))
+    if items_ext:
+        print("Campos del primer ítem extendido:", sorted(items_ext[0].keys()))
+
+    por_zona_ext = {}
+    for item in items_ext:
+        if not isinstance(item, dict):
+            continue
+        zona = str(item.get("zonaCorta") or "").strip().upper()
+        if zona == "SW":
+            zona = "SO"
+        try:
+            dia_mas_n = int(item.get("diaMasN"))
+        except Exception:
+            dia_mas_n = -1
+        if not zona or dia_mas_n < 3:
+            continue
+        por_zona_ext.setdefault(zona, []).append((dia_mas_n, item))
+
+    for codigo, pares in por_zona_ext.items():
+        if codigo not in forecasts:
+            continue
+        convertidos = []
+        for _, item in sorted(pares, key=lambda x: x[0]):
+            dia = _convertir_extendido(item)
+            if dia:
+                convertidos.append(dia)
+        forecasts[codigo]["days"] = _anexar_sin_duplicados(
+            forecasts[codigo].get("days", []), convertidos
+        )
+
+    # El campo histórico `days` representa Montevideo; lo dejamos también
+    # completo para compatibilidad con versiones anteriores del index.
+    if "M" in forecasts:
+        days = list(forecasts["M"]["days"])
+
+    for codigo in ZONE_NAMES:
+        if codigo in forecasts:
+            print(
+                "Pronóstico total", codigo, "->",
+                len(forecasts[codigo].get("days", [])), "días"
+            )
+
+except Exception as error:
+    # Si falla el extendido, la actualización principal sigue funcionando.
+    # La interfaz mostrará únicamente los días oficiales disponibles.
+    print("Error obteniendo pronóstico extendido:", error)
+
+
 # =================================================
 # 2. OBSERVACIONES REALES - RED NACIONAL SYNOP
 # =================================================
