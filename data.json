@@ -1,5 +1,5 @@
 {
-  "updated": "28/09/2026 11:17",
+  "updated": "28/09/2026 12:06",
   "current": {
     "temperature": 17.5,
     "station": "Prado",
@@ -18,19 +18,19 @@
     "level": "naranja",
     "phenomenon": "Tormentas fuertes y puntualmente severas",
     "probability": "> 75%",
-    "start": "2026-09-28 09:00",
-    "end": "2026-09-28 12:00",
+    "start": "2026-09-28 12:00",
+    "end": "2026-09-28 15:00",
     "description": "El área será afectada por tormentas fuertes y/o severas.\n\nPodrán estar acompañadas por precipitaciones abundantes en cortos periodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-    "zones": "Artigas(Todo el departamento), Paysandú : Cerro Chato, Chapicuy, Gallinal y Tambores.Rivera : Amarillo, Cerro Pelado , Cerros de la Calera, La Puente , Lagos del Norte, Masoller, Minas de Corrales, Paso Ataques y Tranqueras.Salto(Todo el departamento), Tacuarembó : Arerungua, Balneario Iporá, La Pedrera, Paso Bonilla, Paso del Cerro, Sauce de Batoví, Tacuarembó y Tambores.",
+    "zones": "Artigas : Baltasar Brum, Diego Lamas, Paso Campamento y Sequeira.Paysandú : Cerro Chato, Chapicuy, Gallinal, Lorenzo Geyres, Quebracho, Tambores y Termas de Guaviyú.Rivera : Amarillo, Cerro Pelado , Cerros de la Calera, La Puente , Lagos del Norte, Masoller, Minas de Corrales, Paso Ataques y Tranqueras.Salto : Albisu, Arapey, Biassini, Campo de Todos, Cayetano, Cerro de Vera, Colonia 18 de Julio, Colonia Itapebí, Constitución, Fernández, Garibaldi, Itapebí, Lluveras, Migliaro, Puntas de Valentín, Quintana, Rincón de Valentín, Salto, San Antonio, Sarandí de Arapey, Saucedo, Termas del Arapey y Termas del Daymán.Tacuarembó : Arerungua, Balneario Iporá, La Pedrera, Paso Bonilla, Paso del Cerro, Sauce de Batoví, Tacuarembó y Tambores.",
     "warnings": [
       {
         "level": "naranja",
         "phenomenon": "Tormentas fuertes y puntualmente severas",
         "probability": "> 75%",
-        "start": "2026-09-28 09:00",
-        "end": "2026-09-28 12:00",
+        "start": "2026-09-28 12:00",
+        "end": "2026-09-28 15:00",
         "description": "El área será afectada por tormentas fuertes y/o severas.\n\nPodrán estar acompañadas por precipitaciones abundantes en cortos periodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Artigas(Todo el departamento), Paysandú : Cerro Chato, Chapicuy, Gallinal y Tambores.Rivera : Amarillo, Cerro Pelado , Cerros de la Calera, La Puente , Lagos del Norte, Masoller, Minas de Corrales, Paso Ataques y Tranqueras.Salto(Todo el departamento), Tacuarembó : Arerungua, Balneario Iporá, La Pedrera, Paso Bonilla, Paso del Cerro, Sauce de Batoví, Tacuarembó y Tambores.",
+        "zones": "Artigas : Baltasar Brum, Diego Lamas, Paso Campamento y Sequeira.Paysandú : Cerro Chato, Chapicuy, Gallinal, Lorenzo Geyres, Quebracho, Tambores y Termas de Guaviyú.Rivera : Amarillo, Cerro Pelado , Cerros de la Calera, La Puente , Lagos del Norte, Masoller, Minas de Corrales, Paso Ataques y Tranqueras.Salto : Albisu, Arapey, Biassini, Campo de Todos, Cayetano, Cerro de Vera, Colonia 18 de Julio, Colonia Itapebí, Constitución, Fernández, Garibaldi, Itapebí, Lluveras, Migliaro, Puntas de Valentín, Quintana, Rincón de Valentín, Salto, San Antonio, Sarandí de Arapey, Saucedo, Termas del Arapey y Termas del Daymán.Tacuarembó : Arerungua, Balneario Iporá, La Pedrera, Paso Bonilla, Paso del Cerro, Sauce de Batoví, Tacuarembó y Tambores.",
         "risk": {
           "riesgoViento": 1,
           "riesgoLluvia": 3,
@@ -44,10 +44,27 @@
         "level": "amarilla",
         "phenomenon": "Persistencia de tormentas puntualmente fuertes",
         "probability": "> 75%",
-        "start": "2026-09-28 09:00",
-        "end": "2026-09-28 12:00",
+        "start": "2026-09-28 12:00",
+        "end": "2026-09-28 15:00",
         "description": "El área será afectada por tormentas fuertes. \n\nPodrán estar acompañadas por precipitaciones abundantes en cortos periodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Cerro Largo : Isidoro Noblía.Paysandú : Beisso, Casa Blanca, Chacras de Paysandú, Colonia Nuevo Paysandú, Constancia, Esperanza, Guayabos, Guichón, Lorenzo Geyres, Merinos, Orgoroso, Paysandú, Piedras Coloradas, Porvenir, Quebracho y Termas de Guaviyú.Río Negro : Algorta, Bellaco, Gartental, General Borges, Menafra, Paso de los mellizos, Sarandí de Navarro, Tres Quintas, Villa María y Young.Rivera : Arroyo Blanco, Cerrillada, Las Flores, Moirones, Paso Hospital y Vichadero.Tacuarembó : Achar, Ansina, Caraguata, Cerro Chato, Clara, Cuchilla de Peralta, Curtina, La Hilera, Las Toscas, Piedra Sola, Pueblo de Arriba, Pueblo de Barro y Punta de Carretera.",
+        "zones": "Cerro Largo : Isidoro Noblía.Paysandú : Beisso, Casa Blanca, Chacras de Paysandú, Colonia Nuevo Paysandú, Constancia, Esperanza, Guayabos, Guichón, Merinos, Orgoroso, Paysandú, Piedras Coloradas y Porvenir.Río Negro : Algorta, Bellaco, Gartental, General Borges, Menafra, Paso de los mellizos, Sarandí de Navarro, Tres Quintas, Villa María y Young.Rivera : Arroyo Blanco, Cerrillada, Las Flores, Moirones, Paso Hospital y Vichadero.Tacuarembó : Achar, Ansina, Caraguata, Cerro Chato, Clara, Cuchilla de Peralta, Curtina, La Hilera, Las Toscas, Piedra Sola, Pueblo de Arriba, Pueblo de Barro y Punta de Carretera.",
+        "risk": {
+          "riesgoViento": 1,
+          "riesgoLluvia": 1,
+          "riesgoTormenta": 2,
+          "riesgoVisibilidad": 1,
+          "riesgoCalor": 1,
+          "riesgoFrio": 1
+        }
+      },
+      {
+        "level": "amarilla",
+        "phenomenon": "Persistencia de tormentas puntualmente fuertes",
+        "probability": "> 75%",
+        "start": "2026-09-28 12:00",
+        "end": "2026-09-28 15:00",
+        "description": "El área será afectada por tormentas fuertes. \n\nPodrán estar acompañadas por precipitaciones abundantes en cortos periodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
+        "zones": "Artigas : Bella Unión, Bernabé Rivera, Cainsa, Colonia Palma, Coronado, Franquia, Javier de Viana, Mones Quintela, Portones de Hierro y Campodónico, Santa Rosa del Cuareim, Tomás Gomensoro y Topador.Salto : Belén.",
         "risk": {
           "riesgoViento": 1,
           "riesgoLluvia": 1,
@@ -58,9 +75,13 @@
         }
       }
     ],
-    "updated": "2026-09-28 09:00",
-    "pdf": "adv1790596604415.pdf",
-    "source": "inumet_alerta_object_v3"
+    "updated": "2026-09-28 12:00",
+    "pdf": "adv1790607585470.pdf",
+    "source": "inumet_alerta_object_v4",
+    "source_timestamp": "2026-09-28T12:00:00-03:00",
+    "source_age_hours": 0.11,
+    "homepage_says_active": true,
+    "data_unavailable": false
   },
   "locations": {
     "montevideo_prado": {
@@ -504,7 +525,7 @@
       "days": [
         {
           "date": "Lunes 28",
-          "min": "14",
+          "min": "13",
           "max": "21",
           "morning": "Nuboso y cubierto. Baja probabilidad de precipitaciones.",
           "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
@@ -536,9 +557,9 @@
       "days": [
         {
           "date": "Lunes 28",
-          "min": "16",
+          "min": "12",
           "max": "28",
-          "morning": "Nuboso y cubierto. Precipitaciones y tormentas.",
+          "morning": "Nuboso y cubierto. Precipitaciones y tormentas. Neblinas.",
           "evening": "Cubierto. Precipitaciones y tormentas. Mejoras temporarias. Neblinas.",
           "wind": "Sector E 20-40 km/h, rachas de 50-60 km/h. Rachas fuertes asociadas a tormentas. Sector E 20-40 km/h, rachas de hasta 50 km/h. Rachas fuertes asociadas a tormentas.",
           "rain": "Precipitaciones"
@@ -600,7 +621,7 @@
       "days": [
         {
           "date": "Lunes 28",
-          "min": "13",
+          "min": "14",
           "max": "21",
           "morning": "Nuboso y cubierto. Precipitaciones y probables tormentas. Mejoras temporarias. Neblinas.",
           "evening": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Mejoras temporarias. Neblinas.",
@@ -632,11 +653,11 @@
       "days": [
         {
           "date": "Lunes 28",
-          "min": "14",
+          "min": "13",
           "max": "22",
           "morning": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Mejoras temporarias.",
           "evening": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Mejoras temporarias.",
-          "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h, rachas de hasta 40 km/h.",
+          "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h, rachas de 40-50 km/h.",
           "rain": "Precipitaciones"
         },
         {
@@ -699,7 +720,7 @@
           "min": "13",
           "max": "16",
           "morning": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas.",
-          "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
+          "evening": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas.",
           "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h, rachas de hasta 50 km/h.",
           "rain": "Precipitaciones"
         },
@@ -727,11 +748,11 @@
   "days": [
     {
       "date": "Lunes 28",
-      "min": "14",
+      "min": "13",
       "max": "21",
-      "morning": "Nuboso y cubierto. Baja probabilidad de precipitaciones.",
+      "morning": null,
       "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
-      "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h, rachas de hasta 40 km/h. ",
+      "wind": "Sector E 20-30 km/h, rachas de hasta 40 km/h. ",
       "rain": "Precipitaciones"
     },
     {
@@ -749,9 +770,9 @@
       "max": "16",
       "morning": "Algo nuboso y nuboso.",
       "evening": "Nuboso a cubierto.",
-      "wind": "SW 20-30 km/h, rachas de hasta 50 km/h. SW 10-30 km/h a variables 0-20 km/h. Pronóstico extendido: Última Actualización: 28/09/2026 09:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "wind": "SW 20-30 km/h, rachas de hasta 50 km/h. SW 10-30 km/h a variables 0-20 km/h. Pronóstico extendido: Última Actualización: 28/09/2026 12:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
       "rain": "No indicada"
     }
   ],
-  "summary": "Temperaturas de 14° a 21°; con posibilidad de precipitaciones."
+  "summary": "Temperaturas de 13° a 21°; con posibilidad de precipitaciones."
 }
