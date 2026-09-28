@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Tiempo Montevideo — INUMET</title>
+<title>Tiempo Uruguay</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#17304a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Tiempo Montevideo">
+<meta name="apple-mobile-web-app-title" content="Tiempo Uruguay">
 <link rel="apple-touch-icon" href="icon-192.png">
 
 
@@ -1837,6 +1837,136 @@ button[onclick="load()"]{width:100%;margin-top:2px;background:var(--glass);color
   .solarItemTime{font-size:.66rem}
 }
 
+
+/* ==========================================
+   V4.12 — FUENTES, ACERCA DE Y PRIVACIDAD
+   ========================================== */
+.aboutButtonV412{
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  font-weight:800;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+  cursor:pointer;
+  padding:4px 2px;
+}
+.aboutButtonV412:hover{opacity:.82}
+.aboutButtonV412:focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:3px;
+  border-radius:6px;
+}
+.aboutDialogV412{
+  width:min(680px,calc(100vw - 28px));
+  max-height:min(82vh,760px);
+  padding:0;
+  border:1px solid var(--border);
+  border-radius:24px;
+  color:var(--text);
+  background:rgba(238,247,252,.94);
+  box-shadow:0 24px 70px rgba(7,18,35,.34);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  overflow:hidden;
+}
+body.night .aboutDialogV412,
+body.stormy .aboutDialogV412,
+body.rainy .aboutDialogV412{
+  background:rgba(18,35,53,.94);
+}
+body.dawn:not(.rainy):not(.stormy) .aboutDialogV412,
+body.dusk:not(.rainy):not(.stormy) .aboutDialogV412{
+  background:rgba(246,249,251,.95);
+}
+.aboutDialogV412::backdrop{
+  background:rgba(4,13,25,.48);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+}
+.aboutHeaderV412{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:20px 22px 14px;
+  border-bottom:1px solid var(--border);
+}
+.aboutHeaderV412 h2{
+  margin:0;
+  font-size:1.35rem;
+  letter-spacing:-.02em;
+}
+.aboutCloseV412{
+  width:36px!important;
+  height:36px!important;
+  min-width:36px!important;
+  padding:0!important;
+  margin:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:50%!important;
+  border:1px solid var(--border)!important;
+  background:var(--glass)!important;
+  color:var(--text)!important;
+  font-size:1.35rem!important;
+  line-height:1!important;
+  box-shadow:none!important;
+  cursor:pointer;
+}
+.aboutBodyV412{
+  padding:18px 22px 22px;
+  overflow:auto;
+  max-height:calc(82vh - 72px);
+  line-height:1.5;
+}
+.aboutLeadV412{
+  margin:0 0 16px;
+  font-weight:750;
+}
+.aboutSectionV412{
+  padding:14px 0;
+  border-top:1px solid var(--border);
+}
+.aboutSectionV412:first-of-type{border-top:0;padding-top:0}
+.aboutSectionV412 h3{
+  margin:0 0 7px;
+  font-size:1rem;
+}
+.aboutSectionV412 p{
+  margin:6px 0;
+  font-size:.9rem;
+}
+.aboutSectionV412 ul{
+  margin:7px 0 0;
+  padding-left:20px;
+}
+.aboutSectionV412 li{
+  margin:6px 0;
+  font-size:.9rem;
+}
+.aboutSectionV412 a{
+  font-weight:800;
+  text-underline-offset:2px;
+}
+.aboutFineV412{
+  color:var(--muted);
+  font-size:.8rem!important;
+}
+@media(max-width:700px){
+  .aboutDialogV412{width:calc(100vw - 18px);max-height:88vh;border-radius:20px}
+  .aboutHeaderV412{padding:15px 16px 11px}
+  .aboutHeaderV412 h2{font-size:1.12rem}
+  .aboutBodyV412{padding:14px 16px 18px;max-height:calc(88vh - 62px)}
+  .aboutSectionV412{padding:11px 0}
+  .aboutSectionV412 p,.aboutSectionV412 li{font-size:.82rem}
+  .aboutFineV412{font-size:.74rem!important}
+  .footerActions{margin-top:7px!important}
+}
+
 </style>
 </head>
 
@@ -1933,10 +2063,56 @@ button[onclick="load()"]{width:100%;margin-top:2px;background:var(--glass);color
   <section id="summaryCard"><div id="summary">—</div></section>
 
   <div class="footerActions">
-    <p class="muted footer">Datos: <a href="https://www.inumet.gub.uy/tiempo/pronostico" target="_blank" rel="noopener">INUMET</a></p>
+    <p class="muted footer">
+      Datos meteorológicos: <a href="https://www.inumet.gub.uy/" target="_blank" rel="noopener noreferrer">INUMET</a> ·
+      <button id="openAboutV412" class="aboutButtonV412" type="button">Fuentes y acerca de</button>
+    </p>
   </div>
 
 </div>
+
+<dialog id="aboutDialogV412" class="aboutDialogV412" aria-labelledby="aboutTitleV412">
+  <div class="aboutHeaderV412">
+    <h2 id="aboutTitleV412">Tiempo Uruguay</h2>
+    <button id="closeAboutV412" class="aboutCloseV412" type="button" aria-label="Cerrar">×</button>
+  </div>
+  <div class="aboutBodyV412">
+    <p class="aboutLeadV412">Aplicación meteorológica independiente y no oficial. No está afiliada ni es desarrollada por INUMET.</p>
+
+    <section class="aboutSectionV412">
+      <h3>Fuentes</h3>
+      <p>Las observaciones meteorológicas, los pronósticos y las advertencias que se muestran provienen del <a href="https://www.inumet.gub.uy/" target="_blank" rel="noopener noreferrer">Instituto Uruguayo de Meteorología (INUMET)</a>.</p>
+      <p>Las advertencias meteorológicas son emitidas oficialmente por INUMET. Tiempo Uruguay las presenta de forma resumida y enlaza al detalle oficial.</p>
+      <p class="aboutFineV412">Algunos datos de observación utilizados por la aplicación forman parte de servicios y conjuntos de datos abiertos de INUMET.</p>
+    </section>
+
+    <section class="aboutSectionV412">
+      <h3>Cálculos de Tiempo Uruguay</h3>
+      <p>La sensación térmica, las recomendaciones “¿Llevo paraguas?” y “¿Necesito abrigo?”, los iconos derivados y las horas de amanecer y atardecer son cálculos o interpretaciones de la aplicación. No constituyen productos oficiales de INUMET.</p>
+    </section>
+
+    <section class="aboutSectionV412">
+      <h3>Privacidad y ubicación</h3>
+      <p>La ubicación se solicita únicamente cuando tocás el botón “Usar mi ubicación” y el navegador pide tu autorización. Las coordenadas se utilizan para identificar la estación INUMET disponible más cercana.</p>
+      <p>Tiempo Uruguay no guarda tus coordenadas en el almacenamiento local del navegador. Solo recuerda la estación seleccionada para mantener tu preferencia en próximas visitas.</p>
+    </section>
+
+    <section class="aboutSectionV412">
+      <h3>Actualización y disponibilidad</h3>
+      <p>La información puede presentar demoras respecto de la publicación original o quedar temporalmente no disponible por cambios, interrupciones o actualizaciones de las fuentes. Ante una situación meteorológica de riesgo, consultá siempre la información oficial de INUMET.</p>
+    </section>
+
+    <section class="aboutSectionV412">
+      <h3>Enlaces oficiales</h3>
+      <ul>
+        <li><a href="https://www.inumet.gub.uy/tiempo/pronostico" target="_blank" rel="noopener noreferrer">Pronóstico de INUMET</a></li>
+        <li><a href="https://www.inumet.gub.uy/alerta" target="_blank" rel="noopener noreferrer">Advertencias meteorológicas de INUMET</a></li>
+        <li><a href="https://catalogodatos.gub.uy/organization/inumet" target="_blank" rel="noopener noreferrer">Datos abiertos de INUMET</a></li>
+        <li><a href="https://www.gub.uy/agencia-gobierno-electronico-sociedad-informacion-conocimiento/comunicacion/publicaciones/licencia-datos-abiertos-uruguay" target="_blank" rel="noopener noreferrer">Licencia de Datos Abiertos de Uruguay</a></li>
+      </ul>
+    </section>
+  </div>
+</dialog>
 
 
 <script>
@@ -3301,6 +3477,39 @@ async function load(options = {}) {
   }
 }
 
+
+
+/* ==========================================
+   V4.12 — MODAL FUENTES / ACERCA DE
+   ========================================== */
+(function setupAboutV412(){
+  const dialog = document.getElementById("aboutDialogV412");
+  const openButton = document.getElementById("openAboutV412");
+  const closeButton = document.getElementById("closeAboutV412");
+
+  if (!dialog || !openButton || !closeButton) return;
+
+  openButton.addEventListener("click", () => {
+    if (typeof dialog.showModal === "function") {
+      dialog.showModal();
+    } else {
+      dialog.setAttribute("open", "");
+    }
+  });
+
+  closeButton.addEventListener("click", () => {
+    if (typeof dialog.close === "function") dialog.close();
+    else dialog.removeAttribute("open");
+  });
+
+  dialog.addEventListener("click", event => {
+    if (event.target !== dialog) return;
+    const rect = dialog.getBoundingClientRect();
+    const inside = event.clientX >= rect.left && event.clientX <= rect.right &&
+                   event.clientY >= rect.top && event.clientY <= rect.bottom;
+    if (!inside) dialog.close();
+  });
+})();
 
 /* ==========================================
    SINCRONIZACIÓN AUTOMÁTICA
