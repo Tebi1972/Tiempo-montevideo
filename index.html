@@ -1671,6 +1671,56 @@ button[onclick="load()"]{width:100%;margin-top:2px;background:var(--glass);color
   .currentStatsV44 .currentMetricValue{font-size:.59rem!important}
 }
 
+
+/* ==========================================
+   V4.5 — PULIDO VISUAL + SOL
+   ========================================== */
+.solarCellV45{display:block!important;min-width:0}
+.solarPairV45{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center;width:100%}
+.solarItemV45{display:grid;grid-template-columns:34px minmax(0,1fr);gap:7px;align-items:center;min-width:0}
+.solarItemIcon{font-size:1.65rem;line-height:1;text-align:center}
+.solarItemLabel{color:var(--muted);font-size:.72rem;font-weight:750;line-height:1.05}
+.solarItemTime{font-size:.95rem;font-weight:900;line-height:1.15;margin-top:3px;font-variant-numeric:tabular-nums}
+
+@media(max-width:700px){
+  .currentLayoutV44{grid-template-columns:minmax(0,1.14fr) minmax(145px,.86fr)!important;gap:8px!important}
+  .currentLeftV44{grid-template-columns:40px auto minmax(56px,1fr)!important;gap:5px!important}
+  .currentLeftV44 .currentBigIcon{font-size:36px!important}
+  .currentLeftV44 .currentBigTemp{font-size:2.05rem!important}
+  .currentLeftV44 .currentCondition{font-size:.67rem!important}
+  .currentStatsV44{padding-left:8px!important;gap:4px!important}
+  .currentStatsV44 .currentMetric{grid-template-columns:15px minmax(58px,1fr) auto!important;column-gap:4px!important;white-space:normal!important}
+  .currentStatsV44 .currentMetricIcon{font-size:.8rem!important}
+  .currentStatsV44 .currentMetricLabel{font-size:.57rem!important;line-height:1.02!important}
+  .currentStatsV44 .currentMetricValue{font-size:.67rem!important;white-space:nowrap!important}
+  .detailStripV43{grid-template-columns:.92fr 1.08fr!important}
+  .solarCellV45{padding:2px 8px!important}
+  .solarPairV45{gap:7px}
+  .solarItemV45{grid-template-columns:25px minmax(0,1fr);gap:4px}
+  .solarItemIcon{font-size:1.3rem}
+  .solarItemLabel{font-size:.57rem}
+  .solarItemTime{font-size:.72rem;margin-top:2px}
+  .nextPanel .nextCardIcon{font-size:34px!important}
+}
+
+@media(max-width:380px){
+  .currentLayoutV44{grid-template-columns:minmax(0,1.06fr) minmax(138px,.94fr)!important;gap:5px!important}
+  .currentLeftV44{grid-template-columns:32px auto minmax(44px,1fr)!important;gap:3px!important}
+  .currentLeftV44 .currentBigIcon{font-size:31px!important}
+  .currentLeftV44 .currentBigTemp{font-size:1.78rem!important}
+  .currentLeftV44 .currentCondition{font-size:.58rem!important}
+  .currentStatsV44{padding-left:6px!important;gap:3px!important}
+  .currentStatsV44 .currentMetric{grid-template-columns:12px minmax(55px,1fr) auto!important;column-gap:3px!important}
+  .currentStatsV44 .currentMetricIcon{font-size:.7rem!important}
+  .currentStatsV44 .currentMetricLabel{font-size:.49rem!important}
+  .currentStatsV44 .currentMetricValue{font-size:.59rem!important}
+  .solarPairV45{gap:4px}
+  .solarItemV45{grid-template-columns:21px minmax(0,1fr);gap:3px}
+  .solarItemIcon{font-size:1.08rem}
+  .solarItemLabel{font-size:.49rem}
+  .solarItemTime{font-size:.66rem}
+}
+
 </style>
 </head>
 
@@ -2721,7 +2771,7 @@ function optionalObservedInline(label, icon, value, suffix="", approximate=false
   const n = Number(value);
   if (!Number.isFinite(n)) return "";
   const formatted = n.toLocaleString("es-UY", {maximumFractionDigits:1});
-  const shown = `${approximate ? "≈" : ""}${formatted}${suffix}`;
+  const shown = `${formatted}${suffix}${approximate ? " aprox." : ""}`;
   const title = approximate ? `${label} estimada` : label;
   return `<div class="currentMetric" title="${esc(title)}"><span class="currentMetricIcon">${icon}</span><span class="currentMetricLabel">${esc(label)}</span><span class="currentMetricValue">${esc(shown)}</span></div>`;
 }
@@ -2856,7 +2906,7 @@ async function load() {
       ? `${formatTemperature(currentTemp)}°` : "—";
     const humidityInline = optionalObservedInline("Humedad", "💧", viewData.current?.humidity, "%");
     const pressureInline = optionalObservedInline("Presión", "◴", viewData.current?.pressure_hpa ?? viewData.current?.pressure, " hPa");
-    const feelsInline = optionalObservedInline("Sensación", "🌡️", viewData.current?.feels_like_c ?? viewData.current?.feels_like, "°", true);
+    const feelsInline = optionalObservedInline("Sensación térmica", "🌡️", viewData.current?.feels_like_c ?? viewData.current?.feels_like, "°", true);
     const windInline = `<div class="currentMetric" title="Viento"><span class="currentMetricIcon">💨</span><span class="currentMetricLabel">Viento</span><span class="currentMetricValue">${esc(observedWindText(viewData))}</span></div>`;
 
     document.getElementById("today").innerHTML = `
@@ -2891,7 +2941,18 @@ async function load() {
 
       <section class="appPanel detailStrip detailStripV43">
         <div class="detailCell"><div class="detailIcon">☔</div><div><div class="detailLabel">Precipitaciones</div><div class="detailValue">${esc(compactRainText(today.rain))}</div></div></div>
-        <div class="detailCell"><div class="detailIcon">🌅</div><div><div class="detailLabel">Amanecer</div><div class="detailValue">${formatSolarTime(solar?.sunrise)}</div><div class="detailSub">Atardecer · ${formatSolarTime(solar?.sunset)}</div></div></div>
+        <div class="detailCell solarCellV45">
+          <div class="solarPairV45">
+            <div class="solarItemV45">
+              <div class="solarItemIcon">🌅</div>
+              <div><div class="solarItemLabel">Amanecer</div><div class="solarItemTime">${formatSolarTime(solar?.sunrise)}</div></div>
+            </div>
+            <div class="solarItemV45">
+              <div class="solarItemIcon">🌇</div>
+              <div><div class="solarItemLabel">Atardecer</div><div class="solarItemTime">${formatSolarTime(solar?.sunset)}</div></div>
+            </div>
+          </div>
+        </div>
       </section>
     `;
 
