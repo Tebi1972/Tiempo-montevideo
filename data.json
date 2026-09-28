@@ -1,5 +1,5 @@
 {
-  "updated": "28/09/2026 16:28",
+  "updated": "28/09/2026 16:48",
   "current": {
     "temperature": 20.0,
     "station": "Prado",
@@ -11,7 +11,11 @@
     "cloud_types": [
       "NIMBOSTRATUS (NS)"
     ],
-    "wind_speed_kmh": 15.1
+    "wind_speed_kmh": 15.1,
+    "humidity": 74.0,
+    "pressure_hpa": 1010.0,
+    "dewpoint_c": 15.4,
+    "feels_like_c": 18.8
   },
   "alert": {
     "active": true,
@@ -62,7 +66,7 @@
     "pdf": "adv1790616641463.pdf",
     "source": "inumet_alerta_object_v4",
     "source_timestamp": "2026-09-28T14:30:00-03:00",
-    "source_age_hours": 1.98,
+    "source_age_hours": 2.31,
     "homepage_says_active": true,
     "data_unavailable": false
   },
@@ -82,6 +86,10 @@
         "NIMBOSTRATUS (NS)"
       ],
       "wind_speed_kmh": 15.1,
+      "humidity": 74.0,
+      "pressure_hpa": 1010.0,
+      "dewpoint_c": 15.4,
+      "feels_like_c": 18.8,
       "forecast_zone": "M"
     },
     "montevideo_carrasco": {
@@ -99,6 +107,10 @@
         "NIMBOSTRATUS (NS)"
       ],
       "wind_speed_kmh": 22.3,
+      "humidity": 77.0,
+      "pressure_hpa": 1011.0,
+      "dewpoint_c": 15.5,
+      "feels_like_c": 17.0,
       "forecast_zone": "M"
     },
     "artigas": {
@@ -118,6 +130,10 @@
         "STRATOCUMULUS (SC)"
       ],
       "wind_speed_kmh": 24.1,
+      "humidity": 92.0,
+      "pressure_hpa": 1008.8,
+      "dewpoint_c": 18.8,
+      "feels_like_c": 18.7,
       "forecast_zone": "NW"
     },
     "bella_union": {
@@ -128,11 +144,15 @@
       "longitude": -57.602608,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
       "wind_speed_kmh": 40.0,
+      "humidity": 80.0,
+      "pressure_hpa": 1006.0,
+      "dewpoint_c": 21.2,
+      "feels_like_c": 21.4,
       "forecast_zone": "NW"
     },
     "colonia": {
@@ -152,6 +172,10 @@
         "STRATUS (ST)"
       ],
       "wind_speed_kmh": 13.3,
+      "humidity": 91.0,
+      "pressure_hpa": 1009.4,
+      "dewpoint_c": 15.5,
+      "feels_like_c": 16.2,
       "forecast_zone": "SO"
     },
     "durazno": {
@@ -171,6 +195,10 @@
         "STRATOCUMULUS (SC)"
       ],
       "wind_speed_kmh": 23.4,
+      "humidity": 80.0,
+      "pressure_hpa": 1008.6,
+      "dewpoint_c": 17.4,
+      "feels_like_c": 18.9,
       "forecast_zone": "C"
     },
     "florida": {
@@ -190,6 +218,10 @@
         "NIMBOSTRATUS (NS)"
       ],
       "wind_speed_kmh": 27.0,
+      "humidity": 80.0,
+      "pressure_hpa": 1010.0,
+      "dewpoint_c": 16.3,
+      "feels_like_c": 16.6,
       "forecast_zone": "C"
     },
     "laguna_del_sauce": {
@@ -207,6 +239,10 @@
         "CUMULUS (CU)"
       ],
       "wind_speed_kmh": 27.0,
+      "humidity": 85.0,
+      "pressure_hpa": 1012.3,
+      "dewpoint_c": 14.2,
+      "feels_like_c": 12.9,
       "forecast_zone": "E"
     },
     "lavalleja": {
@@ -217,11 +253,15 @@
       "longitude": -55.0841,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
       "wind_speed_kmh": 18.7,
+      "humidity": 94.0,
+      "pressure_hpa": 1012.7,
+      "dewpoint_c": 15.3,
+      "feels_like_c": 14.3,
       "forecast_zone": "E"
     },
     "melilla": {
@@ -241,6 +281,10 @@
         "CIRRUS (CI)"
       ],
       "wind_speed_kmh": 21.2,
+      "humidity": 79.0,
+      "pressure_hpa": 1010.5,
+      "dewpoint_c": 15.9,
+      "feels_like_c": 17.5,
       "forecast_zone": "M"
     },
     "melo": {
@@ -260,6 +304,10 @@
         "STRATOCUMULUS (SC)"
       ],
       "wind_speed_kmh": 5.8,
+      "humidity": 87.0,
+      "pressure_hpa": 1010.9,
+      "dewpoint_c": 17.2,
+      "feels_like_c": 21.0,
       "forecast_zone": "NE"
     },
     "mercedes": {
@@ -278,6 +326,10 @@
         "STRATUS (ST)"
       ],
       "wind_speed_kmh": 18.4,
+      "humidity": 77.0,
+      "pressure_hpa": 1008.4,
+      "dewpoint_c": 17.2,
+      "feels_like_c": 20.3,
       "forecast_zone": "SO"
     },
     "paysandu": {
@@ -288,13 +340,17 @@
       "longitude": -58.0312,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "cloudy",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": "8 OKTAS",
       "cloud_types": [
         "NIMBOSTRATUS (NS)"
       ],
       "wind_speed_kmh": 18.4,
+      "humidity": 86.0,
+      "pressure_hpa": 1007.4,
+      "dewpoint_c": 18.4,
+      "feels_like_c": 20.3,
       "forecast_zone": "NW"
     },
     "punta_del_este": {
@@ -305,13 +361,17 @@
       "longitude": -54.9512,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "cloudy",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": "8 OKTAS",
       "cloud_types": [
         "STRATUS (ST)"
       ],
       "wind_speed_kmh": 19.8,
+      "humidity": 96.0,
+      "pressure_hpa": 1013.1,
+      "dewpoint_c": 12.8,
+      "feels_like_c": 10.3,
       "forecast_zone": "PE"
     },
     "rocha": {
@@ -330,6 +390,10 @@
         "STRATUS (ST)"
       ],
       "wind_speed_kmh": 18.0,
+      "humidity": 94.0,
+      "pressure_hpa": 1013.4,
+      "dewpoint_c": 14.2,
+      "feels_like_c": 13.0,
       "forecast_zone": "E"
     },
     "salto": {
@@ -348,6 +412,10 @@
         "STRATUS (ST)"
       ],
       "wind_speed_kmh": 4.3,
+      "humidity": 96.0,
+      "pressure_hpa": 1007.1,
+      "dewpoint_c": 19.5,
+      "feels_like_c": 22.7,
       "forecast_zone": "NW"
     },
     "san_jose": {
@@ -367,6 +435,10 @@
         "STRATOCUMULUS (SC)"
       ],
       "wind_speed_kmh": 20.2,
+      "humidity": 77.0,
+      "pressure_hpa": 1008.8,
+      "dewpoint_c": 17.9,
+      "feels_like_c": 20.9,
       "forecast_zone": "SO"
     },
     "atlantida": {
@@ -377,11 +449,15 @@
       "longitude": -55.7528,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
       "wind_speed_kmh": 15.8,
+      "humidity": 74.0,
+      "pressure_hpa": 1011.1,
+      "dewpoint_c": 15.4,
+      "feels_like_c": 19.0,
       "forecast_zone": "M"
     },
     "paso_de_los_toros": {
@@ -392,11 +468,15 @@
       "longitude": -56.5147,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
       "wind_speed_kmh": 29.2,
+      "humidity": 84.0,
+      "pressure_hpa": 1008.5,
+      "dewpoint_c": 17.3,
+      "feels_like_c": 17.1,
       "forecast_zone": "C"
     },
     "rivera_aeropuerto": {
@@ -407,11 +487,15 @@
       "longitude": -55.4735,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
       "wind_speed_kmh": 19.8,
+      "humidity": null,
+      "pressure_hpa": 1011.1,
+      "dewpoint_c": 18.6,
+      "feels_like_c": null,
       "forecast_zone": "NE"
     },
     "san_jacinto": {
@@ -422,11 +506,15 @@
       "longitude": -55.8464,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
       "wind_speed_kmh": 22.7,
+      "humidity": 82.0,
+      "pressure_hpa": 1010.9,
+      "dewpoint_c": 15.8,
+      "feels_like_c": 16.4,
       "forecast_zone": "M"
     },
     "tacuarembo": {
@@ -437,11 +525,15 @@
       "longitude": -55.9288138511,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
       "wind_speed_kmh": 22.0,
+      "humidity": 98.0,
+      "pressure_hpa": 1006.5,
+      "dewpoint_c": 17.0,
+      "feels_like_c": 15.4,
       "forecast_zone": "NE"
     },
     "treinta_y_tres": {
@@ -452,11 +544,15 @@
       "longitude": -54.3481,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
       "wind_speed_kmh": 16.6,
+      "humidity": 96.0,
+      "pressure_hpa": 1011.9,
+      "dewpoint_c": 16.4,
+      "feels_like_c": 15.8,
       "forecast_zone": "E"
     },
     "trinidad": {
@@ -467,11 +563,15 @@
       "longitude": -56.890246,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
       "wind_speed_kmh": 13.3,
+      "humidity": 79.0,
+      "pressure_hpa": 1008.5,
+      "dewpoint_c": 16.9,
+      "feels_like_c": 20.4,
       "forecast_zone": "C"
     },
     "vichadero": {
@@ -482,11 +582,15 @@
       "longitude": -54.58984,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
       "wind_speed_kmh": 13.0,
+      "humidity": 94.0,
+      "pressure_hpa": 1011.8,
+      "dewpoint_c": 16.8,
+      "feels_like_c": 17.5,
       "forecast_zone": "NE"
     },
     "young": {
@@ -497,11 +601,15 @@
       "longitude": -57.58991,
       "observation_time": "2026-09-28T19:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T18:50:00Z",
+      "condition_time": "2026-09-28T19:00:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
       "wind_speed_kmh": 32.8,
+      "humidity": 84.0,
+      "pressure_hpa": 1007.3,
+      "dewpoint_c": 18.1,
+      "feels_like_c": 17.4,
       "forecast_zone": "NW"
     }
   },
