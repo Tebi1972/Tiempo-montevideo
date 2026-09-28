@@ -1,19 +1,18 @@
 {
-  "updated": "27/09/2026 23:06",
+  "updated": "28/09/2026 00:07",
   "current": {
-    "temperature": 14.6,
+    "temperature": 14.3,
     "station": "Prado",
-    "observation_time": "2026-09-28T01:00:00Z",
-    "condition": "partly",
-    "condition_time": "2026-09-28T01:00:00Z",
+    "observation_time": "2026-09-28T02:00:00Z",
+    "condition": "cloudy",
+    "condition_time": "2026-09-28T02:00:00Z",
     "present_weather": null,
-    "cloud_amount": "6 OKTAS",
+    "cloud_amount": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
     "cloud_types": [
       "CIRRUS (CI)",
-      "STRATUS (ST)",
-      "CIRRUS (CI)"
+      "STRATUS (ST)"
     ],
-    "wind_speed_kmh": 4.7
+    "wind_speed_kmh": 9.7
   },
   "alert": {
     "active": true,
@@ -66,97 +65,94 @@
   },
   "locations": {
     "montevideo_prado": {
-      "temperature": 14.6,
+      "temperature": 14.3,
       "station": "Prado",
       "wigos": "0-20000-0-86585",
       "latitude": -34.860639,
       "longitude": -56.207389,
-      "observation_time": "2026-09-28T01:00:00Z",
-      "condition": "partly",
-      "condition_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
+      "condition": "cloudy",
+      "condition_time": "2026-09-28T02:00:00Z",
       "present_weather": null,
-      "cloud_amount": "6 OKTAS",
+      "cloud_amount": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
       "cloud_types": [
         "CIRRUS (CI)",
-        "STRATUS (ST)",
-        "CIRRUS (CI)"
+        "STRATUS (ST)"
       ],
-      "wind_speed_kmh": 4.7,
+      "wind_speed_kmh": 9.7,
       "forecast_zone": "M"
     },
     "montevideo_carrasco": {
-      "temperature": 13.6,
+      "temperature": 13.5,
       "station": "Carrasco",
       "wigos": "0-20000-0-86580",
       "latitude": -34.832923,
       "longitude": -56.012876,
-      "observation_time": "2026-09-28T01:00:00Z",
-      "condition": "partly",
-      "condition_time": "2026-09-28T01:00:00Z",
-      "present_weather": "CLOUDS GENERALLY DISSOLVING OR BECOMING LESS DEVELOPED",
-      "cloud_amount": "5 OKTAS",
+      "observation_time": "2026-09-28T02:00:00Z",
+      "condition": "cloudy",
+      "condition_time": "2026-09-28T02:00:00Z",
+      "present_weather": "CLOUDS GENERALLY FORMING OR DEVELOPING",
+      "cloud_amount": "8 OKTAS",
       "cloud_types": [
-        "CIRRUS (CI)",
-        "STRATUS (ST)",
-        "CIRRUS (CI)"
+        "ALTOSTRATUS (AS)"
       ],
-      "wind_speed_kmh": 13.0,
+      "wind_speed_kmh": 16.6,
       "forecast_zone": "M"
     },
     "artigas": {
-      "temperature": 20.3,
+      "temperature": 19.4,
       "station": "Artigas",
       "wigos": "0-20000-0-86330",
       "latitude": -30.39911,
       "longitude": -56.51267,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 27.7,
+      "wind_speed_kmh": 31.7,
       "forecast_zone": "NW"
     },
     "bella_union": {
-      "temperature": 22.2,
+      "temperature": 21.47,
       "station": "Bella Unión",
       "wigos": "0-858-0-A000000000000009",
       "latitude": -30.253235,
       "longitude": -57.602608,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 25.6,
+      "wind_speed_kmh": 21.2,
       "forecast_zone": "NW"
     },
     "colonia": {
-      "temperature": 14.9,
+      "temperature": 15.3,
       "station": "Colonia",
       "wigos": "0-20000-0-86560",
       "latitude": -34.45182199,
       "longitude": -57.76804181,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 11.2,
+      "wind_speed_kmh": 16.9,
       "forecast_zone": "SO"
     },
     "durazno": {
-      "temperature": 14.2,
+      "temperature": 14.1,
       "station": "Durazno",
       "wigos": "0-20000-0-86530",
       "latitude": -33.350522,
       "longitude": -56.4972385,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
@@ -164,152 +160,151 @@
       "forecast_zone": "C"
     },
     "florida": {
-      "temperature": 14.2,
+      "temperature": 14.3,
       "station": "Florida",
       "wigos": "0-20000-0-86545",
       "latitude": -34.086325,
       "longitude": -56.18795,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 20.9,
+      "wind_speed_kmh": 9.7,
       "forecast_zone": "C"
     },
     "laguna_del_sauce": {
-      "temperature": 14.4,
+      "temperature": 14.3,
       "station": "Laguna del Sauce",
       "wigos": "0-20000-0-86586",
       "latitude": -34.8604,
       "longitude": -55.1071,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "cloudy",
-      "condition_time": "2026-09-28T01:00:00Z",
+      "condition_time": "2026-09-28T02:00:00Z",
       "present_weather": null,
       "cloud_amount": "8 OKTAS",
       "cloud_types": [
-        "NIMBOSTRATUS (NS)",
-        "STRATUS (ST)"
+        "NIMBOSTRATUS (NS)"
       ],
-      "wind_speed_kmh": 31.0,
+      "wind_speed_kmh": 25.9,
       "forecast_zone": "E"
     },
     "lavalleja": {
-      "temperature": 13.8,
+      "temperature": 14.0,
       "station": "Lavalleja",
       "wigos": "0-858-0-A000000000000001",
       "latitude": -34.336,
       "longitude": -55.0841,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 22.7,
+      "wind_speed_kmh": 20.5,
       "forecast_zone": "E"
     },
     "melilla": {
-      "temperature": 14.4,
+      "temperature": 14.2,
       "station": "Melilla",
       "wigos": "0-20000-0-86575",
       "latitude": -34.781,
       "longitude": -56.2663,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 8.6,
+      "wind_speed_kmh": 11.9,
       "forecast_zone": "M"
     },
     "melo": {
-      "temperature": 14.5,
+      "temperature": 14.4,
       "station": "Melo",
       "wigos": "0-20000-0-86440",
       "latitude": -32.36675,
       "longitude": -54.19257,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 14.8,
+      "wind_speed_kmh": 6.1,
       "forecast_zone": "NE"
     },
     "mercedes": {
-      "temperature": 14.4,
+      "temperature": 14.6,
       "station": "Mercedes",
       "wigos": "0-20000-0-86490",
       "latitude": -33.2506,
       "longitude": -58.0692,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 21.2,
+      "wind_speed_kmh": 20.9,
       "forecast_zone": "SO"
     },
     "paysandu": {
-      "temperature": 16.4,
+      "temperature": 16.7,
       "station": "Paysandú",
       "wigos": "0-20000-0-86430",
       "latitude": -32.381,
       "longitude": -58.0312,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 23.4,
+      "wind_speed_kmh": 25.6,
       "forecast_zone": "NW"
     },
     "punta_del_este": {
-      "temperature": 12.93,
+      "temperature": 12.84,
       "station": "Punta del Este",
       "wigos": "0-858-0-86595",
       "latitude": -34.9689,
       "longitude": -54.9512,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 23.0,
+      "wind_speed_kmh": 18.0,
       "forecast_zone": "PE"
     },
     "rocha": {
-      "temperature": 14.8,
+      "temperature": 14.7,
       "station": "Rocha",
       "wigos": "0-20000-0-86565",
       "latitude": -34.4936,
       "longitude": -54.3125,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 23.0,
+      "wind_speed_kmh": 19.8,
       "forecast_zone": "E"
     },
     "salto": {
-      "temperature": 18.3,
+      "temperature": 18.1,
       "station": "Salto",
       "wigos": "0-20000-0-86360",
       "latitude": -31.4388,
       "longitude": -57.981,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "cloudy",
-      "condition_time": "2026-09-28T01:00:00Z",
+      "condition_time": "2026-09-28T02:00:00Z",
       "present_weather": null,
       "cloud_amount": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
       "cloud_types": [
@@ -317,63 +312,63 @@
         "STRATUS (ST)",
         "CIRRUS (CI)"
       ],
-      "wind_speed_kmh": 17.6,
+      "wind_speed_kmh": 20.5,
       "forecast_zone": "NW"
     },
     "san_jose": {
-      "temperature": 14.15,
+      "temperature": 14.03,
       "station": "San José",
       "wigos": "0-858-0-86550",
       "latitude": -34.3519,
       "longitude": -56.7497,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 7.9,
+      "wind_speed_kmh": 6.5,
       "forecast_zone": "SO"
     },
     "atlantida": {
-      "temperature": 13.3,
+      "temperature": 13.2,
       "station": "Atlántida",
       "wigos": "0-858-0-A000000000000003",
       "latitude": -34.7797,
       "longitude": -55.7528,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 5.8,
+      "wind_speed_kmh": 9.7,
       "forecast_zone": "M"
     },
     "paso_de_los_toros": {
-      "temperature": 14.3,
+      "temperature": 14.6,
       "station": "Paso de los Toros",
       "wigos": "0-20000-0-86460",
       "latitude": -32.7967,
       "longitude": -56.5147,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 18.0,
+      "wind_speed_kmh": 17.6,
       "forecast_zone": "C"
     },
     "rivera_aeropuerto": {
-      "temperature": 16.9,
+      "temperature": 17.0,
       "station": "Rivera Aeropuerto",
       "wigos": "0-858-0-A000000000000004",
       "latitude": -30.9703,
       "longitude": -55.4735,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
@@ -381,93 +376,93 @@
       "forecast_zone": "NE"
     },
     "san_jacinto": {
-      "temperature": 14.7,
+      "temperature": 13.7,
       "station": "San Jacinto",
       "wigos": "0-858-0-A000000000000002",
       "latitude": -34.5145,
       "longitude": -55.8464,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 16.9,
+      "wind_speed_kmh": 12.2,
       "forecast_zone": "M"
     },
     "tacuarembo": {
-      "temperature": 14.8,
+      "temperature": 14.6,
       "station": "Tacuarembó",
       "wigos": "0-20000-0-86370",
       "latitude": -31.7499634024,
       "longitude": -55.9288138511,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
+      "present_weather": null,
+      "cloud_amount": null,
+      "cloud_types": [],
+      "wind_speed_kmh": 16.2,
+      "forecast_zone": "NE"
+    },
+    "treinta_y_tres": {
+      "temperature": 14.9,
+      "station": "Treinta y Tres Aeropuerto",
+      "wigos": "0-858-0-A000000000000005",
+      "latitude": -33.1968,
+      "longitude": -54.3481,
+      "observation_time": "2026-09-28T02:00:00Z",
+      "condition": "neutral",
+      "condition_time": "2026-09-28T01:50:00Z",
+      "present_weather": null,
+      "cloud_amount": null,
+      "cloud_types": [],
+      "wind_speed_kmh": 20.2,
+      "forecast_zone": "E"
+    },
+    "trinidad": {
+      "temperature": 13.81,
+      "station": "Trinidad",
+      "wigos": "0-858-0-A000000000000007",
+      "latitude": -33.486257,
+      "longitude": -56.890246,
+      "observation_time": "2026-09-28T02:00:00Z",
+      "condition": "neutral",
+      "condition_time": "2026-09-28T01:50:00Z",
+      "present_weather": null,
+      "cloud_amount": null,
+      "cloud_types": [],
+      "wind_speed_kmh": 16.6,
+      "forecast_zone": "C"
+    },
+    "vichadero": {
+      "temperature": 14.24,
+      "station": "Vichadero",
+      "wigos": "0-858-0-A000000000000008",
+      "latitude": -31.74309,
+      "longitude": -54.58984,
+      "observation_time": "2026-09-28T02:00:00Z",
+      "condition": "neutral",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
       "wind_speed_kmh": 11.9,
       "forecast_zone": "NE"
     },
-    "treinta_y_tres": {
-      "temperature": 14.6,
-      "station": "Treinta y Tres Aeropuerto",
-      "wigos": "0-858-0-A000000000000005",
-      "latitude": -33.1968,
-      "longitude": -54.3481,
-      "observation_time": "2026-09-28T01:00:00Z",
-      "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
-      "present_weather": null,
-      "cloud_amount": null,
-      "cloud_types": [],
-      "wind_speed_kmh": 27.4,
-      "forecast_zone": "E"
-    },
-    "trinidad": {
-      "temperature": 13.72,
-      "station": "Trinidad",
-      "wigos": "0-858-0-A000000000000007",
-      "latitude": -33.486257,
-      "longitude": -56.890246,
-      "observation_time": "2026-09-28T01:00:00Z",
-      "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
-      "present_weather": null,
-      "cloud_amount": null,
-      "cloud_types": [],
-      "wind_speed_kmh": 21.6,
-      "forecast_zone": "C"
-    },
-    "vichadero": {
-      "temperature": 14.28,
-      "station": "Vichadero",
-      "wigos": "0-858-0-A000000000000008",
-      "latitude": -31.74309,
-      "longitude": -54.58984,
-      "observation_time": "2026-09-28T01:00:00Z",
-      "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
-      "present_weather": null,
-      "cloud_amount": null,
-      "cloud_types": [],
-      "wind_speed_kmh": 27.0,
-      "forecast_zone": "NE"
-    },
     "young": {
-      "temperature": 14.0,
+      "temperature": 14.2,
       "station": "Young",
       "wigos": "0-858-0-A000000000000006",
       "latitude": -32.66447,
       "longitude": -57.58991,
-      "observation_time": "2026-09-28T01:00:00Z",
+      "observation_time": "2026-09-28T02:00:00Z",
       "condition": "neutral",
-      "condition_time": "2026-09-28T00:50:00Z",
+      "condition_time": "2026-09-28T01:50:00Z",
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 25.2,
+      "wind_speed_kmh": 18.4,
       "forecast_zone": "NW"
     }
   },
@@ -476,20 +471,11 @@
       "name": "Área Metropolitana",
       "days": [
         {
-          "date": "Domingo 27",
-          "min": "12",
-          "max": "19",
-          "morning": "Nuboso y cubierto. Probable formación de tormentas aisladas.",
-          "evening": "Nuboso y cubierto. Precipitaciones.",
-          "wind": "E y NE 20-40 km/h, rachas de 50 km/h. E y NE 20-40 km/h, rachas de 50 km/h.",
-          "rain": "Precipitaciones"
-        },
-        {
           "date": "Lunes 28",
-          "min": "15",
+          "min": "13",
           "max": "21",
-          "morning": "Nuboso y cubierto. Chaparrones.",
-          "evening": "Nuboso y cubierto. Chaparrones.",
+          "morning": "Nuboso y cubierto. Precipitaciones aisladas.",
+          "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
           "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h, rachas de hasta 40 km/h.",
           "rain": "Precipitaciones"
         },
@@ -501,6 +487,15 @@
           "evening": "Cubierto a nuboso. Precipitaciones y tormentas aisladas. Ventoso.",
           "wind": "Sector E al NW 10-30 km/h. Periodos de variables 0-10 km/h. NW al SW 20-40 km/h, rachas de 50-60 km/h y ocasionalmente superiores.",
           "rain": "Precipitaciones"
+        },
+        {
+          "date": "Miércoles 30",
+          "min": "11",
+          "max": "16",
+          "morning": "Algo nuboso y nuboso.",
+          "evening": "Nuboso a cubierto.",
+          "wind": "SW 20-30 km/h, rachas de hasta 50 km/h. SW 10-30 km/h a variables 0-20 km/h.",
+          "rain": "No indicada"
         }
       ]
     },
@@ -508,21 +503,12 @@
       "name": "Noroeste",
       "days": [
         {
-          "date": "Domingo 27",
-          "min": "12",
-          "max": "27",
-          "morning": "Nuboso y cubierto. Precipitaciones y tormentas. Probable precipitación de granizo",
-          "evening": "Nuboso y cubierto. Precipitaciones y tormentas. Mejoras temporarias. Neblinas.",
-          "wind": "E y NE 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas. E y NE 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas.",
-          "rain": "Precipitaciones"
-        },
-        {
           "date": "Lunes 28",
           "min": "16",
           "max": "28",
           "morning": "Nuboso y cubierto. Precipitaciones y tormentas.",
           "evening": "Cubierto. Precipitaciones y tormentas. Mejoras temporarias. Neblinas.",
-          "wind": "Sector E 20-40 km/h, rachas de 50-60 km/h. Rachas fuertes asociadas a tormentas. Sector E 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas.",
+          "wind": "Sector E 20-40 km/h, rachas de 50-60 km/h. Rachas fuertes asociadas a tormentas. Sector E 20-40 km/h, rachas de hasta 50 km/h. Rachas fuertes asociadas a tormentas.",
           "rain": "Precipitaciones"
         },
         {
@@ -531,8 +517,17 @@
           "max": "26",
           "morning": "Cubierto. Precipitaciones y tormentas. Neblinas.",
           "evening": "Cubierto a nuboso. Precipitaciones y tormentas aisladas. Mejorando.",
-          "wind": "Sector E 20-40 km/h, rachas de 50 km/h al sector W 10-30 km/h. Rachas fuertes asociadas a tormentas amainando a variables 0-20 km/h Sector W al sector S 20-40 km/h, rachas de 50 km/h.",
+          "wind": "Sector E 20-40 km/h, rachas de hasta 50 km/h al sector W 10-30 km/h. Rachas fuertes asociadas a tormentas. Amainando. Sector W al sector S 20-40 km/h, rachas de hasta 50 km/h.",
           "rain": "Precipitaciones"
+        },
+        {
+          "date": "Miércoles 30",
+          "min": "10",
+          "max": "20",
+          "morning": "Algo nuboso y nuboso. Neblinas y bancos de niebla.",
+          "evening": "Algo nuboso y nuboso. Neblinas y bancos de niebla.",
+          "wind": "Sector S 20-30 km/h. Sector S 10-30 km/h.",
+          "rain": "No indicada"
         }
       ]
     },
@@ -540,21 +535,12 @@
       "name": "Noreste",
       "days": [
         {
-          "date": "Domingo 27",
-          "min": "11",
-          "max": "18",
-          "morning": "Nuboso y cubierto. Precipitaciones y tormentas. Neblinas.",
-          "evening": "Nuboso y cubierto. Precipitaciones y tormentas. Mejoras temporarias. Neblinas.",
-          "wind": "Sector E 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas. Sector E 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas.",
-          "rain": "Precipitaciones"
-        },
-        {
           "date": "Lunes 28",
-          "min": "14",
+          "min": "13",
           "max": "24",
           "morning": "Cubierto. Precipitaciones y tormentas. Neblinas.",
           "evening": "Cubierto. Precipitaciones y tormentas. Mejoras temporarias. Neblinas.",
-          "wind": "Sector E 10-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas. Sector E 20-40 km/h, rachas de 50 km/h. Periodos de variables 0-10 km/h. Rachas fuertes asociadas a tormentas.",
+          "wind": "Sector E 10-40 km/h, rachas de hasta 50 km/h. Rachas fuertes asociadas a tormentas. Sector E 20-40 km/h, rachas de hasta 50 km/h. Periodos de variables 0-10 km/h. Rachas fuertes asociadas a tormentas.",
           "rain": "Precipitaciones"
         },
         {
@@ -563,8 +549,17 @@
           "max": "25",
           "morning": "Cubierto. Precipitaciones y tormentas. Neblinas y bancos de niebla.",
           "evening": "Cubierto a nuboso. Precipitaciones y tormentas. Mejorando.",
-          "wind": "Sector N 10-40 km/h. Periodos de variables 0-10 km/h NW al SW 20-40 km/h, rachas de 50 km/h.",
+          "wind": "Sector N 10-40 km/h. Periodos de variables 0-10 km/h NW al SW 20-40 km/h, rachas de hasta 50 km/h.",
           "rain": "Precipitaciones"
+        },
+        {
+          "date": "Miércoles 30",
+          "min": "10",
+          "max": "19",
+          "morning": "Algo nuboso y nuboso.",
+          "evening": "Algo nuboso y nuboso.",
+          "wind": "SW 10-30 km/h. SW 10-30 km/h.",
+          "rain": "No indicada"
         }
       ]
     },
@@ -572,20 +567,11 @@
       "name": "Suroeste",
       "days": [
         {
-          "date": "Domingo 27",
-          "min": "11",
-          "max": "19",
-          "morning": "Nuboso y cubierto. Precipitaciones y tormentas. Neblinas.",
-          "evening": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Mejoras temporarias. Neblinas.",
-          "wind": "E y NE 20-40 km/h, rachas de 50 km/h. Rachas fuertes asociadas a tormentas. E y NE 20-40 km/h. Probables rachas fuertes asociadas a tormentas.",
-          "rain": "Precipitaciones"
-        },
-        {
           "date": "Lunes 28",
-          "min": "15",
+          "min": "13",
           "max": "21",
           "morning": "Nuboso y cubierto. Precipitaciones y probables tormentas. Mejoras temporarias. Neblinas.",
-          "evening": "Nuboso y cubierto. Precipitaciones y probables tormentas. Mejoras temporarias.",
+          "evening": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Mejoras temporarias. Neblinas.",
           "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h.",
           "rain": "Precipitaciones"
         },
@@ -597,6 +583,15 @@
           "evening": "Cubierto a nuboso. Precipitaciones y tormentas aisladas. Mejorando.",
           "wind": "Sector E al sector W 10-30 km/h. Periodos de variables 0-10 km/h. SW y S 20-40 km/h, rachas de 50-60 km/h en zonas costeras.",
           "rain": "Precipitaciones"
+        },
+        {
+          "date": "Miércoles 30",
+          "min": "10",
+          "max": "18",
+          "morning": "Algo nuboso y nuboso. Neblinas y bancos de niebla.",
+          "evening": "Nuboso a cubierto. Neblinas y bancos de niebla.",
+          "wind": "Sector S 20-30 km/h. SW 10-30 km/h a variables 0-20 km/h.",
+          "rain": "No indicada"
         }
       ]
     },
@@ -604,20 +599,11 @@
       "name": "Centro-Sur",
       "days": [
         {
-          "date": "Domingo 27",
-          "min": "11",
-          "max": "20",
-          "morning": "Nuboso y cubierto. Precipitaciones y tormentas aisladas.",
-          "evening": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Mejoras temporarias. Neblinas.",
-          "wind": "E y NE 20-40 km/h, rachas de 50 km/h. E y NE 20-40 km/h, rachas de  50 km/h. Probables rachas fuertes asociadas a tormentas.",
-          "rain": "Precipitaciones"
-        },
-        {
           "date": "Lunes 28",
           "min": "12",
           "max": "22",
           "morning": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Mejoras temporarias.",
-          "evening": "Nuboso y cubierto. Precipitaciones aisladas. Mejoras temporarias.",
+          "evening": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Mejoras temporarias.",
           "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h, rachas de hasta 40 km/h.",
           "rain": "Precipitaciones"
         },
@@ -629,6 +615,15 @@
           "evening": "Cubierto a nuboso. Precipitaciones y tormentas aisladas. Mejorando. Ventoso.",
           "wind": "Sector E al sector W 10-30 km/h. Periodos de variables 0-10 km/h. W al SW 20-40 km/h, rachas de 50-60 km/h en zonas costeras y ocasionalmente superiores.",
           "rain": "Precipitaciones"
+        },
+        {
+          "date": "Miércoles 30",
+          "min": "8",
+          "max": "17",
+          "morning": "Algo nuboso y nuboso.",
+          "evening": "Nuboso a cubierto.",
+          "wind": "SW 20-30 km/h, rachas de hasta 50 km/h en zonas costeras. SW 10-30 km/h a variables 0-20 km/h.",
+          "rain": "No indicada"
         }
       ]
     },
@@ -636,21 +631,12 @@
       "name": "Este",
       "days": [
         {
-          "date": "Domingo 27",
-          "min": "9",
-          "max": "21",
-          "morning": "Nuboso y cubierto. Neblinas y bancos de niebla.",
-          "evening": "Nuboso y cubierto. Precipitaciones y probables tormentas. Mejoras temporarias. Neblinas.",
-          "wind": "E al NE 20-40 km/h, rachas de 50 km/h. NE y E 20-40 km/h, rachas de 50-60 km/h.",
-          "rain": "Precipitaciones"
-        },
-        {
           "date": "Lunes 28",
           "min": "12",
           "max": "20",
-          "morning": "Nuboso y cubierto. Chaparrones. Mejoras temporarias.",
+          "morning": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Mejoras temporarias.",
           "evening": "Nuboso y cubierto. Precipitaciones aisladas. Mejoras temporarias. Neblinas.",
-          "wind": "NE y E 20-40 km/h, rachas de 50 km/h. Sector E 10-40 km/h, rachas de hasta 50 km/h en zonas costeras.",
+          "wind": "NE y E 20-40 km/h, rachas de hasta 50 km/h. Sector E 10-40 km/h, rachas de hasta 50 km/h en zonas costeras.",
           "rain": "Precipitaciones"
         },
         {
@@ -661,6 +647,15 @@
           "evening": "Cubierto a nuboso. Precipitaciones y tormentas aisladas. Mejorando. Ventoso.",
           "wind": "NE al N 10-30 km/h, rachas de hasta 40 km/h en zonas costeras. NW al SW 20-40 km/h, rachas de 50-60 km/h. y ocasionalmente superiores en zonas costeras",
           "rain": "Precipitaciones"
+        },
+        {
+          "date": "Miércoles 30",
+          "min": "8",
+          "max": "18",
+          "morning": "Nuboso y cubierto.",
+          "evening": "Cubierto a algo nuboso. Neblinas y bancos de niebla.",
+          "wind": "SW 20-30 km/h, rachas de hasta 50 km/h en zonas costeras. SW 10-30 km/h.",
+          "rain": "No indicada"
         }
       ]
     },
@@ -668,17 +663,8 @@
       "name": "Punta del Este",
       "days": [
         {
-          "date": "Domingo 27",
-          "min": "13",
-          "max": "14",
-          "morning": "Nuboso.",
-          "evening": "Nuboso y cubierto. Precipitaciones. Ventoso.",
-          "wind": "E y NE 20-40 km/h, rachas de 50 km/h. E y NE 20-40 km/h, rachas de 50-60 km/h.",
-          "rain": "Precipitaciones"
-        },
-        {
           "date": "Lunes 28",
-          "min": "14",
+          "min": "12",
           "max": "16",
           "morning": "Nuboso y cubierto. Precipitaciones aisladas.",
           "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
@@ -693,26 +679,26 @@
           "evening": "Cubierto a nuboso. Precipitaciones y tormentas aisladas. Ventoso.",
           "wind": "Sector E al NW 10-30 km/h, rachas de hasta 40 km/h NW al SW 20-40 km/h, rachas de 50-60 km/h y ocasionalmente superiores.",
           "rain": "Precipitaciones"
+        },
+        {
+          "date": "Miércoles 30",
+          "min": "10",
+          "max": "13",
+          "morning": "Algo nuboso y nuboso.",
+          "evening": "Nuboso a cubierto.",
+          "wind": "SW 20-30 km/h, rachas de hasta 50 km/h. SW 10-30 km/h a variables 0-20 km/h.",
+          "rain": "No indicada"
         }
       ]
     }
   },
   "days": [
     {
-      "date": "Domingo 27",
-      "min": "12",
-      "max": "19",
-      "morning": null,
-      "evening": "Nuboso y cubierto. Precipitaciones.",
-      "wind": "E y NE 20-40 km/h, rachas de 50 km/h. ",
-      "rain": "Precipitaciones"
-    },
-    {
       "date": "Lunes 28",
-      "min": "15",
+      "min": "13",
       "max": "21",
-      "morning": "Nuboso y cubierto. Chaparrones.",
-      "evening": "Nuboso y cubierto. Chaparrones.",
+      "morning": "Nuboso y cubierto. Precipitaciones aisladas.",
+      "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
       "wind": "Sector E 20-30 km/h. Sector E 20-30 km/h, rachas de hasta 40 km/h. ",
       "rain": "Precipitaciones"
     },
@@ -722,9 +708,18 @@
       "max": "19",
       "morning": "Cubierto. Precipitaciones y tormentas.",
       "evening": "Cubierto a nuboso. Precipitaciones y tormentas aisladas. Ventoso.",
-      "wind": "Sector E al NW 10-30 km/h. Periodos de variables 0-10 km/h. NW al SW 20-40 km/h, rachas de 50-60 km/h y ocasionalmente superiores. Pronóstico extendido: Última Actualización: 27/09/2026 18:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "wind": "Sector E al NW 10-30 km/h. Periodos de variables 0-10 km/h. NW al SW 20-40 km/h, rachas de 50-60 km/h y ocasionalmente superiores. ",
       "rain": "Precipitaciones"
+    },
+    {
+      "date": "Miércoles 30",
+      "min": "11",
+      "max": "16",
+      "morning": "Algo nuboso y nuboso.",
+      "evening": "Nuboso a cubierto.",
+      "wind": "SW 20-30 km/h, rachas de hasta 50 km/h. SW 10-30 km/h a variables 0-20 km/h. Pronóstico extendido: Última Actualización: 28/09/2026 00:00Hs INSTITUTO URUGUAYO DE METEOROLOGÍA Dr. Javier Barrios Amorín 1488 - CP 11200 - Mesa Central (+598) 1895 - Desde el interior 21895. Montevideo - Uruguay Mapa de sitio",
+      "rain": "No indicada"
     }
   ],
-  "summary": "Temperaturas de 12° a 19°; con posibilidad de precipitaciones."
+  "summary": "Temperaturas de 13° a 21°; con posibilidad de precipitaciones."
 }
