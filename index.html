@@ -1563,6 +1563,57 @@ button[onclick="load()"]{width:100%;margin-top:2px;background:var(--glass);color
   .detailIcon{font-size:1.15rem!important}
 }
 
+
+
+/* ==========================================
+   V4.3 — DATOS ACTUALES EN UNA LÍNEA
+   + PRONÓSTICO SIN VIENTO REPETIDO
+   ========================================== */
+.currentPanelV43{display:block!important}
+.currentPanelV43 .currentEyebrow{margin-bottom:10px;text-align:center}
+.currentInline{display:grid;grid-template-columns:auto auto minmax(120px,1fr) auto;gap:16px;align-items:center;min-width:0}
+.currentInline .currentBigIcon{font-size:68px}
+.currentInline .currentBigTemp{font-size:3.55rem;margin:0;white-space:nowrap}
+.currentInline .currentCondition{font-size:1.05rem;margin:0;line-height:1.15;min-width:0}
+.currentInlineStats{display:flex;align-items:center;justify-content:flex-end;gap:12px;min-width:0;overflow-x:auto;scrollbar-width:none}
+.currentInlineStats::-webkit-scrollbar{display:none}
+.currentMetric{display:flex;align-items:center;gap:5px;white-space:nowrap;font-weight:850;font-size:.9rem;padding-left:12px;border-left:1px solid var(--border)}
+.currentMetricIcon{font-size:1.12rem}
+.currentMetricLabel{font-size:.7rem;color:var(--muted);font-weight:750}
+.detailStripV43{grid-template-columns:1fr 1fr!important}
+.nextCard.placeholder{display:grid!important;place-items:center;color:var(--muted);min-height:108px}
+.nextCard.placeholder .nextCardName{white-space:normal!important}
+
+@media(max-width:700px){
+  .currentPanelV43{padding:11px 12px!important}
+  .currentPanelV43 .currentEyebrow{font-size:.62rem!important;margin-bottom:6px!important}
+  .currentInline{grid-template-columns:47px auto minmax(78px,1fr) auto;gap:7px!important}
+  .currentInline .currentBigIcon{font-size:41px!important}
+  .currentInline .currentBigTemp{font-size:2.42rem!important;letter-spacing:-.055em!important}
+  .currentInline .currentCondition{font-size:.76rem!important;line-height:1.08!important;font-weight:800!important}
+  .currentInlineStats{gap:6px!important}
+  .currentMetric{font-size:.7rem!important;gap:3px!important;padding-left:7px!important}
+  .currentMetricIcon{font-size:.9rem!important}
+  .currentMetricLabel{display:none}
+  .detailStripV43{grid-template-columns:1fr 1fr!important;padding:8px 6px!important}
+  .detailStripV43 .detailCell{padding:3px 10px!important}
+  .detailStripV43 .detailCell:first-child{border-right:1px solid var(--border)!important}
+  .detailStripV43 .detailCell:last-child{border-right:0!important}
+}
+
+@media(max-width:430px){
+  .currentInline{grid-template-columns:40px auto minmax(68px,1fr) auto;gap:5px!important}
+  .currentInline .currentBigIcon{font-size:36px!important}
+  .currentInline .currentBigTemp{font-size:2.08rem!important}
+  .currentInline .currentCondition{font-size:.68rem!important}
+  .currentMetric{font-size:.64rem!important;padding-left:5px!important}
+}
+
+@media(max-width:360px){
+  .currentInline{grid-template-columns:38px auto minmax(60px,1fr);}
+  .currentInlineStats{grid-column:1/-1;justify-content:center;overflow:visible;margin-top:2px}
+  .currentMetric{border-left:0;padding-left:0!important}
+}
 </style>
 </head>
 
@@ -1728,30 +1779,31 @@ function hasForecastDetail(value) {
 
 function icon(day) {
 
-  const text =
-    forecastText(day);
+  const text = forecastText(day);
 
+  if (text.includes("torment")) return "⛈️";
 
-  if (text.includes("torment"))
-    return "⛈️";
+  // En el pronóstico extendido INUMET puede indicar la probabilidad
+  // de lluvia en lugar de una descripción horaria.
+  if (
+    text.includes("sin precipitaciones") ||
+    text.includes("probabilidad de precipitaciones: nula") ||
+    text.includes("probabilidad nula")
+  ) return "🌤️";
 
+  if (
+    text.includes("baja probabilidad") &&
+    (text.includes("precipit") || text.includes("lluvia"))
+  ) return "🌤️";
 
   if (
     text.includes("precipit") ||
     text.includes("lluvia") ||
     text.includes("chaparr")
-  )
-    return "🌧️";
+  ) return "🌧️";
 
-
-  if (text.includes("cubierto"))
-    return "☁️";
-
-
-  if (text.includes("nuboso"))
-    return "🌤️";
-
-
+  if (text.includes("cubierto")) return "☁️";
+  if (text.includes("nuboso")) return "🌤️";
   return "☀️";
 }
 
@@ -1762,30 +1814,34 @@ function icon(day) {
 
 function shortDescription(day) {
 
-  const text =
-    forecastText(day);
+  const text = forecastText(day);
 
+  if (text.includes("torment")) return "Posibles tormentas";
 
-  if (text.includes("torment"))
-    return "Posibles tormentas";
+  if (
+    text.includes("sin precipitaciones") ||
+    text.includes("probabilidad de precipitaciones: nula") ||
+    text.includes("probabilidad nula")
+  ) return "Sin lluvias previstas";
 
+  if (text.includes("baja probabilidad") && text.includes("precipit"))
+    return "Baja prob. de lluvia";
+
+  if (text.includes("alta probabilidad") && text.includes("precipit"))
+    return "Alta prob. de lluvia";
+
+  if (text.includes("probabilidad media") && text.includes("precipit"))
+    return "Prob. media de lluvia";
 
   if (
     text.includes("precipit") ||
     text.includes("lluvia") ||
     text.includes("chaparr")
-  )
-    return "Posibles precipitaciones";
+  ) return "Posibles precipitaciones";
 
-
-  if (text.includes("cubierto"))
-    return "Cielo cubierto";
-
-
-  if (text.includes("nuboso"))
-    return "Nubosidad variable";
-
-
+  if (text.includes("cubierto")) return "Cielo cubierto";
+  if (text.includes("nuboso")) return "Nubosidad variable";
+  if (text.includes("pronóstico extendido")) return "Pronóstico extendido";
   return "Cielo mayormente despejado";
 }
 
@@ -2608,6 +2664,22 @@ function optionalObservedStat(label, icon, value, suffix="") {
   return `<div class="statRow"><div class="statIcon">${icon}</div><div class="statLabel">${label}</div><div class="statValue">${esc(n.toLocaleString("es-UY", {maximumFractionDigits:1}))}${suffix}</div></div>`;
 }
 
+function optionalObservedInline(label, icon, value, suffix="") {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return "";
+  const formatted = n.toLocaleString("es-UY", {maximumFractionDigits:1});
+  return `<div class="currentMetric" title="${esc(label)}"><span class="currentMetricIcon">${icon}</span><span class="currentMetricLabel">${esc(label)}</span><span>${esc(formatted)}${suffix}</span></div>`;
+}
+
+function compactRainText(value) {
+  const text = String(value ?? "").trim();
+  const low = text.toLowerCase();
+  if (!text || text === "—") return "No indicadas";
+  if (low === "precipitaciones") return "Previstas";
+  if (low === "no indicada" || low === "no indicado") return "No indicadas";
+  return text;
+}
+
 /* ==========================================
    CARGAR DATA.JSON
    ========================================== */
@@ -2727,25 +2799,24 @@ async function load() {
     const stationName = viewData.current?.station || "INUMET";
     const currentTempDisplay = currentTemp !== null && showObservedTemperature()
       ? `${formatTemperature(currentTemp)}°` : "—";
-    const humidityStat = optionalObservedStat("Humedad", "💧", viewData.current?.humidity, "%");
-    const pressureStat = optionalObservedStat("Presión", "◴", viewData.current?.pressure_hpa ?? viewData.current?.pressure, " hPa");
-    const feelsStat = optionalObservedStat("Sensación térmica", "🌡️", viewData.current?.feels_like ?? viewData.current?.feels_like_c, "°");
+    const humidityInline = optionalObservedInline("Humedad", "💧", viewData.current?.humidity, "%");
+    const pressureInline = optionalObservedInline("Presión", "◴", viewData.current?.pressure_hpa ?? viewData.current?.pressure, " hPa");
+    const feelsInline = optionalObservedInline("Sensación térmica", "🌡️", viewData.current?.feels_like ?? viewData.current?.feels_like_c, "°");
+    const windInline = `<div class="currentMetric" title="Viento"><span class="currentMetricIcon">💨</span><span class="currentMetricLabel">Viento</span><span>${esc(observedWindText(viewData))}</span></div>`;
 
     document.getElementById("today").innerHTML = `
-      <section class="appPanel currentPanel">
-        <div class="currentPrimary">
+      <section class="appPanel currentPanel currentPanelV43">
+        <div class="currentEyebrow">Actual · INUMET ${esc(stationName)}</div>
+        <div class="currentInline">
           <div class="currentBigIcon">${observedIcon(viewData)}</div>
-          <div>
-            <div class="currentEyebrow">Actual · INUMET ${esc(stationName)}</div>
-            <div class="currentBigTemp">${currentTempDisplay}</div>
-            <div class="currentCondition">${esc(observedDescription(viewData))}</div>
+          <div class="currentBigTemp">${currentTempDisplay}</div>
+          <div class="currentCondition">${esc(observedDescription(viewData))}</div>
+          <div class="currentInlineStats">
+            ${windInline}
+            ${feelsInline}
+            ${humidityInline}
+            ${pressureInline}
           </div>
-        </div>
-        <div class="currentStats">
-          ${feelsStat}
-          <div class="statRow"><div class="statIcon">💨</div><div class="statLabel">Viento</div><div class="statValue">${esc(observedWindText(viewData))}</div></div>
-          ${humidityStat}
-          ${pressureStat}
         </div>
       </section>
 
@@ -2761,9 +2832,8 @@ async function load() {
         </div>
       </section>
 
-      <section class="appPanel detailStrip">
-        <div class="detailCell"><div class="detailIcon">💨</div><div><div class="detailLabel">Viento (pronóstico)</div><div class="detailValue">${esc(today.wind || "No indicado")}</div></div></div>
-        <div class="detailCell"><div class="detailIcon">☔</div><div><div class="detailLabel">Precipitaciones</div><div class="detailValue">${esc(today.rain || "No indicada")}</div></div></div>
+      <section class="appPanel detailStrip detailStripV43">
+        <div class="detailCell"><div class="detailIcon">☔</div><div><div class="detailLabel">Precipitaciones</div><div class="detailValue">${esc(compactRainText(today.rain))}</div></div></div>
         <div class="detailCell"><div class="detailIcon">🌅</div><div><div class="detailLabel">Amanecer</div><div class="detailValue">${formatSolarTime(solar?.sunrise)}</div><div class="detailSub">Atardecer · ${formatSolarTime(solar?.sunset)}</div></div></div>
       </section>
     `;
@@ -2805,9 +2875,6 @@ async function load() {
         ) {
           parts.push("con posibilidad de precipitaciones");
         }
-        if (getMaximumWind(today) > 0) {
-          parts.push("y viento a tener en cuenta");
-        }
         return parts.join("; ") + ".";
       })();
 
@@ -2817,17 +2884,23 @@ async function load() {
        ====================================== */
 
     const nextTitle = document.getElementById("nextTitle");
-    if (nextTitle) nextTitle.textContent = `Próximos días (${viewData.selectedForecastName})`;
+    if (nextTitle) nextTitle.textContent = `Próximos 3 días (${viewData.selectedForecastName})`;
 
-    document.getElementById("days").innerHTML =
-      viewData.days.slice(1, 4).map(function(day) {
-        return `<div class="nextCard">
-          <div class="nextCardName">${esc(day.date)}</div>
-          <div class="nextCardIcon">${icon(day)}</div>
-          <div><div class="nextCardTemp"><span class="lo">${esc(day.min)}°</span> / <span class="hi">${esc(day.max)}°</span></div>
-          <div class="nextCardText">${esc(shortDescription(day))}</div></div>
-        </div>`;
-      }).join("");
+    const futureDays = viewData.days.slice(1, 4);
+    const nextCards = futureDays.map(function(day) {
+      return `<div class="nextCard">
+        <div class="nextCardName">${esc(day.date)}</div>
+        <div class="nextCardIcon">${icon(day)}</div>
+        <div><div class="nextCardTemp"><span class="lo">${esc(day.min)}°</span> / <span class="hi">${esc(day.max)}°</span></div>
+        <div class="nextCardText">${esc(shortDescription(day))}</div></div>
+      </div>`;
+    });
+
+    while (nextCards.length < 3) {
+      nextCards.push(`<div class="nextCard placeholder"><div class="nextCardName">Dato extendido no disponible</div></div>`);
+    }
+
+    document.getElementById("days").innerHTML = nextCards.join("");
 
 
   }
