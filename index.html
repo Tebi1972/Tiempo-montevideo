@@ -5,13 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Tiempo Uruguay</title>
+<!-- Tiempo Uruguay V5.0 · PWA instalable -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#17304a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Tiempo Uruguay">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="application-name" content="Tiempo Uruguay">
 
 
 <style>
@@ -1967,6 +1969,27 @@ body.dusk:not(.rainy):not(.stormy) .aboutDialogV412{
   .footerActions{margin-top:7px!important}
 }
 
+
+/* ==========================================
+   V5.0 — INSTALACIÓN PWA
+   ========================================== */
+.installPwaV50{
+  appearance:none;
+  border:1px solid var(--border);
+  background:var(--glass);
+  color:inherit;
+  font:inherit;
+  font-weight:800;
+  border-radius:999px;
+  padding:7px 11px;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.installPwaV50:hover{opacity:.86}
+.installPwaV50:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.installPwaV50[hidden]{display:none!important}
+
 </style>
 </head>
 
@@ -2065,6 +2088,7 @@ body.dusk:not(.rainy):not(.stormy) .aboutDialogV412{
   <div class="footerActions">
     <p class="muted footer">
       Datos meteorológicos: <a href="https://www.inumet.gub.uy/" target="_blank" rel="noopener noreferrer">INUMET</a> ·
+      <button id="installPwaV50" class="installPwaV50" type="button" hidden>Instalar app</button>
       <button id="openAboutV412" class="aboutButtonV412" type="button">Fuentes y acerca de</button>
     </p>
   </div>
@@ -2095,6 +2119,11 @@ body.dusk:not(.rainy):not(.stormy) .aboutDialogV412{
       <h3>Privacidad y ubicación</h3>
       <p>La ubicación se solicita únicamente cuando tocás el botón “Usar mi ubicación” y el navegador pide tu autorización. Las coordenadas se utilizan para identificar la estación INUMET disponible más cercana.</p>
       <p>Tiempo Uruguay no guarda tus coordenadas en el almacenamiento local del navegador. Solo recuerda la estación seleccionada para mantener tu preferencia en próximas visitas.</p>
+    </section>
+
+    <section class="aboutSectionV412">
+      <h3>Aplicación instalable</h3>
+      <p>Tiempo Uruguay puede instalarse desde navegadores compatibles como una aplicación web progresiva (PWA). La interfaz puede quedar disponible para abrirse desde la pantalla de inicio, pero los datos meteorológicos actuales se solicitan a la red y no se reutilizan desde una caché antigua.</p>
     </section>
 
     <section class="aboutSectionV412">
@@ -3514,6 +3543,36 @@ async function load(options = {}) {
     if (!inside) dialog.close();
   });
 })();
+
+
+
+/* ==========================================
+   V5.0 — INSTALACIÓN PWA
+   ========================================== */
+let deferredInstallPromptV50 = null;
+const installPwaButtonV50 = document.getElementById("installPwaV50");
+
+window.addEventListener("beforeinstallprompt", event => {
+  event.preventDefault();
+  deferredInstallPromptV50 = event;
+  if (installPwaButtonV50) installPwaButtonV50.hidden = false;
+});
+
+if (installPwaButtonV50) {
+  installPwaButtonV50.addEventListener("click", async () => {
+    if (!deferredInstallPromptV50) return;
+    deferredInstallPromptV50.prompt();
+    try { await deferredInstallPromptV50.userChoice; } catch (_) {}
+    deferredInstallPromptV50 = null;
+    installPwaButtonV50.hidden = true;
+  });
+}
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPromptV50 = null;
+  if (installPwaButtonV50) installPwaButtonV50.hidden = true;
+});
+
 
 /* ==========================================
    SINCRONIZACIÓN AUTOMÁTICA
