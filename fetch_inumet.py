@@ -9,6 +9,16 @@ from zoneinfo import ZoneInfo
 HEADERS = {"User-Agent": "Tiempo-Uruguay/1.0"}
 URUGUAY_TZ = ZoneInfo("America/Montevideo")
 
+# V4.12.2: conservar como respaldo la última observación publicada.
+# Se usa únicamente cuando una nueva consulta de la API omite transitoriamente
+# la temperatura de una estación y la observación anterior sigue teniendo
+# menos de 2 horas. Nunca prolonga una observación ya vencida.
+try:
+    with open("data.json", "r", encoding="utf-8") as _f:
+        PREVIOUS_DATA = json.load(_f)
+except (OSError, json.JSONDecodeError):
+    PREVIOUS_DATA = {}
+
 # =================================================
 # 1. PRONÓSTICO INUMET - ÁREA METROPOLITANA
 # =================================================
@@ -474,13 +484,59 @@ def observacion_vacia(meta):
         "temperature": None, "station": nombre, "wigos": wigos,
         "latitude": lat, "longitude": lon, "observation_time": None,
         "condition": "neutral", "condition_time": None,
-        "condition_source": None,
         "present_weather": None, "cloud_amount": None,
         "cloud_types": [], "wind_speed_kmh": None,
         "humidity": None, "pressure_hpa": None,
         "dewpoint_c": None, "feels_like_c": None,
-        "precipitation_recent_mm": None,
     }
+
+def calcular_sensacion_termica(out):
+    """Calcula temperatura aparente de Steadman sin radiación solar.
+
+    Prioriza humedad relativa observada. Si INUMET no entrega RH pero sí
+    punto de rocío, obtiene directamente de éste la presión de vapor, que es
+    el término que realmente necesita la fórmula de Steadman.
+    """
+    if out.get("temperature") is None or out.get("wind_speed_kmh") is None:
+        out["feels_like_c"] = None
+        return
+
+    try:
+        t = float(out["temperature"])
+        ws = float(out["wind_speed_kmh"]) / 3.6
+
+        if out.get("humidity") is not None:
+            rh = float(out["humidity"])
+            e = (rh / 100.0) * 6.105 * math.exp((17.27 * t) / (237.7 + t))
+        elif out.get("dewpoint_c") is not None:
+            td = float(out["dewpoint_c"])
+            e = 6.105 * math.exp((17.27 * td) / (237.7 + td))
+        else:
+            out["feels_like_c"] = None
+            return
+
+        out["feels_like_c"] = round(t + 0.33 * e - 0.70 * ws - 4.00, 1)
+    except (TypeError, ValueError, OverflowError, ZeroDivisionError):
+        out["feels_like_c"] = None
+
+def recuperar_temperatura_previa_si_fresca(key, out, ahora):
+    """Evita que una respuesta parcial de la API borre una temperatura válida."""
+    if out.get("temperature") is not None:
+        return out
+
+    previa = (PREVIOUS_DATA.get("locations") or {}).get(key) or {}
+    temperatura_previa = previa.get("temperature")
+    hora_previa = previa.get("observation_time")
+    edad = edad_horas(hora_previa, ahora) if hora_previa else None
+
+    if (temperatura_previa is not None and edad is not None
+            and 0 <= edad <= 2):
+        out["temperature"] = temperatura_previa
+        out["observation_time"] = hora_previa
+        print(f"{key}: temperatura recuperada de data.json ({edad:.2f} h de antigüedad)")
+        calcular_sensacion_termica(out)
+
+    return out
 
 def construir_observacion(meta, registros, ahora):
     out = observacion_vacia(meta)
@@ -503,10 +559,7 @@ def construir_observacion(meta, registros, ahora):
     }
     recientes = []
     for p in registros:
-        nombre_variable = str(p.get("name") or "")
-        # Algunas estaciones automáticas no reportan estado del cielo, pero sí
-        # precipitación reciente. La conservamos para reconocer lluvia observada.
-        if p.get("name") not in nombres and "precipitation" not in nombre_variable.lower():
+        if p.get("name") not in nombres:
             continue
         hora = instante(p)
         edad = edad_horas(hora, ahora)
@@ -536,13 +589,6 @@ def construir_observacion(meta, registros, ahora):
     pressure_msl = ultimo("pressure_reduced_to_mean_sea_level")
     pressure_station = ultimo("non_coordinate_pressure")
     dewpoint = ultimo("dewpoint_temperature")
-    precip_recent = [
-        p for p in recientes
-        if "precipitation" in str(p.get("name") or "").lower()
-        and "past24" not in str(p.get("name") or "").lower()
-        and p.get("value") is not None
-    ]
-    precip_recent.sort(key=instante, reverse=True)
 
     wd = [str(p.get("description") or "") for p in weather]
     cd = [str(p.get("description") or "") for p in clouds]
@@ -575,48 +621,21 @@ def construir_observacion(meta, registros, ahora):
         except (TypeError, ValueError):
             pass
 
-    if precip_recent:
-        try:
-            # Usamos el registro de precipitación reciente más nuevo. No usamos
-            # el acumulado de 24 h para decidir el estado meteorológico actual.
-            out["precipitation_recent_mm"] = round(float(precip_recent[0]["value"]), 1)
-        except (TypeError, ValueError):
-            pass
-
     # Sensación térmica / temperatura aparente (Steadman, sin radiación solar).
-    # AT = T + 0.33*e - 0.70*ws - 4.00
-    # e = RH/100 * 6.105 * exp(17.27*T/(237.7+T))
-    # T en °C, RH en %, ws en m/s.
-    if (out.get("temperature") is not None and
-            out.get("humidity") is not None and
-            out.get("wind_speed_kmh") is not None):
-        try:
-            t = float(out["temperature"])
-            rh = float(out["humidity"])
-            ws = float(out["wind_speed_kmh"]) / 3.6
-            e = (rh / 100.0) * 6.105 * math.exp((17.27 * t) / (237.7 + t))
-            out["feels_like_c"] = round(t + 0.33 * e - 0.70 * ws - 4.00, 1)
-        except (TypeError, ValueError, OverflowError):
-            pass
+    # Usa RH observada cuando está disponible. Si falta RH pero existe punto
+    # de rocío, calcula la presión de vapor directamente a partir de Td.
+    calcular_sensacion_termica(out)
 
     weather_text = " ".join(wd).upper()
     cloud_text = " ".join(cd).upper()
 
     if any(x in weather_text for x in ("THUNDER", "LIGHTNING")):
         out["condition"] = "stormy"
-        out["condition_source"] = "observed"
     elif any(x in weather_text for x in
              ("RAIN", "DRIZZLE", "SHOWER", "PRECIPIT", "HAIL", "SNOW")):
         out["condition"] = "rainy"
-        out["condition_source"] = "observed"
     elif any(x in weather_text for x in ("FOG", "MIST")):
         out["condition"] = "cloudy"
-        out["condition_source"] = "observed"
-    elif out.get("precipitation_recent_mm") is not None and out["precipitation_recent_mm"] > 0:
-        # Respaldo especialmente útil en estaciones automáticas sin sensor/código
-        # de nubosidad: si está midiendo precipitación reciente, sí podemos afirmar lluvia.
-        out["condition"] = "rainy"
-        out["condition_source"] = "observed_precipitation"
     else:
         oktas = [int(x) for x in re.findall(r"(\d+)\s*OKTAS?", cloud_text)]
         cobertura = max(oktas) if oktas else None
@@ -636,7 +655,6 @@ def construir_observacion(meta, registros, ahora):
                 "partly" if cobertura >= 3 else
                 "sunny"
             )
-            out["condition_source"] = "observed"
     return out
 
 locations = {k: observacion_vacia(v) for k, v in ESTACIONES.items()}
@@ -676,10 +694,14 @@ try:
             url_actual = None
 
     for key, meta in ESTACIONES.items():
-        locations[key] = construir_observacion(meta, registros[key], ahora)
-        locations[key]["forecast_zone"] = FORECAST_ZONE_BY_LOCATION.get(key, "M")
+        nueva = construir_observacion(meta, registros[key], ahora)
+        nueva = recuperar_temperatura_previa_si_fresca(key, nueva, ahora)
+        nueva["forecast_zone"] = FORECAST_ZONE_BY_LOCATION.get(key, "M")
+        locations[key] = nueva
         o = locations[key]
-        print(key, o["temperature"], o["condition"], o.get("condition_source"), o["wind_speed_kmh"], "precip", o.get("precipitation_recent_mm"))
+        print(key, o["temperature"], o["condition"], o["wind_speed_kmh"],
+              "RH", o.get("humidity"), "Td", o.get("dewpoint_c"),
+              "ST", o.get("feels_like_c"))
 
 except Exception as error:
     print("Error obteniendo observaciones nacionales:", error)
