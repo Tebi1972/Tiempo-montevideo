@@ -67,7 +67,7 @@
     "pdf": "adv1790672465975.pdf",
     "source": "inumet_alerta_object_v4",
     "source_timestamp": "2026-09-29T06:00:00-03:00",
-    "source_age_hours": 0.49,
+    "source_age_hours": 0.93,
     "homepage_says_active": true,
     "data_unavailable": false
   },
@@ -1192,6 +1192,6 @@
   "summary": "Temperaturas de 14° a 19°; con posibilidad de precipitaciones.",
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-09-29T06:29-03:00"
+    "checked_at": "2026-09-29T06:55-03:00"
   }
 }
