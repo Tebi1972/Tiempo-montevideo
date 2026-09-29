@@ -3152,12 +3152,16 @@ function formatSolarTime(date) {
 }
 
 function optionalObservedStat(label, icon, value, suffix="") {
+  // V4.12.1: null/undefined/vacío significa “sin dato”, no cero.
+  if (value === null || value === undefined || value === "") return "";
   const n = Number(value);
   if (!Number.isFinite(n)) return "";
   return `<div class="statRow"><div class="statIcon">${icon}</div><div class="statLabel">${label}</div><div class="statValue">${esc(n.toLocaleString("es-UY", {maximumFractionDigits:1}))}${suffix}</div></div>`;
 }
 
 function optionalObservedInline(label, icon, value, suffix="", approximate=false) {
+  // V4.12.1: preservar el 0 real, pero no convertir un dato ausente en 0.
+  if (value === null || value === undefined || value === "") return "";
   const n = Number(value);
   if (!Number.isFinite(n)) return "";
   const formatted = n.toLocaleString("es-UY", {maximumFractionDigits:1});
