@@ -1,16 +1,38 @@
 {
-  "name": "Tiempo Montevideo",
-  "short_name": "Tiempo MVD",
-  "description": "Pronóstico y observaciones meteorológicas de Montevideo con datos de INUMET.",
+  "id": "./",
+  "name": "Tiempo Uruguay",
+  "short_name": "Tiempo Uruguay",
+  "description": "Estado del tiempo, pronósticos y advertencias para Uruguay con datos meteorológicos de INUMET.",
   "lang": "es-UY",
+  "dir": "ltr",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
-  "background_color": "#9fd8ee",
+  "background_color": "#17304a",
   "theme_color": "#17304a",
+  "orientation": "any",
+  "categories": [
+    "weather",
+    "utilities"
+  ],
   "icons": [
-    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
-    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
