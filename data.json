@@ -21,7 +21,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-09-30T02:30:00-03:00",
-    "source_age_hours": 3.98,
+    "source_age_hours": 4.43,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -1088,6 +1088,6 @@
   "summary": "Temperaturas de 10° a 15°; con posibilidad de precipitaciones.",
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-09-30T06:29-03:00"
+    "checked_at": "2026-09-30T06:55-03:00"
   }
 }
