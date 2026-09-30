@@ -18,40 +18,13 @@
     "feels_like_c": 9.1
   },
   "alert": {
-    "active": true,
-    "level": "amarilla",
-    "phenomenon": "Vientos fuertes y persistentes",
-    "probability": "> 75%",
-    "start": "2026-09-30 00:00",
-    "end": "2026-09-30 06:00",
-    "description": "El área será afectada por vientos sostenidos del SW con velocidades entre 40-60 km/h y rachas que pueden alcanzar los 60-80 km/h.",
-    "zones": "Canelones : Atlántida, Estación Atlántida, Estación La Floresta, Jaureguiberry, La Floresta, Las Toscas, Parque del Plata y San Luis.Maldonado : Balneario Buenos Aires, Bella Vista, Canteras de Marelli, Cerro Pelado, Cerros Azules, El Chorro, El Tesoro, Gerona, Gregorio Aznárez, José Ignacio, La Barra, La Capuera, Las Flores, Maldonado, Manantiales, Ocean Park, Pan de Azúcar, Parque Medina, Piriápolis, Playa Grande, Playa Hermosa, Playa Verde, Pueblo Solís, Punta Ballena, Punta Colorada, Punta Negra, Punta del Este, San Carlos y Sauce de Portezuelo.Rocha : 19 de Abril, Aguas Dulces, Arachania, Barra de Valizas, Barrio Pereira, Barrio Torres, Cabo Polonio, Capacho, Castillos, La Esmeralda, La Paloma, La Pedrera, Palmares de Castillos, Puente Valizas, Puerto de los Botes, Punta del Diablo y Rocha.",
-    "warnings": [
-      {
-        "level": "amarilla",
-        "phenomenon": "Vientos fuertes y persistentes",
-        "probability": "> 75%",
-        "start": "2026-09-30 00:00",
-        "end": "2026-09-30 06:00",
-        "description": "El área será afectada por vientos sostenidos del SW con velocidades entre 40-60 km/h y rachas que pueden alcanzar los 60-80 km/h.",
-        "zones": "Canelones : Atlántida, Estación Atlántida, Estación La Floresta, Jaureguiberry, La Floresta, Las Toscas, Parque del Plata y San Luis.Maldonado : Balneario Buenos Aires, Bella Vista, Canteras de Marelli, Cerro Pelado, Cerros Azules, El Chorro, El Tesoro, Gerona, Gregorio Aznárez, José Ignacio, La Barra, La Capuera, Las Flores, Maldonado, Manantiales, Ocean Park, Pan de Azúcar, Parque Medina, Piriápolis, Playa Grande, Playa Hermosa, Playa Verde, Pueblo Solís, Punta Ballena, Punta Colorada, Punta Negra, Punta del Este, San Carlos y Sauce de Portezuelo.Rocha : 19 de Abril, Aguas Dulces, Arachania, Barra de Valizas, Barrio Pereira, Barrio Torres, Cabo Polonio, Capacho, Castillos, La Esmeralda, La Paloma, La Pedrera, Palmares de Castillos, Puente Valizas, Puerto de los Botes, Punta del Diablo y Rocha.",
-        "risk": {
-          "riesgoViento": 2,
-          "riesgoLluvia": 1,
-          "riesgoTormenta": 1,
-          "riesgoVisibilidad": 1,
-          "riesgoCalor": 1,
-          "riesgoFrio": 1
-        }
-      }
-    ],
-    "updated": "2026-09-30 00:00",
-    "pdf": "adv1790736981380.pdf",
-    "source": "inumet_alerta_object_v4",
-    "source_timestamp": "2026-09-30T00:00:00-03:00",
-    "source_age_hours": 2.46,
+    "active": false,
+    "data_unavailable": true,
     "homepage_says_active": true,
-    "data_unavailable": false
+    "source": "inumet_sources_out_of_sync",
+    "source_timestamp": "2026-09-30T02:30:00-03:00",
+    "source_age_hours": 0.41,
+    "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
     "montevideo_prado": {
@@ -1121,6 +1094,6 @@
   "summary": "Temperaturas de 10° a 15°; con posibilidad de precipitaciones.",
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-09-30T02:27-03:00"
+    "checked_at": "2026-09-30T02:54-03:00"
   }
 }
