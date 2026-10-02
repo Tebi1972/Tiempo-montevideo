@@ -25,7 +25,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-09-30T02:30:00-03:00",
-    "source_age_hours": 46.98,
+    "source_age_hours": 47.42,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -1102,6 +1102,6 @@
   "summary": "Temperaturas de 7° a 17°.",
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-10-02T01:28-03:00"
+    "checked_at": "2026-10-02T01:55-03:00"
   }
 }
