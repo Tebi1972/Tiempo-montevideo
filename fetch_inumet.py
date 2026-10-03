@@ -648,6 +648,7 @@ def leer_matriz_dinamica():
     estaciones = data.get("estaciones") or []
     variables = data.get("variables") or []
     observaciones = data.get("observaciones") or []
+    fechas = data.get("fechas") or []
 
     st_index = {s.get("id"): i for i, s in enumerate(estaciones)}
     var_index = {v.get("idInt"): i for i, v in enumerate(variables)}
@@ -663,6 +664,20 @@ def leer_matriz_dinamica():
         except Exception:
             return None
 
+    def hora_variable(var_id):
+        """Hora oficial asociada a una variable de la matriz dinámica."""
+        vi = var_index.get(var_id)
+        if vi is None:
+            return None
+        try:
+            indices = (observaciones[vi] or {}).get("iFechas") or []
+            if not indices:
+                return None
+            idx = int(indices[0])
+            return fechas[idx] if 0 <= idx < len(fechas) else None
+        except Exception:
+            return None
+
     resultado = {}
     for key, candidatos in DYNAMIC_IDS.items():
         elegido = None
@@ -675,6 +690,9 @@ def leer_matriz_dinamica():
             continue
         resultado[key] = {
             "station_id": elegido,
+            # La temperatura (47) es el requisito mínimo de estación activa;
+            # usamos la hora oficial que la propia matriz asocia a esa variable.
+            "observation_time": hora_variable(47),
             "visibility_km": _num(valor(elegido, 74)),
             "wind_direction_deg": _num(valor(elegido, 8)),
             "wind_knots": _num(valor(elegido, 29)),
@@ -697,6 +715,10 @@ def aplicar_dinamica(base, dyn):
 
     out = dict(base)
     out["observation_source"] = "inumet_dynamic"
+    # Para los valores dinámicos usamos la hora publicada por la propia matriz.
+    # SYNOP queda únicamente como respaldo si excepcionalmente falta esa hora.
+    if dyn.get("observation_time"):
+        out["observation_time"] = dyn["observation_time"]
     out["dynamic_station_id"] = dyn["station_id"]
 
     for campo in ("temperature", "humidity", "dewpoint_c", "visibility_km", "wind_direction_deg"):
