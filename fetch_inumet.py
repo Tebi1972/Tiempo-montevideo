@@ -9,16 +9,6 @@ from zoneinfo import ZoneInfo
 HEADERS = {"User-Agent": "Tiempo-Uruguay/1.0"}
 URUGUAY_TZ = ZoneInfo("America/Montevideo")
 
-# V4.12.2: conservar como respaldo la última observación publicada.
-# Se usa únicamente cuando una nueva consulta de la API omite transitoriamente
-# la temperatura de una estación y la observación anterior sigue teniendo
-# menos de 2 horas. Nunca prolonga una observación ya vencida.
-try:
-    with open("data.json", "r", encoding="utf-8") as _f:
-        PREVIOUS_DATA = json.load(_f)
-except (OSError, json.JSONDecodeError):
-    PREVIOUS_DATA = {}
-
 # =================================================
 # 1. PRONÓSTICO INUMET - ÁREA METROPOLITANA
 # =================================================
@@ -399,15 +389,18 @@ except Exception as error:
 
 
 # =================================================
-# 2. OBSERVACIONES REALES - RED NACIONAL SYNOP
+# 2. OBSERVACIONES REALES - MATRIZ DINÁMICA + SYNOP
 # =================================================
 API_OBSERVACIONES = (
     "https://w2b.inumet.gub.uy/oapi/collections/"
     "urn:wmo:md:uy-inumet:surface-based-observations.synop/items"
 )
+API_ESTADO_DINAMICO = (
+    "https://www.inumet.gub.uy/reportes/estadoActual/"
+    "estadoActualDatosHorarios.mch"
+)
 
-# Estaciones verificadas por el diagnóstico nacional.
-# Conservamos Prado como "current" para no alterar todavía la PWA.
+# Estaciones de la aplicación. Se conserva WIGOS para el respaldo SYNOP.
 ESTACIONES = {
     "montevideo_prado": ("0-20000-0-86585", "Prado", -34.860639, -56.207389),
     "montevideo_carrasco": ("0-20000-0-86580", "Carrasco", -34.832923, -56.012876),
@@ -438,33 +431,46 @@ ESTACIONES = {
 }
 WIGOS_A_KEY = {v[0]: k for k, v in ESTACIONES.items()}
 
-# Zona oficial de pronóstico asociada a cada estación de la aplicación.
+# IDs internos de la matriz dinámica. Orden = prioridad.
+# Convencional primero cuando entrega el conjunto completo; G3/G4 cuando
+# la convencional no tiene datos o como respaldo.
+DYNAMIC_IDS = {
+    "montevideo_prado": [211, 652],
+    "montevideo_carrasco": [39],
+    "artigas": [16, 1337],
+    "bella_union": [1671],
+    "colonia": [66, 594],
+    "durazno": [96, 610],
+    "florida": [110, 1522],
+    "laguna_del_sauce": [138, 953],
+    "lavalleja": [1334],
+    "melilla": [159, 608],
+    "melo": [160, 1336, 1758],
+    "mercedes": [162, 609],
+    "paysandu": [1333, 201],
+    "punta_del_este": [1605, 219],
+    "rocha": [236, 590],
+    "salto": [239, 600],
+    "san_jose": [252, 1606],
+    "atlantida": [1341],
+    "paso_de_los_toros": [603],
+    "rivera_aeropuerto": [1693, 1332],
+    "san_jacinto": [1335],
+    "tacuarembo": [1326, 587, 588],
+    "treinta_y_tres": [1342, 272, 585],
+    "trinidad": [1611, 276],
+    "vichadero": [1680],
+    "young": [1628, 293],
+}
+
 FORECAST_ZONE_BY_LOCATION = {
-    "montevideo_prado": "M",
-    "montevideo_carrasco": "M",
-    "melilla": "M",
-    "atlantida": "M",
-    "san_jacinto": "M",
-    "artigas": "NW",
-    "bella_union": "NW",
-    "salto": "NW",
-    "paysandu": "NW",
-    "young": "NW",
-    "rivera_aeropuerto": "NE",
-    "tacuarembo": "NE",
-    "vichadero": "NE",
-    "melo": "NE",
-    "colonia": "SO",
-    "mercedes": "SO",
-    "san_jose": "SO",
-    "durazno": "C",
-    "florida": "C",
-    "paso_de_los_toros": "C",
-    "trinidad": "C",
-    "lavalleja": "E",
-    "rocha": "E",
-    "treinta_y_tres": "E",
-    "laguna_del_sauce": "E",
+    "montevideo_prado": "M", "montevideo_carrasco": "M", "melilla": "M",
+    "atlantida": "M", "san_jacinto": "M",
+    "artigas": "NW", "bella_union": "NW", "salto": "NW", "paysandu": "NW", "young": "NW",
+    "rivera_aeropuerto": "NE", "tacuarembo": "NE", "vichadero": "NE", "melo": "NE",
+    "colonia": "SO", "mercedes": "SO", "san_jose": "SO",
+    "durazno": "C", "florida": "C", "paso_de_los_toros": "C", "trinidad": "C",
+    "lavalleja": "E", "rocha": "E", "treinta_y_tres": "E", "laguna_del_sauce": "E",
     "punta_del_este": "PE",
 }
 
@@ -484,61 +490,31 @@ def observacion_vacia(meta):
         "temperature": None, "station": nombre, "wigos": wigos,
         "latitude": lat, "longitude": lon, "observation_time": None,
         "condition": "neutral", "condition_time": None,
+        "condition_source": None,
         "present_weather": None, "cloud_amount": None,
         "cloud_types": [], "wind_speed_kmh": None,
+        "wind_direction_deg": None, "visibility_km": None,
         "humidity": None, "pressure_hpa": None,
         "dewpoint_c": None, "feels_like_c": None,
+        "precipitation_recent_mm": None,
+        "observation_source": None, "dynamic_station_id": None,
     }
 
-def calcular_sensacion_termica(out):
-    """Calcula temperatura aparente de Steadman sin radiación solar.
-
-    Prioriza humedad relativa observada. Si INUMET no entrega RH pero sí
-    punto de rocío, obtiene directamente de éste la presión de vapor, que es
-    el término que realmente necesita la fórmula de Steadman.
-    """
-    if out.get("temperature") is None or out.get("wind_speed_kmh") is None:
-        out["feels_like_c"] = None
-        return
-
-    try:
-        t = float(out["temperature"])
-        ws = float(out["wind_speed_kmh"]) / 3.6
-
-        if out.get("humidity") is not None:
+def calcular_sensacion(out):
+    if (out.get("temperature") is not None and
+            out.get("humidity") is not None and
+            out.get("wind_speed_kmh") is not None):
+        try:
+            t = float(out["temperature"])
             rh = float(out["humidity"])
+            ws = float(out["wind_speed_kmh"]) / 3.6
             e = (rh / 100.0) * 6.105 * math.exp((17.27 * t) / (237.7 + t))
-        elif out.get("dewpoint_c") is not None:
-            td = float(out["dewpoint_c"])
-            e = 6.105 * math.exp((17.27 * td) / (237.7 + td))
-        else:
-            out["feels_like_c"] = None
-            return
-
-        out["feels_like_c"] = round(t + 0.33 * e - 0.70 * ws - 4.00, 1)
-    except (TypeError, ValueError, OverflowError, ZeroDivisionError):
-        out["feels_like_c"] = None
-
-def recuperar_temperatura_previa_si_fresca(key, out, ahora):
-    """Evita que una respuesta parcial de la API borre una temperatura válida."""
-    if out.get("temperature") is not None:
-        return out
-
-    previa = (PREVIOUS_DATA.get("locations") or {}).get(key) or {}
-    temperatura_previa = previa.get("temperature")
-    hora_previa = previa.get("observation_time")
-    edad = edad_horas(hora_previa, ahora) if hora_previa else None
-
-    if (temperatura_previa is not None and edad is not None
-            and 0 <= edad <= 2):
-        out["temperature"] = temperatura_previa
-        out["observation_time"] = hora_previa
-        print(f"{key}: temperatura recuperada de data.json ({edad:.2f} h de antigüedad)")
-        calcular_sensacion_termica(out)
-
-    return out
+            out["feels_like_c"] = round(t + 0.33 * e - 0.70 * ws - 4.00, 1)
+        except (TypeError, ValueError, OverflowError):
+            pass
 
 def construir_observacion(meta, registros, ahora):
+    """Respaldo SYNOP. Mantiene la lógica anterior."""
     out = observacion_vacia(meta)
 
     temps = [p for p in registros if p.get("name") == "air_temperature"
@@ -553,13 +529,14 @@ def construir_observacion(meta, registros, ahora):
 
     nombres = {
         "present_weather", "cloud_amount", "cloud_cover_total",
-        "cloud_type", "wind_speed", "relative_humidity",
-        "pressure_reduced_to_mean_sea_level", "non_coordinate_pressure",
-        "dewpoint_temperature"
+        "cloud_type", "wind_speed", "wind_from_direction",
+        "relative_humidity", "pressure_reduced_to_mean_sea_level",
+        "non_coordinate_pressure", "dewpoint_temperature"
     }
     recientes = []
     for p in registros:
-        if p.get("name") not in nombres:
+        nombre_variable = str(p.get("name") or "")
+        if p.get("name") not in nombres and "precipitation" not in nombre_variable.lower():
             continue
         hora = instante(p)
         edad = edad_horas(hora, ahora)
@@ -585,61 +562,62 @@ def construir_observacion(meta, registros, ahora):
     totals = ultimo("cloud_cover_total")
     types = ultimo("cloud_type")
     winds = ultimo("wind_speed")
+    winddir = ultimo("wind_from_direction")
     humidity = ultimo("relative_humidity")
     pressure_msl = ultimo("pressure_reduced_to_mean_sea_level")
     pressure_station = ultimo("non_coordinate_pressure")
     dewpoint = ultimo("dewpoint_temperature")
+    precip_recent = [
+        p for p in recientes
+        if "precipitation" in str(p.get("name") or "").lower()
+        and "past24" not in str(p.get("name") or "").lower()
+        and p.get("value") is not None
+    ]
+    precip_recent.sort(key=instante, reverse=True)
 
     wd = [str(p.get("description") or "") for p in weather]
     cd = [str(p.get("description") or "") for p in clouds]
     out["present_weather"] = " | ".join(x for x in wd if x) or None
     out["cloud_amount"] = " | ".join(x for x in cd if x) or None
-    out["cloud_types"] = [str(p["description"]) for p in types
-                          if p.get("description")]
+    out["cloud_types"] = [str(p["description"]) for p in types if p.get("description")]
 
     if winds and winds[0].get("value") is not None:
         out["wind_speed_kmh"] = round(float(winds[0]["value"]) * 3.6, 1)
-
+    if winddir and winddir[0].get("value") is not None:
+        try: out["wind_direction_deg"] = round(float(winddir[0]["value"]), 0)
+        except (TypeError, ValueError): pass
     if humidity and humidity[0].get("value") is not None:
-        try:
-            out["humidity"] = round(float(humidity[0]["value"]), 0)
-        except (TypeError, ValueError):
-            pass
+        try: out["humidity"] = round(float(humidity[0]["value"]), 0)
+        except (TypeError, ValueError): pass
 
-    # Para una app meteorológica mostramos presión reducida al nivel medio del mar,
-    # que es la presión comparable entre estaciones. Si no existe, usamos la de estación.
     pressure_source = pressure_msl or pressure_station
     if pressure_source and pressure_source[0].get("value") is not None:
-        try:
-            out["pressure_hpa"] = round(float(pressure_source[0]["value"]), 1)
-        except (TypeError, ValueError):
-            pass
+        try: out["pressure_hpa"] = round(float(pressure_source[0]["value"]), 1)
+        except (TypeError, ValueError): pass
 
     if dewpoint and dewpoint[0].get("value") is not None:
-        try:
-            out["dewpoint_c"] = round(float(dewpoint[0]["value"]), 1)
-        except (TypeError, ValueError):
-            pass
+        try: out["dewpoint_c"] = round(float(dewpoint[0]["value"]), 1)
+        except (TypeError, ValueError): pass
 
-    # Sensación térmica / temperatura aparente (Steadman, sin radiación solar).
-    # Usa RH observada cuando está disponible. Si falta RH pero existe punto
-    # de rocío, calcula la presión de vapor directamente a partir de Td.
-    calcular_sensacion_termica(out)
+    if precip_recent:
+        try: out["precipitation_recent_mm"] = round(float(precip_recent[0]["value"]), 1)
+        except (TypeError, ValueError): pass
+
+    calcular_sensacion(out)
 
     weather_text = " ".join(wd).upper()
     cloud_text = " ".join(cd).upper()
-
     if any(x in weather_text for x in ("THUNDER", "LIGHTNING")):
-        out["condition"] = "stormy"
-    elif any(x in weather_text for x in
-             ("RAIN", "DRIZZLE", "SHOWER", "PRECIPIT", "HAIL", "SNOW")):
-        out["condition"] = "rainy"
+        out["condition"], out["condition_source"] = "stormy", "observed_synop"
+    elif any(x in weather_text for x in ("RAIN", "DRIZZLE", "SHOWER", "PRECIPIT", "HAIL", "SNOW")):
+        out["condition"], out["condition_source"] = "rainy", "observed_synop"
     elif any(x in weather_text for x in ("FOG", "MIST")):
-        out["condition"] = "cloudy"
+        out["condition"], out["condition_source"] = "cloudy", "observed_synop"
+    elif out.get("precipitation_recent_mm") is not None and out["precipitation_recent_mm"] > 0:
+        out["condition"], out["condition_source"] = "rainy", "observed_precipitation"
     else:
         oktas = [int(x) for x in re.findall(r"(\d+)\s*OKTAS?", cloud_text)]
         cobertura = max(oktas) if oktas else None
-
         if cobertura is None and totals:
             try:
                 valor = float(totals[0].get("value"))
@@ -648,63 +626,181 @@ def construir_observacion(meta, registros, ahora):
                 )
             except (TypeError, ValueError):
                 pass
-
         if cobertura is not None:
-            out["condition"] = (
-                "cloudy" if cobertura >= 7 else
-                "partly" if cobertura >= 3 else
-                "sunny"
-            )
+            out["condition"] = "cloudy" if cobertura >= 7 else "partly" if cobertura >= 3 else "sunny"
+            out["condition_source"] = "observed_synop"
+    out["observation_source"] = "synop"
+    return out
+
+def _num(v):
+    try:
+        if v in (None, "", "-", "null"): return None
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+def leer_matriz_dinamica():
+    """Devuelve valores por ID de estación e ID de variable."""
+    r = requests.get(API_ESTADO_DINAMICO, headers=HEADERS, timeout=45)
+    print("Código matriz dinámica:", r.status_code)
+    r.raise_for_status()
+    data = r.json()
+    estaciones = data.get("estaciones") or []
+    variables = data.get("variables") or []
+    observaciones = data.get("observaciones") or []
+
+    st_index = {s.get("id"): i for i, s in enumerate(estaciones)}
+    var_index = {v.get("idInt"): i for i, v in enumerate(variables)}
+
+    def valor(st_id, var_id):
+        si = st_index.get(st_id)
+        vi = var_index.get(var_id)
+        if si is None or vi is None: return None
+        try:
+            datos = (observaciones[vi] or {}).get("datos") or []
+            celda = datos[si] if si < len(datos) else None
+            return celda[0] if isinstance(celda, list) and celda else celda
+        except Exception:
+            return None
+
+    resultado = {}
+    for key, candidatos in DYNAMIC_IDS.items():
+        elegido = None
+        for sid in candidatos:
+            # Temperatura es el requisito mínimo para considerar activa la estación.
+            if _num(valor(sid, 47)) is not None:
+                elegido = sid
+                break
+        if elegido is None:
+            continue
+        resultado[key] = {
+            "station_id": elegido,
+            "visibility_km": _num(valor(elegido, 74)),
+            "wind_direction_deg": _num(valor(elegido, 8)),
+            "wind_knots": _num(valor(elegido, 29)),
+            "temperature": _num(valor(elegido, 47)),
+            "humidity": _num(valor(elegido, 25)),
+            "dewpoint_c": _num(valor(elegido, 59)),
+            "pressure_station_hpa": _num(valor(elegido, 43)),
+            "pressure_msl_hpa": _num(valor(elegido, 45)),
+            "present_weather": valor(elegido, 123),
+            "cloud_types_raw": valor(elegido, 31),
+            "sky_raw": valor(elegido, 3),
+            "precipitation_recent_mm": _num(valor(elegido, 94)),
+        }
+    return resultado
+
+def aplicar_dinamica(base, dyn):
+    """La matriz dinámica manda en valores actuales; SYNOP conserva hora/estado como respaldo."""
+    if not dyn:
+        return base
+
+    out = dict(base)
+    out["observation_source"] = "inumet_dynamic"
+    out["dynamic_station_id"] = dyn["station_id"]
+
+    for campo in ("temperature", "humidity", "dewpoint_c", "visibility_km", "wind_direction_deg"):
+        if dyn.get(campo) is not None:
+            out[campo] = dyn[campo]
+
+    # INUMET declara la intensidad de viento de esta matriz en NUDOS.
+    if dyn.get("wind_knots") is not None:
+        out["wind_speed_kmh"] = round(dyn["wind_knots"] * 1.852, 1)
+
+    # Siempre preferimos presión reducida al nivel del mar.
+    if dyn.get("pressure_msl_hpa") is not None:
+        out["pressure_hpa"] = round(dyn["pressure_msl_hpa"], 1)
+    elif dyn.get("pressure_station_hpa") is not None:
+        out["pressure_hpa"] = round(dyn["pressure_station_hpa"], 1)
+
+    if dyn.get("precipitation_recent_mm") is not None:
+        out["precipitation_recent_mm"] = round(dyn["precipitation_recent_mm"], 1)
+
+    if dyn.get("present_weather") not in (None, ""):
+        out["present_weather"] = dyn["present_weather"]
+    if dyn.get("cloud_types_raw") not in (None, ""):
+        out["cloud_types"] = [str(dyn["cloud_types_raw"])]
+    if dyn.get("sky_raw") not in (None, ""):
+        sky = str(dyn["sky_raw"]).strip().lower()
+        out["cloud_amount"] = sky
+        # Sólo interpretamos categorías de cielo inequívocas.
+        if sky.startswith(("cub", "over")):
+            out["condition"], out["condition_source"] = "cloudy", "observed_dynamic_sky"
+        elif sky.startswith(("des", "clear")):
+            out["condition"], out["condition_source"] = "sunny", "observed_dynamic_sky"
+        elif sky.startswith(("nub", "par", "poc")):
+            out["condition"], out["condition_source"] = "partly", "observed_dynamic_sky"
+
+    # En automáticas G3/G4 puede no haber cielo/estado actual. Una precipitación
+    # horaria positiva sí permite afirmar lluvia observada.
+    if (dyn.get("precipitation_recent_mm") is not None and
+            dyn["precipitation_recent_mm"] > 0):
+        out["condition"], out["condition_source"] = "rainy", "observed_dynamic_precipitation"
+
+    # IMPORTANTE: la matriz no expone en este endpoint una hora de observación
+    # inequívoca. No inventamos una. Se conserva la hora SYNOP de la misma
+    # localidad únicamente como referencia de frescura para la PWA.
+    calcular_sensacion(out)
     return out
 
 locations = {k: observacion_vacia(v) for k, v in ESTACIONES.items()}
 for _key in locations:
     locations[_key]["forecast_zone"] = FORECAST_ZONE_BY_LOCATION.get(_key, "M")
 
-try:
-    ahora = datetime.now(timezone.utc)
-    desde = ahora - timedelta(hours=24)
-    rango_tiempo = (desde.strftime("%Y-%m-%dT%H:%M:%SZ") + "/" +
-                    ahora.strftime("%Y-%m-%dT%H:%M:%SZ"))
+ahora = datetime.now(timezone.utc)
 
+# 1) Respaldo SYNOP y referencia temporal.
+try:
+    desde = ahora - timedelta(hours=24)
+    rango_tiempo = desde.strftime("%Y-%m-%dT%H:%M:%SZ") + "/" + ahora.strftime("%Y-%m-%dT%H:%M:%SZ")
     registros = {k: [] for k in ESTACIONES}
     url_actual = API_OBSERVACIONES
     params = {"f": "json", "limit": 1000, "datetime": rango_tiempo}
     pagina = 1
 
     while url_actual and pagina <= 20:
-        print("Consultando página nacional:", pagina)
+        print("Consultando página SYNOP nacional:", pagina)
         respuesta = requests.get(url_actual, params=params, headers=HEADERS, timeout=60)
-        print("Código respuesta API:", respuesta.status_code)
+        print("Código respuesta SYNOP:", respuesta.status_code)
         respuesta.raise_for_status()
         api_data = respuesta.json()
-        print("Registros recibidos:", len(api_data.get("features", [])))
-
         for feature in api_data.get("features", []):
             props = feature.get("properties", {})
             key = WIGOS_A_KEY.get(str(props.get("wigos_station_identifier")))
             if key and props.get("phenomenonTime"):
                 registros[key].append(props)
-
-        siguiente = next((x.get("href") for x in api_data.get("links", [])
-                          if x.get("rel") == "next"), None)
+        siguiente = next((x.get("href") for x in api_data.get("links", []) if x.get("rel") == "next"), None)
         if siguiente:
             url_actual, params, pagina = siguiente, None, pagina + 1
         else:
             url_actual = None
 
     for key, meta in ESTACIONES.items():
-        nueva = construir_observacion(meta, registros[key], ahora)
-        nueva = recuperar_temperatura_previa_si_fresca(key, nueva, ahora)
-        nueva["forecast_zone"] = FORECAST_ZONE_BY_LOCATION.get(key, "M")
-        locations[key] = nueva
-        o = locations[key]
-        print(key, o["temperature"], o["condition"], o["wind_speed_kmh"],
-              "RH", o.get("humidity"), "Td", o.get("dewpoint_c"),
-              "ST", o.get("feels_like_c"))
-
+        locations[key] = construir_observacion(meta, registros[key], ahora)
+        locations[key]["forecast_zone"] = FORECAST_ZONE_BY_LOCATION.get(key, "M")
 except Exception as error:
-    print("Error obteniendo observaciones nacionales:", error)
+    print("Error obteniendo respaldo SYNOP:", error)
+
+# 2) Fuente prioritaria: matriz dinámica oficial de INUMET.
+try:
+    dinamicas = leer_matriz_dinamica()
+    print("Estaciones con dato dinámico:", len(dinamicas))
+    for key, dyn in dinamicas.items():
+        locations[key] = aplicar_dinamica(locations[key], dyn)
+        locations[key]["forecast_zone"] = FORECAST_ZONE_BY_LOCATION.get(key, "M")
+except Exception as error:
+    print("Error obteniendo matriz dinámica; se conserva SYNOP:", error)
+
+for key, o in locations.items():
+    print(
+        key,
+        "id_dyn", o.get("dynamic_station_id"),
+        "temp", o.get("temperature"),
+        "viento_kmh", o.get("wind_speed_kmh"),
+        "presion", o.get("pressure_hpa"),
+        "fuente", o.get("observation_source"),
+        "hora_ref", o.get("observation_time"),
+    )
 
 # Compatibilidad con la aplicación actual: current sigue siendo Prado.
 prado = locations["montevideo_prado"]
