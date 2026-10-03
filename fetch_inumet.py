@@ -703,9 +703,10 @@ def aplicar_dinamica(base, dyn):
         if dyn.get(campo) is not None:
             out[campo] = dyn[campo]
 
-    # INUMET declara la intensidad de viento de esta matriz en NUDOS.
+    # La matriz entrega el valor que INUMET publica en su interfaz como km/h.
+    # Se usa directamente para reproducir el dato oficial mostrado por INUMET.
     if dyn.get("wind_knots") is not None:
-        out["wind_speed_kmh"] = round(dyn["wind_knots"] * 1.852, 1)
+        out["wind_speed_kmh"] = round(dyn["wind_knots"], 1)
 
     # Siempre preferimos presión reducida al nivel del mar.
     if dyn.get("pressure_msl_hpa") is not None:
