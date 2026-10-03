@@ -2810,8 +2810,22 @@ function montevideoHour() {
   return Number(parts.find(p => p.type === "hour")?.value ?? 0);
 }
 
-function showObservedTemperature() {
-  return montevideoHour() < 18;
+function observedDataIsFresh(data, maxAgeHours = 3) {
+  const raw = data?.current?.observation_time;
+  if (!raw) return false;
+
+  const observedAt = new Date(raw);
+  if (Number.isNaN(observedAt.getTime())) return false;
+
+  const ageHours = (Date.now() - observedAt.getTime()) / 3600000;
+
+  // Se muestran observaciones de hasta 3 horas de antigüedad.
+  // Se admite un pequeño desfase de reloj de hasta 15 minutos.
+  return ageHours >= -0.25 && ageHours <= maxAgeHours;
+}
+
+function showObservedTemperature(data) {
+  return observedDataIsFresh(data, 3);
 }
 
 /* ==========================================
@@ -3298,18 +3312,16 @@ async function load(options = {}) {
     let currentHeader;
 
     const currentTempHtml =
-      currentTemp !== null && showObservedTemperature()
+      currentTemp !== null && showObservedTemperature(viewData)
         ? `<div class="heroTemp">${formatTemperature(currentTemp)}°</div>`
         : "";
 
     const currentSourceHtml =
-      currentTemp !== null && showObservedTemperature()
+      currentTemp !== null && showObservedTemperature(viewData)
         ? `<div class="heroSource">INUMET · ${esc(viewData.current?.station || "Prado")}</div>`
-        : (montevideoHour() >= 18
-            ? `<a href="https://www.inumet.gub.uy/tiempo/estado-actual"
-                  target="_blank" rel="noopener noreferrer"
-                  class="heroInumetLink">🌡️ Temperaturas INUMET</a>`
-            : `<div class="heroSource">Temperatura actual no disponible</div>`);
+        : `<a href="https://www.inumet.gub.uy/tiempo/estado-actual"
+              target="_blank" rel="noopener noreferrer"
+              class="heroInumetLink">🌡️ Temperaturas INUMET</a>`;
 
     currentHeader = `
       <div class="heroCondition">${esc(observedDescription(viewData))}</div>
@@ -3327,7 +3339,7 @@ async function load(options = {}) {
 
     const solar = solarTimesMontevideo();
     const stationName = viewData.current?.station || "INUMET";
-    const hasFreshObservedTemperature = currentTemp !== null && showObservedTemperature();
+    const hasFreshObservedTemperature = currentTemp !== null && showObservedTemperature(viewData);
     const currentTempDisplay = hasFreshObservedTemperature
       ? `${formatTemperature(currentTemp)}°` : "";
     const humidityInline = optionalObservedInline("Humedad", "💧", viewData.current?.humidity, "%");
