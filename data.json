@@ -1,5 +1,5 @@
 {
-  "updated": "04/10/2026 19:20",
+  "updated": "04/10/2026 20:05",
   "current": {
     "temperature": 16.6,
     "station": "Prado",
@@ -23,7 +23,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-09-30T02:30:00-03:00",
-    "source_age_hours": 113.39,
+    "source_age_hours": 113.59,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -49,7 +49,7 @@
       "pressure_hpa": 1014.7,
       "dewpoint_c": 8.7,
       "feels_like_c": 15.9,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 211,
       "forecast_zone": "M"
@@ -103,7 +103,7 @@
       "pressure_hpa": 1014.0,
       "dewpoint_c": 11.3,
       "feels_like_c": 16.9,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 16,
       "forecast_zone": "NW"
@@ -155,7 +155,7 @@
       "pressure_hpa": 1014.4,
       "dewpoint_c": 12.9,
       "feels_like_c": 19.2,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 66,
       "forecast_zone": "SO"
@@ -167,16 +167,12 @@
       "latitude": -33.350522,
       "longitude": -56.4972385,
       "observation_time": "2026-10-04T19:00:00.000-03:00",
-      "condition": "sunny",
+      "condition": "neutral",
       "condition_time": "2026-10-04T22:00:00Z",
-      "condition_source": "observed_synop",
+      "condition_source": null,
       "present_weather": null,
-      "cloud_amount": "2 OKTAS",
-      "cloud_types": [
-        "ALTOSTRATUS (AS)",
-        "CIRRUS (CI)",
-        "NIMBOSTRATUS (NS)"
-      ],
+      "cloud_amount": null,
+      "cloud_types": [],
       "wind_speed_kmh": 8.0,
       "wind_direction_deg": 115.0,
       "visibility_km": null,
@@ -196,16 +192,12 @@
       "latitude": -34.086325,
       "longitude": -56.18795,
       "observation_time": "2026-10-04T19:00:00.000-03:00",
-      "condition": "sunny",
+      "condition": "neutral",
       "condition_time": "2026-10-04T22:00:00Z",
-      "condition_source": "observed_synop",
+      "condition_source": null,
       "present_weather": null,
-      "cloud_amount": "1 OKTA OR LESS, BUT NOT ZERO",
-      "cloud_types": [
-        "CIRRUS (CI)",
-        "CIRRUS (CI)",
-        "NIMBOSTRATUS (NS)"
-      ],
+      "cloud_amount": null,
+      "cloud_types": [],
       "wind_speed_kmh": 8.0,
       "wind_direction_deg": 130.0,
       "visibility_km": null,
@@ -240,7 +232,7 @@
       "pressure_hpa": 1014.8,
       "dewpoint_c": 11.2,
       "feels_like_c": 14.0,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 138,
       "forecast_zone": "E"
@@ -292,7 +284,7 @@
       "pressure_hpa": 1014.9,
       "dewpoint_c": 10.3,
       "feels_like_c": 15.7,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 159,
       "forecast_zone": "M"
@@ -319,7 +311,7 @@
       "pressure_hpa": 1014.5,
       "dewpoint_c": 11.2,
       "feels_like_c": 16.7,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 160,
       "forecast_zone": "NE"
@@ -346,7 +338,7 @@
       "pressure_hpa": 1014.3,
       "dewpoint_c": 12.3,
       "feels_like_c": 18.7,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 162,
       "forecast_zone": "SO"
@@ -423,7 +415,7 @@
       "pressure_hpa": 1014.9,
       "dewpoint_c": 10.3,
       "feels_like_c": 13.7,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 236,
       "forecast_zone": "E"
@@ -450,7 +442,7 @@
       "pressure_hpa": 1014.4,
       "dewpoint_c": 12.6,
       "feels_like_c": 17.3,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 239,
       "forecast_zone": "NW"
@@ -554,7 +546,7 @@
       "pressure_hpa": 1014.5,
       "dewpoint_c": 10.3,
       "feels_like_c": 15.2,
-      "precipitation_recent_mm": 0.2,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 1693,
       "forecast_zone": "NE"
@@ -1273,9 +1265,5 @@
       "weather_code": "3"
     }
   ],
-  "summary": "Temperaturas de 10° a 21°.",
-  "alert_check": {
-    "ok": true,
-    "checked_at": "2026-10-04T19:53-03:00"
-  }
+  "summary": "Temperaturas de 10° a 21°."
 }
