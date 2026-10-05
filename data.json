@@ -23,7 +23,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-09-30T02:30:00-03:00",
-    "source_age_hours": 126.84,
+    "source_age_hours": 127.1,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -1277,5 +1277,9 @@
       "weather_code": "4"
     }
   ],
-  "summary": "Temperaturas de 9° a 20°."
+  "summary": "Temperaturas de 9° a 20°.",
+  "alert_check": {
+    "ok": true,
+    "checked_at": "2026-10-05T09:35-03:00"
+  }
 }
