@@ -1,5 +1,5 @@
 {
-  "updated": "07/10/2026 10:11",
+  "updated": "07/10/2026 10:20",
   "current": {
     "temperature": 19.2,
     "station": "Prado",
@@ -23,7 +23,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-09-30T02:30:00-03:00",
-    "source_age_hours": 175.7,
+    "source_age_hours": 175.84,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -141,7 +141,7 @@
       "longitude": -57.76804181,
       "observation_time": "2026-10-07T10:00:00.000-03:00",
       "condition": "cloudy",
-      "condition_time": "2026-10-07T12:00:00Z",
+      "condition_time": "2026-10-07T13:00:00Z",
       "condition_source": "observed_dynamic_sky",
       "present_weather": 7,
       "cloud_amount": "cub",
@@ -155,7 +155,7 @@
       "pressure_hpa": 1011.9,
       "dewpoint_c": 15.9,
       "feels_like_c": 17.4,
-      "precipitation_recent_mm": null,
+      "precipitation_recent_mm": 0.0,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 66,
       "forecast_zone": "SO"
