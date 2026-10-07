@@ -49,7 +49,7 @@
     "pdf": "adv1791379233665.pdf",
     "source": "inumet_alerta_object_v4",
     "source_timestamp": "2026-10-07T12:00:00-03:00",
-    "source_age_hours": 1.17,
+    "source_age_hours": 1.53,
     "homepage_says_active": true,
     "data_unavailable": false
   },
@@ -1304,5 +1304,9 @@
       "weather_code": "13"
     }
   ],
-  "summary": "Temperaturas de 14° a 22°; con posibilidad de precipitaciones."
+  "summary": "Temperaturas de 14° a 22°; con posibilidad de precipitaciones.",
+  "alert_check": {
+    "ok": true,
+    "checked_at": "2026-10-07T13:32-03:00"
+  }
 }
