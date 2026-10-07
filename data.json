@@ -18,57 +18,13 @@
     "feels_like_c": 19.6
   },
   "alert": {
-    "active": true,
-    "level": "naranja",
-    "phenomenon": "Tormentas fuertes",
-    "probability": "> 75%",
-    "start": "2026-10-07 14:00",
-    "end": "2026-10-07 17:00",
-    "description": "El área será afectada por tormentas (puntualmente) fuertes y/o severas.\n\nPodrán estar acompañadas por precipitaciones copiosas en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-    "zones": "Canelones : Aguas Corrientes, Atlántida, Barra de Carrasco, Barros Blancos, Camino del Andaluz y Ruta 84, Canelones, Ciudad de la Costa, Colonia Nicolich, El Pinar, Empalme Olmos, Estación Atlántida, Estación La Floresta, Estación Pedrera, Joaquín Suárez, Juanicó, La Floresta, La Paz, Las Piedras, Las Toscas, Los Cerrillos, Marindia, Migues, Montes, Neptunia, Pando, Parque del Plata, Paso Carrasco, Pinamar - Pinepark, Progreso, Ruta 74, Salinas, San Antonio, San Bautista, San Jacinto, San Ramón, Santa Lucía, Santa Rosa, Sauce, Soca, Tala, Toledo, Villa Aeroparque, Villa Crespo y San Andrés, Villa Felicidad y Villa San José.Colonia(Todo el departamento), Durazno : Baygorria, Carlos Reyles, Carmen, Centenario, Durazno, Feliciano, Ombúes de Oribe, Pueblo de Álvarez y Santa Bernardina.Flores(Todo el departamento), Florida : 25 de Agosto, 25 de Mayo, Cardal, Casupa, Chamizo, Florida, Fray Marcos, Goñi, Independencia, La Cruz, Mendoza, Mendoza Chico, Reboledo, San Gabriel y Sarandí Grande.Montevideo(Todo el departamento), Paysandú : Casa Blanca, Chacras de Paysandú, Esperanza, Orgoroso, Paysandú, Piedras Coloradas y Porvenir.Río Negro : Algorta, Bellaco, El Ombú, Fray Bentos, Gartental, General Borges, Grecco, Los Arrayanes, Menafra, Nuevo Berlín, Paso de los mellizos, Sarandí de Navarro, Tres Quintas, Villa María y Young.San José(Todo el departamento), Soriano(Todo el departamento), Tacuarembó : Paso de los Toros y Rincón del Bonete.",
-    "warnings": [
-      {
-        "level": "naranja",
-        "phenomenon": "Tormentas fuertes",
-        "probability": "> 75%",
-        "start": "2026-10-07 14:00",
-        "end": "2026-10-07 17:00",
-        "description": "El área será afectada por tormentas (puntualmente) fuertes y/o severas.\n\nPodrán estar acompañadas por precipitaciones copiosas en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Canelones : Aguas Corrientes, Atlántida, Barra de Carrasco, Barros Blancos, Camino del Andaluz y Ruta 84, Canelones, Ciudad de la Costa, Colonia Nicolich, El Pinar, Empalme Olmos, Estación Atlántida, Estación La Floresta, Estación Pedrera, Joaquín Suárez, Juanicó, La Floresta, La Paz, Las Piedras, Las Toscas, Los Cerrillos, Marindia, Migues, Montes, Neptunia, Pando, Parque del Plata, Paso Carrasco, Pinamar - Pinepark, Progreso, Ruta 74, Salinas, San Antonio, San Bautista, San Jacinto, San Ramón, Santa Lucía, Santa Rosa, Sauce, Soca, Tala, Toledo, Villa Aeroparque, Villa Crespo y San Andrés, Villa Felicidad y Villa San José.Colonia(Todo el departamento), Durazno : Baygorria, Carlos Reyles, Carmen, Centenario, Durazno, Feliciano, Ombúes de Oribe, Pueblo de Álvarez y Santa Bernardina.Flores(Todo el departamento), Florida : 25 de Agosto, 25 de Mayo, Cardal, Casupa, Chamizo, Florida, Fray Marcos, Goñi, Independencia, La Cruz, Mendoza, Mendoza Chico, Reboledo, San Gabriel y Sarandí Grande.Montevideo(Todo el departamento), Paysandú : Casa Blanca, Chacras de Paysandú, Esperanza, Orgoroso, Paysandú, Piedras Coloradas y Porvenir.Río Negro : Algorta, Bellaco, El Ombú, Fray Bentos, Gartental, General Borges, Grecco, Los Arrayanes, Menafra, Nuevo Berlín, Paso de los mellizos, Sarandí de Navarro, Tres Quintas, Villa María y Young.San José(Todo el departamento), Soriano(Todo el departamento), Tacuarembó : Paso de los Toros y Rincón del Bonete.",
-        "risk": {
-          "riesgoViento": 1,
-          "riesgoLluvia": 1,
-          "riesgoTormenta": 3,
-          "riesgoVisibilidad": 1,
-          "riesgoCalor": 1,
-          "riesgoFrio": 1
-        }
-      },
-      {
-        "level": "amarilla",
-        "phenomenon": "Tormentas puntualmente fuertes",
-        "probability": "50 - 75%",
-        "start": "2026-10-07 14:00",
-        "end": "2026-10-07 17:00",
-        "description": "El área será afectada por tormentas (puntualmente) fuertes.\n\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Artigas : Baltasar Brum, Bella Unión, Bernabé Rivera, Cainsa, Colonia Palma, Coronado, Diego Lamas, Franquia, Javier de Viana, Mones Quintela, Paso Campamento, Portones de Hierro y Campodónico, Santa Rosa del Cuareim, Sequeira, Tomás Gomensoro y Topador.Canelones : Jaureguiberry y San Luis.Durazno : Aguas Buenas, Blanquillo, Rossell y Rius, San Jorge y Sarandí del Yí.Florida : Alejandro Gallinal y Capilla del Sauce.Lavalleja : Blanes Viale, Estación Solís, Gaetán, Illescas, La Coronilla, Minas, San Francisco de las Sierras, Solís de Mataojo y Villa del Rosario.Maldonado : Bella Vista, Cerros Azules, Gerona, Gregorio Aznárez, Las Flores, Nueva Carrara, Piriápolis, Playa Grande, Playa Hermosa, Playa Verde y Pueblo Solís.Paysandú : Beisso, Cerro Chato, Chapicuy, Constancia, Gallinal, Guayabos, Guichón, Lorenzo Geyres, Merinos, Quebracho, Tambores y Termas de Guaviyú.Salto : Albisu, Arapey, Belén, Biassini, Campo de Todos, Cayetano, Cerro de Vera, Colonia 18 de Julio, Colonia Itapebí, Constitución, Garibaldi, Itapebí, Lluveras, Migliaro, Puntas de Valentín, Quintana, Rincón de Valentín, Salto, San Antonio, Saucedo, Termas del Arapey y Termas del Daymán.Tacuarembó : Achar, Arerungua, Cerro Chato, Cuchilla de Peralta, Curtina, Piedra Sola, San Gregorio de Polanco y Tambores.",
-        "risk": {
-          "riesgoViento": 1,
-          "riesgoLluvia": 1,
-          "riesgoTormenta": 2,
-          "riesgoVisibilidad": 1,
-          "riesgoCalor": 1,
-          "riesgoFrio": 1
-        }
-      }
-    ],
-    "updated": "2026-10-07 14:00",
-    "pdf": "adv1791392295576.pdf",
-    "source": "inumet_alerta_object_v4",
-    "source_timestamp": "2026-10-07T14:00:00-03:00",
-    "source_age_hours": 2.48,
+    "active": false,
+    "data_unavailable": true,
     "homepage_says_active": true,
-    "data_unavailable": false
+    "source": "inumet_sources_out_of_sync",
+    "source_timestamp": "2026-10-07T17:00:00-03:00",
+    "source_age_hours": -0.11,
+    "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
     "montevideo_prado": {
@@ -1322,6 +1278,6 @@
   "summary": "Temperaturas de 14° a 22°; con posibilidad de precipitaciones.",
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-10-07T16:29-03:00"
+    "checked_at": "2026-10-07T16:53-03:00"
   }
 }
