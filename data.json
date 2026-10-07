@@ -1,5 +1,5 @@
 {
-  "updated": "07/10/2026 19:20",
+  "updated": "07/10/2026 20:05",
   "current": {
     "temperature": 17.6,
     "station": "Prado",
@@ -22,19 +22,19 @@
     "level": "naranja",
     "phenomenon": "Tormentas fuertes",
     "probability": "> 75%",
-    "start": "2026-10-07 17:00",
-    "end": "2026-10-07 20:00",
+    "start": "2026-10-07 20:00",
+    "end": "2026-10-07 23:00",
     "description": "El área será afectada por tormentas (puntualmente) fuertes y/o severas.\n\nPodrán estar acompañadas por precipitaciones copiosas en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-    "zones": "Canelones(Todo el departamento), Colonia(Todo el departamento), Durazno : Aguas Buenas, Baygorria, Carlos Reyles, Carmen, Centenario, Durazno, Feliciano, Las Palmas, Ombúes de Oribe, Pueblo de Álvarez, Rossell y Rius, San Jorge, Santa Bernardina y Sarandí del Yí.Flores(Todo el departamento), Florida(Todo el departamento), Lavalleja : Blanes Viale, Estación Solís, Gaetán, Illescas, José Batlle y Ordoñez, La Coronilla, Minas, Polanco Norte, Polanco Sur, San Francisco de las Sierras, Solís de Mataojo, Villa Serrana y Villa del Rosario.Maldonado : Bella Vista, Cerros Azules, El Edén, Gerona, Gregorio Aznárez, La Capuera, Las Flores, Nueva Carrara, Ocean Park, Pan de Azúcar, Piriápolis, Playa Grande, Playa Hermosa, Playa Verde, Pueblo Solís, Punta Ballena, Punta Colorada, Punta Negra y Sauce de Portezuelo.Montevideo(Todo el departamento), Paysandú : Casa Blanca, Chacras de Paysandú, Esperanza, Orgoroso, Paysandú, Piedras Coloradas y Porvenir.Río Negro : Algorta, Bellaco, El Ombú, Fray Bentos, Gartental, General Borges, Grecco, Los Arrayanes, Menafra, Nuevo Berlín, Paso de los mellizos, Sarandí de Navarro, Tres Quintas, Villa María y Young.San José(Todo el departamento), Soriano(Todo el departamento), Tacuarembó : Paso de los Toros y Rincón del Bonete.Treinta y Tres : Cerro Chato y Valentines.",
+    "zones": "Canelones : Migues, Montes, San Bautista, San Ramón y Tala.Cerro Largo : Arévalo, Esperanza, Quebracho y Tupambaé.Durazno(Todo el departamento), Flores(Todo el departamento), Florida : 25 de Mayo, Alejandro Gallinal, Capilla del Sauce, Casupa, Cerro Chato, Chamizo, Florida, Fray Marcos, Goñi, La Cruz, Mendoza, Mendoza Chico, Nico Pérez, Reboledo, San Gabriel y Sarandí Grande.Lavalleja(Todo el departamento), Maldonado(Todo el departamento), Paysandú(Todo el departamento), Río Negro(Todo el departamento), Rocha(Todo el departamento), Salto : Albisu, Biassini, Campo de Todos, Cerro de Vera, Colonia 18 de Julio, Colonia Itapebí, Constitución, Garibaldi, Itapebí, Puntas de Valentín, Rincón de Valentín, Salto, San Antonio, Saucedo y Termas del Daymán.Soriano : Mercedes y Risso.Tacuarembó : Achar, Cerro Chato, Clara, Cuchilla de Peralta, Curtina, La Hilera, Paso de los Toros, Piedra Sola, Rincón del Bonete, San Gregorio de Polanco y Tambores.Treinta y Tres : Cerro Chato, Ejido de Treinta y Tres, General Enrique Martínez, Isla Patrulla, Maria Albina, Mendizábal, Santa Clara de Olimar, Treinta y Tres, Valentines y Villa Sara.",
     "warnings": [
       {
         "level": "naranja",
         "phenomenon": "Tormentas fuertes",
         "probability": "> 75%",
-        "start": "2026-10-07 17:00",
-        "end": "2026-10-07 20:00",
+        "start": "2026-10-07 20:00",
+        "end": "2026-10-07 23:00",
         "description": "El área será afectada por tormentas (puntualmente) fuertes y/o severas.\n\nPodrán estar acompañadas por precipitaciones copiosas en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Canelones(Todo el departamento), Colonia(Todo el departamento), Durazno : Aguas Buenas, Baygorria, Carlos Reyles, Carmen, Centenario, Durazno, Feliciano, Las Palmas, Ombúes de Oribe, Pueblo de Álvarez, Rossell y Rius, San Jorge, Santa Bernardina y Sarandí del Yí.Flores(Todo el departamento), Florida(Todo el departamento), Lavalleja : Blanes Viale, Estación Solís, Gaetán, Illescas, José Batlle y Ordoñez, La Coronilla, Minas, Polanco Norte, Polanco Sur, San Francisco de las Sierras, Solís de Mataojo, Villa Serrana y Villa del Rosario.Maldonado : Bella Vista, Cerros Azules, El Edén, Gerona, Gregorio Aznárez, La Capuera, Las Flores, Nueva Carrara, Ocean Park, Pan de Azúcar, Piriápolis, Playa Grande, Playa Hermosa, Playa Verde, Pueblo Solís, Punta Ballena, Punta Colorada, Punta Negra y Sauce de Portezuelo.Montevideo(Todo el departamento), Paysandú : Casa Blanca, Chacras de Paysandú, Esperanza, Orgoroso, Paysandú, Piedras Coloradas y Porvenir.Río Negro : Algorta, Bellaco, El Ombú, Fray Bentos, Gartental, General Borges, Grecco, Los Arrayanes, Menafra, Nuevo Berlín, Paso de los mellizos, Sarandí de Navarro, Tres Quintas, Villa María y Young.San José(Todo el departamento), Soriano(Todo el departamento), Tacuarembó : Paso de los Toros y Rincón del Bonete.Treinta y Tres : Cerro Chato y Valentines.",
+        "zones": "Canelones : Migues, Montes, San Bautista, San Ramón y Tala.Cerro Largo : Arévalo, Esperanza, Quebracho y Tupambaé.Durazno(Todo el departamento), Flores(Todo el departamento), Florida : 25 de Mayo, Alejandro Gallinal, Capilla del Sauce, Casupa, Cerro Chato, Chamizo, Florida, Fray Marcos, Goñi, La Cruz, Mendoza, Mendoza Chico, Nico Pérez, Reboledo, San Gabriel y Sarandí Grande.Lavalleja(Todo el departamento), Maldonado(Todo el departamento), Paysandú(Todo el departamento), Río Negro(Todo el departamento), Rocha(Todo el departamento), Salto : Albisu, Biassini, Campo de Todos, Cerro de Vera, Colonia 18 de Julio, Colonia Itapebí, Constitución, Garibaldi, Itapebí, Puntas de Valentín, Rincón de Valentín, Salto, San Antonio, Saucedo y Termas del Daymán.Soriano : Mercedes y Risso.Tacuarembó : Achar, Cerro Chato, Clara, Cuchilla de Peralta, Curtina, La Hilera, Paso de los Toros, Piedra Sola, Rincón del Bonete, San Gregorio de Polanco y Tambores.Treinta y Tres : Cerro Chato, Ejido de Treinta y Tres, General Enrique Martínez, Isla Patrulla, Maria Albina, Mendizábal, Santa Clara de Olimar, Treinta y Tres, Valentines y Villa Sara.",
         "risk": {
           "riesgoViento": 1,
           "riesgoLluvia": 1,
@@ -48,10 +48,27 @@
         "level": "amarilla",
         "phenomenon": "Tormentas puntualmente fuertes",
         "probability": "50 - 75%",
-        "start": "2026-10-07 17:00",
-        "end": "2026-10-07 20:00",
+        "start": "2026-10-07 20:00",
+        "end": "2026-10-07 23:00",
         "description": "El área será afectada por tormentas (puntualmente) fuertes.\n\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Artigas : Baltasar Brum, Bella Unión, Bernabé Rivera, Cainsa, Colonia Palma, Coronado, Diego Lamas, Franquia, Javier de Viana, Mones Quintela, Paso Campamento, Portones de Hierro y Campodónico, Santa Rosa del Cuareim, Sequeira, Tomás Gomensoro y Topador.Cerro Largo : Esperanza.Durazno : Blanquillo y La Paloma.Lavalleja : Aramendía, Colón, Mariscala, Pirarajá y Zapicán.Maldonado : Aiguá, Balneario Buenos Aires, Canteras de Marelli, Cerro Pelado, El Chorro, El Tesoro, José Ignacio, La Barra, Los Talas, Maldonado, Manantiales, Parque Medina, Punta del Este y San Carlos.Paysandú : Beisso, Cerro Chato, Chapicuy, Constancia, Gallinal, Guayabos, Guichón, Lorenzo Geyres, Quebracho, Tambores y Termas de Guaviyú.Salto : Albisu, Arapey, Belén, Biassini, Campo de Todos, Cayetano, Cerro de Vera, Colonia 18 de Julio, Colonia Itapebí, Constitución, Garibaldi, Itapebí, Lluveras, Migliaro, Puntas de Valentín, Quintana, Rincón de Valentín, Salto, San Antonio, Saucedo, Termas del Arapey y Termas del Daymán.Tacuarembó : Achar, Arerungua, Cerro Chato, Clara, Cuchilla de Peralta, Curtina, Piedra Sola, San Gregorio de Polanco y Tambores.Treinta y Tres : Maria Albina y Santa Clara de Olimar.",
+        "zones": "Artigas : Baltasar Brum, Colonia Palma, Diego Lamas y Sequeira.Cerro Largo : Arachania, Arbolito, Barrio Hipodromo, Barrio La Vinchuca, Barrio López Benítez, Bañado de medina, Cerro de las Cuentas, Fraile Muerto, Getulio Vargas, La Pedrera, Melo, Plácido Rosas, Ramón Trigo, Toledo y Tres Islas.Rivera : Las Flores.Salto : Arapey, Belén, Cayetano, Fernández, Lluveras, Migliaro, Quintana y Termas del Arapey.Tacuarembó : Ansina, Arerungua, Balneario Iporá, Caraguata, La Pedrera, Las Toscas, Paso Bonilla, Paso del Cerro, Pueblo de Arriba, Pueblo de Barro, Punta de Carretera y Tacuarembó.Treinta y Tres : Arrocera Zapata, Arrozal Treinta y Tres, Rincón y Vergara.",
+        "risk": {
+          "riesgoViento": 1,
+          "riesgoLluvia": 1,
+          "riesgoTormenta": 2,
+          "riesgoVisibilidad": 1,
+          "riesgoCalor": 1,
+          "riesgoFrio": 1
+        }
+      },
+      {
+        "level": "amarilla",
+        "phenomenon": "Tormentas puntualmente fuertes",
+        "probability": "50 - 75%",
+        "start": "2026-10-07 20:00",
+        "end": "2026-10-07 23:00",
+        "description": "El área será afectada por tormentas (puntualmente) fuertes.\n\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
+        "zones": "Canelones : Aguas Corrientes, Atlántida, Barra de Carrasco, Barros Blancos, Camino del Andaluz y Ruta 84, Canelones, Ciudad de la Costa, Colonia Nicolich, El Pinar, Empalme Olmos, Estación Atlántida, Estación La Floresta, Estación Pedrera, Jaureguiberry, Joaquín Suárez, Juanicó, La Floresta, La Paz, Las Piedras, Las Toscas, Los Cerrillos, Marindia, Neptunia, Pando, Parque del Plata, Paso Carrasco, Pinamar - Pinepark, Progreso, Ruta 74, Salinas, San Antonio, San Jacinto, San Luis, Santa Lucía, Santa Rosa, Sauce, Soca, Toledo, Villa Aeroparque, Villa Crespo y San Andrés, Villa Felicidad y Villa San José.Colonia(Todo el departamento), Florida : 25 de Agosto, Cardal y Independencia.Maldonado : Playa Grande, Punta Colorada y Punta Negra.Montevideo(Todo el departamento), San José : Capurro, Ciudad del Plata, Ecilda Paullier, Juan Soler, Kiyú-Ordeig, Libertad, Mal Abrigo, Puntas de Valdez, Rafael Perazza, Rodríguez, San José de Mayo y Villa María.Soriano : Agraciada, Cardona, Chacras de Dolores, Dolores, Egaña, José Enrique Rodó, Palmitas, Santa Catalina y Villa Soriano.",
         "risk": {
           "riesgoViento": 1,
           "riesgoLluvia": 1,
@@ -62,11 +79,11 @@
         }
       }
     ],
-    "updated": "2026-10-07 16:50",
-    "pdf": "adv1791402601542.pdf",
+    "updated": "2026-10-07 20:00",
+    "pdf": "adv1791414071169.pdf",
     "source": "inumet_alerta_object_v4",
-    "source_timestamp": "2026-10-07T17:00:00-03:00",
-    "source_age_hours": 2.91,
+    "source_timestamp": "2026-10-07T20:00:00-03:00",
+    "source_age_hours": 0.09,
     "homepage_says_active": true,
     "data_unavailable": false
   },
@@ -93,7 +110,7 @@
       "pressure_hpa": 1009.9,
       "dewpoint_c": 17.4,
       "feels_like_c": 18.8,
-      "precipitation_recent_mm": 9.6,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 211,
       "forecast_zone": "M"
@@ -147,7 +164,7 @@
       "pressure_hpa": 1007.9,
       "dewpoint_c": 20.6,
       "feels_like_c": 28.0,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 16,
       "forecast_zone": "NW"
@@ -199,7 +216,7 @@
       "pressure_hpa": 1008.9,
       "dewpoint_c": 17.2,
       "feels_like_c": 18.0,
-      "precipitation_recent_mm": 0.2,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 66,
       "forecast_zone": "SO"
@@ -211,16 +228,12 @@
       "latitude": -33.350522,
       "longitude": -56.4972385,
       "observation_time": "2026-10-07T19:00:00.000-03:00",
-      "condition": "cloudy",
+      "condition": "neutral",
       "condition_time": "2026-10-07T22:00:00Z",
-      "condition_source": "observed_synop",
+      "condition_source": null,
       "present_weather": null,
-      "cloud_amount": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
-      "cloud_types": [
-        "ALTOCUMULUS (AC)",
-        "STRATUS (ST)",
-        "STRATOCUMULUS (SC)"
-      ],
+      "cloud_amount": null,
+      "cloud_types": [],
       "wind_speed_kmh": 26.0,
       "wind_direction_deg": 52.0,
       "visibility_km": null,
@@ -240,16 +253,12 @@
       "latitude": -34.086325,
       "longitude": -56.18795,
       "observation_time": "2026-10-07T19:00:00.000-03:00",
-      "condition": "cloudy",
+      "condition": "neutral",
       "condition_time": "2026-10-07T22:00:00Z",
-      "condition_source": "observed_synop",
+      "condition_source": null,
       "present_weather": null,
-      "cloud_amount": "8 OKTAS",
-      "cloud_types": [
-        "CUMULONIMBUS (CB)",
-        "CIRROSTRATUS (CS)",
-        "STRATOCUMULUS (SC)"
-      ],
+      "cloud_amount": null,
+      "cloud_types": [],
       "wind_speed_kmh": 17.0,
       "wind_direction_deg": 134.0,
       "visibility_km": null,
@@ -284,7 +293,7 @@
       "pressure_hpa": 1011.8,
       "dewpoint_c": 16.2,
       "feels_like_c": 16.3,
-      "precipitation_recent_mm": 0.4,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 138,
       "forecast_zone": "E"
@@ -336,7 +345,7 @@
       "pressure_hpa": 1010.0,
       "dewpoint_c": 17.8,
       "feels_like_c": 18.9,
-      "precipitation_recent_mm": 7.1,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 159,
       "forecast_zone": "M"
@@ -363,7 +372,7 @@
       "pressure_hpa": 1009.7,
       "dewpoint_c": 20.1,
       "feels_like_c": 24.4,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 160,
       "forecast_zone": "NE"
@@ -390,7 +399,7 @@
       "pressure_hpa": 1006.6,
       "dewpoint_c": 18.7,
       "feels_like_c": 20.4,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 162,
       "forecast_zone": "SO"
@@ -467,7 +476,7 @@
       "pressure_hpa": 1012.2,
       "dewpoint_c": 15.3,
       "feels_like_c": 15.8,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 236,
       "forecast_zone": "E"
@@ -494,7 +503,7 @@
       "pressure_hpa": 1005.9,
       "dewpoint_c": 20.3,
       "feels_like_c": 28.0,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 239,
       "forecast_zone": "NW"
@@ -598,7 +607,7 @@
       "pressure_hpa": 1009.6,
       "dewpoint_c": 19.3,
       "feels_like_c": 25.8,
-      "precipitation_recent_mm": 0.2,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 1693,
       "forecast_zone": "NE"
@@ -1317,9 +1326,5 @@
       "weather_code": "13"
     }
   ],
-  "summary": "Temperaturas de 14° a 22°; con posibilidad de precipitaciones.",
-  "alert_check": {
-    "ok": true,
-    "checked_at": "2026-10-07T19:54-03:00"
-  }
+  "summary": "Temperaturas de 14° a 22°; con posibilidad de precipitaciones."
 }
