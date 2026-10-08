@@ -23,7 +23,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-08T04:10:00-03:00",
-    "source_age_hours": 0.37,
+    "source_age_hours": 0.78,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -1250,6 +1250,6 @@
   "summary": "Temperaturas de 14° a 18°; con posibilidad de precipitaciones.",
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-10-08T04:32-03:00"
+    "checked_at": "2026-10-08T04:56-03:00"
   }
 }
