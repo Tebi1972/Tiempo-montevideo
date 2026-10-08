@@ -22,19 +22,19 @@
     "level": "naranja",
     "phenomenon": "Tormentas fuertes y puntualmente severas",
     "probability": "> 75%",
-    "start": "2026-10-07 22:40",
-    "end": "2026-10-08 01:30",
+    "start": "2026-10-08 00:40",
+    "end": "2026-10-08 03:30",
     "description": "El área será afectada por tormentas (puntualmente) fuertes y/o severas.\n\nPodrán estar acompañadas por precipitaciones copiosas en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-    "zones": "Artigas(Todo el departamento), Canelones : Jaureguiberry, Migues, Montes, San Luis, San Ramón, Soca y Tala.Cerro Largo : Arévalo, Esperanza, Quebracho y Tupambaé.Durazno : Aguas Buenas, Baygorria, Blanquillo, Carlos Reyles, Carmen, Centenario, Durazno, Feliciano, La Paloma, Las Palmas, Ombúes de Oribe, Pueblo de Álvarez, Rossell y Rius, San Jorge, Santa Bernardina y Sarandí del Yí.Florida : Alejandro Gallinal, Capilla del Sauce, Casupa, Cerro Chato, Chamizo, Fray Marcos, Goñi, La Cruz, Nico Pérez, Reboledo, San Gabriel y Sarandí Grande.Lavalleja(Todo el departamento), Maldonado(Todo el departamento), Paysandú : Beisso, Cerro Chato, Chapicuy, Gallinal, Guayabos, Guichón, Merinos y Tambores.Río Negro : Algorta, Grecco, Paso de los mellizos y Sarandí de Navarro.Rivera : Masoller, Minas de Corrales y Tranqueras.Rocha : 19 de Abril, Arachania, La Paloma, La Pedrera, Lascano, Puerto de los Botes, Rocha y Velazquez.Salto(Todo el departamento), Tacuarembó : Achar, Ansina, Arerungua, Balneario Iporá, Caraguata, Cerro Chato, Clara, Cuchilla de Peralta, Curtina, La Hilera, La Pedrera, Las Toscas, Paso Bonilla, Paso de los Toros, Paso del Cerro, Piedra Sola, Pueblo de Arriba, Pueblo de Barro, Punta de Carretera, Rincón del Bonete, San Gregorio de Polanco, Sauce de Batoví, Tacuarembó y Tambores.Treinta y Tres : Cerro Chato, Ejido de Treinta y Tres, Isla Patrulla, Maria Albina, Santa Clara de Olimar, Treinta y Tres, Valentines y Villa Sara.",
+    "zones": "Cerro Largo : Arachania, Arbolito, Arévalo, Barrio Hipodromo, Barrio La Vinchuca, Barrio López Benítez, Bañado de medina, Cerro de las Cuentas, Esperanza, Fraile Muerto, Getulio Vargas, Isidoro Noblía, La Pedrera, Lago Merín, Las Cañas, Melo, Plácido Rosas, Poblado Uruguay, Quebracho, Ramón Trigo, Río Branco, Toledo, Tres Islas y Tupambaé.Florida : Cerro Chato y Nico Pérez.Lavalleja : 19 de Junio, Aramendía, Colón, José Batlle y Ordoñez, José Pedro Varela, Mariscala, Pirarajá, Polanco Norte, Polanco Sur y Zapicán.Maldonado : Aiguá y Los Talas.Rivera(Todo el departamento), Rocha : 18 de Julio, Barra del Chuy, Barrio Pereira, Capacho, Cebollati, Chuy, La Coronilla, Lascano, Palmares de la Coronilla, Puimayen, San Luis Al Medio y Velazquez.Salto : Sarandí de Arapey.Tacuarembó : Ansina, Caraguata, Las Toscas, Paso del Cerro, Pueblo de Arriba, Pueblo de Barro y Punta de Carretera.Treinta y Tres(Todo el departamento),",
     "warnings": [
       {
         "level": "naranja",
         "phenomenon": "Tormentas fuertes y puntualmente severas",
         "probability": "> 75%",
-        "start": "2026-10-07 22:40",
-        "end": "2026-10-08 01:30",
+        "start": "2026-10-08 00:40",
+        "end": "2026-10-08 03:30",
         "description": "El área será afectada por tormentas (puntualmente) fuertes y/o severas.\n\nPodrán estar acompañadas por precipitaciones copiosas en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Artigas(Todo el departamento), Canelones : Jaureguiberry, Migues, Montes, San Luis, San Ramón, Soca y Tala.Cerro Largo : Arévalo, Esperanza, Quebracho y Tupambaé.Durazno : Aguas Buenas, Baygorria, Blanquillo, Carlos Reyles, Carmen, Centenario, Durazno, Feliciano, La Paloma, Las Palmas, Ombúes de Oribe, Pueblo de Álvarez, Rossell y Rius, San Jorge, Santa Bernardina y Sarandí del Yí.Florida : Alejandro Gallinal, Capilla del Sauce, Casupa, Cerro Chato, Chamizo, Fray Marcos, Goñi, La Cruz, Nico Pérez, Reboledo, San Gabriel y Sarandí Grande.Lavalleja(Todo el departamento), Maldonado(Todo el departamento), Paysandú : Beisso, Cerro Chato, Chapicuy, Gallinal, Guayabos, Guichón, Merinos y Tambores.Río Negro : Algorta, Grecco, Paso de los mellizos y Sarandí de Navarro.Rivera : Masoller, Minas de Corrales y Tranqueras.Rocha : 19 de Abril, Arachania, La Paloma, La Pedrera, Lascano, Puerto de los Botes, Rocha y Velazquez.Salto(Todo el departamento), Tacuarembó : Achar, Ansina, Arerungua, Balneario Iporá, Caraguata, Cerro Chato, Clara, Cuchilla de Peralta, Curtina, La Hilera, La Pedrera, Las Toscas, Paso Bonilla, Paso de los Toros, Paso del Cerro, Piedra Sola, Pueblo de Arriba, Pueblo de Barro, Punta de Carretera, Rincón del Bonete, San Gregorio de Polanco, Sauce de Batoví, Tacuarembó y Tambores.Treinta y Tres : Cerro Chato, Ejido de Treinta y Tres, Isla Patrulla, Maria Albina, Santa Clara de Olimar, Treinta y Tres, Valentines y Villa Sara.",
+        "zones": "Cerro Largo : Arachania, Arbolito, Arévalo, Barrio Hipodromo, Barrio La Vinchuca, Barrio López Benítez, Bañado de medina, Cerro de las Cuentas, Esperanza, Fraile Muerto, Getulio Vargas, Isidoro Noblía, La Pedrera, Lago Merín, Las Cañas, Melo, Plácido Rosas, Poblado Uruguay, Quebracho, Ramón Trigo, Río Branco, Toledo, Tres Islas y Tupambaé.Florida : Cerro Chato y Nico Pérez.Lavalleja : 19 de Junio, Aramendía, Colón, José Batlle y Ordoñez, José Pedro Varela, Mariscala, Pirarajá, Polanco Norte, Polanco Sur y Zapicán.Maldonado : Aiguá y Los Talas.Rivera(Todo el departamento), Rocha : 18 de Julio, Barra del Chuy, Barrio Pereira, Capacho, Cebollati, Chuy, La Coronilla, Lascano, Palmares de la Coronilla, Puimayen, San Luis Al Medio y Velazquez.Salto : Sarandí de Arapey.Tacuarembó : Ansina, Caraguata, Las Toscas, Paso del Cerro, Pueblo de Arriba, Pueblo de Barro y Punta de Carretera.Treinta y Tres(Todo el departamento),",
         "risk": {
           "riesgoViento": 1,
           "riesgoLluvia": 1,
@@ -48,27 +48,10 @@
         "level": "amarilla",
         "phenomenon": "Tormentas puntualmente fuertes",
         "probability": "> 75%",
-        "start": "2026-10-07 22:40",
-        "end": "2026-10-08 01:30",
+        "start": "2026-10-08 00:40",
+        "end": "2026-10-08 03:30",
         "description": "El área será afectada por tormentas (puntualmente) fuertes.\n\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Cerro Largo : Arachania, Arbolito, Barrio Hipodromo, Barrio La Vinchuca, Barrio López Benítez, Bañado de medina, Fraile Muerto, Getulio Vargas, Isidoro Noblía, La Pedrera, Lago Merín, Las Cañas, Melo, Plácido Rosas, Poblado Uruguay, Ramón Trigo, Río Branco y Toledo.Rivera : Amarillo, Arroyo Blanco, Cerrillada, Cerro Pelado , Cerros de la Calera, La Puente , Lagos del Norte, Las Flores, Moirones, Paso Ataques, Paso Hospital y Vichadero.Rocha : 18 de Julio, Aguas Dulces, Barra de Valizas, Barra del Chuy, Barrio Pereira, Barrio Torres, Cabo Polonio, Capacho, Castillos, Cebollati, Chuy, La Coronilla, La Esmeralda, Palmares de Castillos, Palmares de la Coronilla, Puente Valizas, Puimayen, Punta del Diablo y San Luis Al Medio.Treinta y Tres : Arrocera Zapata, Arrozal Treinta y Tres, General Enrique Martínez, Mendizábal, Rincón y Vergara.",
-        "risk": {
-          "riesgoViento": 1,
-          "riesgoLluvia": 1,
-          "riesgoTormenta": 2,
-          "riesgoVisibilidad": 1,
-          "riesgoCalor": 1,
-          "riesgoFrio": 1
-        }
-      },
-      {
-        "level": "amarilla",
-        "phenomenon": "Tormentas puntualmente fuertes",
-        "probability": "50 - 75%",
-        "start": "2026-10-07 22:40",
-        "end": "2026-10-08 01:30",
-        "description": "El área será afectada por tormentas (puntualmente) fuertes.\n\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Canelones : Aguas Corrientes, Atlántida, Barra de Carrasco, Barros Blancos, Camino del Andaluz y Ruta 84, Canelones, Ciudad de la Costa, Colonia Nicolich, El Pinar, Empalme Olmos, Estación Atlántida, Estación La Floresta, Estación Pedrera, Joaquín Suárez, Juanicó, La Floresta, La Paz, Las Piedras, Las Toscas, Los Cerrillos, Marindia, Neptunia, Pando, Parque del Plata, Paso Carrasco, Pinamar - Pinepark, Progreso, Ruta 74, Salinas, San Antonio, San Bautista, San Jacinto, Santa Lucía, Santa Rosa, Sauce, Toledo, Villa Aeroparque, Villa Crespo y San Andrés, Villa Felicidad y Villa San José.Colonia : Colonia Valdense, Florencio Sánchez, La Paz, Los Pinos, Miguelete, Nueva Helvecia y Rosario.Flores : Andresito, Cerro Colorado, Ismael Cortinas, Juan José Castro, La Casilla y Trinidad.Florida : 25 de Agosto, 25 de Mayo, Cardal, Florida, Independencia, Mendoza y Mendoza Chico.Montevideo(Todo el departamento), Paysandú : Casa Blanca, Chacras de Paysandú, Colonia Nuevo Paysandú, Constancia, Esperanza, Lorenzo Geyres, Orgoroso, Paysandú, Piedras Coloradas, Porvenir, Quebracho y Termas de Guaviyú.Río Negro : Bellaco, El Ombú, Fray Bentos, Gartental, General Borges, Los Arrayanes, Menafra, Nuevo Berlín, Tres Quintas, Villa María y Young.San José(Todo el departamento), Soriano : Cardona, Egaña, José Enrique Rodó, Mercedes, Palmitas, Risso y Santa Catalina.",
+        "zones": "Artigas : Baltasar Brum, Bella Unión, Bernabé Rivera, Cainsa, Colonia Palma, Coronado, Diego Lamas, Franquia, Javier de Viana, Mones Quintela, Paso Campamento, Portones de Hierro y Campodónico, Santa Rosa del Cuareim, Sequeira, Tomás Gomensoro y Topador.Canelones : Atlántida, Estación Atlántida, Estación La Floresta, Estación Pedrera, Jaureguiberry, La Floresta, Las Toscas, Marindia, Migues, Montes, Parque del Plata, Salinas, San Bautista, San Jacinto, San Luis, San Ramón, Soca y Tala.Durazno : Aguas Buenas, Blanquillo, Carmen, La Paloma, Las Palmas, Pueblo de Álvarez, Rossell y Rius, San Jorge y Sarandí del Yí.Florida : Alejandro Gallinal, Capilla del Sauce, Casupa, Chamizo, Fray Marcos, Reboledo y San Gabriel.Lavalleja : Estación Solís, Gaetán, Illescas, La Coronilla, Minas, San Francisco de las Sierras, Solís de Mataojo y Villa del Rosario.Maldonado : Balneario Buenos Aires, Bella Vista, Canteras de Marelli, Cerro Pelado, Cerros Azules, El Chorro, El Edén, El Tesoro, Gerona, Gregorio Aznárez, José Ignacio, La Barra, La Capuera, Las Flores, Maldonado, Manantiales, Nueva Carrara, Ocean Park, Pan de Azúcar, Parque Medina, Piriápolis, Playa Grande, Playa Hermosa, Playa Verde, Pueblo Solís, Punta Ballena, Punta Colorada, Punta Negra, Punta del Este, San Carlos y Sauce de Portezuelo.Paysandú : Gallinal y Tambores.Rocha : 19 de Abril, Aguas Dulces, Arachania, Barra de Valizas, Barrio Torres, Cabo Polonio, Castillos, La Esmeralda, La Paloma, La Pedrera, Palmares de Castillos, Puente Valizas, Puerto de los Botes y Rocha.Salto : Albisu, Arapey, Belén, Biassini, Campo de Todos, Cayetano, Cerro de Vera, Colonia 18 de Julio, Colonia Itapebí, Constitución, Fernández, Garibaldi, Itapebí, Lluveras, Migliaro, Puntas de Valentín, Quintana, Rincón de Valentín, Salto, San Antonio, Saucedo, Termas del Arapey y Termas del Daymán.Tacuarembó : Achar, Arerungua, Balneario Iporá, Cerro Chato, Clara, Cuchilla de Peralta, Curtina, La Hilera, La Pedrera, Paso Bonilla, Piedra Sola, San Gregorio de Polanco, Sauce de Batoví, Tacuarembó y Tambores.",
         "risk": {
           "riesgoViento": 1,
           "riesgoLluvia": 1,
@@ -79,11 +62,11 @@
         }
       }
     ],
-    "updated": "2026-10-07 22:40",
-    "pdf": "adv1791423593061.pdf",
+    "updated": "2026-10-08 00:40",
+    "pdf": "adv1791430871813.pdf",
     "source": "inumet_alerta_object_v4",
-    "source_timestamp": "2026-10-07T22:40:00-03:00",
-    "source_age_hours": 1.83,
+    "source_timestamp": "2026-10-08T00:40:00-03:00",
+    "source_age_hours": 0.28,
     "homepage_says_active": true,
     "data_unavailable": false
   },
@@ -1313,6 +1296,6 @@
   "summary": "Temperaturas de 14° a 18°; con posibilidad de precipitaciones.",
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-10-08T00:29-03:00"
+    "checked_at": "2026-10-08T00:56-03:00"
   }
 }
