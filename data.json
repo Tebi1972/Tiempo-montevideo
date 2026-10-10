@@ -1,5 +1,5 @@
 {
-  "updated": "10/10/2026 12:20",
+  "updated": "10/10/2026 13:05",
   "current": {
     "temperature": 15.0,
     "station": "Prado",
@@ -23,7 +23,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-10T02:52:00-03:00",
-    "source_age_hours": 10.03,
+    "source_age_hours": 10.23,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -49,7 +49,7 @@
       "pressure_hpa": 1022.1,
       "dewpoint_c": 11.2,
       "feels_like_c": 13.6,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 211,
       "forecast_zone": "M"
@@ -103,7 +103,7 @@
       "pressure_hpa": 1019.3,
       "dewpoint_c": 13.7,
       "feels_like_c": 16.1,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 16,
       "forecast_zone": "NW"
@@ -155,7 +155,7 @@
       "pressure_hpa": 1022.5,
       "dewpoint_c": 13.0,
       "feels_like_c": 11.3,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 66,
       "forecast_zone": "SO"
@@ -182,7 +182,7 @@
       "pressure_hpa": 1021.2,
       "dewpoint_c": 11.7,
       "feels_like_c": 13.0,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 96,
       "forecast_zone": "C"
@@ -209,7 +209,7 @@
       "pressure_hpa": 1021.7,
       "dewpoint_c": 11.6,
       "feels_like_c": 13.0,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 110,
       "forecast_zone": "C"
@@ -236,7 +236,7 @@
       "pressure_hpa": 1021.2,
       "dewpoint_c": 12.1,
       "feels_like_c": 11.6,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 138,
       "forecast_zone": "E"
@@ -288,7 +288,7 @@
       "pressure_hpa": 1022.3,
       "dewpoint_c": 10.9,
       "feels_like_c": 10.6,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 159,
       "forecast_zone": "M"
@@ -315,7 +315,7 @@
       "pressure_hpa": 1019.1,
       "dewpoint_c": 13.8,
       "feels_like_c": 13.3,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 160,
       "forecast_zone": "NE"
@@ -342,7 +342,7 @@
       "pressure_hpa": 1022.1,
       "dewpoint_c": 12.0,
       "feels_like_c": 14.2,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 162,
       "forecast_zone": "SO"
@@ -423,7 +423,7 @@
       "pressure_hpa": 1020.3,
       "dewpoint_c": 12.5,
       "feels_like_c": 13.7,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 236,
       "forecast_zone": "E"
@@ -450,7 +450,7 @@
       "pressure_hpa": 1021.0,
       "dewpoint_c": 12.2,
       "feels_like_c": 12.9,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 239,
       "forecast_zone": "NW"
@@ -554,7 +554,7 @@
       "pressure_hpa": 1019.3,
       "dewpoint_c": 13.2,
       "feels_like_c": 14.7,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 1693,
       "forecast_zone": "NE"
@@ -1273,9 +1273,5 @@
       "weather_code": "13"
     }
   ],
-  "summary": "Temperaturas de 12° a 16°; con posibilidad de precipitaciones.",
-  "alert_check": {
-    "ok": true,
-    "checked_at": "2026-10-10T12:54-03:00"
-  }
+  "summary": "Temperaturas de 12° a 16°; con posibilidad de precipitaciones."
 }
