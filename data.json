@@ -18,13 +18,40 @@
     "feels_like_c": 11.0
   },
   "alert": {
-    "active": false,
-    "data_unavailable": true,
+    "active": true,
+    "level": "amarilla",
+    "phenomenon": "Tormentas puntualmente fuertes",
+    "probability": "50 - 75%",
+    "start": "2026-10-09 22:25",
+    "end": "2026-10-10 01:25",
+    "description": "El área será afectada por tormentas (puntualmente) fuertes.\n\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
+    "zones": "Artigas : Baltasar Brum, Bella Unión, Bernabé Rivera, Cainsa, Colonia Palma, Coronado, Diego Lamas, Franquia, Javier de Viana, Mones Quintela, Paso Campamento, Portones de Hierro y Campodónico, Santa Rosa del Cuareim, Sequeira, Tomás Gomensoro y Topador.Salto : Cayetano y Migliaro.",
+    "warnings": [
+      {
+        "level": "amarilla",
+        "phenomenon": "Tormentas puntualmente fuertes",
+        "probability": "50 - 75%",
+        "start": "2026-10-09 22:25",
+        "end": "2026-10-10 01:25",
+        "description": "El área será afectada por tormentas (puntualmente) fuertes.\n\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
+        "zones": "Artigas : Baltasar Brum, Bella Unión, Bernabé Rivera, Cainsa, Colonia Palma, Coronado, Diego Lamas, Franquia, Javier de Viana, Mones Quintela, Paso Campamento, Portones de Hierro y Campodónico, Santa Rosa del Cuareim, Sequeira, Tomás Gomensoro y Topador.Salto : Cayetano y Migliaro.",
+        "risk": {
+          "riesgoViento": 1,
+          "riesgoLluvia": 1,
+          "riesgoTormenta": 2,
+          "riesgoVisibilidad": 1,
+          "riesgoCalor": 1,
+          "riesgoFrio": 1
+        }
+      }
+    ],
+    "updated": "2026-10-09 22:25",
+    "pdf": "adv1791595583561.pdf",
+    "source": "inumet_alerta_object_v4",
+    "source_timestamp": "2026-10-09T22:25:00-03:00",
+    "source_age_hours": 0.07,
     "homepage_says_active": true,
-    "source": "inumet_sources_out_of_sync",
-    "source_timestamp": "2026-10-08T04:10:00-03:00",
-    "source_age_hours": 42.17,
-    "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
+    "data_unavailable": false
   },
   "locations": {
     "montevideo_prado": {
@@ -1249,5 +1276,9 @@
       "weather_code": "13"
     }
   ],
-  "summary": "Temperaturas de 12° a 15°; con posibilidad de precipitaciones."
+  "summary": "Temperaturas de 12° a 15°; con posibilidad de precipitaciones.",
+  "alert_check": {
+    "ok": true,
+    "checked_at": "2026-10-09T22:29-03:00"
+  }
 }
