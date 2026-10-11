@@ -23,7 +23,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-10T02:52:00-03:00",
-    "source_age_hours": 23.47,
+    "source_age_hours": 23.6,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -1249,5 +1249,9 @@
       "weather_code": "13"
     }
   ],
-  "summary": "Temperaturas de 11° a 15°; con posibilidad de precipitaciones."
+  "summary": "Temperaturas de 11° a 15°; con posibilidad de precipitaciones.",
+  "alert_check": {
+    "ok": true,
+    "checked_at": "2026-10-11T02:27-03:00"
+  }
 }
