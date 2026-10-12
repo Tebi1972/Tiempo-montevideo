@@ -1,5 +1,5 @@
 {
-  "updated": "12/10/2026 12:12",
+  "updated": "12/10/2026 12:20",
   "current": {
     "temperature": 14.0,
     "station": "Prado",
@@ -23,7 +23,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-10T02:52:00-03:00",
-    "source_age_hours": 57.35,
+    "source_age_hours": 57.47,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -60,27 +60,25 @@
       "wigos": "0-20000-0-86580",
       "latitude": -34.832923,
       "longitude": -56.012876,
-      "observation_time": "2026-10-12T15:00:00Z",
-      "condition": "cloudy",
+      "observation_time": "2026-10-12T12:00:00.000-03:00",
+      "condition": "partly",
       "condition_time": "2026-10-12T15:00:00Z",
-      "condition_source": "observed_synop",
-      "present_weather": "STATE OF SKY ON THE WHOLE UNCHANGED",
-      "cloud_amount": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
+      "condition_source": "observed_dynamic_sky",
+      "present_weather": 13,
+      "cloud_amount": "nub",
       "cloud_types": [
-        "NIMBOSTRATUS (NS)",
-        "CIRRUS (CI)",
-        "CIRRUS (CI)"
+        "5sc400 7cusc700"
       ],
-      "wind_speed_kmh": 22.3,
-      "wind_direction_deg": null,
-      "visibility_km": null,
+      "wind_speed_kmh": 22.0,
+      "wind_direction_deg": 120.0,
+      "visibility_km": 10.0,
       "humidity": 78.0,
       "pressure_hpa": 1019.3,
       "dewpoint_c": 10.4,
       "feels_like_c": 10.2,
       "precipitation_recent_mm": null,
-      "observation_source": "synop",
-      "dynamic_station_id": null,
+      "observation_source": "inumet_dynamic",
+      "dynamic_station_id": 39,
       "forecast_zone": "M"
     },
     "artigas": {
