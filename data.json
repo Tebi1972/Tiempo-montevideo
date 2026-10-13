@@ -1,5 +1,5 @@
 {
-  "updated": "12/10/2026 21:12",
+  "updated": "12/10/2026 21:20",
   "current": {
     "temperature": 13.7,
     "station": "Prado",
@@ -23,7 +23,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-10T02:52:00-03:00",
-    "source_age_hours": 66.34,
+    "source_age_hours": 66.47,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -132,28 +132,28 @@
       "forecast_zone": "NW"
     },
     "colonia": {
-      "temperature": 13.8,
+      "temperature": 14.0,
       "station": "Colonia",
       "wigos": "0-20000-0-86560",
       "latitude": -34.45182199,
       "longitude": -57.76804181,
-      "observation_time": "2026-10-12T23:00:00Z",
+      "observation_time": "2026-10-12T21:00:00.000-03:00",
       "condition": "neutral",
-      "condition_time": "2026-10-12T23:00:00Z",
+      "condition_time": "2026-10-13T00:00:00Z",
       "condition_source": null,
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 22.7,
-      "wind_direction_deg": null,
+      "wind_speed_kmh": 20.0,
+      "wind_direction_deg": 138.0,
       "visibility_km": null,
       "humidity": 84.0,
-      "pressure_hpa": 1016.4,
-      "dewpoint_c": 11.1,
-      "feels_like_c": 9.8,
-      "precipitation_recent_mm": null,
-      "observation_source": "synop",
-      "dynamic_station_id": null,
+      "pressure_hpa": 1016.8,
+      "dewpoint_c": 11.4,
+      "feels_like_c": 10.5,
+      "precipitation_recent_mm": 0.0,
+      "observation_source": "inumet_dynamic",
+      "dynamic_station_id": 594,
       "forecast_zone": "SO"
     },
     "durazno": {
