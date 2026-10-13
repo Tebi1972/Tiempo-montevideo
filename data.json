@@ -1,5 +1,5 @@
 {
-  "updated": "13/10/2026 20:21",
+  "updated": "13/10/2026 20:34",
   "current": {
     "temperature": 14.8,
     "station": "Prado",
@@ -23,7 +23,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-10T02:52:00-03:00",
-    "source_age_hours": 89.49,
+    "source_age_hours": 89.7,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -292,28 +292,28 @@
       "forecast_zone": "M"
     },
     "melo": {
-      "temperature": null,
+      "temperature": 16.7,
       "station": "Melo",
       "wigos": "0-20000-0-86440",
       "latitude": -32.36675,
       "longitude": -54.19257,
-      "observation_time": null,
+      "observation_time": "2026-10-13T20:00:00.000-03:00",
       "condition": "neutral",
-      "condition_time": null,
+      "condition_time": "2026-10-13T23:00:00Z",
       "condition_source": null,
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": null,
-      "wind_direction_deg": null,
+      "wind_speed_kmh": 4.0,
+      "wind_direction_deg": 140.0,
       "visibility_km": null,
-      "humidity": null,
-      "pressure_hpa": null,
-      "dewpoint_c": null,
-      "feels_like_c": null,
-      "precipitation_recent_mm": null,
-      "observation_source": null,
-      "dynamic_station_id": null,
+      "humidity": 78.0,
+      "pressure_hpa": 1016.1,
+      "dewpoint_c": 12.9,
+      "feels_like_c": 16.8,
+      "precipitation_recent_mm": 0.0,
+      "observation_source": "inumet_dynamic",
+      "dynamic_station_id": 1336,
       "forecast_zone": "NE"
     },
     "mercedes": {
