@@ -1,5 +1,5 @@
 {
-  "updated": "13/10/2026 23:20",
+  "updated": "14/10/2026 00:01",
   "current": {
     "temperature": 14.8,
     "station": "Prado",
@@ -23,7 +23,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-10T02:52:00-03:00",
-    "source_age_hours": 92.47,
+    "source_age_hours": 93.17,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -49,7 +49,7 @@
       "pressure_hpa": 1018.6,
       "dewpoint_c": 14.1,
       "feels_like_c": 15.0,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 211,
       "forecast_zone": "M"
@@ -138,14 +138,12 @@
       "latitude": -34.45182199,
       "longitude": -57.76804181,
       "observation_time": "2026-10-13T23:00:00.000-03:00",
-      "condition": "cloudy",
+      "condition": "neutral",
       "condition_time": "2026-10-14T02:00:00Z",
-      "condition_source": "observed_synop",
+      "condition_source": null,
       "present_weather": null,
-      "cloud_amount": "8 OKTAS",
-      "cloud_types": [
-        "NIMBOSTRATUS (NS)"
-      ],
+      "cloud_amount": null,
+      "cloud_types": [],
       "wind_speed_kmh": 20.0,
       "wind_direction_deg": 144.0,
       "visibility_km": null,
@@ -230,7 +228,7 @@
       "pressure_hpa": 1018.1,
       "dewpoint_c": 14.3,
       "feels_like_c": 14.5,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 138,
       "forecast_zone": "E"
@@ -532,7 +530,7 @@
       "pressure_hpa": 1016.0,
       "dewpoint_c": 14.2,
       "feels_like_c": 14.6,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 1693,
       "forecast_zone": "NE"
