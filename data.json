@@ -1,5 +1,5 @@
 {
-  "updated": "15/10/2026 23:20",
+  "updated": "15/10/2026 23:37",
   "current": {
     "temperature": 14.4,
     "station": "Prado",
@@ -23,7 +23,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-10T02:52:00-03:00",
-    "source_age_hours": 140.47,
+    "source_age_hours": 140.77,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
