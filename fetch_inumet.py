@@ -983,7 +983,7 @@ def portada_indica_vigente():
         )
 
         vigente = bool(re.search(
-            r"Advertencia\s+Meteorol[oó]gica.{0,300}\bVigente\b",
+            r"Advertencia\\s+Meteorol[oó]gica\\s+Vigente\\b",
             texto_portada,
             re.I,
         ))
@@ -1287,6 +1287,7 @@ data = {
         "feels_like_c": feels_like_c,
     },
     "alert": alert,
+    "alert_check": {"ok": not alert.get("data_unavailable", False), "checked_at": ahora_uruguay.isoformat(timespec="minutes")},
     "locations": locations,
     "forecasts": forecasts,
     "days": days,
