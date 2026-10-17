@@ -291,7 +291,7 @@ def obtener_alerta():
                 round(edad_fuente_h, 2) if edad_fuente_h is not None else None
             ),
             "homepage_says_active": portada_vigente,
-            "data_unavailable": False,
+            "data_unavailable": (marca_fuente is None or edad_fuente_h is None or edad_fuente_h > 24 or edad_fuente_h < -1),
         }
 
         print("Advertencias INUMET vigentes:", len(vigentes))
@@ -373,12 +373,21 @@ def main():
         }
         with DATA_PATH.open("w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
+        if isinstance(data.get("alert"), dict) and data["alert"].get("active"):
+            data["alert"]["data_unavailable"] = True
+            with DATA_PATH.open("w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
         print("Se conservó la última advertencia; la comprobación falló.")
         return
 
+    if alert.get("data_unavailable") and isinstance(data.get("alert"), dict) and data["alert"].get("active"):
+        # Mantener la última advertencia para mostrarla como NO verificada.
+        alert = data["alert"]
+        alert["data_unavailable"] = True
+
     data["alert"] = alert
     data["alert_check"] = {
-        "ok": True,
+        "ok": not alert.get("data_unavailable", False),
         "checked_at": datetime.now(URUGUAY_TZ).isoformat(timespec="minutes"),
     }
 
