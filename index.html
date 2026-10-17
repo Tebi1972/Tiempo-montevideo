@@ -1076,6 +1076,25 @@ a {
 }
 
 
+.alertStatusFooter[hidden] { display:none !important; }
+.alertStatusFooter {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px 12px;
+  margin:14px 0 8px;
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.32);
+  border-radius:12px;
+  background:rgba(255,255,255,.10);
+  color:var(--text);
+  font-size:.82rem;
+  line-height:1.3;
+  font-weight:500;
+}
+.alertStatusFooter a { color:inherit; text-decoration:underline; text-underline-offset:2px; font-weight:650; }
+
 /* ==========================================
    SELECTOR DE LOCALIDAD
    ========================================== */
@@ -2085,6 +2104,9 @@ body.dusk:not(.rainy):not(.stormy) .aboutDialogV412{
 
   <section id="summaryCard"><div id="summary">—</div></section>
 
+  <!-- Aviso discreto al pie: solo cuando INUMET no se puede verificar -->
+  <section id="alertStatusFooter" class="alertStatusFooter" aria-live="polite" hidden></section>
+
   <div class="footerActions">
     <p class="muted footer">
       Datos meteorológicos: <a href="https://www.inumet.gub.uy/" target="_blank" rel="noopener noreferrer">INUMET</a> ·
@@ -3087,7 +3109,18 @@ function scheduleAlertExpiry(data, warning) {
   alertExpiryTimer = setTimeout(() => renderAlert(data), safeDelay);
 }
 
+function renderAlertStatusFooter(message = "") {
+  const footer = document.getElementById("alertStatusFooter");
+  if (!footer) return;
+  footer.hidden = !message;
+  footer.innerHTML = message
+    ? `<span>ⓘ Advertencias INUMET: información no verificada. ${message}</span>
+       <a href="https://www.inumet.gub.uy/alerta" target="_blank" rel="noopener noreferrer">Consultar INUMET ↗</a>`
+    : "";
+}
+
 function renderAlert(data) {
+  renderAlertStatusFooter();
   const box = document.getElementById("weatherAlert");
   if (!box) return;
 
@@ -3099,19 +3132,10 @@ function renderAlert(data) {
   const current = selectedCurrent(data);
   const rootAlert = data?.alert;
 
-  // No interpretar una consulta fallida como ausencia de advertencias.
-  // Mostrar un aviso neutral sin inventar niveles ni zonas afectadas.
   if (!rootAlert || (rootAlert.active !== true && (rootAlert.data_unavailable === true || data?.alert_check?.ok === false))) {
-    box.className = "alertCard visible";
-    box.innerHTML = `
-      <div class="alertCompactRow">
-        <div>
-          <div class="alertTitle">No se pudo verificar el estado de las advertencias</div>
-          <div class="alertValidity">Consultá la información oficial de INUMET.</div>
-        </div>
-        <a class="alertLink" href="https://www.inumet.gub.uy/alerta"
-           target="_blank" rel="noopener noreferrer">Verificar en INUMET ↗</a>
-      </div>`;
+    box.className = "alertCard";
+    box.innerHTML = "";
+    renderAlertStatusFooter("Consultá el estado actual en la fuente oficial.");
     return;
   }
 
@@ -3130,23 +3154,13 @@ function renderAlert(data) {
   );
 
   if (!applicable.length) {
-    const hasTimeValidWarning = warnings.some(w => warningIsStillActive(w));
-    // Si venció una advertencia anterior y la fuente sigue sin poder
-    // verificarse, no afirmar que ya no hay advertencias.
+    box.className = "alertCard";
+    box.innerHTML = "";
     if (rootAlert.data_unavailable === true || data?.alert_check?.ok === false) {
-      box.className = "alertCard visible";
-      box.innerHTML = `
-        <div class="alertCompactRow">
-          <div>
-            <div class="alertTitle">No se pudo verificar el estado de las advertencias</div>
-            <div class="alertValidity">${hasTimeValidWarning ? "La última advertencia conocida no corresponde a esta localidad. No se pudo verificar el estado actual." : "La última advertencia conocida ya no está vigente según su horario. No se pudo verificar el estado actual."} Consultá INUMET.</div>
-          </div>
-          <a class="alertLink" href="https://www.inumet.gub.uy/alerta"
-             target="_blank" rel="noopener noreferrer">Verificar en INUMET ↗</a>
-        </div>`;
-    } else {
-      box.className = "alertCard";
-      box.innerHTML = "";
+      const hasTimeValidWarning = warnings.some(w => warningIsStillActive(w));
+      renderAlertStatusFooter(hasTimeValidWarning
+        ? "La última advertencia conocida corresponde a otra localidad."
+        : "La última advertencia conocida ya venció.");
     }
     return;
   }
