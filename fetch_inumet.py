@@ -940,6 +940,30 @@ def fecha_uruguay(fecha):
     except Exception:
         return None
 
+def normalizar_alerta_anterior(anterior):
+    if not isinstance(anterior, dict) or anterior.get("active") is not True:
+        return None
+    ahora = datetime.now(URUGUAY_TZ)
+    avisos = anterior.get("warnings")
+    if not isinstance(avisos, list):
+        avisos = [anterior]
+    vigentes = []
+    for aviso in avisos:
+        if not isinstance(aviso, dict):
+            continue
+        fin = fecha_uruguay(aviso.get("end"))
+        inicio = fecha_uruguay(aviso.get("start"))
+        if fin is not None and fin > ahora and (inicio is None or inicio <= ahora):
+            vigentes.append(aviso)
+    resultado = dict(anterior)
+    resultado["data_unavailable"] = True
+    resultado["warnings"] = vigentes
+    resultado["active"] = bool(vigentes)
+    if not vigentes:
+        resultado["previous_warning_expired"] = True
+    return resultado
+
+
 def marca_frescura_alerta(datos):
     # NO usamos "finalizacion" para decidir qué respuesta es más nueva:
     # una hora futura de vencimiento no es una marca de actualización.
@@ -983,7 +1007,7 @@ def portada_indica_vigente():
         )
 
         vigente = bool(re.search(
-            r"Advertencia\s+Meteorol[oó]gica.{0,300}\bVigente\b",
+            r"Advertencia\s+Meteorol[oó]gica\s+Vigente\b",
             texto_portada,
             re.I,
         ))
@@ -1069,6 +1093,9 @@ try:
         or datetime(1970, 1, 1, tzinfo=URUGUAY_TZ),
         reverse=True,
     )
+
+    if not candidatos:
+        raise RuntimeError("No se pudo obtener una respuesta estructurada válida de INUMET")
 
     datos_alerta = candidatos[0][1] if candidatos else None
     marca_fuente = candidatos[0][0] if candidatos else None
@@ -1159,7 +1186,7 @@ try:
                 if edad_fuente_h is not None else None
             ),
             "homepage_says_active": portada_vigente,
-            "data_unavailable": False,
+            "data_unavailable": (marca_fuente is None or edad_fuente_h is None or edad_fuente_h > 24 or edad_fuente_h < -1),
         }
 
         print(
@@ -1208,6 +1235,17 @@ try:
             "pero no hay zonas estructuradas vigentes."
         )
 
+    elif portada_vigente is None or marca_fuente is None or edad_fuente_h is None or edad_fuente_h > 24 or edad_fuente_h < -1:
+        alert = {
+            "active": False,
+            "data_unavailable": True,
+            "homepage_says_active": portada_vigente,
+            "source": "inumet_alerta_unverified",
+            "source_timestamp": marca_fuente.isoformat() if marca_fuente else None,
+            "source_age_hours": round(edad_fuente_h, 2) if edad_fuente_h is not None else None,
+            "message": "No se pudo confirmar la ausencia de advertencias con datos recientes.",
+        }
+
     else:
         alert = {
             "active": False,
@@ -1239,6 +1277,19 @@ except Exception as error:
         "Error procesando advertencias INUMET:",
         error,
     )
+
+# Si INUMET no permite verificar advertencias, conservar la última
+# advertencia activa para mostrarla como información NO confirmada.
+if alert.get("data_unavailable"):
+    try:
+        with open("data.json", "r", encoding="utf-8") as previo_archivo:
+            previo = json.load(previo_archivo)
+        anterior = previo.get("alert")
+        if isinstance(anterior, dict) and anterior.get("active") is True:
+            alert = normalizar_alerta_anterior(anterior)
+            alert["check_error"] = True
+    except (OSError, ValueError, TypeError) as error:
+        print("No se pudo recuperar la advertencia anterior:", error)
 
 # =================================================
 # 4. RESUMEN DEL PRONÓSTICO
@@ -1273,6 +1324,7 @@ data = {
         "feels_like_c": feels_like_c,
     },
     "alert": alert,
+    "alert_check": {"ok": not alert.get("data_unavailable", False), "checked_at": ahora_uruguay.isoformat(timespec="minutes")},
     "locations": locations,
     "forecasts": forecasts,
     "days": days,
