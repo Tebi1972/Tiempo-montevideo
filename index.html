@@ -3130,8 +3130,23 @@ function renderAlert(data) {
   );
 
   if (!applicable.length) {
-    box.className = "alertCard";
-    box.innerHTML = "";
+    // Si venció una advertencia anterior y la fuente sigue sin poder
+    // verificarse, no afirmar que ya no hay advertencias.
+    if (rootAlert.data_unavailable === true || data?.alert_check?.ok === false) {
+      box.className = "alertCard visible";
+      box.innerHTML = `
+        <div class="alertCompactRow">
+          <div>
+            <div class="alertTitle">No se pudo verificar el estado de las advertencias</div>
+            <div class="alertValidity">La última advertencia conocida ya no está vigente según su horario. Consultá INUMET para conocer la situación actual.</div>
+          </div>
+          <a class="alertLink" href="https://www.inumet.gub.uy/alerta"
+             target="_blank" rel="noopener noreferrer">Verificar en INUMET ↗</a>
+        </div>`;
+    } else {
+      box.className = "alertCard";
+      box.innerHTML = "";
+    }
     return;
   }
 
