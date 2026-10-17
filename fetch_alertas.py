@@ -101,6 +101,31 @@ def fecha_uruguay(fecha):
         return None
 
 
+def normalizar_alerta_anterior(anterior):
+    """Conservar solo advertencias anteriores que aún tienen vigencia verificable."""
+    if not isinstance(anterior, dict) or anterior.get("active") is not True:
+        return None
+    ahora = datetime.now(URUGUAY_TZ)
+    avisos = anterior.get("warnings")
+    if not isinstance(avisos, list):
+        avisos = [anterior]
+    vigentes = []
+    for aviso in avisos:
+        if not isinstance(aviso, dict):
+            continue
+        fin = fecha_uruguay(aviso.get("end"))
+        inicio = fecha_uruguay(aviso.get("start"))
+        if fin is not None and fin > ahora and (inicio is None or inicio <= ahora):
+            vigentes.append(aviso)
+    resultado = dict(anterior)
+    resultado["data_unavailable"] = True
+    resultado["warnings"] = vigentes
+    resultado["active"] = bool(vigentes)
+    if not vigentes:
+        resultado["previous_warning_expired"] = True
+    return resultado
+
+
 def marca_frescura_alerta(datos):
     # No usamos "finalizacion" como marca de actualización.
     fechas = []
@@ -372,7 +397,7 @@ def main():
             "error": str(error),
         }
         if isinstance(data.get("alert"), dict) and data["alert"].get("active"):
-            data["alert"]["data_unavailable"] = True
+            data["alert"] = normalizar_alerta_anterior(data["alert"])
         else:
             data["alert"] = {
                 "active": False,
@@ -387,8 +412,7 @@ def main():
 
     if alert.get("data_unavailable") and isinstance(data.get("alert"), dict) and data["alert"].get("active"):
         # Mantener la última advertencia para mostrarla como NO verificada.
-        alert = data["alert"]
-        alert["data_unavailable"] = True
+        alert = normalizar_alerta_anterior(data["alert"])
 
     data["alert"] = alert
     data["alert_check"] = {
