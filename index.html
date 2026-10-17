@@ -3099,7 +3099,23 @@ function renderAlert(data) {
   const current = selectedCurrent(data);
   const rootAlert = data?.alert;
 
-  if (!rootAlert || rootAlert.active !== true) {
+  // No interpretar una consulta fallida como ausencia de advertencias.
+  // Mostrar un aviso neutral sin inventar niveles ni zonas afectadas.
+  if (!rootAlert || rootAlert.data_unavailable === true || data?.alert_check?.ok === false) {
+    box.className = "alertCard visible";
+    box.innerHTML = `
+      <div class="alertCompactRow">
+        <div>
+          <div class="alertTitle">No se pudo verificar el estado de las advertencias</div>
+          <div class="alertValidity">Consultá la información oficial de INUMET.</div>
+        </div>
+        <a class="alertLink" href="https://www.inumet.gub.uy/alerta"
+           target="_blank" rel="noopener noreferrer">Verificar en INUMET ↗</a>
+      </div>`;
+    return;
+  }
+
+  if (rootAlert.active !== true) {
     box.className = "alertCard";
     box.innerHTML = "";
     return;
