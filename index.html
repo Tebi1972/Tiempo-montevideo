@@ -3130,6 +3130,7 @@ function renderAlert(data) {
   );
 
   if (!applicable.length) {
+    const hasTimeValidWarning = warnings.some(w => warningIsStillActive(w));
     // Si venció una advertencia anterior y la fuente sigue sin poder
     // verificarse, no afirmar que ya no hay advertencias.
     if (rootAlert.data_unavailable === true || data?.alert_check?.ok === false) {
@@ -3138,7 +3139,7 @@ function renderAlert(data) {
         <div class="alertCompactRow">
           <div>
             <div class="alertTitle">No se pudo verificar el estado de las advertencias</div>
-            <div class="alertValidity">La última advertencia conocida ya no está vigente según su horario. Consultá INUMET para conocer la situación actual.</div>
+            <div class="alertValidity">${hasTimeValidWarning ? "La última advertencia conocida no corresponde a esta localidad. No se pudo verificar el estado actual." : "La última advertencia conocida ya no está vigente según su horario. No se pudo verificar el estado actual."} Consultá INUMET.</div>
           </div>
           <a class="alertLink" href="https://www.inumet.gub.uy/alerta"
              target="_blank" rel="noopener noreferrer">Verificar en INUMET ↗</a>
