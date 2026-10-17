@@ -142,7 +142,7 @@ def portada_indica_vigente():
         )
 
         vigente = bool(re.search(
-            r"Advertencia\\s+Meteorol[oó]gica\\s+Vigente\\b",
+            r"Advertencia\s+Meteorol[oó]gica\s+Vigente\b",
             texto_portada,
             re.I,
         ))
@@ -373,9 +373,16 @@ def main():
         }
         if isinstance(data.get("alert"), dict) and data["alert"].get("active"):
             data["alert"]["data_unavailable"] = True
-            with DATA_PATH.open("w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
-        print("Se conservó la última advertencia; la comprobación falló.")
+        else:
+            data["alert"] = {
+                "active": False,
+                "data_unavailable": True,
+                "source": "inumet_alert_check_failed",
+                "message": "No se pudo verificar el estado de las advertencias.",
+            }
+        with DATA_PATH.open("w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        print("Se registró el fallo sin confirmar ausencia de advertencias.")
         return
 
     if alert.get("data_unavailable") and isinstance(data.get("alert"), dict) and data["alert"].get("active"):
