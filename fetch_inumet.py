@@ -983,7 +983,7 @@ def portada_indica_vigente():
         )
 
         vigente = bool(re.search(
-            r"Advertencia\\s+Meteorol[oó]gica\\s+Vigente\\b",
+            r"Advertencia\s+Meteorol[oó]gica\s+Vigente\b",
             texto_portada,
             re.I,
         ))
