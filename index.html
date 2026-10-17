@@ -3099,7 +3099,23 @@ function renderAlert(data) {
   const current = selectedCurrent(data);
   const rootAlert = data?.alert;
 
-  if (!rootAlert || rootAlert.active !== true) {
+  // No interpretar una consulta fallida como ausencia de advertencias.
+  // Mostrar un aviso neutral sin inventar niveles ni zonas afectadas.
+  if (!rootAlert || (rootAlert.active !== true && (rootAlert.data_unavailable === true || data?.alert_check?.ok === false))) {
+    box.className = "alertCard visible";
+    box.innerHTML = `
+      <div class="alertCompactRow">
+        <div>
+          <div class="alertTitle">No se pudo verificar el estado de las advertencias</div>
+          <div class="alertValidity">Consultá la información oficial de INUMET.</div>
+        </div>
+        <a class="alertLink" href="https://www.inumet.gub.uy/alerta"
+           target="_blank" rel="noopener noreferrer">Verificar en INUMET ↗</a>
+      </div>`;
+    return;
+  }
+
+  if (rootAlert.active !== true) {
     box.className = "alertCard";
     box.innerHTML = "";
     return;
@@ -3114,8 +3130,24 @@ function renderAlert(data) {
   );
 
   if (!applicable.length) {
-    box.className = "alertCard";
-    box.innerHTML = "";
+    const hasTimeValidWarning = warnings.some(w => warningIsStillActive(w));
+    // Si venció una advertencia anterior y la fuente sigue sin poder
+    // verificarse, no afirmar que ya no hay advertencias.
+    if (rootAlert.data_unavailable === true || data?.alert_check?.ok === false) {
+      box.className = "alertCard visible";
+      box.innerHTML = `
+        <div class="alertCompactRow">
+          <div>
+            <div class="alertTitle">No se pudo verificar el estado de las advertencias</div>
+            <div class="alertValidity">${hasTimeValidWarning ? "La última advertencia conocida no corresponde a esta localidad. No se pudo verificar el estado actual." : "La última advertencia conocida ya no está vigente según su horario. No se pudo verificar el estado actual."} Consultá INUMET.</div>
+          </div>
+          <a class="alertLink" href="https://www.inumet.gub.uy/alerta"
+             target="_blank" rel="noopener noreferrer">Verificar en INUMET ↗</a>
+        </div>`;
+    } else {
+      box.className = "alertCard";
+      box.innerHTML = "";
+    }
     return;
   }
 
@@ -3148,8 +3180,10 @@ function renderAlert(data) {
     red: "🔴 ADVERTENCIA ROJA"
   };
 
+  const unverified = rootAlert.data_unavailable === true || data?.alert_check?.ok === false;
   const end = warning.end
-    ? `<div class="alertValidity">Vigente hasta: ${esc(formatWarningEnd(warning.end))}</div>` : "";
+    ? `<div class="alertValidity">${unverified ? "Última vigencia conocida hasta" : "Vigente hasta"}: ${esc(formatWarningEnd(warning.end))}</div>` : "";
+  const staleNote = unverified ? `<div class="alertValidity">⚠ Información anterior: no se pudo verificar si INUMET la actualizó. Consultá el sitio oficial.</div>` : "";
 
   box.className = `alertCard visible ${cssLevel}`;
   box.innerHTML = `
@@ -3157,6 +3191,7 @@ function renderAlert(data) {
       <div>
         <div class="alertTitle">${labels[cssLevel]}</div>
         ${end}
+        ${staleNote}
       </div>
       <a class="alertLink"
          href="https://www.inumet.gub.uy/alerta"
