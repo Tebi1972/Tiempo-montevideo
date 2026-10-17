@@ -1162,7 +1162,7 @@ try:
                 if edad_fuente_h is not None else None
             ),
             "homepage_says_active": portada_vigente,
-            "data_unavailable": False,
+            "data_unavailable": (marca_fuente is None or edad_fuente_h is None or edad_fuente_h > 24 or edad_fuente_h < -1),
         }
 
         print(
@@ -1253,6 +1253,20 @@ except Exception as error:
         "Error procesando advertencias INUMET:",
         error,
     )
+
+# Si INUMET no permite verificar advertencias, conservar la última
+# advertencia activa para mostrarla como información NO confirmada.
+if alert.get("data_unavailable"):
+    try:
+        with open("data.json", "r", encoding="utf-8") as previo_archivo:
+            previo = json.load(previo_archivo)
+        anterior = previo.get("alert")
+        if isinstance(anterior, dict) and anterior.get("active") is True:
+            alert = dict(anterior)
+            alert["data_unavailable"] = True
+            alert["check_error"] = True
+    except (OSError, ValueError, TypeError) as error:
+        print("No se pudo recuperar la advertencia anterior:", error)
 
 # =================================================
 # 4. RESUMEN DEL PRONÓSTICO
