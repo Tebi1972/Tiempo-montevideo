@@ -1070,6 +1070,9 @@ try:
         reverse=True,
     )
 
+    if not candidatos:
+        raise RuntimeError("No se pudo obtener una respuesta estructurada válida de INUMET")
+
     datos_alerta = candidatos[0][1] if candidatos else None
     marca_fuente = candidatos[0][0] if candidatos else None
 
@@ -1207,6 +1210,17 @@ try:
             "ATENCIÓN: portada INUMET = VIGENTE, "
             "pero no hay zonas estructuradas vigentes."
         )
+
+    elif portada_vigente is None or marca_fuente is None or edad_fuente_h is None or edad_fuente_h > 24 or edad_fuente_h < -1:
+        alert = {
+            "active": False,
+            "data_unavailable": True,
+            "homepage_says_active": portada_vigente,
+            "source": "inumet_alerta_unverified",
+            "source_timestamp": marca_fuente.isoformat() if marca_fuente else None,
+            "source_age_hours": round(edad_fuente_h, 2) if edad_fuente_h is not None else None,
+            "message": "No se pudo confirmar la ausencia de advertencias con datos recientes.",
+        }
 
     else:
         alert = {
