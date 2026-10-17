@@ -101,6 +101,31 @@ def fecha_uruguay(fecha):
         return None
 
 
+def normalizar_alerta_anterior(anterior):
+    """Conservar solo advertencias anteriores que aún tienen vigencia verificable."""
+    if not isinstance(anterior, dict) or anterior.get("active") is not True:
+        return None
+    ahora = datetime.now(URUGUAY_TZ)
+    avisos = anterior.get("warnings")
+    if not isinstance(avisos, list):
+        avisos = [anterior]
+    vigentes = []
+    for aviso in avisos:
+        if not isinstance(aviso, dict):
+            continue
+        fin = fecha_uruguay(aviso.get("end"))
+        inicio = fecha_uruguay(aviso.get("start"))
+        if fin is not None and fin > ahora and (inicio is None or inicio <= ahora):
+            vigentes.append(aviso)
+    resultado = dict(anterior)
+    resultado["data_unavailable"] = True
+    resultado["warnings"] = vigentes
+    resultado["active"] = bool(vigentes)
+    if not vigentes:
+        resultado["previous_warning_expired"] = True
+    return resultado
+
+
 def marca_frescura_alerta(datos):
     # No usamos "finalizacion" como marca de actualización.
     fechas = []
@@ -142,7 +167,7 @@ def portada_indica_vigente():
         )
 
         vigente = bool(re.search(
-            r"Advertencia\s+Meteorol[oó]gica.{0,300}\bVigente\b",
+            r"Advertencia\s+Meteorol[oó]gica\s+Vigente\b",
             texto_portada,
             re.I,
         ))
@@ -217,6 +242,9 @@ def obtener_alerta():
         reverse=True,
     )
 
+    if not candidatos:
+        raise RuntimeError("No se pudo obtener una respuesta estructurada válida de INUMET")
+
     datos_alerta = candidatos[0][1] if candidatos else None
     marca_fuente = candidatos[0][0] if candidatos else None
 
@@ -288,7 +316,7 @@ def obtener_alerta():
                 round(edad_fuente_h, 2) if edad_fuente_h is not None else None
             ),
             "homepage_says_active": portada_vigente,
-            "data_unavailable": False,
+            "data_unavailable": (marca_fuente is None or edad_fuente_h is None or edad_fuente_h > 24 or edad_fuente_h < -1),
         }
 
         print("Advertencias INUMET vigentes:", len(vigentes))
@@ -326,6 +354,17 @@ def obtener_alerta():
             ),
         }
 
+    if portada_vigente is None or marca_fuente is None or edad_fuente_h is None or edad_fuente_h > 24 or edad_fuente_h < -1:
+        return {
+            "active": False,
+            "data_unavailable": True,
+            "homepage_says_active": portada_vigente,
+            "source": "inumet_alerta_unverified",
+            "source_timestamp": marca_fuente.isoformat() if marca_fuente else None,
+            "source_age_hours": round(edad_fuente_h, 2) if edad_fuente_h is not None else None,
+            "message": "No se pudo confirmar la ausencia de advertencias con datos recientes.",
+        }
+
     print("INUMET no entrega advertencias vigentes.")
     return {
         "active": False,
@@ -357,13 +396,27 @@ def main():
             "checked_at": datetime.now(URUGUAY_TZ).isoformat(timespec="minutes"),
             "error": str(error),
         }
+        if isinstance(data.get("alert"), dict) and data["alert"].get("active"):
+            data["alert"] = normalizar_alerta_anterior(data["alert"])
+        else:
+            data["alert"] = {
+                "active": False,
+                "data_unavailable": True,
+                "source": "inumet_alert_check_failed",
+                "message": "No se pudo verificar el estado de las advertencias.",
+            }
         with DATA_PATH.open("w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        raise
+        print("Se registró el fallo sin confirmar ausencia de advertencias.")
+        return
+
+    if alert.get("data_unavailable") and isinstance(data.get("alert"), dict) and data["alert"].get("active"):
+        # Mantener la última advertencia para mostrarla como NO verificada.
+        alert = normalizar_alerta_anterior(data["alert"])
 
     data["alert"] = alert
     data["alert_check"] = {
-        "ok": True,
+        "ok": not alert.get("data_unavailable", False),
         "checked_at": datetime.now(URUGUAY_TZ).isoformat(timespec="minutes"),
     }
 
