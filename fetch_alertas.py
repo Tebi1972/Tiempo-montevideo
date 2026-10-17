@@ -142,7 +142,7 @@ def portada_indica_vigente():
         )
 
         vigente = bool(re.search(
-            r"Advertencia\s+Meteorol[oó]gica.{0,300}\bVigente\b",
+            r"Advertencia\\s+Meteorol[oó]gica\\s+Vigente\\b",
             texto_portada,
             re.I,
         ))
@@ -373,7 +373,8 @@ def main():
         }
         with DATA_PATH.open("w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        raise
+        print("Se conservó la última advertencia; la comprobación falló.")
+        return
 
     data["alert"] = alert
     data["alert_check"] = {
