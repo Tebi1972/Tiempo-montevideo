@@ -940,6 +940,30 @@ def fecha_uruguay(fecha):
     except Exception:
         return None
 
+def normalizar_alerta_anterior(anterior):
+    if not isinstance(anterior, dict) or anterior.get("active") is not True:
+        return None
+    ahora = datetime.now(URUGUAY_TZ)
+    avisos = anterior.get("warnings")
+    if not isinstance(avisos, list):
+        avisos = [anterior]
+    vigentes = []
+    for aviso in avisos:
+        if not isinstance(aviso, dict):
+            continue
+        fin = fecha_uruguay(aviso.get("end"))
+        inicio = fecha_uruguay(aviso.get("start"))
+        if fin is not None and fin > ahora and (inicio is None or inicio <= ahora):
+            vigentes.append(aviso)
+    resultado = dict(anterior)
+    resultado["data_unavailable"] = True
+    resultado["warnings"] = vigentes
+    resultado["active"] = bool(vigentes)
+    if not vigentes:
+        resultado["previous_warning_expired"] = True
+    return resultado
+
+
 def marca_frescura_alerta(datos):
     # NO usamos "finalizacion" para decidir qué respuesta es más nueva:
     # una hora futura de vencimiento no es una marca de actualización.
@@ -1262,8 +1286,7 @@ if alert.get("data_unavailable"):
             previo = json.load(previo_archivo)
         anterior = previo.get("alert")
         if isinstance(anterior, dict) and anterior.get("active") is True:
-            alert = dict(anterior)
-            alert["data_unavailable"] = True
+            alert = normalizar_alerta_anterior(anterior)
             alert["check_error"] = True
     except (OSError, ValueError, TypeError) as error:
         print("No se pudo recuperar la advertencia anterior:", error)
