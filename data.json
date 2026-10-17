@@ -1,5 +1,5 @@
 {
-  "updated": "17/10/2026 08:20",
+  "updated": "17/10/2026 08:54",
   "current": {
     "temperature": 11.3,
     "station": "Prado",
@@ -23,7 +23,7 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-10T02:52:00-03:00",
-    "source_age_hours": 173.47,
+    "source_age_hours": 174.05,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "locations": {
@@ -321,32 +321,30 @@
       "forecast_zone": "NE"
     },
     "mercedes": {
-      "temperature": 10.6,
+      "temperature": 10.4,
       "station": "Mercedes",
       "wigos": "0-20000-0-86490",
       "latitude": -33.2506,
       "longitude": -58.0692,
       "observation_time": "2026-10-17T08:00:00.000-03:00",
-      "condition": "cloudy",
+      "condition": "partly",
       "condition_time": "2026-10-17T11:00:00Z",
-      "condition_source": "observed_synop",
-      "present_weather": null,
-      "cloud_amount": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
+      "condition_source": "observed_dynamic_sky",
+      "present_weather": 13,
+      "cloud_amount": "nub",
       "cloud_types": [
-        "CUMULUS (CU)",
-        "CIRRUS (CI)",
-        "CIRRUS (CI)"
+        "1Cu350 7Sc600"
       ],
-      "wind_speed_kmh": 17.0,
-      "wind_direction_deg": 169.0,
-      "visibility_km": null,
-      "humidity": 81.0,
-      "pressure_hpa": 1021.7,
-      "dewpoint_c": 7.4,
-      "feels_like_c": 6.7,
+      "wind_speed_kmh": 20.0,
+      "wind_direction_deg": 160.0,
+      "visibility_km": 18.0,
+      "humidity": 84.0,
+      "pressure_hpa": 1021.3,
+      "dewpoint_c": 7.7,
+      "feels_like_c": 6.0,
       "precipitation_recent_mm": 0.0,
       "observation_source": "inumet_dynamic",
-      "dynamic_station_id": 609,
+      "dynamic_station_id": 162,
       "forecast_zone": "SO"
     },
     "paysandu": {
