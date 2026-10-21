@@ -1,5 +1,5 @@
 {
-  "updated": "21/10/2026 19:20",
+  "updated": "21/10/2026 19:57",
   "current": {
     "temperature": 19.3,
     "station": "Prado",
@@ -23,12 +23,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-10T02:52:00-03:00",
-    "source_age_hours": 280.47,
+    "source_age_hours": 281.09,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-10-21T19:20-03:00"
+    "checked_at": "2026-10-21T19:57-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -1103,7 +1103,7 @@
           "min": "5",
           "max": "21",
           "morning": "Nuboso, períodos de algo nuboso. Neblinas y bancos de niebla.",
-          "evening": "Nuboso, períodos de algo nuboso. Baja probabilidad de precipitaciones.",
+          "evening": "Nuboso, períodos de algo nuboso. Precipitaciones y tormentas aisladas.",
           "wind": "NE y E 20-30 km/h, rachas de hasta 40 km/h. E y NE 20-30 km/h, rachas de hasta 50 km/h en zonas costeras.",
           "rain": "Precipitaciones"
         },
