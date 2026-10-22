@@ -1,5 +1,5 @@
 {
-  "updated": "22/10/2026 17:20",
+  "updated": "22/10/2026 18:04",
   "current": {
     "temperature": 20.6,
     "station": "Prado",
@@ -49,13 +49,13 @@
     "pdf": "adv1792699647536.pdf",
     "source": "inumet_alerta_object_v4",
     "source_timestamp": "2026-10-22T16:30:00-03:00",
-    "source_age_hours": 0.84,
+    "source_age_hours": 1.57,
     "homepage_says_active": true,
     "data_unavailable": false
   },
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-10-22T17:20-03:00"
+    "checked_at": "2026-10-22T18:04-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -80,7 +80,7 @@
       "pressure_hpa": 1013.0,
       "dewpoint_c": 13.9,
       "feels_like_c": 18.1,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 211,
       "forecast_zone": "M"
@@ -134,7 +134,7 @@
       "pressure_hpa": 1011.8,
       "dewpoint_c": 18.4,
       "feels_like_c": 19.6,
-      "precipitation_recent_mm": 2.8,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 16,
       "forecast_zone": "NW"
@@ -186,7 +186,7 @@
       "pressure_hpa": 1012.2,
       "dewpoint_c": 17.1,
       "feels_like_c": 20.6,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 66,
       "forecast_zone": "SO"
@@ -213,7 +213,7 @@
       "pressure_hpa": 1011.0,
       "dewpoint_c": 15.9,
       "feels_like_c": 17.3,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 96,
       "forecast_zone": "C"
@@ -240,7 +240,7 @@
       "pressure_hpa": 1013.1,
       "dewpoint_c": 14.7,
       "feels_like_c": 16.1,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 110,
       "forecast_zone": "C"
@@ -267,7 +267,7 @@
       "pressure_hpa": 1014.2,
       "dewpoint_c": 13.6,
       "feels_like_c": 15.7,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 138,
       "forecast_zone": "E"
@@ -319,7 +319,7 @@
       "pressure_hpa": 1013.2,
       "dewpoint_c": 13.8,
       "feels_like_c": 16.4,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 159,
       "forecast_zone": "M"
@@ -346,7 +346,7 @@
       "pressure_hpa": 1013.8,
       "dewpoint_c": 17.4,
       "feels_like_c": 16.7,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 160,
       "forecast_zone": "NE"
@@ -373,7 +373,7 @@
       "pressure_hpa": 1011.4,
       "dewpoint_c": 17.8,
       "feels_like_c": 19.5,
-      "precipitation_recent_mm": 1.6,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 162,
       "forecast_zone": "SO"
@@ -435,15 +435,12 @@
       "latitude": -34.4936,
       "longitude": -54.3125,
       "observation_time": "2026-10-22T17:00:00.000-03:00",
-      "condition": "cloudy",
+      "condition": "neutral",
       "condition_time": "2026-10-22T20:00:00Z",
-      "condition_source": "observed_synop",
+      "condition_source": null,
       "present_weather": null,
-      "cloud_amount": "8 OKTAS",
-      "cloud_types": [
-        "STRATUS (ST)",
-        "STRATUS (ST)"
-      ],
+      "cloud_amount": null,
+      "cloud_types": [],
       "wind_speed_kmh": 19.0,
       "wind_direction_deg": 68.0,
       "visibility_km": null,
@@ -478,7 +475,7 @@
       "pressure_hpa": 1010.4,
       "dewpoint_c": 19.4,
       "feels_like_c": 22.2,
-      "precipitation_recent_mm": 2.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 239,
       "forecast_zone": "NW"
@@ -582,7 +579,7 @@
       "pressure_hpa": 1013.3,
       "dewpoint_c": 19.3,
       "feels_like_c": 22.4,
-      "precipitation_recent_mm": 0.1,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 1693,
       "forecast_zone": "NE"
@@ -745,9 +742,9 @@
         {
           "date": "Jueves 22",
           "min": "12",
-          "max": "23",
+          "max": "22",
           "morning": "Nuboso a cubierto.",
-          "evening": "Nuboso y cubierto. Precipitaciones en la noche",
+          "evening": "Nuboso y cubierto. Precipitaciones y probables tormentas.",
           "wind": "NE 20-30 km/h, rachas de hasta 40 km/h. E y NE 20-40 km/h.",
           "rain": "Precipitaciones"
         },
@@ -755,7 +752,7 @@
           "date": "Viernes 23",
           "min": "14",
           "max": "21",
-          "morning": "Cubierto. Precipitaciones.",
+          "morning": "Cubierto. Precipitaciones y probables tormentas. Neblinas.",
           "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
           "wind": "Sector E 20-40 km/h al sector W 10-20 km/h, periodo de variable 0-10 km/h SW y S 10-30 km/h.",
           "rain": "Precipitaciones"
@@ -764,9 +761,9 @@
           "date": "Sábado 24",
           "min": "13",
           "max": "18",
-          "morning": "Cubierto. Precipitaciones. Neblinas.",
-          "evening": "Nuboso y cubierto. Baja probabilidad de precipitaciones.",
-          "wind": "Sector S 20-30 km/h, rachas de 50 km/h. Sector S 20-30 km/h, rachas de 40 km/h.",
+          "morning": "Cubierto. Precipitaciones aisladas. Neblinas.",
+          "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
+          "wind": "Sector S 20-30 km/h, rachas de 50 km/h. SW al SE 20-30 km/h, rachas de 40 km/h.",
           "rain": "Precipitaciones"
         },
         {
@@ -821,9 +818,9 @@
         {
           "date": "Jueves 22",
           "min": "15",
-          "max": "28",
+          "max": "25",
           "morning": "Nuboso a cubierto. Precipitaciones y tormentas.",
-          "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
+          "evening": "Nuboso y cubierto. Precipitaciones y tormentas. Neblinas.",
           "wind": "E y NE 20-30 km/h, rachas de hasta 40 km/h. Sector E 10-30 km/h, rachas  de 40 km/h. Probables rachas fuertes asociadas a tormentas.",
           "rain": "Precipitaciones"
         },
@@ -833,14 +830,14 @@
           "max": "28",
           "morning": "Nuboso y cubierto. Precipitaciones y probables tormentas. Neblinas y bancos de niebla.",
           "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
-          "wind": "Sector E al sector S10-30 km/h. Períodos de variables 0-10 km/h. Probables rachas fuertes asociadas a tormentas. SE y S 10-30 km/h. Períodos de variables 0-10 km/h.",
+          "wind": "Sector E al sector W 10-30 km/h. Períodos de variables 0-10 km/h. Probables rachas fuertes asociadas a tormentas. Sector W al S 10-30 km/h. Períodos de variables 0-10 km/h.",
           "rain": "Precipitaciones"
         },
         {
           "date": "Sábado 24",
           "min": "14",
           "max": "24",
-          "morning": "Cubierto. Precipitaciones. Neblinas.",
+          "morning": "Nuboso y cubierto. Precipitaciones aisladas y baja probabilidad de tormentas. Neblinas.",
           "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
           "wind": "Sector S 20-30 km/h, rachas de 40 km/h. Sector S 20-30 km/h, rachas de 40 km/h.",
           "rain": "Precipitaciones"
@@ -897,7 +894,7 @@
         {
           "date": "Jueves 22",
           "min": "12",
-          "max": "25",
+          "max": "24",
           "morning": "Nuboso a cubierto. Probables precipitaciones y tormentas. Neblinas.",
           "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
           "wind": "Sector E 20-40 km/h. Sector E 20-40 km/h, rachas de hasta 50 km/h. Probables rachas fuertes asociadas a tormentas.",
@@ -916,9 +913,9 @@
           "date": "Sábado 24",
           "min": "14",
           "max": "21",
-          "morning": "Cubierto. Precipitaciones. Neblinas y bancos de niebla.",
+          "morning": "Cubierto. Precipitaciones aisladas y baja probabilidad de tormentas. Neblinas y bancos de niebla.",
           "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
-          "wind": "Sector S 20-30 km/h, rachas de 40 km/h. Sector S 20-30 km/h, rachas de 40 km/h.",
+          "wind": "Sector S 20-30 km/h, rachas de 40 km/h. SW al SE 20-30 km/h, rachas de 40 km/h.",
           "rain": "Precipitaciones"
         },
         {
@@ -926,9 +923,9 @@
           "min": "10",
           "max": "19",
           "morning": null,
-          "evening": "Probabilidad media de precipitaciones",
+          "evening": "Alta probabilidad de precipitaciones",
           "wind": "—",
-          "rain": "Probabilidad media de precipitaciones",
+          "rain": "Alta probabilidad de precipitaciones",
           "extended": true,
           "weather_code": "4"
         },
@@ -973,17 +970,17 @@
         {
           "date": "Jueves 22",
           "min": "13",
-          "max": "25",
+          "max": "23",
           "morning": "Nuboso a cubierto. Desmejorando con precipitaciones y tormentas Neblinas y bancos de niebla.",
           "evening": "Nuboso y cubierto. Precipitaciones y tormentas. Neblinas.",
-          "wind": "E y NE 20-30 km/h, rachas de hasta 40 km/h. Sector E 20-40 km/h, rachas de hasta 50 km/h.",
+          "wind": "E y NE 20-30 km/h, rachas de hasta 40 km/h. Sector E 20-40 km/h, rachas de hasta 50 km/h en zonas costeras.",
           "rain": "Precipitaciones"
         },
         {
           "date": "Viernes 23",
           "min": "14",
           "max": "25",
-          "morning": "Nuboso y cubierto. Precipitaciones y probables tormentas. Neblinas.",
+          "morning": "Nuboso y cubierto. Precipitaciones y probables tormentas. Neblinas y bancos de niebla.",
           "evening": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas.",
           "wind": "Sector E 20-40 km/h al sector W 10-20 km/h, periodo de variable 0-10 km/h SW y S 10-30 km/h.",
           "rain": "Precipitaciones"
@@ -992,8 +989,8 @@
           "date": "Sábado 24",
           "min": "13",
           "max": "22",
-          "morning": "Cubierto. Precipitaciones. Neblinas y bancos de niebla.",
-          "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
+          "morning": "Cubierto. Precipitaciones aisladas. Neblinas y bancos de niebla.",
+          "evening": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas.",
           "wind": "Sector S 20-30 km/h, rachas de 50 km/h. Sector S 20-30 km/h, rachas de 40 km/h.",
           "rain": "Precipitaciones"
         },
@@ -1002,9 +999,9 @@
           "min": "10",
           "max": "18",
           "morning": null,
-          "evening": "Probabilidad media de precipitaciones",
+          "evening": "Alta probabilidad de precipitaciones",
           "wind": "—",
-          "rain": "Probabilidad media de precipitaciones",
+          "rain": "Alta probabilidad de precipitaciones",
           "extended": true,
           "weather_code": "4"
         },
@@ -1024,9 +1021,9 @@
           "min": "9",
           "max": "22",
           "morning": null,
-          "evening": "Sin precipitaciones previstas",
+          "evening": "Baja probabilidad de precipitaciones",
           "wind": "—",
-          "rain": "Sin precipitaciones previstas",
+          "rain": "Baja probabilidad de precipitaciones",
           "extended": true,
           "weather_code": "13"
         },
@@ -1048,8 +1045,8 @@
       "days": [
         {
           "date": "Jueves 22",
-          "min": "12",
-          "max": "25",
+          "min": "13",
+          "max": "22",
           "morning": "Nuboso a cubierto. Neblinas.",
           "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
           "wind": "NE 20-30 km/h, rachas de hasta 40 km/h. Sector E 20-40 km/h, rachas de hasta 50 km/h. Probables rachas fuertes asociadas a tormentas.",
@@ -1059,8 +1056,8 @@
           "date": "Viernes 23",
           "min": "13",
           "max": "24",
-          "morning": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas.",
-          "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
+          "morning": "Nuboso y cubierto. Precipitaciones y probables tormentas. Neblinas y bancos de niebla.",
+          "evening": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas.",
           "wind": "Sector E 20-40 km/h al sector W 10-20 km/h, periodo de variable 0-10 km/h NW al SW 10-30 km/h.",
           "rain": "Precipitaciones"
         },
@@ -1068,9 +1065,9 @@
           "date": "Sábado 24",
           "min": "12",
           "max": "21",
-          "morning": "Cubierto. Precipitaciones. Neblinas y bancos de niebla.",
-          "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
-          "wind": "Sector S 20-30 km/h, rachas de 40 km/h. Sector S 20-30 km/h, rachas de 40 km/h.",
+          "morning": "Cubierto. Precipitaciones aisladas. Neblinas y bancos de niebla.",
+          "evening": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas.",
+          "wind": "Sector S 20-30 km/h, rachas de 50 km/h. SW al SE 20-30 km/h, rachas de 40 km/h.",
           "rain": "Precipitaciones"
         },
         {
@@ -1078,9 +1075,9 @@
           "min": "9",
           "max": "18",
           "morning": null,
-          "evening": "Probabilidad media de precipitaciones",
+          "evening": "Alta probabilidad de precipitaciones",
           "wind": "—",
-          "rain": "Probabilidad media de precipitaciones",
+          "rain": "Alta probabilidad de precipitaciones",
           "extended": true,
           "weather_code": "4"
         },
@@ -1125,7 +1122,7 @@
         {
           "date": "Jueves 22",
           "min": "13",
-          "max": "23",
+          "max": "21",
           "morning": "Nuboso a cubierto. Neblinas y bancos de niebla.",
           "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
           "wind": "E y NE 20-40 km/h. NE 20-40 km/h, rachas de hasta 50 km/h en zonas costeras. Probables rachas fuertes asociadas a tormentas.",
@@ -1133,36 +1130,36 @@
         },
         {
           "date": "Viernes 23",
-          "min": "12",
-          "max": "23",
-          "morning": "Cubierto. Precipitaciones y probables tormentas. Neblinas y bancos de niebla.",
+          "min": "14",
+          "max": "24",
+          "morning": "Cubierto. Precipitaciones y tormentas. Neblinas y bancos de niebla.",
           "evening": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas.",
           "wind": "Sector E 20-40 km/h al sector W 10-20 km/h. NW al SW 10-20 km/h.",
           "rain": "Precipitaciones"
         },
         {
           "date": "Sábado 24",
-          "min": "12",
+          "min": "13",
           "max": "20",
-          "morning": "Cubierto. Precipitaciones. Neblinas y bancos de niebla.",
-          "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
-          "wind": "Sector S 20-30 km/h, rachas de 40 km/h. Sector S 20-30 km/h, rachas de 40 km/h.",
+          "morning": "Cubierto. Precipitaciones aisladas. Neblinas y bancos de niebla.",
+          "evening": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas.",
+          "wind": "SW al SE 20-30 km/h, rachas de 40 km/h. SE 20-30 km/h, rachas de 40 km/h.",
           "rain": "Precipitaciones"
         },
         {
           "date": "Domingo 25",
-          "min": "9",
+          "min": "10",
           "max": "17",
           "morning": null,
-          "evening": "Probabilidad media de precipitaciones",
+          "evening": "Alta probabilidad de precipitaciones",
           "wind": "—",
-          "rain": "Probabilidad media de precipitaciones",
+          "rain": "Alta probabilidad de precipitaciones",
           "extended": true,
           "weather_code": "4"
         },
         {
           "date": "Lunes 26",
-          "min": "5",
+          "min": "6",
           "max": "19",
           "morning": null,
           "evening": "Baja probabilidad de precipitaciones",
@@ -1201,7 +1198,7 @@
         {
           "date": "Jueves 22",
           "min": "13",
-          "max": "17",
+          "max": "15",
           "morning": "Nuboso a cubierto.",
           "evening": "Nuboso y cubierto. Precipitaciones en la noche",
           "wind": "NE 20-40 km/h. NE 30-40 km/h, rachas de hasta 50 km/h.",
@@ -1211,18 +1208,18 @@
           "date": "Viernes 23",
           "min": "14",
           "max": "17",
-          "morning": "Cubierto. Precipitaciones.",
+          "morning": "Cubierto. Precipitaciones. Neblinas.",
           "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
-          "wind": "NEal sector W 10-30 km/h, periodo de variable 0-10 km/h. W al SW 10-30 km/h.",
+          "wind": "NE 10-30 km/h. NE al SW 10-30 km/h.",
           "rain": "Precipitaciones"
         },
         {
           "date": "Sábado 24",
           "min": "13",
           "max": "15",
-          "morning": "Cubierto. Precipitaciones.",
-          "evening": "Nuboso y cubierto. Baja probabilidad de precipitaciones.",
-          "wind": "Sector S 20-30 km/h, rachas de 50 km/h. Sector S 20-30 km/h, rachas de 40 km/h.",
+          "morning": "Cubierto. Precipitaciones aisladas.",
+          "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
+          "wind": "Sector S 20-30 km/h, rachas de 50 km/h. SE 20-30 km/h, rachas de 40 km/h.",
           "rain": "Precipitaciones"
         }
       ]
@@ -1232,9 +1229,9 @@
     {
       "date": "Jueves 22",
       "min": "12",
-      "max": "23",
+      "max": "22",
       "morning": "Nuboso a cubierto.",
-      "evening": "Nuboso y cubierto. Precipitaciones en la noche",
+      "evening": "Nuboso y cubierto. Precipitaciones y probables tormentas.",
       "wind": "NE 20-30 km/h, rachas de hasta 40 km/h. E y NE 20-40 km/h.",
       "rain": "Precipitaciones"
     },
@@ -1242,7 +1239,7 @@
       "date": "Viernes 23",
       "min": "14",
       "max": "21",
-      "morning": "Cubierto. Precipitaciones.",
+      "morning": "Cubierto. Precipitaciones y probables tormentas. Neblinas.",
       "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
       "wind": "Sector E 20-40 km/h al sector W 10-20 km/h, periodo de variable 0-10 km/h SW y S 10-30 km/h.",
       "rain": "Precipitaciones"
@@ -1251,9 +1248,9 @@
       "date": "Sábado 24",
       "min": "13",
       "max": "18",
-      "morning": "Cubierto. Precipitaciones. Neblinas.",
-      "evening": "Nuboso y cubierto. Baja probabilidad de precipitaciones.",
-      "wind": "Sector S 20-30 km/h, rachas de 50 km/h. Sector S 20-30 km/h, rachas de 40 km/h.",
+      "morning": "Cubierto. Precipitaciones aisladas. Neblinas.",
+      "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
+      "wind": "Sector S 20-30 km/h, rachas de 50 km/h. SW al SE 20-30 km/h, rachas de 40 km/h.",
       "rain": "Precipitaciones"
     },
     {
@@ -1301,5 +1298,5 @@
       "weather_code": "13"
     }
   ],
-  "summary": "Temperaturas de 12° a 23°; con posibilidad de precipitaciones."
+  "summary": "Temperaturas de 12° a 22°; con posibilidad de precipitaciones."
 }
