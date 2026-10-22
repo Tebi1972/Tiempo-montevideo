@@ -1,5 +1,5 @@
 {
-  "updated": "22/10/2026 09:20",
+  "updated": "22/10/2026 09:45",
   "current": {
     "temperature": 17.2,
     "station": "Prado",
@@ -23,12 +23,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-10T02:52:00-03:00",
-    "source_age_hours": 294.47,
+    "source_age_hours": 294.88,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-10-22T09:20-03:00"
+    "checked_at": "2026-10-22T09:45-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -724,7 +724,7 @@
       "days": [
         {
           "date": "Jueves 22",
-          "min": "13",
+          "min": "12",
           "max": "23",
           "morning": "Nuboso a cubierto.",
           "evening": "Nuboso y cubierto. Precipitaciones en la noche",
@@ -800,7 +800,7 @@
       "days": [
         {
           "date": "Jueves 22",
-          "min": "14",
+          "min": "15",
           "max": "26",
           "morning": "Nuboso a cubierto. Desmejorando con precipitaciones y tormentas",
           "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
@@ -952,7 +952,7 @@
       "days": [
         {
           "date": "Jueves 22",
-          "min": "12",
+          "min": "13",
           "max": "23",
           "morning": "Nuboso a cubierto. Desmejorando con precipitaciones y tormentas Neblinas y bancos de niebla.",
           "evening": "Nuboso y cubierto. Precipitaciones y tormentas. Neblinas.",
@@ -1028,7 +1028,7 @@
       "days": [
         {
           "date": "Jueves 22",
-          "min": "13",
+          "min": "12",
           "max": "23",
           "morning": "Nuboso a cubierto. Neblinas.",
           "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
@@ -1180,7 +1180,7 @@
       "days": [
         {
           "date": "Jueves 22",
-          "min": "14",
+          "min": "13",
           "max": "17",
           "morning": "Nuboso a cubierto.",
           "evening": "Nuboso y cubierto. Precipitaciones en la noche",
@@ -1211,7 +1211,7 @@
   "days": [
     {
       "date": "Jueves 22",
-      "min": "13",
+      "min": "12",
       "max": "23",
       "morning": "Nuboso a cubierto.",
       "evening": "Nuboso y cubierto. Precipitaciones en la noche",
@@ -1281,5 +1281,5 @@
       "weather_code": "13"
     }
   ],
-  "summary": "Temperaturas de 13° a 23°; con posibilidad de precipitaciones."
+  "summary": "Temperaturas de 12° a 23°; con posibilidad de precipitaciones."
 }
