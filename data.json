@@ -19,14 +19,31 @@
   },
   "alert": {
     "active": true,
-    "level": "amarilla",
-    "phenomenon": "Tormentas puntualmente fuertes y lluvias abundantes",
+    "level": "naranja",
+    "phenomenon": "Tormentas fuertes y puntualmente severas",
     "probability": "> 75%",
-    "start": "2026-10-22 18:30",
+    "start": "2026-10-22 19:30",
     "end": "2026-10-22 20:30",
-    "description": "El área será afectada por tormentas puntualmente fuertes.\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-    "zones": "Artigas(Todo el departamento), Durazno : Baygorria, Carlos Reyles y Centenario.Flores : Andresito.Paysandú(Todo el departamento), Río Negro : Algorta, Bellaco, El Ombú, Gartental, General Borges, Grecco, Menafra, Nuevo Berlín, Paso de los mellizos, Sarandí de Navarro, Tres Quintas, Villa María y Young.Rivera : Masoller, Paso Ataques y Tranqueras.Salto(Todo el departamento), Tacuarembó : Achar, Arerungua, Balneario Iporá, Cerro Chato, Cuchilla de Peralta, Curtina, La Pedrera, Paso Bonilla, Paso de los Toros, Paso del Cerro, Piedra Sola, Rincón del Bonete, Sauce de Batoví, Tacuarembó y Tambores.",
+    "description": "El área será afectada por tormentas (puntualmente) fuertes y/o severas.\n\nPodrán estar acompañadas por precipitaciones copiosas en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
+    "zones": "Durazno : Baygorria.Paysandú : Beisso, Casa Blanca, Cerro Chato, Chacras de Paysandú, Chapicuy, Colonia Nuevo Paysandú, Constancia, Esperanza, Gallinal, Guayabos, Guichón, Lorenzo Geyres, Merinos, Orgoroso, Paysandú, Piedras Coloradas, Porvenir, Quebracho y Termas de Guaviyú.Río Negro : Algorta, Bellaco, El Ombú, Gartental, General Borges, Grecco, Menafra, Paso de los mellizos, Sarandí de Navarro, Tres Quintas, Villa María y Young.Salto : Albisu, Campo de Todos, Colonia 18 de Julio, Colonia Itapebí, Garibaldi, Itapebí, Puntas de Valentín, Salto, San Antonio y Termas del Daymán.",
     "warnings": [
+      {
+        "level": "naranja",
+        "phenomenon": "Tormentas fuertes y puntualmente severas",
+        "probability": "> 75%",
+        "start": "2026-10-22 19:30",
+        "end": "2026-10-22 20:30",
+        "description": "El área será afectada por tormentas (puntualmente) fuertes y/o severas.\n\nPodrán estar acompañadas por precipitaciones copiosas en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
+        "zones": "Durazno : Baygorria.Paysandú : Beisso, Casa Blanca, Cerro Chato, Chacras de Paysandú, Chapicuy, Colonia Nuevo Paysandú, Constancia, Esperanza, Gallinal, Guayabos, Guichón, Lorenzo Geyres, Merinos, Orgoroso, Paysandú, Piedras Coloradas, Porvenir, Quebracho y Termas de Guaviyú.Río Negro : Algorta, Bellaco, El Ombú, Gartental, General Borges, Grecco, Menafra, Paso de los mellizos, Sarandí de Navarro, Tres Quintas, Villa María y Young.Salto : Albisu, Campo de Todos, Colonia 18 de Julio, Colonia Itapebí, Garibaldi, Itapebí, Puntas de Valentín, Salto, San Antonio y Termas del Daymán.",
+        "risk": {
+          "riesgoViento": 1,
+          "riesgoLluvia": 3,
+          "riesgoTormenta": 3,
+          "riesgoVisibilidad": 1,
+          "riesgoCalor": 1,
+          "riesgoFrio": 1
+        }
+      },
       {
         "level": "amarilla",
         "phenomenon": "Tormentas puntualmente fuertes y lluvias abundantes",
@@ -34,7 +51,7 @@
         "start": "2026-10-22 18:30",
         "end": "2026-10-22 20:30",
         "description": "El área será afectada por tormentas puntualmente fuertes.\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Artigas(Todo el departamento), Durazno : Baygorria, Carlos Reyles y Centenario.Flores : Andresito.Paysandú(Todo el departamento), Río Negro : Algorta, Bellaco, El Ombú, Gartental, General Borges, Grecco, Menafra, Nuevo Berlín, Paso de los mellizos, Sarandí de Navarro, Tres Quintas, Villa María y Young.Rivera : Masoller, Paso Ataques y Tranqueras.Salto(Todo el departamento), Tacuarembó : Achar, Arerungua, Balneario Iporá, Cerro Chato, Cuchilla de Peralta, Curtina, La Pedrera, Paso Bonilla, Paso de los Toros, Paso del Cerro, Piedra Sola, Rincón del Bonete, Sauce de Batoví, Tacuarembó y Tambores.",
+        "zones": "Artigas(Todo el departamento), Durazno : Carlos Reyles y Centenario.Flores : Andresito.Paysandú : Tambores.Río Negro : Nuevo Berlín.Rivera : Masoller, Paso Ataques y Tranqueras.Salto : Arapey, Belén, Biassini, Cayetano, Cerro de Vera, Constitución, Fernández, Lluveras, Migliaro, Quintana, Rincón de Valentín, Sarandí de Arapey, Saucedo y Termas del Arapey.Tacuarembó : Achar, Arerungua, Balneario Iporá, Cerro Chato, Cuchilla de Peralta, Curtina, La Pedrera, Paso Bonilla, Paso de los Toros, Paso del Cerro, Piedra Sola, Rincón del Bonete, Sauce de Batoví, Tacuarembó y Tambores.",
         "risk": {
           "riesgoViento": 1,
           "riesgoLluvia": 2,
@@ -45,17 +62,17 @@
         }
       }
     ],
-    "updated": "2026-10-22 18:25",
-    "pdf": "adv1792704430729.pdf",
+    "updated": "2026-10-22 19:30",
+    "pdf": "adv1792708229442.pdf",
     "source": "inumet_alerta_object_v4",
-    "source_timestamp": "2026-10-22T18:30:00-03:00",
-    "source_age_hours": 0.84,
+    "source_timestamp": "2026-10-22T19:30:00-03:00",
+    "source_age_hours": 0.26,
     "homepage_says_active": true,
     "data_unavailable": false
   },
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-10-22T19:20-03:00"
+    "checked_at": "2026-10-22T19:45-03:00"
   },
   "locations": {
     "montevideo_prado": {
