@@ -1,5 +1,5 @@
 {
-  "updated": "22/10/2026 14:20",
+  "updated": "22/10/2026 14:48",
   "current": {
     "temperature": 21.4,
     "station": "Prado",
@@ -22,19 +22,19 @@
     "level": "amarilla",
     "phenomenon": "Tormentas puntualmente fuertes y lluvias abundantes",
     "probability": "> 75%",
-    "start": "2026-10-22 12:45",
-    "end": "2026-10-22 14:45",
+    "start": "2026-10-22 14:45",
+    "end": "2026-10-22 16:45",
     "description": "El área será afectada por tormentas puntualmente fuertes.\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-    "zones": "Artigas(Todo el departamento), Paysandú(Todo el departamento), Río Negro : Algorta, Bellaco, El Ombú, Fray Bentos, Gartental, General Borges, Grecco, Los Arrayanes, Menafra, Nuevo Berlín, Paso de los mellizos, Sarandí de Navarro, Tres Quintas, Villa María y Young.Rivera : Cerros de la Calera, Lagos del Norte, Masoller, Paso Ataques y Tranqueras.Salto(Todo el departamento), Soriano : Mercedes y Villa Soriano.Tacuarembó : Arerungua, Balneario Iporá, Cuchilla de Peralta, Curtina, La Pedrera, Paso Bonilla, Paso del Cerro, Piedra Sola, Sauce de Batoví, Tacuarembó y Tambores.",
+    "zones": "Artigas(Todo el departamento), Rivera : Masoller, Paso Ataques y Tranqueras.Salto : Arapey, Belén, Biassini, Cayetano, Cerro de Vera, Colonia Itapebí, Constitución, Fernández, Itapebí, Lluveras, Migliaro, Puntas de Valentín, Quintana, Rincón de Valentín, Sarandí de Arapey, Saucedo y Termas del Arapey.Tacuarembó : Arerungua y Paso del Cerro.",
     "warnings": [
       {
         "level": "amarilla",
         "phenomenon": "Tormentas puntualmente fuertes y lluvias abundantes",
         "probability": "> 75%",
-        "start": "2026-10-22 12:45",
-        "end": "2026-10-22 14:45",
+        "start": "2026-10-22 14:45",
+        "end": "2026-10-22 16:45",
         "description": "El área será afectada por tormentas puntualmente fuertes.\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Artigas(Todo el departamento), Paysandú(Todo el departamento), Río Negro : Algorta, Bellaco, El Ombú, Fray Bentos, Gartental, General Borges, Grecco, Los Arrayanes, Menafra, Nuevo Berlín, Paso de los mellizos, Sarandí de Navarro, Tres Quintas, Villa María y Young.Rivera : Cerros de la Calera, Lagos del Norte, Masoller, Paso Ataques y Tranqueras.Salto(Todo el departamento), Soriano : Mercedes y Villa Soriano.Tacuarembó : Arerungua, Balneario Iporá, Cuchilla de Peralta, Curtina, La Pedrera, Paso Bonilla, Paso del Cerro, Piedra Sola, Sauce de Batoví, Tacuarembó y Tambores.",
+        "zones": "Artigas(Todo el departamento), Rivera : Masoller, Paso Ataques y Tranqueras.Salto : Arapey, Belén, Biassini, Cayetano, Cerro de Vera, Colonia Itapebí, Constitución, Fernández, Itapebí, Lluveras, Migliaro, Puntas de Valentín, Quintana, Rincón de Valentín, Sarandí de Arapey, Saucedo y Termas del Arapey.Tacuarembó : Arerungua y Paso del Cerro.",
         "risk": {
           "riesgoViento": 1,
           "riesgoLluvia": 2,
@@ -45,17 +45,17 @@
         }
       }
     ],
-    "updated": "2026-10-22 12:45",
-    "pdf": "adv1792683908488.pdf",
+    "updated": "2026-10-22 14:40",
+    "pdf": "adv1792691140440.pdf",
     "source": "inumet_alerta_object_v4",
-    "source_timestamp": "2026-10-22T12:45:00-03:00",
-    "source_age_hours": 1.59,
+    "source_timestamp": "2026-10-22T14:45:00-03:00",
+    "source_age_hours": 0.05,
     "homepage_says_active": true,
     "data_unavailable": false
   },
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-10-22T14:20-03:00"
+    "checked_at": "2026-10-22T14:48-03:00"
   },
   "locations": {
     "montevideo_prado": {
