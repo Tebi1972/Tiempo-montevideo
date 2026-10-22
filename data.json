@@ -49,13 +49,13 @@
     "pdf": "adv1792696669530.pdf",
     "source": "inumet_alerta_object_v4",
     "source_timestamp": "2026-10-22T14:45:00-03:00",
-    "source_age_hours": 1.59,
+    "source_age_hours": 1.76,
     "homepage_says_active": true,
     "data_unavailable": false
   },
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-10-22T16:20-03:00"
+    "checked_at": "2026-10-22T16:30-03:00"
   },
   "locations": {
     "montevideo_prado": {
