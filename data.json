@@ -1,5 +1,5 @@
 {
-  "updated": "23/10/2026 19:20",
+  "updated": "23/10/2026 19:48",
   "current": {
     "temperature": 20.0,
     "station": "Prado",
@@ -23,12 +23,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-23T00:00:00-03:00",
-    "source_age_hours": 19.34,
+    "source_age_hours": 19.81,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-10-23T19:20-03:00"
+    "checked_at": "2026-10-23T19:48-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -799,7 +799,7 @@
           "min": "16",
           "max": "28",
           "morning": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Neblinas y bancos de niebla.",
-          "evening": "Nuboso y cubierto. Precipitaciones y tormentas.",
+          "evening": "Nuboso y cubierto. Precipitaciones aisladas y baja probabilidad de tormentas.",
           "wind": "Sector E al sector W 10-30 km/h. Períodos de variables 0-10 km/h. Sector W al S 10-30 km/h. Períodos de variables 0-10 km/h.",
           "rain": "Precipitaciones"
         },
@@ -875,7 +875,7 @@
           "min": "15",
           "max": "27",
           "morning": "Nuboso y cubierto. Precipitaciones aisladas y baja probabilidad de tormentas. Neblinas y bancos de niebla.",
-          "evening": "Nuboso y cubierto. Precipitaciones y tormentas. Neblinas.",
+          "evening": "Nuboso y cubierto. Precipitaciones y probables tormentas. Neblinas.",
           "wind": "Sector E 20-40 km/h al sector W 10-20 km/h. NW al SW 10-20 km/h.",
           "rain": "Precipitaciones"
         },
@@ -951,7 +951,7 @@
           "min": "15",
           "max": "25",
           "morning": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas y bancos de niebla.",
-          "evening": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Neblinas.",
+          "evening": "Nuboso y cubierto, períodos de algo nuboso. Precipitaciones aisladas. Neblinas.",
           "wind": "Sector E 20-40 km/h al sector W 10-20 km/h, periodos de variable 0-10 km/h SW y S 10-30 km/h.",
           "rain": "Precipitaciones"
         },
@@ -1027,7 +1027,7 @@
           "min": "14",
           "max": "24",
           "morning": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas y bancos de niebla.",
-          "evening": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas.",
+          "evening": "Nuboso y cubierto, períodos de algo nuboso. Precipitaciones aisladas. Neblinas.",
           "wind": "Sector E 20-40 km/h al sector W 10-20 km/h, periodos de variable 0-10 km/h NW al SW 10-30 km/h.",
           "rain": "Precipitaciones"
         },
@@ -1103,7 +1103,7 @@
           "min": "15",
           "max": "24",
           "morning": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas y bancos de niebla.",
-          "evening": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas.",
+          "evening": "Nuboso y cubierto. Precipitaciones aisladas y baja probabilidad de tormentas. Neblinas.",
           "wind": "Sector E 20-40 km/h al sector W 10-20 km/h. NW al SW 10-20 km/h.",
           "rain": "Precipitaciones"
         },
@@ -1179,7 +1179,7 @@
           "min": "14",
           "max": "22",
           "morning": "Nuboso y cubierto. Precipitaciones aisladas. Neblinas.",
-          "evening": "Nuboso y cubierto. Precipitaciones aisladas.",
+          "evening": "Nuboso.",
           "wind": "NE 10-30 km/h. NE al SW 10-30 km/h.",
           "rain": "Precipitaciones"
         },
