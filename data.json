@@ -1,5 +1,5 @@
 {
-  "updated": "24/10/2026 08:20",
+  "updated": "24/10/2026 08:46",
   "current": {
     "temperature": 14.4,
     "station": "Prado",
@@ -19,27 +19,16 @@
   },
   "alert": {
     "active": false,
-    "level": "amarilla",
-    "phenomenon": "Tormentas puntualmente fuertes",
-    "probability": "> 75%",
-    "start": "2026-10-24 05:50",
-    "end": "2026-10-24 07:50",
-    "description": "El área será afectada por tormentas (puntualmente) fuertes.\n\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-    "zones": "Artigas(Todo el departamento), Salto : Arapey, Belén, Lluveras, Migliaro, Rincón de Valentín, Saucedo y Termas del Arapey.",
-    "warnings": [],
-    "updated": "2026-10-24 05:50",
-    "pdf": "adv1792832104364.pdf",
-    "source": "inumet_alerta_object_v4",
-    "source_timestamp": "2026-10-24T05:50:00-03:00",
-    "source_age_hours": 1.51,
-    "homepage_says_active": true,
     "data_unavailable": true,
-    "previous_warning_expired": true,
-    "check_error": true
+    "homepage_says_active": true,
+    "source": "inumet_sources_out_of_sync",
+    "source_timestamp": "2026-10-24T08:00:00-03:00",
+    "source_age_hours": 0.78,
+    "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-10-24T08:20-03:00"
+    "checked_at": "2026-10-24T08:46-03:00"
   },
   "locations": {
     "montevideo_prado": {
