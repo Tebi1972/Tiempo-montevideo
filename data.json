@@ -1,5 +1,5 @@
 {
-  "updated": "25/10/2026 21:20",
+  "updated": "25/10/2026 22:01",
   "current": {
     "temperature": 11.8,
     "station": "Prado",
@@ -23,12 +23,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-24T08:00:00-03:00",
-    "source_age_hours": 37.36,
+    "source_age_hours": 38.02,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-10-25T21:21-03:00"
+    "checked_at": "2026-10-25T22:01-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -53,7 +53,7 @@
       "pressure_hpa": 1022.6,
       "dewpoint_c": 8.1,
       "feels_like_c": 10.0,
-      "precipitation_recent_mm": 0.2,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 211,
       "forecast_zone": "M"
@@ -66,7 +66,7 @@
       "longitude": -56.012876,
       "observation_time": "2026-10-25T21:00:00.000-03:00",
       "condition": "cloudy",
-      "condition_time": "2026-10-25T23:00:00Z",
+      "condition_time": null,
       "condition_source": "observed_dynamic_sky",
       "present_weather": 4,
       "cloud_amount": "cub",
@@ -232,7 +232,7 @@
       "pressure_hpa": 1022.2,
       "dewpoint_c": 7.5,
       "feels_like_c": 7.7,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 138,
       "forecast_zone": "E"
@@ -534,33 +534,33 @@
       "pressure_hpa": 1020.8,
       "dewpoint_c": 10.8,
       "feels_like_c": 9.9,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 1693,
       "forecast_zone": "NE"
     },
     "san_jacinto": {
-      "temperature": 10.5,
+      "temperature": null,
       "station": "San Jacinto",
       "wigos": "0-858-0-A000000000000002",
       "latitude": -34.5145,
       "longitude": -55.8464,
-      "observation_time": "2026-10-25T23:00:00Z",
+      "observation_time": null,
       "condition": "neutral",
-      "condition_time": "2026-10-25T23:00:00Z",
+      "condition_time": null,
       "condition_source": null,
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 14.0,
+      "wind_speed_kmh": null,
       "wind_direction_deg": null,
       "visibility_km": null,
-      "humidity": 87.0,
-      "pressure_hpa": 1022.3,
-      "dewpoint_c": 8.4,
-      "feels_like_c": 7.4,
+      "humidity": null,
+      "pressure_hpa": null,
+      "dewpoint_c": null,
+      "feels_like_c": null,
       "precipitation_recent_mm": null,
-      "observation_source": "synop",
+      "observation_source": null,
       "dynamic_station_id": null,
       "forecast_zone": "M"
     },
