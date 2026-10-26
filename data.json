@@ -1,5 +1,5 @@
 {
-  "updated": "26/10/2026 17:14",
+  "updated": "26/10/2026 17:20",
   "current": {
     "temperature": 13.9,
     "station": "Prado",
@@ -23,12 +23,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-24T08:00:00-03:00",
-    "source_age_hours": 57.25,
+    "source_age_hours": 57.34,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-10-26T17:14-03:00"
+    "checked_at": "2026-10-26T17:20-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -325,32 +325,30 @@
       "forecast_zone": "NE"
     },
     "mercedes": {
-      "temperature": 17.2,
+      "temperature": 18.0,
       "station": "Mercedes",
       "wigos": "0-20000-0-86490",
       "latitude": -33.2506,
       "longitude": -58.0692,
       "observation_time": "2026-10-26T17:00:00.000-03:00",
-      "condition": "cloudy",
+      "condition": "partly",
       "condition_time": "2026-10-26T20:00:00Z",
-      "condition_source": "observed_synop",
-      "present_weather": null,
-      "cloud_amount": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
+      "condition_source": "observed_dynamic_sky",
+      "present_weather": 13,
+      "cloud_amount": "nub",
       "cloud_types": [
-        "ALTOSTRATUS (AS)",
-        "CIRRUS (CI)",
-        "CIRRUS (CI)"
+        "7CuSc700"
       ],
-      "wind_speed_kmh": 8.0,
-      "wind_direction_deg": 101.0,
-      "visibility_km": null,
-      "humidity": 53.0,
-      "pressure_hpa": 1020.2,
-      "dewpoint_c": 7.5,
-      "feels_like_c": 15.1,
+      "wind_speed_kmh": 7.0,
+      "wind_direction_deg": 120.0,
+      "visibility_km": 18.0,
+      "humidity": 51.0,
+      "pressure_hpa": 1020.0,
+      "dewpoint_c": 7.7,
+      "feels_like_c": 16.1,
       "precipitation_recent_mm": 0.0,
       "observation_source": "inumet_dynamic",
-      "dynamic_station_id": 609,
+      "dynamic_station_id": 162,
       "forecast_zone": "SO"
     },
     "paysandu": {
