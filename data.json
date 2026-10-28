@@ -1,5 +1,5 @@
 {
-  "updated": "27/10/2026 21:20",
+  "updated": "27/10/2026 21:51",
   "current": {
     "temperature": 13.0,
     "station": "Prado",
@@ -23,12 +23,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-10-24T08:00:00-03:00",
-    "source_age_hours": 85.34,
+    "source_age_hours": 85.87,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-10-27T21:20-03:00"
+    "checked_at": "2026-10-27T21:51-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -552,13 +552,13 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 9.0,
+      "wind_speed_kmh": null,
       "wind_direction_deg": null,
       "visibility_km": null,
       "humidity": 85.0,
       "pressure_hpa": 1022.4,
       "dewpoint_c": 9.8,
-      "feels_like_c": 10.6,
+      "feels_like_c": null,
       "precipitation_recent_mm": null,
       "observation_source": "synop",
       "dynamic_station_id": null,
