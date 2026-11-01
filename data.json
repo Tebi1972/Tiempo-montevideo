@@ -20,24 +20,24 @@
   "alert": {
     "active": true,
     "level": "amarilla",
-    "phenomenon": "Tormentas puntualmente fuertes",
-    "probability": "50 - 75%",
-    "start": "2026-11-01 13:55",
-    "end": "2026-11-01 17:00",
+    "phenomenon": "Tormentas puntualmente fuertes y lluvias abundantes",
+    "probability": "> 75%",
+    "start": "2026-11-01 15:30",
+    "end": "2026-11-01 18:00",
     "description": "El área será afectada por tormentas (puntualmente) fuertes.\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-    "zones": "Canelones(Todo el departamento), Florida : 25 de Agosto, 25 de Mayo, Cardal, Chamizo, Florida, Fray Marcos, Independencia, La Cruz, Mendoza, Mendoza Chico y San Gabriel.Lavalleja : Estación Solís, Gaetán, La Coronilla, San Francisco de las Sierras, Solís de Mataojo y Villa del Rosario.Maldonado : Bella Vista, Cerros Azules, Gerona, Gregorio Aznárez, Las Flores, Nueva Carrara, Pan de Azúcar, Piriápolis, Playa Grande, Playa Hermosa, Playa Verde, Pueblo Solís y Punta Colorada.Montevideo(Todo el departamento), San José : Capurro, Ciudad del Plata, Juan Soler, Libertad, Rodríguez y San José de Mayo.",
+    "zones": "Canelones(Todo el departamento), Flores : Cerro Colorado, Ismael Cortinas, La Casilla y Trinidad.Florida : 25 de Agosto, 25 de Mayo, Cardal, Chamizo, Florida, Fray Marcos, Independencia, La Cruz, Mendoza y Mendoza Chico.Lavalleja : Estación Solís y Solís de Mataojo.Maldonado : Bella Vista, Canteras de Marelli, Cerro Pelado, Cerros Azules, Gerona, Gregorio Aznárez, La Capuera, Las Flores, Maldonado, Nueva Carrara, Ocean Park, Pan de Azúcar, Piriápolis, Playa Grande, Playa Hermosa, Playa Verde, Pueblo Solís, Punta Ballena, Punta Colorada, Punta Negra, Punta del Este y Sauce de Portezuelo.Montevideo(Todo el departamento), San José : Capurro, Ciudad del Plata, Ecilda Paullier, Juan Soler, Kiyú-Ordeig, Libertad, Mal Abrigo, Puntas de Valdez, Rafael Perazza, Rodríguez, San José de Mayo y Villa María.",
     "warnings": [
       {
         "level": "amarilla",
-        "phenomenon": "Tormentas puntualmente fuertes",
-        "probability": "50 - 75%",
-        "start": "2026-11-01 13:55",
-        "end": "2026-11-01 17:00",
+        "phenomenon": "Tormentas puntualmente fuertes y lluvias abundantes",
+        "probability": "> 75%",
+        "start": "2026-11-01 15:30",
+        "end": "2026-11-01 18:00",
         "description": "El área será afectada por tormentas (puntualmente) fuertes.\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Canelones(Todo el departamento), Florida : 25 de Agosto, 25 de Mayo, Cardal, Chamizo, Florida, Fray Marcos, Independencia, La Cruz, Mendoza, Mendoza Chico y San Gabriel.Lavalleja : Estación Solís, Gaetán, La Coronilla, San Francisco de las Sierras, Solís de Mataojo y Villa del Rosario.Maldonado : Bella Vista, Cerros Azules, Gerona, Gregorio Aznárez, Las Flores, Nueva Carrara, Pan de Azúcar, Piriápolis, Playa Grande, Playa Hermosa, Playa Verde, Pueblo Solís y Punta Colorada.Montevideo(Todo el departamento), San José : Capurro, Ciudad del Plata, Juan Soler, Libertad, Rodríguez y San José de Mayo.",
+        "zones": "Canelones(Todo el departamento), Flores : Cerro Colorado, Ismael Cortinas, La Casilla y Trinidad.Florida : 25 de Agosto, 25 de Mayo, Cardal, Chamizo, Florida, Fray Marcos, Independencia, La Cruz, Mendoza y Mendoza Chico.Lavalleja : Estación Solís y Solís de Mataojo.Maldonado : Bella Vista, Canteras de Marelli, Cerro Pelado, Cerros Azules, Gerona, Gregorio Aznárez, La Capuera, Las Flores, Maldonado, Nueva Carrara, Ocean Park, Pan de Azúcar, Piriápolis, Playa Grande, Playa Hermosa, Playa Verde, Pueblo Solís, Punta Ballena, Punta Colorada, Punta Negra, Punta del Este y Sauce de Portezuelo.Montevideo(Todo el departamento), San José : Capurro, Ciudad del Plata, Ecilda Paullier, Juan Soler, Kiyú-Ordeig, Libertad, Mal Abrigo, Puntas de Valdez, Rafael Perazza, Rodríguez, San José de Mayo y Villa María.",
         "risk": {
           "riesgoViento": 1,
-          "riesgoLluvia": 1,
+          "riesgoLluvia": 2,
           "riesgoTormenta": 2,
           "riesgoVisibilidad": 1,
           "riesgoCalor": 1,
@@ -45,17 +45,17 @@
         }
       }
     ],
-    "updated": "2026-11-01 13:55",
-    "pdf": "adv1793552096427.pdf",
+    "updated": "2026-11-01 15:30",
+    "pdf": "adv1793557825967.pdf",
     "source": "inumet_alerta_object_v4",
-    "source_timestamp": "2026-11-01T13:55:00-03:00",
-    "source_age_hours": 1.42,
+    "source_timestamp": "2026-11-01T15:30:00-03:00",
+    "source_age_hours": 0.71,
     "homepage_says_active": true,
     "data_unavailable": false
   },
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-11-01T15:20-03:00"
+    "checked_at": "2026-11-01T16:12-03:00"
   },
   "locations": {
     "montevideo_prado": {
