@@ -1,5 +1,5 @@
 {
-  "updated": "01/11/2026 16:20",
+  "updated": "01/11/2026 17:02",
   "current": {
     "temperature": 16.8,
     "station": "Prado",
@@ -49,13 +49,13 @@
     "pdf": "adv1793557825967.pdf",
     "source": "inumet_alerta_object_v4",
     "source_timestamp": "2026-11-01T15:30:00-03:00",
-    "source_age_hours": 0.84,
+    "source_age_hours": 1.54,
     "homepage_says_active": true,
     "data_unavailable": false
   },
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-11-01T16:20-03:00"
+    "checked_at": "2026-11-01T17:02-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -80,7 +80,7 @@
       "pressure_hpa": 1011.9,
       "dewpoint_c": 16.2,
       "feels_like_c": 14.6,
-      "precipitation_recent_mm": 10.8,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 211,
       "forecast_zone": "M"
@@ -134,7 +134,7 @@
       "pressure_hpa": 1010.0,
       "dewpoint_c": 15.5,
       "feels_like_c": 27.4,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 16,
       "forecast_zone": "NW"
@@ -186,7 +186,7 @@
       "pressure_hpa": 1010.6,
       "dewpoint_c": 17.6,
       "feels_like_c": 23.2,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 66,
       "forecast_zone": "SO"
@@ -213,7 +213,7 @@
       "pressure_hpa": 1010.2,
       "dewpoint_c": 12.8,
       "feels_like_c": 24.1,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 96,
       "forecast_zone": "C"
@@ -240,7 +240,7 @@
       "pressure_hpa": 1010.3,
       "dewpoint_c": 16.1,
       "feels_like_c": 26.8,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 110,
       "forecast_zone": "C"
@@ -267,7 +267,7 @@
       "pressure_hpa": 1010.4,
       "dewpoint_c": 17.4,
       "feels_like_c": 27.0,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 138,
       "forecast_zone": "E"
@@ -319,7 +319,7 @@
       "pressure_hpa": 1011.2,
       "dewpoint_c": 15.8,
       "feels_like_c": 16.5,
-      "precipitation_recent_mm": 14.9,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 159,
       "forecast_zone": "M"
@@ -346,7 +346,7 @@
       "pressure_hpa": 1011.7,
       "dewpoint_c": 17.3,
       "feels_like_c": 27.2,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 160,
       "forecast_zone": "NE"
@@ -373,7 +373,7 @@
       "pressure_hpa": 1009.5,
       "dewpoint_c": 15.7,
       "feels_like_c": 26.6,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 162,
       "forecast_zone": "SO"
@@ -385,16 +385,12 @@
       "latitude": -32.381,
       "longitude": -58.0312,
       "observation_time": "2026-11-01T16:00:00.000-03:00",
-      "condition": "cloudy",
+      "condition": "neutral",
       "condition_time": "2026-11-01T19:00:00Z",
-      "condition_source": "observed_synop",
+      "condition_source": null,
       "present_weather": null,
-      "cloud_amount": "7 OKTAS OR MORE, BUT NOT 8 OKTAS",
-      "cloud_types": [
-        "ALTOSTRATUS (AS)",
-        "CIRROSTRATUS (CS)",
-        "ALTOSTRATUS (AS)"
-      ],
+      "cloud_amount": null,
+      "cloud_types": [],
       "wind_speed_kmh": 9.0,
       "wind_direction_deg": 11.0,
       "visibility_km": null,
@@ -414,16 +410,12 @@
       "latitude": -34.9689,
       "longitude": -54.9512,
       "observation_time": "2026-11-01T16:00:00.000-03:00",
-      "condition": "cloudy",
+      "condition": "neutral",
       "condition_time": "2026-11-01T19:00:00Z",
-      "condition_source": "observed_synop",
+      "condition_source": null,
       "present_weather": null,
-      "cloud_amount": "8 OKTAS",
-      "cloud_types": [
-        "CIRROSTRATUS (CS)",
-        "STRATUS (ST)",
-        "CUMULUS (CU)"
-      ],
+      "cloud_amount": null,
+      "cloud_types": [],
       "wind_speed_kmh": 12.0,
       "wind_direction_deg": 115.0,
       "visibility_km": null,
@@ -458,7 +450,7 @@
       "pressure_hpa": 1011.6,
       "dewpoint_c": 18.3,
       "feels_like_c": 21.5,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 236,
       "forecast_zone": "E"
@@ -485,7 +477,7 @@
       "pressure_hpa": 1009.3,
       "dewpoint_c": 15.0,
       "feels_like_c": 25.9,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 239,
       "forecast_zone": "NW"
@@ -589,7 +581,7 @@
       "pressure_hpa": 1011.3,
       "dewpoint_c": 14.6,
       "feels_like_c": 24.5,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 1693,
       "forecast_zone": "NE"
