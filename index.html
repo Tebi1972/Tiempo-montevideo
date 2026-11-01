@@ -3275,6 +3275,85 @@ function compactRainText(value) {
    CARGAR DATA.JSON
    ========================================== */
 
+
+/* Respaldo independiente de datos meteorológicos: GitHub principal y Cloudflare alternativo. */
+const TIEMPO_BACKUP_URL = "https://tiempo-uruguay-backup.efarat.workers.dev/";
+const TIEMPO_MAX_AGE_MS = 95 * 60 * 1000;
+function tiempoFechaActualizacion(data) {
+  const m = typeof data?.updated === "string" &&
+    data.updated.match(/^(\d{2})\/(\d{2})\/(\d{4})\s+(\d{2}):(\d{2})$/);
+  if (!m) return NaN;
+  const value = Date.parse(m[3]+"-"+m[2]+"-"+m[1]+"T"+m[4]+":"+m[5]+":00-03:00");
+  return Number.isFinite(value) ? value : NaN;
+}
+function tiempoFechaObservacion(data) {
+  const value = Date.parse(data?.current?.observation_time || "");
+  return Number.isFinite(value) ? value : NaN;
+}
+function tiempoDatosValidos(data) {
+  return !!(data && typeof data === "object" &&
+    Number.isFinite(tiempoFechaActualizacion(data)) &&
+    Number.isFinite(tiempoFechaObservacion(data)) &&
+    data.current && typeof data.current === "object" &&
+    data.locations && typeof data.locations === "object" &&
+    Object.keys(data.locations).length > 0 &&
+    data.forecasts && typeof data.forecasts === "object" &&
+    Object.keys(data.forecasts).length > 0 &&
+    Array.isArray(data.days) && data.days.length > 0);
+}
+const TIEMPO_MAX_OBSERVACION_MS = 120 * 60 * 1000;
+function tiempoDatosRecientes(data) {
+  const ageUpdate = Date.now() - tiempoFechaActualizacion(data);
+  const ageObservation = Date.now() - tiempoFechaObservacion(data);
+  return ageUpdate >= -5 * 60000 && ageUpdate <= TIEMPO_MAX_AGE_MS &&
+    ageObservation >= -5 * 60000 && ageObservation <= TIEMPO_MAX_OBSERVACION_MS;
+}
+async function tiempoLeerFuente(url) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12000);
+  try {
+    const response = await fetch(url, {cache:"no-store",signal:controller.signal});
+    if (!response.ok) throw new Error("HTTP "+response.status);
+    const data = await response.json();
+    if (!tiempoDatosValidos(data)) throw new Error("Datos meteorológicos incompletos");
+    return data;
+  } finally { clearTimeout(timeout); }
+}
+async function tiempoObtenerDatos() {
+  let principal = null, respaldo = null;
+  try {
+    principal = await tiempoLeerFuente("data.json?v="+Date.now());
+    if (tiempoDatosRecientes(principal))
+      return {data:principal,fuente:"GitHub",antiguos:false};
+  } catch (error) { console.warn("Fuente principal:",error); }
+  try {
+    respaldo = await tiempoLeerFuente(TIEMPO_BACKUP_URL+"?v="+Date.now());
+  } catch (error) { console.warn("Respaldo Cloudflare:",error); }
+  const opciones = [
+    ...(principal ? [{data:principal,fuente:"GitHub"}] : []),
+    ...(respaldo ? [{data:respaldo,fuente:"Cloudflare"}] : [])
+  ];
+  if (!opciones.length) throw new Error("No hay datos disponibles en GitHub ni Cloudflare");
+  opciones.sort((a,b)=>tiempoFechaObservacion(b.data)-tiempoFechaObservacion(a.data) ||
+    tiempoFechaActualizacion(b.data)-tiempoFechaActualizacion(a.data));
+  return {...opciones[0],antiguos:!tiempoDatosRecientes(opciones[0].data)};
+}
+function tiempoMostrarFuente(fuente, antiguos) {
+  const updated = document.getElementById("updated");
+  if (!updated) return;
+  const old = document.getElementById("tiempoFuenteAviso");
+  if (old) old.remove();
+  if (antiguos) {
+    const aviso = document.createElement("span");
+    aviso.id = "tiempoFuenteAviso";
+    aviso.setAttribute("role","status");
+    aviso.style.cssText = "display:block;font-weight:600;margin-top:4px";
+    aviso.textContent = "Información meteorológica desactualizada. Consultá INUMET.";
+    updated.insertAdjacentElement("afterend", aviso);
+  }
+  updated.title = "Datos desde "+fuente;
+}
+
 async function load(options = {}) {
 
   const silent = Boolean(options && options.silent);
@@ -3282,24 +3361,7 @@ async function load(options = {}) {
   try {
 
 
-    const response =
-      await fetch(
-        "data.json?v=" +
-        Date.now(),
-        {
-          cache:"no-store"
-        }
-      );
-
-
-    if (!response.ok)
-      throw new Error(
-        "No se pudo leer data.json"
-      );
-
-
-    const data =
-      await response.json();
+    const {data,fuente,antiguos} = await tiempoObtenerDatos();
 
     lastWeatherData = data;
     populateLocationSelector(data);
@@ -3348,6 +3410,8 @@ async function load(options = {}) {
     ).textContent =
 
       "Actualizado: " + data.updated;
+
+    tiempoMostrarFuente(fuente, antiguos);
 
 
     /* ADVERTENCIA OFICIAL */
