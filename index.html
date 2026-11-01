@@ -3284,16 +3284,16 @@ function tiempoFechaActualizacion(data) {
     data.updated.match(/^(\d{2})\/(\d{2})\/(\d{4})\s+(\d{2}):(\d{2})$/);
   if (!m) return NaN;
   const value = Date.parse(m[3]+"-"+m[2]+"-"+m[1]+"T"+m[4]+":"+m[5]+":00-03:00");
-  if (!Number.isFinite(value)) return NaN;
-  const d = new Date(value - 3 * 3600000);
-  if (d.getUTCFullYear()!==+m[3] || d.getUTCMonth()+1!==+m[2] ||
-      d.getUTCDate()!==+m[1] || d.getUTCHours()!==+m[4] ||
-      d.getUTCMinutes()!==+m[5]) return NaN;
-  return value;
+  return Number.isFinite(value) ? value : NaN;
+}
+function tiempoFechaObservacion(data) {
+  const value = Date.parse(data?.current?.observation_time || "");
+  return Number.isFinite(value) ? value : NaN;
 }
 function tiempoDatosValidos(data) {
   return !!(data && typeof data === "object" &&
     Number.isFinite(tiempoFechaActualizacion(data)) &&
+    Number.isFinite(tiempoFechaObservacion(data)) &&
     data.current && typeof data.current === "object" &&
     data.locations && typeof data.locations === "object" &&
     Object.keys(data.locations).length > 0 &&
@@ -3301,9 +3301,12 @@ function tiempoDatosValidos(data) {
     Object.keys(data.forecasts).length > 0 &&
     Array.isArray(data.days) && data.days.length > 0);
 }
+const TIEMPO_MAX_OBSERVACION_MS = 120 * 60 * 1000;
 function tiempoDatosRecientes(data) {
-  const age = Date.now() - tiempoFechaActualizacion(data);
-  return age >= -5 * 60 * 1000 && age <= TIEMPO_MAX_AGE_MS;
+  const ageUpdate = Date.now() - tiempoFechaActualizacion(data);
+  const ageObservation = Date.now() - tiempoFechaObservacion(data);
+  return ageUpdate >= -5 * 60000 && ageUpdate <= TIEMPO_MAX_AGE_MS &&
+    ageObservation >= -5 * 60000 && ageObservation <= TIEMPO_MAX_OBSERVACION_MS;
 }
 async function tiempoLeerFuente(url) {
   const controller = new AbortController();
@@ -3331,7 +3334,8 @@ async function tiempoObtenerDatos() {
     ...(respaldo ? [{data:respaldo,fuente:"Cloudflare"}] : [])
   ];
   if (!opciones.length) throw new Error("No hay datos disponibles en GitHub ni Cloudflare");
-  opciones.sort((a,b)=>tiempoFechaActualizacion(b.data)-tiempoFechaActualizacion(a.data));
+  opciones.sort((a,b)=>tiempoFechaObservacion(b.data)-tiempoFechaObservacion(a.data) ||
+    tiempoFechaActualizacion(b.data)-tiempoFechaActualizacion(a.data));
   return {...opciones[0],antiguos:!tiempoDatosRecientes(opciones[0].data)};
 }
 function tiempoMostrarFuente(fuente, antiguos) {
