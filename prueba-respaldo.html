@@ -33,7 +33,7 @@ const options=[...(gh?[{name:"GitHub",data:gh}]:[]),...(cf?[{name:"Cloudflare",d
 if(!options.length){$("status").textContent="FALLA: no hay datos disponibles";$("details").textContent="GitHub: "+errGH+"\nCloudflare: "+errCF;return;}
 const best=options[0], age=Math.round((Date.now()-parsedTime(best.data))/60000), observationAge=Math.round((Date.now()-observationTime(best.data))/60000);
 $("status").textContent="Fuente elegida: "+best.name+(!fresh(best.data)?" · DATOS ANTIGUOS":"");
-$("details").textContent="GitHub: "+(fail?"falla simulada":errGH||"respondió")+"\nCloudflare: "+(cf?"respondió":errCF||"no fue necesario consultar")+"\nÚltima actualización: "+best.data.updated+"\nAntigüedad: "+age+" minutos\nAdvertencia informada: "+(best.data.alert?.level||"ninguna");
+$("details").textContent="GitHub: "+(fail?"falla simulada":errGH||"respondió")+"\nCloudflare: "+(cf?"respondió":errCF||"no fue necesario consultar")+"\nÚltima actualización: "+best.data.updated+"\nAntigüedad: "+age+" minutos\nAntigüedad de observación INUMET: "+observationAge+" minutos\nAdvertencia informada: "+(best.data.alert?.level||"ninguna");
 showAlert(best.data);
 }
 $("normal").onclick=()=>test(false);$("fail").onclick=()=>test(true);$("recover").onclick=()=>test(false);
