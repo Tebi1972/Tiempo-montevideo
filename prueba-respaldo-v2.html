@@ -15,7 +15,9 @@ function parsedTime(data){
  const m=String(data?.updated||"").match(/^(\d{2})\/(\d{2})\/(\d{4})\s+(\d{2}):(\d{2})$/);
  return m?Date.parse(m[3]+"-"+m[2]+"-"+m[1]+"T"+m[4]+":"+m[5]+":00-03:00"):NaN;
 }
-function observationTime(data){const t=Date.parse(data?.current?.observation_time||"");return Number.isFinite(t)?t:NaN;}\nfunction fresh(data){const a=Date.now()-parsedTime(data),b=Date.now()-observationTime(data);return a>=-300000&&a<=95*60000&&b>=-300000&&b<=120*60000;}\nfunction valid(data){return !!(data?.current && data?.locations && data?.forecasts && Array.isArray(data?.days) && Number.isFinite(parsedTime(data)) && Number.isFinite(observationTime(data)));}
+function observationTime(data){const t=Date.parse(data?.current?.observation_time||"");return Number.isFinite(t)?t:NaN;}
+function fresh(data){const a=Date.now()-parsedTime(data),b=Date.now()-observationTime(data);return a>=-300000&&a<=95*60000&&b>=-300000&&b<=120*60000;}
+function valid(data){return !!(data?.current && data?.locations && data?.forecasts && Array.isArray(data?.days) && Number.isFinite(parsedTime(data)) && Number.isFinite(observationTime(data)));}
 async function read(url){const ctrl=new AbortController(), t=setTimeout(()=>ctrl.abort(),12000);try{const r=await fetch(url+(url.includes("?")?"&":"?")+"v="+Date.now(),{cache:"no-store",signal:ctrl.signal});if(!r.ok)throw Error("HTTP "+r.status);const d=await r.json();if(!valid(d))throw Error("Datos incompletos");return d;}finally{clearTimeout(t)}}
 function dateAlert(s){const m=String(s||"").match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);return m?Date.parse(m[1]+"-"+m[2]+"-"+m[3]+"T"+m[4]+":"+m[5]+":00-03:00"):NaN;}
 function showAlert(data){const root=data.alert, el=$("alert");el.className="card";if(!root?.active){el.textContent="INUMET: sin advertencia activa según esta fuente";return;}
