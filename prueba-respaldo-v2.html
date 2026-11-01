@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiempo Uruguay - Prueba de respaldo</title>
+<style>body{font:16px system-ui,sans-serif;max-width:740px;margin:25px auto;padding:0 16px;line-height:1.5;background:#f6f8fb;color:#152333}button{padding:12px;margin:5px 5px 5px 0;cursor:pointer;border:1px solid #ccd3df;border-radius:8px;background:white}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#e9eff6;padding:14px;border-radius:8px}.card{background:white;border:1px solid #d9dfe8;padding:15px;border-radius:12px}.yellow{border-left:7px solid #e2b527}.orange{border-left:7px solid #df7825}.red{border-left:7px solid #c22}small{color:#526273}</style></head>
+<body><h1>Tiempo Uruguay · Prueba de respaldo (versión 2)</h1>
+<p>Esta página es una prueba aislada: no cambia la aplicación pública ni modifica datos. Comprueba también la hora real de observación INUMET.</p>
+<div><button id="normal">1. Probar funcionamiento normal</button><button id="fail">2. Simular falla de GitHub</button><button id="recover">3. Probar recuperación</button></div>
+<p id="status" role="status">Esperando una prueba…</p><div id="alert" class="card">Advertencias: sin comprobar</div><pre id="details"></pre>
+<small>Las advertencias se muestran únicamente si su vigencia incluye la hora actual. Si los datos están vencidos se advierte expresamente.</small>
+<script>
+const GH="https://raw.githubusercontent.com/Tebi1972/Tiempo-montevideo/main/data.json";
+const CF="https://tiempo-uruguay-backup.efarat.workers.dev/";
+const $=id=>document.getElementById(id);
+function parsedTime(data){
+ const m=String(data?.updated||"").match(/^(\d{2})\/(\d{2})\/(\d{4})\s+(\d{2}):(\d{2})$/);
+ return m?Date.parse(m[3]+"-"+m[2]+"-"+m[1]+"T"+m[4]+":"+m[5]+":00-03:00"):NaN;
+}
+function observationTime(data){const t=Date.parse(data?.current?.observation_time||"");return Number.isFinite(t)?t:NaN;}\nfunction fresh(data){const a=Date.now()-parsedTime(data),b=Date.now()-observationTime(data);return a>=-300000&&a<=95*60000&&b>=-300000&&b<=120*60000;}\nfunction valid(data){return !!(data?.current && data?.locations && data?.forecasts && Array.isArray(data?.days) && Number.isFinite(parsedTime(data)) && Number.isFinite(observationTime(data)));}
+async function read(url){const ctrl=new AbortController(), t=setTimeout(()=>ctrl.abort(),12000);try{const r=await fetch(url+(url.includes("?")?"&":"?")+"v="+Date.now(),{cache:"no-store",signal:ctrl.signal});if(!r.ok)throw Error("HTTP "+r.status);const d=await r.json();if(!valid(d))throw Error("Datos incompletos");return d;}finally{clearTimeout(t)}}
+function dateAlert(s){const m=String(s||"").match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);return m?Date.parse(m[1]+"-"+m[2]+"-"+m[3]+"T"+m[4]+":"+m[5]+":00-03:00"):NaN;}
+function showAlert(data){const root=data.alert, el=$("alert");el.className="card";if(!root?.active){el.textContent="INUMET: sin advertencia activa según esta fuente";return;}
+const active=(root.warnings?.length?root.warnings:[root]).filter(w=>dateAlert(w.start)<=Date.now()&&dateAlert(w.end)>Date.now());
+if(!active.length){el.textContent="Advertencia informada por la fuente, pero fuera de vigencia en este momento";return;}
+const priority={roja:3,naranja:2,amarilla:1};active.sort((a,b)=>(priority[b.level]||0)-(priority[a.level]||0));const w=active[0];el.classList.add(w.level==="amarilla"?"yellow":w.level==="naranja"?"orange":"red");
+const title=document.createElement("strong");title.textContent="ADVERTENCIA "+String(w.level).toUpperCase();const p=document.createElement("p");p.textContent=(w.phenomenon||"")+" · Hasta "+w.end;el.replaceChildren(title,p);
+}
+async function test(fail){
+ $("status").textContent="Consultando servidores…";$("details").textContent="";$("alert").textContent="Advertencias: comprobando";
+let gh=null,cf=null,errGH="",errCF="";
+try{if(fail)throw Error("Falla simulada de GitHub");gh=await read(GH);}catch(e){errGH=e.message;}
+if(!gh||!fresh(gh)){try{cf=await read(CF);}catch(e){errCF=e.message;}}
+const options=[...(gh?[{name:"GitHub",data:gh}]:[]),...(cf?[{name:"Cloudflare",data:cf}]:[])].sort((a,b)=>observationTime(b.data)-observationTime(a.data)||parsedTime(b.data)-parsedTime(a.data));
+if(!options.length){$("status").textContent="FALLA: no hay datos disponibles";$("details").textContent="GitHub: "+errGH+"\nCloudflare: "+errCF;return;}
+const best=options[0], age=Math.round((Date.now()-parsedTime(best.data))/60000), observationAge=Math.round((Date.now()-observationTime(best.data))/60000);
+$("status").textContent="Fuente elegida: "+best.name+(!fresh(best.data)?" · DATOS ANTIGUOS":"");
+$("details").textContent="GitHub: "+(fail?"falla simulada":errGH||"respondió")+"\nCloudflare: "+(cf?"respondió":errCF||"no fue necesario consultar")+"\nÚltima actualización: "+best.data.updated+"\nAntigüedad: "+age+" minutos\nAntigüedad de observación INUMET: "+observationAge+" minutos\nAdvertencia informada: "+(best.data.alert?.level||"ninguna");
+showAlert(best.data);
+}
+$("normal").onclick=()=>test(false);$("fail").onclick=()=>test(true);$("recover").onclick=()=>test(false);
+</script></body></html>
