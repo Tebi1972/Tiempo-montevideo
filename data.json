@@ -19,27 +19,16 @@
   },
   "alert": {
     "active": false,
-    "level": "amarilla",
-    "phenomenon": "Tormentas puntualmente fuertes y lluvias abundantes",
-    "probability": "50 - 75%",
-    "start": "2026-11-01 19:55",
-    "end": "2026-11-01 23:00",
-    "description": "El área será afectada por tormentas (puntualmente) fuertes.\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-    "zones": "Canelones : Atlántida, Barra de Carrasco, Barros Blancos, Camino del Andaluz y Ruta 84, Ciudad de la Costa, Colonia Nicolich, El Pinar, Empalme Olmos, Estación Atlántida, Estación La Floresta, Estación Pedrera, Jaureguiberry, Joaquín Suárez, La Floresta, Las Toscas, Marindia, Migues, Montes, Neptunia, Pando, Parque del Plata, Paso Carrasco, Pinamar - Pinepark, Ruta 74, Salinas, San Jacinto, San Luis, Sauce, Soca, Toledo, Villa Aeroparque, Villa Crespo y San Andrés y Villa San José.Lavalleja : Solís de Mataojo.Maldonado : Balneario Buenos Aires, Bella Vista, Canteras de Marelli, Cerro Pelado, Cerros Azules, El Chorro, El Tesoro, Gerona, Gregorio Aznárez, La Barra, La Capuera, Las Flores, Maldonado, Manantiales, Nueva Carrara, Ocean Park, Pan de Azúcar, Parque Medina, Piriápolis, Playa Grande, Playa Hermosa, Playa Verde, Pueblo Solís, Punta Ballena, Punta Colorada, Punta Negra, Punta del Este, San Carlos y Sauce de Portezuelo.Montevideo : Montevideo.",
-    "warnings": [],
-    "updated": "2026-11-01 19:55",
-    "pdf": "adv1793573716819.pdf",
-    "source": "inumet_alerta_object_v4",
-    "source_timestamp": "2026-11-01T19:55:00-03:00",
-    "source_age_hours": 1.2,
-    "homepage_says_active": true,
     "data_unavailable": true,
-    "check_error": true,
-    "previous_warning_expired": true
+    "homepage_says_active": true,
+    "source": "inumet_sources_out_of_sync",
+    "source_timestamp": "2026-11-01T21:16:00-03:00",
+    "source_age_hours": 2.21,
+    "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-11-01T23:20-03:00"
+    "checked_at": "2026-11-01T23:28-03:00"
   },
   "locations": {
     "montevideo_prado": {
