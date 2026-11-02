@@ -51,11 +51,11 @@
     "source_timestamp": "2026-11-02T05:45:00-03:00",
     "source_age_hours": 0.59,
     "homepage_says_active": true,
-    "data_unavailable": false
+    "data_unavailable": true
   },
   "alert_check": {
-    "ok": true,
-    "checked_at": "2026-11-02T06:20-03:00"
+    "ok": false,
+    "checked_at": "2026-11-02T06:57-03:00"
   },
   "locations": {
     "montevideo_prado": {
