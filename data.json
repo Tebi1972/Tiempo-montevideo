@@ -1,5 +1,5 @@
 {
-  "updated": "02/11/2026 03:20",
+  "updated": "02/11/2026 04:02",
   "current": {
     "temperature": 15.8,
     "station": "Prado",
@@ -23,12 +23,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-11-01T21:16:00-03:00",
-    "source_age_hours": 6.07,
+    "source_age_hours": 6.77,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-11-02T03:20-03:00"
+    "checked_at": "2026-11-02T04:02-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -53,7 +53,7 @@
       "pressure_hpa": 1010.2,
       "dewpoint_c": 15.2,
       "feels_like_c": 14.9,
-      "precipitation_recent_mm": 4.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 211,
       "forecast_zone": "M"
@@ -66,7 +66,7 @@
       "longitude": -56.012876,
       "observation_time": "2026-11-02T03:00:00.000-03:00",
       "condition": "cloudy",
-      "condition_time": "2026-11-02T05:00:00Z",
+      "condition_time": null,
       "condition_source": "observed_dynamic_sky",
       "present_weather": 7,
       "cloud_amount": "cub",
@@ -232,7 +232,7 @@
       "pressure_hpa": 1011.7,
       "dewpoint_c": 15.7,
       "feels_like_c": 13.9,
-      "precipitation_recent_mm": 2.4,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 138,
       "forecast_zone": "E"
@@ -424,9 +424,7 @@
       "condition_source": null,
       "present_weather": 1,
       "cloud_amount": "cl",
-      "cloud_types": [
-        "CIRRUS (CI)"
-      ],
+      "cloud_types": [],
       "wind_speed_kmh": 6.0,
       "wind_direction_deg": 120.0,
       "visibility_km": 10.0,
@@ -434,7 +432,7 @@
       "pressure_hpa": 1010.6,
       "dewpoint_c": 15.6,
       "feels_like_c": 17.1,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 239,
       "forecast_zone": "NW"
@@ -534,7 +532,7 @@
       "pressure_hpa": 1010.5,
       "dewpoint_c": 14.2,
       "feels_like_c": 16.0,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 1693,
       "forecast_zone": "NE"
