@@ -1,5 +1,5 @@
 {
-  "updated": "02/11/2026 21:17",
+  "updated": "02/11/2026 21:20",
   "current": {
     "temperature": 16.9,
     "station": "Prado",
@@ -56,7 +56,7 @@
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-11-02T21:17-03:00"
+    "checked_at": "2026-11-02T21:20-03:00"
   },
   "locations": {
     "montevideo_prado": {
