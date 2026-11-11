@@ -1,5 +1,5 @@
 {
-  "updated": "10/11/2026 21:20",
+  "updated": "10/11/2026 21:58",
   "current": {
     "temperature": 22.2,
     "station": "Prado",
@@ -23,12 +23,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-11-04T00:30:00-03:00",
-    "source_age_hours": 164.84,
+    "source_age_hours": 165.47,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-11-10T21:20-03:00"
+    "checked_at": "2026-11-10T21:58-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -552,13 +552,13 @@
       "present_weather": null,
       "cloud_amount": null,
       "cloud_types": [],
-      "wind_speed_kmh": 11.9,
+      "wind_speed_kmh": null,
       "wind_direction_deg": null,
       "visibility_km": null,
       "humidity": 67.0,
       "pressure_hpa": 1017.5,
       "dewpoint_c": 15.3,
-      "feels_like_c": 21.2,
+      "feels_like_c": null,
       "precipitation_recent_mm": null,
       "observation_source": "synop",
       "dynamic_station_id": null,
@@ -784,7 +784,7 @@
           "min": "15",
           "max": "28",
           "morning": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Neblinas y bancos de niebla.",
-          "evening": "Algo nuboso y nuboso, períodos de cubierto. Probable formación de tormentas aisladas.",
+          "evening": "Algo nuboso y nuboso, períodos de cubierto. Probable formación de tormentas aisladas. Neblinas y bancos de niebla.",
           "wind": "NE y N 10-40 km/h. Periodos de variables 0-10 km/h. Probables rachas asociadas a tormentas. NE y E 10-30 km/h. Periodos de variables 0-10 km/h.",
           "rain": "Precipitaciones"
         },
@@ -927,7 +927,7 @@
           "min": "10",
           "max": "30",
           "morning": "Claro y algo nuboso.",
-          "evening": "Desmejorando con aumento de nubosidad. Precipitaciones aisladas y baja probabilidad de tormentas.",
+          "evening": "Desmejorando con aumento de nubosidad. Precipitaciones y tormentas.",
           "wind": "NE 10-30 km/h. NE y N 10-30 km/h. Periodos de variables 0-10 km/h.",
           "rain": "Precipitaciones"
         },
@@ -935,7 +935,7 @@
           "date": "Miércoles 11",
           "min": "16",
           "max": "27",
-          "morning": "Nuboso y cubierto. Precipitaciones aisladas y baja probabilidad de tormentas. Nieblas y neblinas.",
+          "morning": "Nuboso y cubierto. Precipitaciones y tormentas aisladas. Nieblas y neblinas.",
           "evening": "Algo nuboso y nuboso. Probables precipitaciones aisladas. Neblinas.",
           "wind": "Sector N 10-30 km/h. Periodos de variables 0-10 km/h. NE y E 10-30 km/h. Periodos de variables 0-10 km/h.",
           "rain": "Precipitaciones"
