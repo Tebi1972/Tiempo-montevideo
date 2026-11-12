@@ -1,5 +1,5 @@
 {
-  "updated": "12/11/2026 08:20",
+  "updated": "12/11/2026 09:02",
   "current": {
     "temperature": 22.0,
     "station": "Prado",
@@ -23,12 +23,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-11-04T00:30:00-03:00",
-    "source_age_hours": 199.84,
+    "source_age_hours": 200.54,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-11-12T08:20-03:00"
+    "checked_at": "2026-11-12T09:02-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -53,7 +53,7 @@
       "pressure_hpa": 1017.7,
       "dewpoint_c": 16.8,
       "feels_like_c": 22.5,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 211,
       "forecast_zone": "M"
@@ -105,7 +105,7 @@
       "pressure_hpa": 1016.3,
       "dewpoint_c": 18.0,
       "feels_like_c": 21.9,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 16,
       "forecast_zone": "NW"
@@ -157,7 +157,7 @@
       "pressure_hpa": 1016.8,
       "dewpoint_c": 19.3,
       "feels_like_c": 23.4,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 66,
       "forecast_zone": "SO"
@@ -184,7 +184,7 @@
       "pressure_hpa": 1017.9,
       "dewpoint_c": 17.4,
       "feels_like_c": 20.6,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 96,
       "forecast_zone": "C"
@@ -211,7 +211,7 @@
       "pressure_hpa": 1018.2,
       "dewpoint_c": 16.6,
       "feels_like_c": 20.9,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 110,
       "forecast_zone": "C"
@@ -238,7 +238,7 @@
       "pressure_hpa": 1018.0,
       "dewpoint_c": 17.9,
       "feels_like_c": 21.9,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 138,
       "forecast_zone": "E"
@@ -290,7 +290,7 @@
       "pressure_hpa": 1017.9,
       "dewpoint_c": 16.8,
       "feels_like_c": 22.1,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 159,
       "forecast_zone": "M"
@@ -315,13 +315,13 @@
       "pressure_hpa": 1018.0,
       "dewpoint_c": 17.4,
       "feels_like_c": 23.5,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 160,
       "forecast_zone": "NE"
     },
     "mercedes": {
-      "temperature": 21.6,
+      "temperature": 22.4,
       "station": "Mercedes",
       "wigos": "0-20000-0-86490",
       "latitude": -33.2506,
@@ -330,23 +330,21 @@
       "condition": "sunny",
       "condition_time": "2026-11-12T11:00:00Z",
       "condition_source": "observed_synop",
-      "present_weather": null,
-      "cloud_amount": "1 OKTA OR LESS, BUT NOT ZERO",
+      "present_weather": 2,
+      "cloud_amount": "an",
       "cloud_types": [
-        "CIRRUS (CI)",
-        "CIRRUS (CI)",
-        "CIRROCUMULUS (CC)"
+        "1Ci6000"
       ],
       "wind_speed_kmh": 11.0,
       "wind_direction_deg": 60.0,
-      "visibility_km": null,
-      "humidity": 81.0,
+      "visibility_km": 15.0,
+      "humidity": 80.0,
       "pressure_hpa": 1016.7,
-      "dewpoint_c": 18.3,
-      "feels_like_c": 22.3,
-      "precipitation_recent_mm": 0.0,
+      "dewpoint_c": 18.8,
+      "feels_like_c": 23.4,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
-      "dynamic_station_id": 609,
+      "dynamic_station_id": 162,
       "forecast_zone": "SO"
     },
     "paysandu": {
@@ -419,11 +417,7 @@
       "condition_source": null,
       "present_weather": 1,
       "cloud_amount": "cl",
-      "cloud_types": [
-        "CIRRUS (CI)",
-        "CIRRUS (CI)",
-        "CIRROCUMULUS (CC)"
-      ],
+      "cloud_types": [],
       "wind_speed_kmh": 0.0,
       "wind_direction_deg": null,
       "visibility_km": 18.0,
@@ -431,7 +425,7 @@
       "pressure_hpa": 1018.4,
       "dewpoint_c": 17.1,
       "feels_like_c": 24.1,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 236,
       "forecast_zone": "E"
@@ -458,7 +452,7 @@
       "pressure_hpa": 1016.1,
       "dewpoint_c": 18.3,
       "feels_like_c": 23.5,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 239,
       "forecast_zone": "NW"
@@ -562,7 +556,7 @@
       "pressure_hpa": 1017.3,
       "dewpoint_c": 16.8,
       "feels_like_c": 21.0,
-      "precipitation_recent_mm": 0.0,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
       "dynamic_station_id": 1693,
       "forecast_zone": "NE"
