@@ -1,5 +1,5 @@
 {
-  "updated": "17/11/2026 15:20",
+  "updated": "17/11/2026 15:58",
   "current": {
     "temperature": 20.6,
     "station": "Prado",
@@ -23,12 +23,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-11-17T06:00:00-03:00",
-    "source_age_hours": 9.34,
+    "source_age_hours": 9.98,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-11-17T15:20-03:00"
+    "checked_at": "2026-11-17T15:58-03:00"
   },
   "locations": {
     "montevideo_prado": {
