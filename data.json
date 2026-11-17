@@ -1,5 +1,5 @@
 {
-  "updated": "17/11/2026 06:20",
+  "updated": "17/11/2026 06:58",
   "current": {
     "temperature": 19.8,
     "station": "Prado",
@@ -19,27 +19,16 @@
   },
   "alert": {
     "active": false,
-    "level": "amarilla",
-    "phenomenon": "Tormentas puntualmente fuertes",
-    "probability": "> 75%",
-    "start": "2026-11-17 03:10",
-    "end": "2026-11-17 06:10",
-    "description": "El área será afectada por tormentas (puntualmente) fuertes.\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-    "zones": "Artigas(Todo el departamento), Cerro Largo : Arévalo, Cerro de las Cuentas, Esperanza, Fraile Muerto, Quebracho, Ramón Trigo, Toledo, Tres Islas y Tupambaé.Durazno(Todo el departamento), Flores(Todo el departamento), Florida : 25 de Mayo, Alejandro Gallinal, Capilla del Sauce, Casupa, Cerro Chato, Florida, Fray Marcos, Goñi, La Cruz, Mendoza Chico, Nico Pérez, Reboledo, San Gabriel y Sarandí Grande.Lavalleja : Gaetán, Illescas, José Batlle y Ordoñez, Polanco Norte, Polanco Sur y Zapicán.Paysandú : Beisso, Cerro Chato, Gallinal, Guayabos, Guichón, Merinos, Orgoroso y Tambores.Río Negro : Algorta, General Borges, Grecco, Menafra, Paso de los mellizos, Sarandí de Navarro y Villa María.Rivera(Todo el departamento), Salto(Todo el departamento), San José : Mal Abrigo.Tacuarembó(Todo el departamento), Treinta y Tres : Cerro Chato, Isla Patrulla, Maria Albina, Santa Clara de Olimar y Valentines.",
-    "warnings": [],
-    "updated": "2026-11-17 03:10",
-    "pdf": "adv1794895776470.pdf",
-    "source": "inumet_alerta_object_v4",
-    "source_timestamp": "2026-11-17T03:10:00-03:00",
-    "source_age_hours": 2.17,
-    "homepage_says_active": true,
     "data_unavailable": true,
-    "previous_warning_expired": true,
-    "check_error": true
+    "homepage_says_active": true,
+    "source": "inumet_sources_out_of_sync",
+    "source_timestamp": "2026-11-17T06:00:00-03:00",
+    "source_age_hours": 0.98,
+    "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-11-17T06:20-03:00"
+    "checked_at": "2026-11-17T06:58-03:00"
   },
   "locations": {
     "montevideo_prado": {
