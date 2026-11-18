@@ -1,5 +1,5 @@
 {
-  "updated": "18/11/2026 15:20",
+  "updated": "18/11/2026 15:33",
   "current": {
     "temperature": 25.2,
     "station": "Prado",
@@ -49,13 +49,13 @@
     "pdf": "adv1795021797373.pdf",
     "source": "inumet_alerta_object_v4",
     "source_timestamp": "2026-11-18T14:10:00-03:00",
-    "source_age_hours": 1.17,
+    "source_age_hours": 1.4,
     "homepage_says_active": true,
     "data_unavailable": false
   },
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-11-18T15:20-03:00"
+    "checked_at": "2026-11-18T15:33-03:00"
   },
   "locations": {
     "montevideo_prado": {
