@@ -1,5 +1,5 @@
 {
-  "updated": "20/11/2026 19:20",
+  "updated": "20/11/2026 19:54",
   "current": {
     "temperature": 18.8,
     "station": "Prado",
@@ -22,19 +22,19 @@
     "level": "amarilla",
     "phenomenon": "Tormentas puntualmente fuertes",
     "probability": "> 75%",
-    "start": "2026-11-20 18:30",
-    "end": "2026-11-20 20:00",
+    "start": "2026-11-20 19:20",
+    "end": "2026-11-20 21:30",
     "description": "El área continuará afectada por tormentas (puntualmente) fuertes.\n\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-    "zones": "Canelones : Migues, Montes, San Bautista, San Ramón y Tala.Cerro Largo : Esperanza.Durazno : Aguas Buenas, Blanquillo, Carlos Reyles, Carmen, Durazno, La Paloma, Las Palmas, Ombúes de Oribe, Pueblo de Álvarez, Rossell y Rius, San Jorge, Santa Bernardina y Sarandí del Yí.Florida : 25 de Mayo, Alejandro Gallinal, Capilla del Sauce, Casupa, Cerro Chato, Chamizo, Florida, Fray Marcos, Goñi, La Cruz, Mendoza, Mendoza Chico, Nico Pérez, Reboledo, San Gabriel y Sarandí Grande.Lavalleja(Todo el departamento), Maldonado : Aiguá.Treinta y Tres : Cerro Chato, Maria Albina, Santa Clara de Olimar y Valentines.",
+    "zones": "Canelones : Estación Pedrera, Migues, Montes, San Antonio, San Bautista, San Jacinto, San Ramón, Santa Lucía, Santa Rosa y Tala.Cerro Largo : Esperanza y Tupambaé.Colonia : Florencio Sánchez.Durazno : Aguas Buenas, Blanquillo, Carlos Reyles, Carmen, Centenario, Durazno, Feliciano, La Paloma, Las Palmas, Ombúes de Oribe, Pueblo de Álvarez, Rossell y Rius, San Jorge, Santa Bernardina y Sarandí del Yí.Flores(Todo el departamento), Florida(Todo el departamento), Lavalleja(Todo el departamento), Maldonado : Aiguá, El Edén, Gregorio Aznárez, Los Talas, Nueva Carrara y Pueblo Solís.Rocha(Todo el departamento), San José : Capurro, Juan Soler, Mal Abrigo, Rodríguez y San José de Mayo.Soriano : Cardona, Egaña, José Enrique Rodó, Risso y Santa Catalina.Treinta y Tres : Arrozal Treinta y Tres, Cerro Chato, Ejido de Treinta y Tres, General Enrique Martínez, Isla Patrulla, Maria Albina, Mendizábal, Santa Clara de Olimar, Treinta y Tres, Valentines, Vergara y Villa Sara.",
     "warnings": [
       {
         "level": "amarilla",
         "phenomenon": "Tormentas puntualmente fuertes",
         "probability": "> 75%",
-        "start": "2026-11-20 18:30",
-        "end": "2026-11-20 20:00",
+        "start": "2026-11-20 19:20",
+        "end": "2026-11-20 21:30",
         "description": "El área continuará afectada por tormentas (puntualmente) fuertes.\n\nPodrán estar acompañadas por precipitaciones abundantes en cortos períodos, granizo, rachas de vientos muy fuertes e intensa actividad eléctrica.",
-        "zones": "Canelones : Migues, Montes, San Bautista, San Ramón y Tala.Cerro Largo : Esperanza.Durazno : Aguas Buenas, Blanquillo, Carlos Reyles, Carmen, Durazno, La Paloma, Las Palmas, Ombúes de Oribe, Pueblo de Álvarez, Rossell y Rius, San Jorge, Santa Bernardina y Sarandí del Yí.Florida : 25 de Mayo, Alejandro Gallinal, Capilla del Sauce, Casupa, Cerro Chato, Chamizo, Florida, Fray Marcos, Goñi, La Cruz, Mendoza, Mendoza Chico, Nico Pérez, Reboledo, San Gabriel y Sarandí Grande.Lavalleja(Todo el departamento), Maldonado : Aiguá.Treinta y Tres : Cerro Chato, Maria Albina, Santa Clara de Olimar y Valentines.",
+        "zones": "Canelones : Estación Pedrera, Migues, Montes, San Antonio, San Bautista, San Jacinto, San Ramón, Santa Lucía, Santa Rosa y Tala.Cerro Largo : Esperanza y Tupambaé.Colonia : Florencio Sánchez.Durazno : Aguas Buenas, Blanquillo, Carlos Reyles, Carmen, Centenario, Durazno, Feliciano, La Paloma, Las Palmas, Ombúes de Oribe, Pueblo de Álvarez, Rossell y Rius, San Jorge, Santa Bernardina y Sarandí del Yí.Flores(Todo el departamento), Florida(Todo el departamento), Lavalleja(Todo el departamento), Maldonado : Aiguá, El Edén, Gregorio Aznárez, Los Talas, Nueva Carrara y Pueblo Solís.Rocha(Todo el departamento), San José : Capurro, Juan Soler, Mal Abrigo, Rodríguez y San José de Mayo.Soriano : Cardona, Egaña, José Enrique Rodó, Risso y Santa Catalina.Treinta y Tres : Arrozal Treinta y Tres, Cerro Chato, Ejido de Treinta y Tres, General Enrique Martínez, Isla Patrulla, Maria Albina, Mendizábal, Santa Clara de Olimar, Treinta y Tres, Valentines, Vergara y Villa Sara.",
         "risk": {
           "riesgoViento": 1,
           "riesgoLluvia": 1,
@@ -45,17 +45,17 @@
         }
       }
     ],
-    "updated": "2026-11-20 18:30",
-    "pdf": "adv1795210036883.pdf",
+    "updated": "2026-11-20 19:20",
+    "pdf": "adv1795213248392.pdf",
     "source": "inumet_alerta_object_v4",
-    "source_timestamp": "2026-11-20T18:30:00-03:00",
-    "source_age_hours": 0.84,
+    "source_timestamp": "2026-11-20T19:20:00-03:00",
+    "source_age_hours": 0.57,
     "homepage_says_active": true,
     "data_unavailable": false
   },
   "alert_check": {
     "ok": true,
-    "checked_at": "2026-11-20T19:20-03:00"
+    "checked_at": "2026-11-20T19:54-03:00"
   },
   "locations": {
     "montevideo_prado": {
