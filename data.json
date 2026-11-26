@@ -1,5 +1,5 @@
 {
-  "updated": "26/11/2026 19:20",
+  "updated": "26/11/2026 19:44",
   "current": {
     "temperature": 19.4,
     "station": "Prado",
@@ -23,12 +23,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-11-20T21:00:00-03:00",
-    "source_age_hours": 142.34,
+    "source_age_hours": 142.74,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-11-26T19:20-03:00"
+    "checked_at": "2026-11-26T19:44-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -225,7 +225,7 @@
       "longitude": -55.1071,
       "observation_time": "2026-11-26T19:00:00.000-03:00",
       "condition": "neutral",
-      "condition_time": null,
+      "condition_time": "2026-11-26T21:00:00Z",
       "condition_source": null,
       "present_weather": 2,
       "cloud_amount": "an",
@@ -358,7 +358,7 @@
       "longitude": -58.0312,
       "observation_time": "2026-11-26T19:00:00.000-03:00",
       "condition": "neutral",
-      "condition_time": null,
+      "condition_time": "2026-11-26T21:00:00Z",
       "condition_source": null,
       "present_weather": null,
       "cloud_amount": null,
@@ -616,7 +616,7 @@
       "longitude": -54.3481,
       "observation_time": "2026-11-26T19:00:00.000-03:00",
       "condition": "neutral",
-      "condition_time": null,
+      "condition_time": "2026-11-26T21:00:00Z",
       "condition_source": null,
       "present_weather": null,
       "cloud_amount": null,
