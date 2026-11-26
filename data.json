@@ -1,5 +1,5 @@
 {
-  "updated": "26/11/2026 10:20",
+  "updated": "26/11/2026 10:26",
   "current": {
     "temperature": 20.2,
     "station": "Prado",
@@ -25,12 +25,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-11-20T21:00:00-03:00",
-    "source_age_hours": 133.34,
+    "source_age_hours": 133.44,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-11-26T10:20-03:00"
+    "checked_at": "2026-11-26T10:26-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -472,22 +472,24 @@
       "latitude": -34.3519,
       "longitude": -56.7497,
       "observation_time": "2026-11-26T10:00:00.000-03:00",
-      "condition": "neutral",
+      "condition": "sunny",
       "condition_time": "2026-11-26T13:00:00Z",
-      "condition_source": null,
-      "present_weather": null,
-      "cloud_amount": "0",
-      "cloud_types": [],
-      "wind_speed_kmh": 12.0,
-      "wind_direction_deg": 102.0,
-      "visibility_km": null,
-      "humidity": 44.0,
-      "pressure_hpa": 1024.3,
-      "dewpoint_c": 7.4,
-      "feels_like_c": 17.1,
-      "precipitation_recent_mm": 0.0,
+      "condition_source": "observed_synop",
+      "present_weather": 2,
+      "cloud_amount": "an",
+      "cloud_types": [
+        "1Ci6000"
+      ],
+      "wind_speed_kmh": 9.0,
+      "wind_direction_deg": 80.0,
+      "visibility_km": 12.0,
+      "humidity": 43.0,
+      "pressure_hpa": 1025.0,
+      "dewpoint_c": 6.9,
+      "feels_like_c": 17.6,
+      "precipitation_recent_mm": null,
       "observation_source": "inumet_dynamic",
-      "dynamic_station_id": 1606,
+      "dynamic_station_id": 252,
       "forecast_zone": "SO"
     },
     "atlantida": {
