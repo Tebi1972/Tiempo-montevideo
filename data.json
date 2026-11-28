@@ -1,5 +1,5 @@
 {
-  "updated": "28/11/2026 11:20",
+  "updated": "28/11/2026 11:52",
   "current": {
     "temperature": 29.8,
     "station": "Prado",
@@ -21,12 +21,12 @@
     "homepage_says_active": true,
     "source": "inumet_sources_out_of_sync",
     "source_timestamp": "2026-11-20T21:00:00-03:00",
-    "source_age_hours": 182.34,
+    "source_age_hours": 182.88,
     "message": "INUMET informa una advertencia vigente, pero la fuente estructurada de zonas aún no entrega datos vigentes."
   },
   "alert_check": {
     "ok": false,
-    "checked_at": "2026-11-28T11:20-03:00"
+    "checked_at": "2026-11-28T11:52-03:00"
   },
   "locations": {
     "montevideo_prado": {
@@ -702,8 +702,8 @@
       "days": [
         {
           "date": "Sábado 28",
-          "min": "15",
-          "max": "30",
+          "min": "16",
+          "max": "32",
           "morning": "Claro y algo nuboso.",
           "evening": "Claro y algo nuboso.",
           "wind": "Sector N 20-30 km/h, rachas de hasta 40 km/h a variables 0-10 km/h. Variables 0 -10 km/h al N y NE 10-30 km/h, rachas de hasta 40 km/h. rachas de hasta 40 km/h",
@@ -854,8 +854,8 @@
       "days": [
         {
           "date": "Sábado 28",
-          "min": "10",
-          "max": "30",
+          "min": "9",
+          "max": "31",
           "morning": "Claro y algo nuboso, períodos de nuboso. Nieblas y neblinas.",
           "evening": "Claro y algo nuboso.",
           "wind": "Sector E 10-20 km/h. Sector E 10-30 km/h.",
@@ -930,7 +930,7 @@
       "days": [
         {
           "date": "Sábado 28",
-          "min": "12",
+          "min": "13",
           "max": "34",
           "morning": "Claro y algo nuboso. Neblinas y bancos de niebla.",
           "evening": "Claro y algo nuboso.",
@@ -1006,10 +1006,10 @@
       "days": [
         {
           "date": "Sábado 28",
-          "min": "11",
-          "max": "32",
+          "min": "9",
+          "max": "34",
           "morning": "Claro y algo nuboso. Neblinas y bancos de niebla.",
-          "evening": "Claro y algo nuboso, períodos de nuboso.",
+          "evening": "Claro y algo nuboso.",
           "wind": "Sector N 20-30 km/h, rachas de hasta 40 km/h a variables 0-10 km/h. Variables 0 -10 km/h al N y NE 10-30 km/h, rachas de hasta 40 km/h en zonas costeras.",
           "rain": "No indicada"
         },
@@ -1082,7 +1082,7 @@
       "days": [
         {
           "date": "Sábado 28",
-          "min": "10",
+          "min": "8",
           "max": "31",
           "morning": "Claro y algo nuboso. Nieblas y neblinas.",
           "evening": "Claro y algo nuboso. Neblinas.",
@@ -1158,8 +1158,8 @@
       "days": [
         {
           "date": "Sábado 28",
-          "min": "17",
-          "max": "27",
+          "min": "18",
+          "max": "28",
           "morning": "Claro y algo nuboso.",
           "evening": "Claro y algo nuboso.",
           "wind": "Sector N 20-30 km/h, rachas de hasta 40 km/h a variables 0-10 km/h. Variables 0 -10 km/h al N y NE 10-30 km/h, rachas de hasta 40 km/h.",
@@ -1189,8 +1189,8 @@
   "days": [
     {
       "date": "Sábado 28",
-      "min": "15",
-      "max": "30",
+      "min": "16",
+      "max": "32",
       "morning": "Claro y algo nuboso.",
       "evening": "Claro y algo nuboso.",
       "wind": "Sector N 20-30 km/h, rachas de hasta 40 km/h a variables 0-10 km/h. Variables 0 -10 km/h al N y NE 10-30 km/h, rachas de hasta 40 km/h. rachas de hasta 40 km/h",
@@ -1259,5 +1259,5 @@
       "weather_code": "2"
     }
   ],
-  "summary": "Temperaturas de 15° a 30°."
+  "summary": "Temperaturas de 16° a 32°."
 }
